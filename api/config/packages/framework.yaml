@@ -28,3 +28,10 @@ when@test:
         test: true
         #session:
         #    storage_factory_id: session.storage.factory.mock_file
+#        http_client:
+#            scoped_clients:
+#                my_api.client:
+#                    base_uri: 'http://nginx'
+#            # ...
+#            default_options:
+               
