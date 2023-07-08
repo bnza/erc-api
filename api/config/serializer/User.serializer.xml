@@ -11,6 +11,11 @@
             <group>read:User</group>
             <group>write:User</group>
         </attribute>
+        <attribute name="roles" >
+            <group>read:User</group>
+            <group>update:User</group>
+            <group>write:User</group>
+        </attribute>
         <attribute name="password" >
             <group>update:User</group>
             <group>write:User</group>
