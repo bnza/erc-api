@@ -2,86 +2,23 @@
 
 namespace App\Entity;
 
-use App\Validator as AppAssert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Uid\Uuid;
-use Symfony\Component\Validator\Constraints as Assert;
 
-#[UniqueEntity(
-    fields: ['email'],
-    message: 'Duplicate username.',
-    errorPath: 'email',
-    groups: ['post:User:Validation']
-)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[Groups(['read:User'])]
     private Uuid $id;
 
-    #[Assert\Email(
-        groups: ['post:User:Validation']
-    )]
-    #[Groups(['read:User', 'write:User'])]
-    private string $email;
+    public string $email;
 
-    #[Assert\NotBlank(
-        groups: ['post:User:Validation']
-    )]
-    #[Assert\All([
-        new Assert\NotBlank(),
-        new Assert\Type(type: 'string'),
-//        new AppAssert\IsValidRoles(),
-    ],
-        groups: ['post:User:Validation']
-    )]
-    #[Groups(['read:User', 'write:User', 'update:User'])]
     private array $roles = ['ROLE_USER'];
 
-    #[Assert\NotBlank(
-        groups: ['post:User:Validation']
-    )]
-    #[Assert\Length(min: 8, groups: ['post:User:Validation'])]
-    #[Assert\Regex(
-        pattern: '/\d/',
-        message: 'Your password must contains at lest one digit',
-        groups: ['post:User:Validation']
-    )]
-    #[Assert\Regex(
-        pattern: '/[A-Z]+/',
-        message: 'Your password must contains at lest one uppercase character',
-        groups: ['write:User']
-    )]
-    #[Assert\Regex(
-        pattern: '/[a-z]+/',
-        message: 'Your password must contains at lest one lowercase character',
-        groups: ['post:User:Validation']
-    )]
-    #[Assert\Regex(
-        pattern: '/\W/',
-        message: 'Your password must contains at lest one not alphanumeric character',
-        groups: ['post:User:Validation']
-    )]
-    #[Groups(['write:User', 'update:User'])]
     private string $password;
 
     public function getId(): ?Uuid
     {
         return $this->id;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
     }
 
     /**
@@ -136,7 +73,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
