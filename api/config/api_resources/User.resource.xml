@@ -29,7 +29,7 @@
             <operation class="ApiPlatform\Metadata\GetCollection"
                        controller="App\Controller\MeController"
                        name="me"
-                       security="is_granted('ROLE_USER')"
+                       security="is_granted('IS_AUTHENTICATED_FULLY')"
                        uriTemplate="/users/me"
                        read="false"
                        write="false"

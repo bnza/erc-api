@@ -1,5 +1,5 @@
 auth:
-    path: /auth
+    path: /login
     methods: ['POST']
     
 controllers:

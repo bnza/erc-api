@@ -14,6 +14,7 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 class AuthApiTestCase extends ApiTestCase
 {
     use RefreshDatabaseTrait;
+    public const LOGIN_PATH = '/login';
 
     private string $jwtToken;
 
@@ -54,7 +55,7 @@ class AuthApiTestCase extends ApiTestCase
             return $this->jwtToken;
         }
 
-        $response = static::createClient()->request('POST', '/auth', [
+        $response = static::createClient()->request('POST', self::LOGIN_PATH, [
             'json' => [
                 'email' => $username,
                 'password' => $password,
