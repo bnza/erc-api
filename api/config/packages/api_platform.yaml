@@ -8,4 +8,4 @@ api_platform:
                 type: header
     mapping:
         paths:
-            - '%kernel.project_dir%/config/api_resources'
+            - '%kernel.project_dir%/config/api_platform/resources'

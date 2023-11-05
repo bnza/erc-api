@@ -2,17 +2,19 @@
 
 namespace App\Entity;
 
+use App\Entity\UserRolesTrait;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use UserRolesTrait;
     private Uuid $id;
 
     public string $email;
 
-    private array $roles = ['ROLE_USER'];
+    public iterable $sites;
 
     private string $password;
 
@@ -28,31 +30,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        if (in_array('ROLE_ADMIN', $roles)) {
-            $roles[] = 'ROLE_EDITOR';
-        }
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        asort($roles);
-        $this->roles = $roles;
-
-        return $this;
+        return $this->email;
     }
 
     /**
