@@ -6,19 +6,25 @@
     <class name="App\Entity\User">
         <attribute name="id" >
             <group>read:User</group>
+            <group>read:session:User</group>
         </attribute>
         <attribute name="email" >
             <group>read:User</group>
+            <group>read:session:User</group>
             <group>write:User</group>
         </attribute>
         <attribute name="roles" >
             <group>read:User</group>
+            <group>read:session:User</group>
             <group>update:User</group>
             <group>write:User</group>
         </attribute>
         <attribute name="password" >
             <group>update:User</group>
             <group>write:User</group>
+        </attribute>
+        <attribute name="sites" >
+            <group>read:session:User</group>
         </attribute>
     </class>
 </serializer>

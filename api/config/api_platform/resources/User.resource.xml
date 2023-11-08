@@ -5,6 +5,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
         https://api-platform.com/schema/metadata/resources-3.0.xsd">
     <resource class="App\Entity\User"
+              routePrefix="/admin"
+              security="is_granted('ROLE_ADMIN')"
     >
         <normalizationContext>
             <values>
@@ -25,14 +27,6 @@
             </values>
         </denormalizationContext>
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection"
-                       controller="App\Controller\MeController"
-                       name="me"
-                       security="is_granted('IS_AUTHENTICATED_FULLY')"
-                       uriTemplate="/users/me"
-                       read="false"
-                       write="false"
-            />
             <operation class="ApiPlatform\Metadata\Get" />
             <operation class="ApiPlatform\Metadata\GetCollection" />
             <operation class="ApiPlatform\Metadata\Post" />
@@ -48,6 +42,30 @@
                 </denormalizationContext>
             </operation>
             <operation class="ApiPlatform\Metadata\Delete" />
+        </operations>
+    </resource>
+    <resource class="App\Entity\User">
+        <formats>
+            <format name="json">application/json</format>
+        </formats>
+        <normalizationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>read:session:User</value>
+                    </values>
+                </value>
+            </values>
+        </normalizationContext>
+        <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection"
+                       controller="App\Controller\MeController"
+                       name="me"
+                       security="is_granted('IS_AUTHENTICATED_FULLY')"
+                       uriTemplate="/users/me"
+                       read="false"
+                       write="false"
+            />
         </operations>
     </resource>
 </resources>
