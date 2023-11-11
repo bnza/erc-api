@@ -1,5 +1,5 @@
 api_platform:
-    title: ERC Project API Platform
+    title: ERC MEDGREENREV Project API Platform
     version: 1.0.0
     swagger:
         api_keys:
