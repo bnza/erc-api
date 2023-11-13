@@ -15,5 +15,9 @@
             <group>read:Site</group>
             <group>write:Site</group>
         </attribute>
+        <attribute name="public" >
+            <group>read:Site</group>
+            <group>write:Site</group>
+        </attribute>
     </class>
 </serializer>

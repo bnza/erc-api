@@ -25,7 +25,11 @@
         </denormalizationContext>
         <operations>
             <operation class="ApiPlatform\Metadata\Get" />
-            <operation class="ApiPlatform\Metadata\GetCollection" />
+            <operation class="ApiPlatform\Metadata\GetCollection">
+                <filters>
+                    <filter>site.order_filter</filter>
+                </filters>
+            </operation>
         </operations>
     </resource>
 </resources>
