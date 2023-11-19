@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Entity;
+use App\Entity\Geometry\SiteGeometry;
+
 class Site
 {
     private int $id;
@@ -12,6 +14,8 @@ class Site
     public string $description;
 
     public bool $public = false;
+
+    public ?SiteGeometry $geom;
 
     public iterable $users;
 

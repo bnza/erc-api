@@ -4,7 +4,7 @@
                   xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="App\Entity\M2M\SitesUsers" schema="public" table="sites__users">
+    <entity name="App\Entity\M2M\SitesUsers" table="sites__users">
         <id name="id" type="uuid">
             <generator strategy="CUSTOM"/>
             <custom-id-generator class="Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator"/>

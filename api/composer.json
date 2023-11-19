@@ -5,6 +5,7 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "jsor/doctrine-postgis": "@dev",
         "api-platform/core": "^3.1",
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
@@ -98,5 +99,14 @@
             "require": "6.3.*",
             "docker": false
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./packages/bnza/doctrine-postgis",
+            "options": {
+                "symlink": true
+            }
+        }
+    ]
 }

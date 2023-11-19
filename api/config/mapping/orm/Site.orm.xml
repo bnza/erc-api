@@ -5,7 +5,7 @@
                   xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Entity\Site" schema="public" table="site" repository-class="App\Repository\SiteRepository">
+    <entity name="App\Entity\Site" table="site" repository-class="App\Repository\SiteRepository">
         <id name="id" type="integer">
             <generator />
         </id>
@@ -17,6 +17,7 @@
                 <option name="default">false</option>
             </options>
         </field>
+        <one-to-one field="geom" target-entity="App\Entity\Geometry\SiteGeometry" mapped-by="site" />
         <one-to-many field="users" target-entity="App\Entity\M2M\SitesUsers" mapped-by="site" />
         <unique-constraints>
             <unique-constraint columns="name" />
