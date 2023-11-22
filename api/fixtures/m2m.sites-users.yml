@@ -1,0 +1,17 @@
+App\Entity\M2M\SitesUsers:
+    sites_users_1:
+        site: '@site_ed'
+        user: '@user_base'
+        privilege: 1
+    sites_users_2:
+        site: '@site_ww'
+        user: '@user_base'
+        privilege: 0
+    sites_users_3:
+        site: '@site_ww'
+        user: '@user_admin'
+        privilege: 0
+    sites_users_4:
+        site: '@site_ww'
+        user: '@user_editor'
+        privilege: 1

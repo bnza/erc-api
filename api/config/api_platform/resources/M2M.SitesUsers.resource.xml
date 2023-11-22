@@ -1,0 +1,35 @@
+<resources xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
+        https://api-platform.com/schema/metadata/resources-3.0.xsd">
+    <resource class="App\Entity\M2M\SitesUsers"
+              security="is_granted('ROLE_ADMIN')"
+    >
+        <operations>
+            <operation class="ApiPlatform\Metadata\Get"/>
+            <operation class="ApiPlatform\Metadata\GetCollection"/>
+        </operations>
+    </resource>
+    <resource class="App\Entity\M2M\SitesUsers"
+              uriTemplate="/admin/users/{user_id}/sites"
+              security="is_granted('ROLE_ADMIN')"
+    >
+        <uriVariables>
+            <uriVariable parameterName="user_id" fromClass="App\Entity\User" fromProperty="sites" />
+        </uriVariables>
+        <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection"/>
+        </operations>
+    </resource>
+    <resource class="App\Entity\M2M\SitesUsers"
+              uriTemplate="/sites/{site_id}/users"
+              security="is_granted('ROLE_ADMIN')"
+    >
+        <uriVariables>
+            <uriVariable parameterName="site_id" fromClass="App\Entity\Site" fromProperty="users" />
+        </uriVariables>
+        <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection"/>
+        </operations>
+    </resource>
+</resources>

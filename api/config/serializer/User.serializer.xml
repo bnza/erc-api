@@ -23,8 +23,12 @@
             <group>update:User</group>
             <group>write:User</group>
         </attribute>
-        <attribute name="sites" >
+        <attribute name="sites">
+            <group>read:item:User</group>
+        </attribute>
+        <attribute name="sitesPrivileges" serialized-name="privileges">
             <group>read:session:User</group>
         </attribute>
+
     </class>
 </serializer>

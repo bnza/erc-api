@@ -2,15 +2,22 @@
 
 namespace App\Entity\M2M;
 
-use App\Entity\UserRolesTrait;
 use Symfony\Component\Uid\Uuid;
+use App\Entity\User;
+use App\Entity\Site;
 
 class SitesUsers
 {
-    use UserRolesTrait;
-    private int $id;
+    private Uuid $id;
 
-    public Uuid $user;
+    public User $user;
 
-    public int $site;
+    public Site $site;
+
+    public int $privilege;
+
+    public function getId(): Uuid
+    {
+        return $this->id;
+    }
 }

@@ -27,7 +27,18 @@
             </values>
         </denormalizationContext>
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" />
+            <operation class="ApiPlatform\Metadata\Get" >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>read:User</value>
+                                <value>read:item:User</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
             <operation class="ApiPlatform\Metadata\GetCollection" />
             <operation class="ApiPlatform\Metadata\Post" />
             <operation class="ApiPlatform\Metadata\Patch" >
