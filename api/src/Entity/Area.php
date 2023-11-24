@@ -2,23 +2,19 @@
 
 namespace App\Entity;
 
-class Site
+class Area
 {
     private int $id;
 
-    public string $code;
+    public Site $site;
 
-    public string $name;
+    public string $code;
 
     public ?string $description;
 
-    public bool $public = false;
-
-    public iterable $users;
-
-    public iterable $areas;
-
     public iterable $stratigraphicUnits;
+
+    public bool $public = false;
 
     public function getId(): int
     {

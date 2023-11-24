@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
+        https://api-platform.com/schema/metadata/resources-3.0.xsd">
+    <resource class="App\Entity\Area" >
+        <normalizationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>read:Area</value>
+                    </values>
+                </value>
+            </values>
+        </normalizationContext>
+        <denormalizationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>write:Area</value>
+                    </values>
+                </value>
+            </values>
+        </denormalizationContext>
+        <operations>
+            <operation class="ApiPlatform\Metadata\Get" />
+<!--            <operation class="ApiPlatform\Metadata\GetCollection">-->
+<!--                <filters>-->
+<!--                    <filter>Area.order_filter</filter>-->
+<!--                </filters>-->
+<!--            </operation>-->
+        </operations>
+    </resource>
+</resources>
