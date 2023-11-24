@@ -15,8 +15,6 @@ class Site
 
     public bool $public = false;
 
-    public ?SiteGeometry $geom;
-
     public iterable $users;
 
     public function getId(): int

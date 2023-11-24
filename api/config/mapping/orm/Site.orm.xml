@@ -17,7 +17,6 @@
                 <option name="default">false</option>
             </options>
         </field>
-        <one-to-one field="geom" target-entity="App\Entity\Geometry\SiteGeometry" mapped-by="site" />
         <one-to-many field="users" target-entity="App\Entity\M2M\SitesUsers" mapped-by="site" />
         <unique-constraints>
             <unique-constraint columns="name" />

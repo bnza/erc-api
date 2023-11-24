@@ -12,10 +12,10 @@
         <id name="id" type="integer">
             <generator />
         </id>
-        <one-to-one field="site" target-entity="App\Entity\Site" inversed-by="geom">
-            <join-column name="site_id" referenced-column-name="id" unique="true"/>
+        <one-to-one field="site" target-entity="App\Entity\Site">
+            <join-column name="site_id" unique="true"/>
         </one-to-one>
-        <field name="geom" type="geometry" nullable="false">
+        <field name="geom" type="geometry">
             <options>
                 <option name="geometry_type">POINTZ</option>
                 <option name="srid">4326</option>
