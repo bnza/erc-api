@@ -17,7 +17,7 @@
         </many-to-one>
         <field name="privilege" type="smallint">
             <options>
-                <option name="default">0</option>
+                <option name="default">1</option>
             </options>
         </field>
         <unique-constraints>

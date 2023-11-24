@@ -9,6 +9,7 @@
 /var/
 /vendor/
 /packages/
+/.http/
 ###< symfony/framework-bundle ###
 
 ###> friendsofphp/php-cs-fixer ###
