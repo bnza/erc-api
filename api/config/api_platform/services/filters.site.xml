@@ -1,0 +1,16 @@
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="site.order_filter" parent="api_platform.doctrine.orm.order_filter">
+            <argument type="collection">
+                <argument key="id"/>
+                <argument key="code"/>
+                <argument key="name"/>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+    </services>
+</container>
