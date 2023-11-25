@@ -10,7 +10,7 @@ class VwSiteGeometry
 
     public readonly Site $site;
 
-    public readonly string $geom;
+    public readonly array $geom;
 
 
 }

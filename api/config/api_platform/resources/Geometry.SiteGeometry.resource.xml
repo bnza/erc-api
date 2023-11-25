@@ -8,6 +8,10 @@
               routePrefix="/geometry"
               shortName="SiteGeometry"
     >
+        <formats>
+            <format name="json">application/json</format>
+            <format name="geojson">application/geo+json</format>
+        </formats>
         <normalizationContext>
             <values>
                 <value name="groups">

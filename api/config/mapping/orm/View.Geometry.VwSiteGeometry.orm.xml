@@ -13,12 +13,7 @@
         <one-to-one field="site" target-entity="App\Entity\Site">
             <join-column name="site_id" />
         </one-to-one>
-        <field name="geom" type="geometry">
-            <options>
-                <option name="geometry_type">POINTZ</option>
-                <option name="srid">4326</option>
-            </options>
-        </field>
+        <field name="geom" type="json" />
     </entity>
 
 </doctrine-mapping>

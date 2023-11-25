@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="app.geojson.normalizer.item" class="App\Serializer\GeoJson\ItemNormalizer" public="false">
+            <argument key="$decorated" type="service" id="serializer.normalizer.object" />
+            <tag name="serializer.normalizer" priority="-975" />
+        </service>
+        <service id="app.geojson.normalizer.collection" class="App\Serializer\GeoJson\CollectionNormalizer" public="false">
+            <argument type="service" id="api_platform.resource_class_resolver" />
+            <argument type="service" id="app.geojson.normalizer.item" />
+
+            <!-- Run after api_platform.jsonld.normalizer.object but before serializer.normalizer.object and serializer.denormalizer.array -->
+            <tag name="serializer.normalizer" priority="-985" />
+        </service>
+    </services>
+</container>
