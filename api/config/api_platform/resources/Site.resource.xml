@@ -30,6 +30,12 @@
                     <filter>site.order_filter</filter>
                 </filters>
             </operation>
+            <operation
+                    class="ApiPlatform\Metadata\Patch"
+                    security="is_granted('ROLE_ADMIN')"
+                    output="false"
+                    status="204"
+            />
         </operations>
     </resource>
 </resources>
