@@ -2,9 +2,8 @@
 
 namespace App\Serializer\GeoJson;
 
-
-use ApiPlatform\Serializer\AbstractCollectionNormalizer;
 use ApiPlatform\Metadata\ResourceClassResolverInterface;
+use ApiPlatform\Serializer\AbstractCollectionNormalizer;
 use ApiPlatform\State\Pagination\PaginatorInterface;
 use ApiPlatform\State\Pagination\PartialPaginatorInterface;
 
@@ -14,7 +13,7 @@ class CollectionNormalizer extends AbstractCollectionNormalizer
 
     private array $defaultContext = [];
 
-    public function __construct( ResourceClassResolverInterface $resourceClassResolver, private ItemNormalizer $itemNormalizer,array $defaultContext = [])
+    public function __construct(ResourceClassResolverInterface $resourceClassResolver, private ItemNormalizer $itemNormalizer, array $defaultContext = [])
     {
         $this->defaultContext = array_merge($this->defaultContext, $defaultContext);
         parent::__construct($resourceClassResolver, '');
@@ -44,8 +43,9 @@ class CollectionNormalizer extends AbstractCollectionNormalizer
         $data = [];
         $data['features'] = [];
         foreach ($object as $obj) {
-            $data['features'][] =  $this->itemNormalizer->normalize($obj, $format, $context);
+            $data['features'][] = $this->itemNormalizer->normalize($obj, $format, $context);
         }
+
         return $data;
     }
 }

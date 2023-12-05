@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Data;
 
+use App\Entity\Data\M2M\SitesUsers;
 use Doctrine\ORM\PersistentCollection;
-use http\Exception\InvalidArgumentException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
-
-use App\Entity\M2M\SitesUsers;
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -60,12 +58,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getSitesPrivileges(): array {
+    public function getSitesPrivileges(): array
+    {
         if (!$this->sites instanceof PersistentCollection) {
-           throw new InvalidArgumentException(sprintf('%s required', PersistentCollection::class));
+            throw new \InvalidArgumentException(sprintf('%s required', PersistentCollection::class));
         }
-        return $this->sites->reduce(function (array $sitesPrivileges,SitesUsers $sitesUser) {
+
+        return $this->sites->reduce(function (array $sitesPrivileges, SitesUsers $sitesUser) {
             $sitesPrivileges[$sitesUser->site->getId()] = $sitesUser->privilege;
+
             return $sitesPrivileges;
         }, []);
     }

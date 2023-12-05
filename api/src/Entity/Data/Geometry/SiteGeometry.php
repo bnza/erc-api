@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity\Geometry;
+namespace App\Entity\Data\Geometry;
 
-use App\Entity\Site as Site;
+use App\Entity\Data\Site;
 
 class SiteGeometry
 {
@@ -14,6 +14,4 @@ class SiteGeometry
     {
         return $this->site->getId();
     }
-
-
 }

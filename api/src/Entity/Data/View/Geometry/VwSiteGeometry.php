@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity\View\Geometry;
+namespace App\Entity\Data\View\Geometry;
 
-use App\Entity\Site as Site;
+use App\Entity\Data\Site;
 
 class VwSiteGeometry
 {
@@ -11,6 +11,4 @@ class VwSiteGeometry
     public readonly Site $site;
 
     public readonly array $geom;
-
-
 }

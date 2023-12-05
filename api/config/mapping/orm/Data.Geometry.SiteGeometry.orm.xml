@@ -5,15 +5,20 @@
                   xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Entity\View\Geometry\VwSiteGeometry" schema="geom" table="vw_site" read-only="true">
+    <entity name="App\Entity\Data\Geometry\SiteGeometry" schema="geom" table="site">
         <indexes>
             <index columns="geom" flags="spatial"/>
         </indexes>
-        <id name="id" type="integer" />
-        <one-to-one field="site" target-entity="App\Entity\Site">
+        <id name="site" association-key="true" />
+        <one-to-one field="site" target-entity="App\Entity\Data\Site">
             <join-column name="site_id" />
         </one-to-one>
-        <field name="geom" type="json" />
+        <field name="geom" type="geometry">
+            <options>
+                <option name="geometry_type">POINTZ</option>
+                <option name="srid">4326</option>
+            </options>
+        </field>
     </entity>
 
 </doctrine-mapping>

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entity\M2M;
+namespace App\Entity\Data\M2M;
 
+use App\Entity\Data\Site;
+use App\Entity\Data\User;
 use Symfony\Component\Uid\Uuid;
-use App\Entity\User;
-use App\Entity\Site;
 
 class SitesUsers
 {

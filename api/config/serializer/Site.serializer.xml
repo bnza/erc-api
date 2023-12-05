@@ -3,7 +3,7 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
         https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
-    <class name="App\Entity\Site">
+    <class name="App\Entity\Data\Site">
         <attribute name="id" >
             <group>read:Site</group>
         </attribute>

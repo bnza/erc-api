@@ -5,7 +5,7 @@
                   xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Entity\Area" table="area">
+    <entity name="App\Entity\Data\Area" table="area">
         <id name="id" type="integer">
             <generator />
         </id>
@@ -16,8 +16,8 @@
                 <option name="default">false</option>
             </options>
         </field>
-        <one-to-many field="stratigraphicUnits" target-entity="App\Entity\StratigraphicUnit" mapped-by="area" />
-        <many-to-one field="site" target-entity="App\Entity\Site" inversed-by="areas" >
+        <one-to-many field="stratigraphicUnits" target-entity="App\Entity\Data\StratigraphicUnit" mapped-by="area" />
+        <many-to-one field="site" target-entity="App\Entity\Data\Site" inversed-by="areas" >
             <join-column name="site_id" />
         </many-to-one>
         <unique-constraints>

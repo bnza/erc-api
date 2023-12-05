@@ -4,15 +4,15 @@
                   xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="App\Entity\M2M\SitesUsers" table="sites__users">
+    <entity name="App\Entity\Data\M2M\SitesUsers" table="sites__users">
         <id name="id" type="uuid">
             <generator strategy="CUSTOM"/>
             <custom-id-generator class="Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator"/>
         </id>
-        <many-to-one field="site" target-entity="App\Entity\Site" inversed-by="users">
+        <many-to-one field="site" target-entity="App\Entity\Data\Site" inversed-by="users">
             <join-column name="site_id" nullable="false" on-delete="CASCADE"/>
         </many-to-one>
-        <many-to-one field="user" target-entity="App\Entity\User" inversed-by="sites">
+        <many-to-one field="user" target-entity="App\Entity\Data\User" inversed-by="sites">
             <join-column name="user_id" nullable="false" on-delete="CASCADE"/>
         </many-to-one>
         <field name="privilege" type="smallint">

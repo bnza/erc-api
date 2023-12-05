@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
+        https://api-platform.com/schema/metadata/resources-3.0.xsd">
+    <resource class="App\Entity\Validator\Unique">
+        <formats>
+            <format name="json">application/json</format>
+        </formats>
+        <operations>
+            <operation
+                    class="ApiPlatform\Metadata\Get"
+                    uriTemplate="/validator/unique/site/code/{value}"
+                    provider="App\State\ValidatorUniqueProvider"
+                    name="unique_site_code"
+                    description="Check for site name uniqueness"
+            >
+<!--                <openapi description="Check for site code uniqueness">-->
+<!--                    <responses>-->
+<!--                        <response status="200">-->
+<!--                            <content>-->
+<!--                                <values>-->
+<!--                                    <value name="text/plain">-->
+<!--                                        <values>-->
+<!--                                            <value name="schema">-->
+<!--                                                <values>-->
+<!--                                                    <value name="type">integer</value>-->
+<!--                                                </values>-->
+<!--                                            </value>-->
+<!--                                        </values>-->
+<!--                                        <values>-->
+<!--                                            <value name="example">-->
+<!--                                                <values>-->
+<!--                                                    <value>1</value>-->
+<!--                                                </values>-->
+<!--                                            </value>-->
+<!--                                        </values>-->
+<!--                                    </value>-->
+<!--                                </values>-->
+<!--                            </content>-->
+<!--                        </response>-->
+<!--                    </responses>-->
+<!--                </openapi>-->
+                <defaults>
+                    <values>
+                        <value name="resource">site</value>
+                        <value name="property">code</value>
+                    </values>
+                </defaults>
+            </operation>
+            <operation
+                    class="ApiPlatform\Metadata\Get"
+                    uriTemplate="/validator/unique/site/name/{value}"
+                    provider="App\State\ValidatorUniqueProvider"
+                    name="unique_site_name"
+                    description="Check for site name uniqueness"
+            >
+                <openapi description="Check for site name uniqueness"/>
+                <defaults>
+                    <values>
+                        <value name="resource">site</value>
+                        <value name="property">name</value>
+                    </values>
+                </defaults>
+            </operation>
+        </operations>
+    </resource>
+</resources>

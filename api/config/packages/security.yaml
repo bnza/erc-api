@@ -1,7 +1,7 @@
 security:
     # https://symfony.com/doc/current/security.html#c-hashing-passwords
     password_hashers:
-        App\Entity\User: 'auto'
+        App\Entity\Data\User: 'auto'
 
     # https://symfony.com/doc/current/security/authenticator_manager.html
     # enable_authenticator_manager: true
@@ -10,7 +10,7 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         users:
             entity:
-                class: App\Entity\User
+                class: App\Entity\Data\User
                 property: email
             # document:
             #    class: App\Document\User
@@ -42,7 +42,7 @@ security:
 when@test:
     security:
         password_hashers:
-            App\Entity\User:
+            App\Entity\Data\User:
                 algorithm: md5
                 encode_as_base64: false
                 iterations: 0
