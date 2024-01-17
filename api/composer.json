@@ -105,10 +105,7 @@
   "repositories": [
     {
       "type": "path",
-      "url": "./packages/bnza/doctrine-postgis",
-      "options": {
-        "symlink": true
-      }
+      "url": "/srv/api/*"
     }
   ]
 }

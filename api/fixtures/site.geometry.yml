@@ -1,4 +1,4 @@
-App\Entity\Geometry\SiteGeometry:
+App\Entity\Data\Geometry\SiteGeometry:
     site_ed_geom:
         site: '@site_ed'
         geom: 'POINT(25.4876090043237 55.650462728292084 123.345)'

@@ -1,4 +1,4 @@
-App\Entity\M2M\SitesUsers:
+App\Entity\Data\M2M\SitesUsers:
     sites_users_1:
         site: '@site_ed'
         user: '@user_base'

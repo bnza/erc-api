@@ -7,8 +7,8 @@ services:
       - POSTGRES_DB=${POSTGRES_DB:-app}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-!ChangeMe!}
       - POSTGRES_USER=${POSTGRES_USER:-app}
-    ports:
-      - "5432:5432"
+#    ports:
+#      - "5432:5432"
     volumes:
       - ${POSTGRES_DATA_DIR}:/var/lib/postgresql/data
       - pg_socket:/var/run/postgresql
@@ -20,6 +20,7 @@ services:
       - database
     restart: unless-stopped
     volumes:
+      - ./api:/srv/api
       - php_socket:/var/run/php
       - pg_socket:/var/run/postgresql
     healthcheck:

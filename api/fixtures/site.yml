@@ -1,4 +1,4 @@
-App\Entity\Site:
+App\Entity\Data\Site:
     site_jb:
         code: 'JB'
         name: 'Jabal al-Baidain'

@@ -1,4 +1,4 @@
-App\Entity\User:
+App\Entity\Data\User:
     user_base:
         email: user_base@example.com
         password: <hashPassword(<{app.alice.parameters.user_base_pw}>)>
