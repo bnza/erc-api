@@ -5,16 +5,16 @@
 >
     <class name="App\Entity\Data\User">
         <attribute name="id" >
-            <group>read:User</group>
+            <group>User:acl:read</group>
             <group>read:session:User</group>
         </attribute>
         <attribute name="email" >
-            <group>read:User</group>
+            <group>User:acl:read</group>
             <group>read:session:User</group>
             <group>write:User</group>
         </attribute>
         <attribute name="roles" >
-            <group>read:User</group>
+            <group>User:acl:read</group>
             <group>read:session:User</group>
             <group>update:User</group>
             <group>write:User</group>

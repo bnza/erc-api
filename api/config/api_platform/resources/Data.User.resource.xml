@@ -6,13 +6,12 @@
         https://api-platform.com/schema/metadata/resources-3.0.xsd">
     <resource class="App\Entity\Data\User"
               routePrefix="/admin"
-              security="is_granted('ROLE_ADMIN')"
     >
         <normalizationContext>
             <values>
                 <value name="groups">
                     <values>
-                        <value>read:User</value>
+                        <value>User:acl:read</value>
                     </values>
                 </value>
             </values>
@@ -27,20 +26,33 @@
             </values>
         </denormalizationContext>
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" >
+            <operation
+                class="ApiPlatform\Metadata\Get"
+                security="is_granted('read', object)"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>read:User</value>
+                                <value>User:acl:read</value>
                                 <value>read:item:User</value>
                             </values>
                         </value>
                     </values>
                 </normalizationContext>
             </operation>
-            <operation class="ApiPlatform\Metadata\GetCollection" />
-            <operation class="ApiPlatform\Metadata\Post" />
+            <operation
+                class="ApiPlatform\Metadata\GetCollection"
+                security="is_granted('ROLE_ADMIN')"
+            />
+            <operation
+                class="ApiPlatform\Metadata\Post"
+                security="is_granted('ROLE_ADMIN')"
+            />
+            <operation
+                class="ApiPlatform\Metadata\Patch"
+                security="is_granted('update', object)"
+            />
             <operation class="ApiPlatform\Metadata\Patch" >
                 <denormalizationContext>
                     <values>
@@ -52,7 +64,10 @@
                     </values>
                 </denormalizationContext>
             </operation>
-            <operation class="ApiPlatform\Metadata\Delete" />
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                security="is_granted('delete', object)"
+            />
         </operations>
     </resource>
     <resource class="App\Entity\Data\User">

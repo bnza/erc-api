@@ -16,32 +16,6 @@
                     name="unique_site_code"
                     description="Check for site name uniqueness"
             >
-<!--                <openapi description="Check for site code uniqueness">-->
-<!--                    <responses>-->
-<!--                        <response status="200">-->
-<!--                            <content>-->
-<!--                                <values>-->
-<!--                                    <value name="text/plain">-->
-<!--                                        <values>-->
-<!--                                            <value name="schema">-->
-<!--                                                <values>-->
-<!--                                                    <value name="type">integer</value>-->
-<!--                                                </values>-->
-<!--                                            </value>-->
-<!--                                        </values>-->
-<!--                                        <values>-->
-<!--                                            <value name="example">-->
-<!--                                                <values>-->
-<!--                                                    <value>1</value>-->
-<!--                                                </values>-->
-<!--                                            </value>-->
-<!--                                        </values>-->
-<!--                                    </value>-->
-<!--                                </values>-->
-<!--                            </content>-->
-<!--                        </response>-->
-<!--                    </responses>-->
-<!--                </openapi>-->
                 <defaults>
                     <values>
                         <value name="resource">site</value>
