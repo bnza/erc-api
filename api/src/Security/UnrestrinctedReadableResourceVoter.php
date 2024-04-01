@@ -9,8 +9,8 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class UnrestrinctedReadableResourceVoter extends Voter
 {
+    public const READ = 'read';
 
-    const READ = 'read';
     protected function supports(string $attribute, mixed $subject): bool
     {
         if (self::READ !== $attribute) {

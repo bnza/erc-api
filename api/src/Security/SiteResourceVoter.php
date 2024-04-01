@@ -2,7 +2,6 @@
 
 namespace App\Security;
 
-use App\Entity\Data\Area;
 use App\Entity\Data\Site;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -10,10 +9,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class SiteResourceVoter extends Voter
 {
-
-    const CREATE = 'create';
-    const UPDATE = 'update';
-    const DELETE = 'delete';
+    public const CREATE = 'create';
+    public const UPDATE = 'update';
+    public const DELETE = 'delete';
 
     public function __construct(private Security $security)
     {

@@ -9,11 +9,10 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class UserResourceVoter extends Voter
 {
-
-    const CREATE = 'create';
-    const READ = 'read';
-    const UPDATE = 'update';
-    const DELETE = 'delete';
+    public const CREATE = 'create';
+    public const READ = 'read';
+    public const UPDATE = 'update';
+    public const DELETE = 'delete';
 
     public function __construct(private Security $security)
     {
