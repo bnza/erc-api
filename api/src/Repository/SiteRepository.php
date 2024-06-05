@@ -4,13 +4,11 @@ namespace App\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class SiteRepository extends EntityRepository
+class SiteRepository extends AbstractCheckUniqueRepository
 {
     public function isUnique(string $field, int|string $value): bool
     {
-        if (!in_array($field, ['code', 'name'])) {
-            throw new \InvalidArgumentException("Unsupported unique field '$field'");
-        }
+        $this->supportField($field);
 
         $qb = $this->createQueryBuilder('u');
         $sub = $this->createQueryBuilder('s');
@@ -24,5 +22,10 @@ class SiteRepository extends EntityRepository
             ->getQuery();
 
         return !(bool) count($query->getResult());
+    }
+
+    protected function getUniqueFields(): array
+    {
+        return ['code', 'name'];
     }
 }
