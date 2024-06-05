@@ -1,5 +1,3 @@
-version: "3.4"
-
 services:
   database:
     image: postgis/postgis:${POSTGRES_VERSION:-15}-${POSTGIS_VERSION:-3.3}-alpine
@@ -24,6 +22,7 @@ services:
       - php_socket:/var/run/php
       - pg_socket:/var/run/postgresql
     healthcheck:
+      test: ["CMD", "php", "-v"]
       interval: 10s
       timeout: 3s
       retries: 3
