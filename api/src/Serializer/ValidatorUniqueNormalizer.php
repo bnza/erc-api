@@ -21,6 +21,6 @@ class ValidatorUniqueNormalizer implements NormalizerInterface
 
     public function normalize(mixed $object, string $format = null, array $context = []): int
     {
-        return $object->value;
+        return (int) $object->unique;
     }
 }

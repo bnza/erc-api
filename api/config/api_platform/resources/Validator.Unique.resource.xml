@@ -11,7 +11,7 @@
         <operations>
             <operation
                     class="ApiPlatform\Metadata\Get"
-                    uriTemplate="/validator/unique/site/code/{value}"
+                    uriTemplate="/validator/unique/site/code/{id}"
                     provider="App\State\ValidatorUniqueProvider"
                     name="unique_site_code"
                     description="Check for site name uniqueness"
@@ -25,7 +25,7 @@
             </operation>
             <operation
                     class="ApiPlatform\Metadata\Get"
-                    uriTemplate="/validator/unique/site/name/{value}"
+                    uriTemplate="/validator/unique/site/name/{id}"
                     provider="App\State\ValidatorUniqueProvider"
                     name="unique_site_name"
                     description="Check for site name uniqueness"

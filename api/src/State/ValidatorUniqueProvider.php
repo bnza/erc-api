@@ -22,6 +22,9 @@ class ValidatorUniqueProvider implements ProviderInterface
 
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
+        if (!method_exists($operation, 'getDefaults')) {
+            throw new \LogicException(sprintf('Operation %s should implement getDefaults()', $operation->getName()));
+        }
         $defaults = $operation->getDefaults();
         if (
             !is_array($defaults)
@@ -32,19 +35,19 @@ class ValidatorUniqueProvider implements ProviderInterface
             throw new HttpException(404, 'Not found');
         }
 
-        if (!array_key_exists('value', $uriVariables)) {
+        if (!array_key_exists('id', $uriVariables)) {
             throw new HttpException(400, 'Missing mandatory values');
         }
 
-        $value = $uriVariables['value'];
+        $id = $uriVariables['id'];
 
         $className = $this->resources[$defaults['resource']];
         $property = $defaults['property'];
 
         $repo = $this->entityManager->getRepository($className);
 
-        $unique = $repo->isUnique($property, $value);
+        $unique = $repo->isUnique($property, $id);
 
-        return new Unique($unique);
+        return new Unique($id, $unique);
     }
 }
