@@ -8,7 +8,6 @@ use App\Entity\Data\Site;
 use App\Entity\Validator\Unique;
 use App\Repository\CheckUniqueRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ValidatorUniqueProvider implements ProviderInterface
@@ -48,8 +47,7 @@ class ValidatorUniqueProvider implements ProviderInterface
 
         $repo = $this->entityManager->getRepository($className);
 
-        if (!$repo instanceof CheckUniqueRepositoryInterface)
-        {
+        if (!$repo instanceof CheckUniqueRepositoryInterface) {
             throw new \LogicException(sprintf('Repository %s must implement %s', $className, CheckUniqueRepositoryInterface::class));
         }
         $unique = $repo->isUnique($property, $id);
