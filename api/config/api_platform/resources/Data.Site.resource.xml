@@ -36,9 +36,14 @@
                 output="false"
                 status="204"
             />
-            <operation class="ApiPlatform\Metadata\Post" securityPostDenormalize="is_granted('create', object)"/>
-            <operation class="ApiPlatform\Metadata\Delete" security="is_granted('delete', object)" output="false"
-                       status="204"/>
+            <operation
+                class="ApiPlatform\Metadata\Post"
+                securityPostDenormalize="is_granted('create', object)"/>
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                security="is_granted('delete', object)"
+                output="false"
+                status="204"/>
         </operations>
     </resource>
 </resources>

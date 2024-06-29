@@ -4,30 +4,32 @@
         https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="App\Entity\Data\User">
-        <attribute name="id" >
+        <attribute name="id">
             <group>User:acl:read</group>
-            <group>read:session:User</group>
+            <group>User:read:session</group>
         </attribute>
-        <attribute name="email" >
+        <attribute name="email">
             <group>User:acl:read</group>
-            <group>read:session:User</group>
-            <group>write:User</group>
+            <group>User:read:session</group>
+            <group>User:create</group>
+            <group>User:update</group>
         </attribute>
-        <attribute name="roles" >
+        <attribute name="roles">
             <group>User:acl:read</group>
-            <group>read:session:User</group>
-            <group>update:User</group>
-            <group>write:User</group>
+            <group>User:read:session</group>
+            <group>User:update</group>
+            <group>User:create</group>
         </attribute>
-        <attribute name="password" >
-            <group>update:User</group>
-            <group>write:User</group>
+        <attribute name="plainPassword">
+            <group>User:create</group>
+            <group>User:update</group>
         </attribute>
         <attribute name="sites">
-            <group>read:item:User</group>
+            <group>User:create</group>
+            <group>User:update</group>
         </attribute>
         <attribute name="sitesPrivileges" serialized-name="privileges">
-            <group>read:session:User</group>
+            <group>User:read:session</group>
         </attribute>
 
     </class>

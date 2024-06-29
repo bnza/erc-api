@@ -20,7 +20,8 @@
             <values>
                 <value name="groups">
                     <values>
-                        <value>write:User</value>
+                        <value>User:create</value>
+                        <value>User:update</value>
                     </values>
                 </value>
             </values>
@@ -35,7 +36,7 @@
                         <value name="groups">
                             <values>
                                 <value>User:acl:read</value>
-                                <value>read:item:User</value>
+                                <value>User:read</value>
                             </values>
                         </value>
                     </values>
@@ -44,21 +45,33 @@
             <operation
                 class="ApiPlatform\Metadata\GetCollection"
                 security="is_granted('ROLE_ADMIN')"
-            />
+            >
+                <filters>
+                    <filter>user.order_filter</filter>
+                </filters>
+            </operation>
             <operation
                 class="ApiPlatform\Metadata\Post"
                 security="is_granted('ROLE_ADMIN')"
-            />
-            <operation
-                class="ApiPlatform\Metadata\Patch"
-                security="is_granted('update', object)"
-            />
-            <operation class="ApiPlatform\Metadata\Patch" >
+                processor="App\State\UserPasswordHasher"
+            >
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>Default</value>
+                                <value>User:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+            <operation class="ApiPlatform\Metadata\Patch">
                 <denormalizationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>update:User</value>
+                                <value>User:update</value>
                             </values>
                         </value>
                     </values>
@@ -78,7 +91,7 @@
             <values>
                 <value name="groups">
                     <values>
-                        <value>read:session:User</value>
+                        <value>User:read:session</value>
                     </values>
                 </value>
             </values>

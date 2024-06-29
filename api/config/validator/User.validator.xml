@@ -12,39 +12,58 @@
             </option>
         </constraint>
         <property name="email">
-            <constraint name="Email" />
+            <constraint name="Email"/>
         </property>
-        <property name="password">
-            <constraint name="NotBlank"/>
+        <property name="plainPassword">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>User:create</value>
+                </option>
+            </constraint>
             <constraint name="Length">
+                <option name="groups">
+                    <value>User:create</value>
+                </option>
                 <option name="min">8</option>
                 <option name="max">20</option>
                 <option name="minMessage">
-                    Your password {{ limit }} characters long
+                    Your password must be at least {{ limit }} characters long
                 </option>
                 <option name="maxMessage">
-                    Your password {{ limit }} characters
+                    Your password must be at most {{ limit }} characters long
                 </option>
             </constraint>
             <constraint name="Regex">
+                <option name="groups">
+                    <value>User:create</value>
+                </option>
                 <option name="pattern">/\d/</option>
                 <option name="message">
                     Your password must contain at lest one digit
                 </option>
             </constraint>
             <constraint name="Regex">
+                <option name="groups">
+                    <value>User:create</value>
+                </option>
                 <option name="pattern">/[A-Z]+/</option>
                 <option name="message">
                     Your password must contain at lest one uppercase character
                 </option>
             </constraint>
             <constraint name="Regex">
+                <option name="groups">
+                    <value>User:create</value>
+                </option>
                 <option name="pattern">/[a-z]+/</option>
                 <option name="message">
                     Your password must contain at lest one lowercase character
                 </option>
             </constraint>
             <constraint name="Regex">
+                <option name="groups">
+                    <value>User:create</value>
+                </option>
                 <option name="pattern">/\W/</option>
                 <option name="message">
                     Your password must contain at lest one not alphanumeric character
@@ -52,11 +71,11 @@
             </constraint>
         </property>
         <property name="roles">
-            <constraint name="NotBlank" />
+            <constraint name="NotBlank"/>
             <constraint name="All">
                 <option name="constraints">
                     <constraint name="NotBlank"/>
-                    <constraint name="App\Validator\IsValidRole" />
+                    <constraint name="App\Validator\IsValidRole"/>
                 </option>
             </constraint>
         </property>

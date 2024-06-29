@@ -10,7 +10,6 @@ use Symfony\Component\Uid\Uuid;
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    use UserRolesTrait;
     private Uuid $id;
 
     public string $email;
@@ -18,6 +17,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public iterable $sites;
 
     private string $password;
+
+    public ?string $plainPassword = null;
+
+    private array $roles = ['ROLE_USER'];
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
 
     public function getId(): ?Uuid
     {
@@ -49,13 +71,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getSitesPrivileges(): array

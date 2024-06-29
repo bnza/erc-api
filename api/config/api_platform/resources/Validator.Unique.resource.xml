@@ -10,11 +10,11 @@
         </formats>
         <operations>
             <operation
-                    class="ApiPlatform\Metadata\Get"
-                    uriTemplate="/validator/unique/site/code/{id}"
-                    provider="App\State\ValidatorUniqueProvider"
-                    name="unique_site_code"
-                    description="Check for site name uniqueness"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/validator/unique/site/code/{id}"
+                provider="App\State\ValidatorUniqueProvider"
+                name="unique_site_code"
+                description="Check for site name uniqueness"
             >
                 <defaults>
                     <values>
@@ -24,17 +24,32 @@
                 </defaults>
             </operation>
             <operation
-                    class="ApiPlatform\Metadata\Get"
-                    uriTemplate="/validator/unique/site/name/{id}"
-                    provider="App\State\ValidatorUniqueProvider"
-                    name="unique_site_name"
-                    description="Check for site name uniqueness"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/validator/unique/site/name/{id}"
+                provider="App\State\ValidatorUniqueProvider"
+                name="unique_site_name"
+                description="Check for site name uniqueness"
             >
                 <openapi description="Check for site name uniqueness"/>
                 <defaults>
                     <values>
                         <value name="resource">site</value>
                         <value name="property">name</value>
+                    </values>
+                </defaults>
+            </operation>
+            <operation
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/validator/unique/user/email/{id}"
+                provider="App\State\ValidatorUniqueProvider"
+                name="unique_user_email"
+                description="Check for user email uniqueness"
+            >
+                <openapi description="Check for user email uniqueness"/>
+                <defaults>
+                    <values>
+                        <value name="resource">user</value>
+                        <value name="property">email</value>
                     </values>
                 </defaults>
             </operation>

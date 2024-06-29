@@ -5,6 +5,7 @@ namespace App\State;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use App\Entity\Data\Site;
+use App\Entity\Data\User;
 use App\Entity\Validator\Unique;
 use App\Repository\CheckUniqueRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,6 +19,7 @@ class ValidatorUniqueProvider implements ProviderInterface
     {
         $this->resources = [
             'site' => Site::class,
+            'user' => User::class,
         ];
     }
 
@@ -37,7 +39,7 @@ class ValidatorUniqueProvider implements ProviderInterface
         }
 
         if (!array_key_exists('id', $uriVariables)) {
-            throw new HttpException(400, 'Missing mandatory values');
+            throw new HttpException(400, 'Missing mandatory request value "id"');
         }
 
         $id = $uriVariables['id'];

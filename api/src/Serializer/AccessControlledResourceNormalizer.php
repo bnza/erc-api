@@ -9,7 +9,6 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 final class AccessControlledResourceNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
@@ -18,13 +17,13 @@ final class AccessControlledResourceNormalizer implements NormalizerInterface, N
     private const ALREADY_CALLED = 'ACCESS_CONTROLLED_ATTRIBUTE_NORMALIZER_ALREADY_CALLED';
 
     public function __construct(
-        #[Autowire(service: ObjectNormalizer::class)]
+        #[Autowire(service: 'api_platform.jsonld.normalizer.item')]
         private NormalizerInterface $decorated,
         private Security $security
     ) {
     }
 
-    public function normalize(mixed $object, string $format = null, array $context = [])
+    public function normalize(mixed $object, ?string $format = null, array $context = [])
     {
         $context[self::ALREADY_CALLED] = true;
         $data = $this->decorated->normalize($object, $format, $context);
@@ -41,6 +40,10 @@ final class AccessControlledResourceNormalizer implements NormalizerInterface, N
     public function supportsNormalization($data, $format = null, array $context = []): bool
     {
         if (isset($context[self::ALREADY_CALLED])) {
+            return false;
+        }
+
+        if (!$this->decorated->supportsNormalization($data, $format, $context)) {
             return false;
         }
 
