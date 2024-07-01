@@ -24,10 +24,6 @@
             <group>User:create</group>
             <group>User:update</group>
         </attribute>
-        <attribute name="sites">
-            <group>User:create</group>
-            <group>User:update</group>
-        </attribute>
         <attribute name="sitesPrivileges" serialized-name="privileges">
             <group>User:read:session</group>
         </attribute>

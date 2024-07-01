@@ -66,8 +66,12 @@
                     </values>
                 </validationContext>
             </operation>
-            <operation class="ApiPlatform\Metadata\Patch">
-                <denormalizationContext>
+            <operation class="ApiPlatform\Metadata\Patch"
+                       security="is_granted('ROLE_ADMIN')"
+                       processor="App\State\UserPasswordHasher"
+                       output="false"
+                       status="204">
+                <validationContext>
                     <values>
                         <value name="groups">
                             <values>
@@ -75,11 +79,13 @@
                             </values>
                         </value>
                     </values>
-                </denormalizationContext>
+                </validationContext>
             </operation>
             <operation
                 class="ApiPlatform\Metadata\Delete"
                 security="is_granted('delete', object)"
+                output="false"
+                status="204"
             />
         </operations>
     </resource>
