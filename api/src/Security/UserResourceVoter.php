@@ -29,6 +29,10 @@ class UserResourceVoter extends Voter
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
-        return $this->security->isGranted('ROLE_ADMIN');
+        if (!$this->security->isGranted('ROLE_ADMIN')) {
+            return false;
+        }
+
+        return self::READ === $attribute || $subject->email !== $token->getUserIdentifier();
     }
 }
