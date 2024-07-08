@@ -12,7 +12,6 @@
             <group>User:acl:read</group>
             <group>User:read:session</group>
             <group>User:create</group>
-            <group>User:update</group>
         </attribute>
         <attribute name="roles">
             <group>User:acl:read</group>
@@ -27,6 +26,5 @@
         <attribute name="sitesPrivileges" serialized-name="privileges">
             <group>User:read:session</group>
         </attribute>
-
     </class>
 </serializer>

@@ -16,16 +16,6 @@
                 </value>
             </values>
         </normalizationContext>
-        <denormalizationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>User:create</value>
-                        <value>User:update</value>
-                    </values>
-                </value>
-            </values>
-        </denormalizationContext>
         <operations>
             <operation
                 class="ApiPlatform\Metadata\Get"
@@ -55,12 +45,20 @@
                 security="is_granted('ROLE_ADMIN')"
                 processor="App\State\UserPasswordHasher"
             >
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>User:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
                 <validationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>Default</value>
-                                <value>User:update</value>
+                                <value>User:create</value>
                             </values>
                         </value>
                     </values>
@@ -71,6 +69,15 @@
                        processor="App\State\UserPasswordHasher"
                        output="false"
                        status="204">
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>User:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
                 <validationContext>
                     <values>
                         <value name="groups">
