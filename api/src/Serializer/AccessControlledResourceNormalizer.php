@@ -3,6 +3,7 @@
 namespace App\Serializer;
 
 use App\Entity\Data\Site;
+use App\Entity\Data\StratigraphicUnit;
 use App\Entity\Data\User;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -43,6 +44,11 @@ final class AccessControlledResourceNormalizer implements NormalizerInterface, N
             return false;
         }
 
+        // Normalize only the requested resource
+        if (array_key_exists('object', $context) && $context['resource_class'] !== get_class($context['object'])) {
+            return false;
+        }
+
         if (!$this->decorated->supportsNormalization($data, $format, $context)) {
             return false;
         }
@@ -62,6 +68,7 @@ final class AccessControlledResourceNormalizer implements NormalizerInterface, N
         return [
             Site::class => true,
             User::class => true,
+            StratigraphicUnit::class => true,
         ];
     }
 }

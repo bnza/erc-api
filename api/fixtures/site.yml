@@ -1,3 +1,4 @@
+#file: noinspection YAMLSchemaValidation
 App\Entity\Data\Site:
     site_jb:
         code: 'JB'

@@ -3,28 +3,27 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
         https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
-    <class name="App\Entity\Data\Site">
+    <class name="App\Entity\Data\StratigraphicUnit">
         <attribute name="id">
             <group>StratigraphicUnit:acl:read</group>
-            <group>Site:acl:read</group>
         </attribute>
-        <attribute name="code">
-            <group>Site:acl:read</group>
-            <group>read:SiteGeometry</group>
-            <group>Site:item:write</group>
+        <attribute name="site">
             <group>StratigraphicUnit:acl:read</group>
         </attribute>
-        <attribute name="name">
-            <group>Site:acl:read</group>
-            <group>Site:item:write</group>
+        <attribute name="year">
+            <group>StratigraphicUnit:acl:read</group>
+        </attribute>
+        <attribute name="number">
+            <group>StratigraphicUnit:acl:read</group>
         </attribute>
         <attribute name="description">
-            <group>Site:acl:read</group>
-            <group>Site:item:write</group>
+            <group>StratigraphicUnit:acl:read</group>
+        </attribute>
+        <attribute name="interpretation">
+            <group>StratigraphicUnit:acl:read</group>
         </attribute>
         <attribute name="public">
-            <group>Site:acl:read</group>
-            <group>Site:item:write</group>
+            <group>StratigraphicUnit:acl:read</group>
         </attribute>
     </class>
 </serializer>

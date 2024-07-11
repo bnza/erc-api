@@ -118,6 +118,18 @@
                        read="false"
                        write="false"
             />
+            <operation class="ApiPlatform\Metadata\Post"
+                       controller="App\Controller\ChangePasswordController"
+                       name="change_password"
+                       security="is_granted('IS_AUTHENTICATED_FULLY')"
+                       uriTemplate="/users/me/change-password"
+                       read="false"
+                       write="false"
+                       output="false"
+                       description="Change the current user password"
+                       input="App\DTO\PasswordChangeDTO"
+                       validate="true"
+            />
         </operations>
     </resource>
 </resources>

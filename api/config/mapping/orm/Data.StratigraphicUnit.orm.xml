@@ -7,12 +7,13 @@
 
     <entity name="App\Entity\Data\StratigraphicUnit" table="su">
         <id name="id" type="integer">
-            <generator />
+            <generator/>
         </id>
-        <field name="number" type="integer" />
-        <field name="interpretation"  type="text" nullable="true"/>
-        <field name="description"  type="text" nullable="true"/>
-        <field name="public" type="boolean" >
+        <field name="number" type="integer"/>
+        <field name="year" type="integer"/>
+        <field name="description" type="text" nullable="true"/>
+        <field name="interpretation" type="text" nullable="true"/>
+        <field name="public" type="boolean">
             <options>
                 <option name="default">false</option>
             </options>
@@ -21,10 +22,10 @@
             <join-column name="site_id" nullable="false"/>
         </many-to-one>
         <many-to-one field="area" target-entity="App\Entity\Data\Area" inversed-by="stratigraphicUnits">
-            <join-column name="site_id" />
+            <join-column name="area_id"/>
         </many-to-one>
         <unique-constraints>
-            <unique-constraint columns="site_id,number" />
+            <unique-constraint columns="site_id,number"/>
         </unique-constraints>
     </entity>
 

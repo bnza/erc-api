@@ -8,11 +8,11 @@ class StratigraphicUnit
 
     public Site $site;
 
-    public Area $area;
+    public ?Area $area;
 
     public int $number;
 
-    public ?string $areaCode;
+    public int $year;
 
     public ?string $interpretation;
 

@@ -4,12 +4,12 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
         https://api-platform.com/schema/metadata/resources-3.0.xsd">
-    <resource class="App\Entity\Data\Site">
+    <resource class="App\Entity\Data\StratigraphicUnit">
         <normalizationContext>
             <values>
                 <value name="groups">
                     <values>
-                        <value>Site:acl:read</value>
+                        <value>StratigraphicUnit:acl:read</value>
                     </values>
                 </value>
             </values>
@@ -18,7 +18,7 @@
             <values>
                 <value name="groups">
                     <values>
-                        <value>Site:item:write</value>
+                        <value>write:StratigraphicUnit</value>
                     </values>
                 </value>
             </values>
@@ -27,24 +27,10 @@
             <operation class="ApiPlatform\Metadata\Get"/>
             <operation class="ApiPlatform\Metadata\GetCollection">
                 <filters>
-                    <filter>site.order_filter</filter>
-                    <filter>site.search_filter</filter>
+                    <filter>stratigraphic_unit.order_filter</filter>
+                    <filter>stratigraphic_unit.search_filter</filter>
                 </filters>
             </operation>
-            <operation
-                class="ApiPlatform\Metadata\Patch"
-                security="is_granted('update', object)"
-                output="false"
-                status="204"
-            />
-            <operation
-                class="ApiPlatform\Metadata\Post"
-                securityPostDenormalize="is_granted('create', object)"/>
-            <operation
-                class="ApiPlatform\Metadata\Delete"
-                security="is_granted('delete', object)"
-                output="false"
-                status="204"/>
         </operations>
     </resource>
 </resources>
