@@ -19,7 +19,7 @@ class CollectionNormalizer extends AbstractCollectionNormalizer
         parent::__construct($resourceClassResolver, '');
     }
 
-    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return is_object($data) && parent::supportsNormalization($data, $format, $context);
     }
@@ -38,7 +38,7 @@ class CollectionNormalizer extends AbstractCollectionNormalizer
         return $data;
     }
 
-    protected function getItemsData(iterable $object, string $format = null, array $context = []): array
+    protected function getItemsData(iterable $object, ?string $format = null, array $context = []): array
     {
         $data = [];
         $data['features'] = [];

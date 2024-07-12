@@ -6,7 +6,7 @@
         https://api-platform.com/schema/metadata/resources-3.0.xsd">
     <resource class="App\Entity\Data\View\Geometry\VwSiteGeometry"
               routePrefix="/geometry"
-              shortName="SiteGeometry"
+              shortName="site"
     >
         <formats>
             <format name="json">application/json</format>
@@ -31,15 +31,15 @@
             </values>
         </denormalizationContext>
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" />
+            <operation class="ApiPlatform\Metadata\GetCollection"/>
             <operation
                 class="ApiPlatform\Metadata\Get"
             />
-<!--            <operation class="ApiPlatform\Metadata\GetCollection">-->
-<!--                <filters>-->
-<!--                    <filter>Area.order_filter</filter>-->
-<!--                </filters>-->
-<!--            </operation>-->
+            <!--            <operation class="ApiPlatform\Metadata\GetCollection">-->
+            <!--                <filters>-->
+            <!--                    <filter>Area.order_filter</filter>-->
+            <!--                </filters>-->
+            <!--            </operation>-->
         </operations>
     </resource>
 </resources>
