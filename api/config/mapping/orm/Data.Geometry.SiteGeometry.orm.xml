@@ -9,9 +9,11 @@
         <indexes>
             <index columns="geom" flags="spatial"/>
         </indexes>
-        <id name="site" association-key="true" />
+        <id name="site" association-key="true">
+            <generator strategy="NONE"/>
+        </id>
         <one-to-one field="site" target-entity="App\Entity\Data\Site">
-            <join-column name="site_id" />
+            <join-column name="site_id"/>
         </one-to-one>
         <field name="geom" type="geometry">
             <options>

@@ -7,22 +7,22 @@
 
     <entity name="App\Entity\Data\Site" table="site" repository-class="App\Repository\SiteRepository">
         <id name="id" type="integer">
-            <generator />
+            <generator strategy="SEQUENCE"/>
         </id>
-        <field name="code" length="3" unique="true" />
-        <field name="name" length="64" unique="true" />
-        <field name="description"  type="text" nullable="true"/>
-        <field name="public" type="boolean" >
+        <field name="code" length="3" unique="true"/>
+        <field name="name" length="64" unique="true"/>
+        <field name="description" type="text" nullable="true"/>
+        <field name="public" type="boolean">
             <options>
                 <option name="default">false</option>
             </options>
         </field>
-        <one-to-many field="users" target-entity="App\Entity\Data\M2M\SitesUsers" mapped-by="site" />
-        <one-to-many field="areas" target-entity="App\Entity\Data\Area" mapped-by="site" />
-        <one-to-many field="stratigraphicUnits" target-entity="App\Entity\Data\StratigraphicUnit" mapped-by="site" />
+        <one-to-many field="users" target-entity="App\Entity\Data\M2M\SitesUsers" mapped-by="site"/>
+        <one-to-many field="areas" target-entity="App\Entity\Data\Area" mapped-by="site"/>
+        <one-to-many field="stratigraphicUnits" target-entity="App\Entity\Data\StratigraphicUnit" mapped-by="site"/>
         <unique-constraints>
-            <unique-constraint columns="name" />
-            <unique-constraint columns="code" />
+            <unique-constraint columns="name"/>
+            <unique-constraint columns="code"/>
         </unique-constraints>
     </entity>
 

@@ -7,21 +7,21 @@
 
     <entity name="App\Entity\Data\Area" table="area">
         <id name="id" type="integer">
-            <generator />
+            <generator strategy="SEQUENCE"/>
         </id>
         <field name="code" length="3"/>
-        <field name="description"  type="text" nullable="true"/>
-        <field name="public" type="boolean" >
+        <field name="description" type="text" nullable="true"/>
+        <field name="public" type="boolean">
             <options>
                 <option name="default">false</option>
             </options>
         </field>
-        <one-to-many field="stratigraphicUnits" target-entity="App\Entity\Data\StratigraphicUnit" mapped-by="area" />
-        <many-to-one field="site" target-entity="App\Entity\Data\Site" inversed-by="areas" >
-            <join-column name="site_id" />
+        <one-to-many field="stratigraphicUnits" target-entity="App\Entity\Data\StratigraphicUnit" mapped-by="area"/>
+        <many-to-one field="site" target-entity="App\Entity\Data\Site" inversed-by="areas">
+            <join-column name="site_id"/>
         </many-to-one>
         <unique-constraints>
-            <unique-constraint columns="site_id,code" />
+            <unique-constraint columns="site_id,code"/>
         </unique-constraints>
     </entity>
 

@@ -4,6 +4,7 @@
         https://api-platform.com/schema/metadata/resources-3.0.xsd">
     <resource class="App\Entity\Data\M2M\SitesUsers"
               security="is_granted('ROLE_ADMIN')"
+              shortName="SitesUser"
     >
         <operations>
             <operation class="ApiPlatform\Metadata\Get"/>
@@ -15,7 +16,7 @@
               security="is_granted('ROLE_ADMIN')"
     >
         <uriVariables>
-            <uriVariable parameterName="user_id" fromClass="App\Entity\Data\User" fromProperty="sites" />
+            <uriVariable parameterName="user_id" fromClass="App\Entity\Data\User" fromProperty="sites"/>
         </uriVariables>
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection"/>
@@ -26,7 +27,7 @@
               security="is_granted('ROLE_ADMIN')"
     >
         <uriVariables>
-            <uriVariable parameterName="site_id" fromClass="App\Entity\Data\Site" fromProperty="users" />
+            <uriVariable parameterName="site_id" fromClass="App\Entity\Data\Site" fromProperty="users"/>
         </uriVariables>
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection"/>

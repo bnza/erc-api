@@ -1,6 +1,6 @@
 services:
-    Jsor\Doctrine\PostGIS\Event\ORMSchemaEventSubscriber:
-        tags: [{ name: doctrine.event_subscriber, connection: default }]
+    Jsor\Doctrine\PostGIS\Event\ORMSchemaDoctrineListener:
+        tags: [{ name: doctrine.listener, connection: default }]
 
 doctrine:
     dbal:

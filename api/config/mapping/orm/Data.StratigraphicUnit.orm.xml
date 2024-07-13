@@ -7,7 +7,7 @@
 
     <entity name="App\Entity\Data\StratigraphicUnit" table="su">
         <id name="id" type="integer">
-            <generator/>
+            <generator strategy="SEQUENCE"/>
         </id>
         <field name="number" type="integer"/>
         <field name="year" type="integer"/>

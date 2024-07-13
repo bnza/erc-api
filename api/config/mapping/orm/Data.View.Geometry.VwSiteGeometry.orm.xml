@@ -9,11 +9,13 @@
         <indexes>
             <index columns="geom" flags="spatial"/>
         </indexes>
-        <id name="id" type="integer" />
+        <id name="id" type="integer">
+            <generator strategy="NONE"/>
+        </id>
         <one-to-one field="site" target-entity="App\Entity\Data\Site">
-            <join-column name="site_id" />
+            <join-column name="site_id"/>
         </one-to-one>
-        <field name="geom" type="json" />
+        <field name="geom" type="json"/>
     </entity>
 
 </doctrine-mapping>
