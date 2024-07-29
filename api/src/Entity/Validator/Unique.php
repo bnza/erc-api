@@ -2,9 +2,9 @@
 
 namespace App\Entity\Validator;
 
-readonly class Unique
+readonly class Unique extends AbstractUnique
 {
-    public function __construct(public string|int $id, public bool $unique)
+    public function __construct(public string|int $id, protected bool $unique)
     {
     }
 

@@ -3,24 +3,30 @@
 namespace App\Serializer;
 
 use App\Entity\Validator\Unique;
+use App\Entity\Validator\UniqueInterface;
+use App\Entity\Validator\UniqueStratigraphicUnit;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class ValidatorUniqueNormalizer implements NormalizerInterface
 {
-    public function supportsNormalization(mixed $data, string $format = null): bool
+    public function supportsNormalization(mixed $data, ?string $format = null): bool
     {
-        return $data instanceof Unique;
+        return $data instanceof UniqueInterface;
     }
 
     public function getSupportedTypes(): array
     {
         return [
-           Unique::class => true,
+            Unique::class => true,
+            UniqueStratigraphicUnit::class => true,
         ];
     }
 
-    public function normalize(mixed $object, string $format = null, array $context = []): int
+    public function normalize(mixed $object, ?string $format = null, array $context = []): int
     {
-        return (int) $object->unique;
+        /*
+         * @var $object UniqueInterface
+         */
+        return (int) $object->isUnique();
     }
 }

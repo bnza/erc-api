@@ -11,11 +11,30 @@
         <operations>
             <operation
                 class="ApiPlatform\Metadata\Get"
-                uriTemplate="/validator/unique/site/code/{id}"
+                uriTemplate="/validator/unique/sites/code/{id}"
                 provider="App\State\ValidatorUniqueProvider"
                 name="unique_site_code"
-                description="Check for site name uniqueness"
+                description="Check for site code uniqueness"
             >
+                <openapi description="Check for site code uniqueness">
+                    <responses>
+                        <response status="200">
+                            <content>
+                                <values>
+                                    <value name="application/json">
+                                        <values>
+                                            <value name="schema">
+                                                <values>
+                                                    <value name="type">integer</value>
+                                                </values>
+                                            </value>
+                                        </values>
+                                    </value>
+                                </values>
+                            </content>
+                        </response>
+                    </responses>
+                </openapi>
                 <defaults>
                     <values>
                         <value name="resource">site</value>
@@ -25,12 +44,30 @@
             </operation>
             <operation
                 class="ApiPlatform\Metadata\Get"
-                uriTemplate="/validator/unique/site/name/{id}"
+                uriTemplate="/validator/unique/sites/name/{id}"
                 provider="App\State\ValidatorUniqueProvider"
                 name="unique_site_name"
                 description="Check for site name uniqueness"
             >
-                <openapi description="Check for site name uniqueness"/>
+                <openapi description="Check for site name uniqueness">
+                    <responses>
+                        <response status="200">
+                            <content>
+                                <values>
+                                    <value name="application/json">
+                                        <values>
+                                            <value name="schema">
+                                                <values>
+                                                    <value name="type">integer</value>
+                                                </values>
+                                            </value>
+                                        </values>
+                                    </value>
+                                </values>
+                            </content>
+                        </response>
+                    </responses>
+                </openapi>
                 <defaults>
                     <values>
                         <value name="resource">site</value>
@@ -40,18 +77,70 @@
             </operation>
             <operation
                 class="ApiPlatform\Metadata\Get"
-                uriTemplate="/validator/unique/user/email/{id}"
+                uriTemplate="/validator/unique/users/email/{id}"
                 provider="App\State\ValidatorUniqueProvider"
                 name="unique_user_email"
                 description="Check for user email uniqueness"
             >
-                <openapi description="Check for user email uniqueness"/>
+                <openapi description="Check for user email uniqueness">
+                    <responses>
+                        <response status="200">
+                            <content>
+                                <values>
+                                    <value name="application/json">
+                                        <values>
+                                            <value name="schema">
+                                                <values>
+                                                    <value name="type">integer</value>
+                                                </values>
+                                            </value>
+                                        </values>
+                                    </value>
+                                </values>
+                            </content>
+                        </response>
+                    </responses>
+                </openapi>
                 <defaults>
                     <values>
                         <value name="resource">user</value>
                         <value name="property">email</value>
                     </values>
                 </defaults>
+            </operation>
+            <operation
+                input="App\Entity\Validator\UniqueStratigraphicUnit"
+                output="App\Entity\Validator\UniqueStratigraphicUnit"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/validator/unique/stratigraphic-units/{site}/{year}/{number}"
+                provider="App\State\ValidatorUniqueStratigraphicUnitProvider"
+                name="unique_sus_code"
+                description="Check for stratigraphic unit [site, year, number] uniqueness"
+            >
+                <requirements>
+                    <requirement property="site">\d+</requirement>
+                    <requirement property="year">\d+</requirement>
+                    <requirement property="number">\d+</requirement>
+                </requirements>
+                <openapi description="Check for stratigraphic unit [site, year, number] uniqueness">
+                    <responses>
+                        <response status="200">
+                            <content>
+                                <values>
+                                    <value name="application/json">
+                                        <values>
+                                            <value name="schema">
+                                                <values>
+                                                    <value name="type">integer</value>
+                                                </values>
+                                            </value>
+                                        </values>
+                                    </value>
+                                </values>
+                            </content>
+                        </response>
+                    </responses>
+                </openapi>
             </operation>
         </operations>
     </resource>

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
-interface CheckUniqueRepositoryInterface {
-    public function isUnique(string $field, int|string $value): bool;
+interface CheckUniqueRepositoryInterface
+{
+    public function isUnique(array $criteria): bool;
 }

@@ -50,9 +50,9 @@ class ValidatorUniqueProvider implements ProviderInterface
         $repo = $this->entityManager->getRepository($className);
 
         if (!$repo instanceof CheckUniqueRepositoryInterface) {
-            throw new \LogicException(sprintf('Repository %s must implement %s', $className, CheckUniqueRepositoryInterface::class));
+            throw new \LogicException(sprintf('Repository %s must implement %s', get_class($repo), CheckUniqueRepositoryInterface::class));
         }
-        $unique = $repo->isUnique($property, $id);
+        $unique = $repo->isUnique([$property => $id]);
 
         return new Unique($id, $unique);
     }

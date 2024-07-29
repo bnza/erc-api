@@ -20,5 +20,12 @@
             </argument>
             <tag name="api_platform.filter"/>
         </service>
+        <service id="site.or_search_filter" parent="app.or_search_filter" class="App\Filter\OrSearchFilter">
+            <argument type="collection">
+                <argument key="code">ipartial</argument>
+                <argument key="name">ipartial</argument>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
     </services>
 </container>

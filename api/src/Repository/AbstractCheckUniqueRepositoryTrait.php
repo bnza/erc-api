@@ -6,25 +6,42 @@ trait AbstractCheckUniqueRepositoryTrait
 {
     abstract protected function getUniqueFields(): array;
 
-    protected function supportField(string $field): void
+    protected function supportFields(array $fields): void
     {
-        if (!in_array($field, $this->getUniqueFields())) {
-            throw new \InvalidArgumentException("Unsupported unique field '$field'");
+        $isSupported = false;
+        foreach ($this->getUniqueFields() as $uniqueFields) {
+            if (is_string($uniqueFields)) {
+                $uniqueFields = [$uniqueFields];
+            }
+            $isSupported = $fields === $uniqueFields;
+            if ($isSupported) {
+                break;
+            }
+        }
+        if (!$isSupported) {
+            throw new \InvalidArgumentException(sprintf("Unsupported unique fields '%s'", implode(', ', $fields)));
         }
     }
 
-    public function isUnique(string $field, int|string $value): bool
+    public function isUnique(array $criteria): bool
     {
-        $this->supportField($field);
+        $this->supportFields(array_keys($criteria));
 
         $qb = $this->createQueryBuilder('u');
         $sub = $this->createQueryBuilder('s');
 
-        $sub->select('1')
-            ->where($sub->expr()->eq($sub->getRootAliases()[0].'.'.$field, ':value'));
+        $sub->select('1');
+        $params = [];
+
+        foreach ($criteria as $field => $value) {
+            $paramKey = ':'.$field;
+            $params[$paramKey] = $value;
+            $sub->andWhere($sub->expr()->eq($sub->getRootAliases()[0].'.'.$field, $paramKey));
+        }
+
         $query = $qb->select('1')
             ->where($qb->expr()->exists($sub->getDQL()))
-            ->setParameter('value', $value)
+            ->setParameters($params)
             ->setMaxResults(1)
             ->getQuery();
 

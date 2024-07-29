@@ -32,6 +32,33 @@
                 </filters>
             </operation>
             <operation
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/autocomplete/sites"
+                paginationItemsPerPage="10"
+            >
+                <order>
+                    <values>
+                        <value name="code">ASC</value>
+                    </values>
+                </order>
+                <formats>
+                    <format name="json">application/json</format>
+                </formats>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>Site:autocomplete</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>site.order_filter</filter>
+                    <filter>site.or_search_filter</filter>
+                </filters>
+            </operation>
+            <operation
                 class="ApiPlatform\Metadata\Patch"
                 security="is_granted('update', object)"
                 output="false"
@@ -39,12 +66,14 @@
             />
             <operation
                 class="ApiPlatform\Metadata\Post"
-                securityPostDenormalize="is_granted('create', object)"/>
+                securityPostDenormalize="is_granted('create', object)"
+            />
             <operation
                 class="ApiPlatform\Metadata\Delete"
                 security="is_granted('delete', object)"
                 output="false"
-                status="204"/>
+                status="204"
+            />
         </operations>
     </resource>
 </resources>

@@ -9,21 +9,27 @@
         </attribute>
         <attribute name="site">
             <group>StratigraphicUnit:acl:read</group>
+            <group>StratigraphicUnit:item:write</group>
         </attribute>
         <attribute name="year">
             <group>StratigraphicUnit:acl:read</group>
+            <group>StratigraphicUnit:item:write</group>
         </attribute>
         <attribute name="number">
             <group>StratigraphicUnit:acl:read</group>
+            <group>StratigraphicUnit:item:write</group>
         </attribute>
         <attribute name="description">
             <group>StratigraphicUnit:acl:read</group>
+            <group>StratigraphicUnit:item:write</group>
         </attribute>
         <attribute name="interpretation">
             <group>StratigraphicUnit:acl:read</group>
+            <group>StratigraphicUnit:item:write</group>
         </attribute>
         <attribute name="public">
             <group>StratigraphicUnit:acl:read</group>
+            <group>StratigraphicUnit:item:write</group>
         </attribute>
     </class>
 </serializer>

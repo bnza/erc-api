@@ -21,6 +21,7 @@
                 <argument key="name">partial</argument>
                 <argument key="number">exact</argument>
                 <argument key="site.code">exact</argument>
+                <argument key="site.id">exact</argument>
                 <argument key="year">partial</argument>
             </argument>
             <tag name="api_platform.filter"/>
