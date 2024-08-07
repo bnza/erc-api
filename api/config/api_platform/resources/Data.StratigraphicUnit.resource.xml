@@ -29,6 +29,8 @@
                 <filters>
                     <filter>stratigraphic_unit.order_filter</filter>
                     <filter>stratigraphic_unit.search_filter</filter>
+                    <filter>stratigraphic_unit.numeric_filter</filter>
+                    <filter>stratigraphic_unit.range_filter</filter>
                 </filters>
             </operation>
             <operation

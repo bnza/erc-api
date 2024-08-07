@@ -19,10 +19,22 @@
                 <argument key="description">partial</argument>
                 <argument key="interpretation">partial</argument>
                 <argument key="name">partial</argument>
-                <argument key="number">exact</argument>
                 <argument key="site.code">exact</argument>
                 <argument key="site.id">exact</argument>
-                <argument key="year">partial</argument>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+        <service id="stratigraphic_unit.numeric_filter" parent="api_platform.doctrine.orm.numeric_filter">
+            <argument type="collection">
+                <argument key="number">exact</argument>
+                <argument key="year">ipartial</argument>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+        <service id="stratigraphic_unit.range_filter" parent="api_platform.doctrine.orm.range_filter">
+            <argument type="collection">
+                <argument key="number">exact</argument>
+                <argument key="year">ipartial</argument>
             </argument>
             <tag name="api_platform.filter"/>
         </service>
