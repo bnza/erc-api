@@ -1,4 +1,53 @@
 App\Entity\Data\StratigraphicUnit:
+    su_an_1001:
+        site: '@site_an'
+        number: 1001
+        year: 2024
+        public: true
+        interpretation: alluvial deposit
+        description: light brown sandy soil
+    su_an_1002:
+        site: '@site_an'
+        number: 1002
+        year: 2024
+        public: false
+        interpretation: anthropized deposit
+        description: dark gray silt terrain
+    su_an_1003:
+        site: '@site_an'
+        number: 1003
+        year: 2024
+        public: true
+        interpretation: pit fill
+        description: light gray silt layer
+    su_an_1004:
+        site: '@site_an'
+        number: 1004
+        year: 2024
+        public: true
+        interpretation: pit cut
+        description: irregular cut (root?)
+    su_ed_900:
+        site: '@site_ed'
+        number: 900
+        year: 2022
+        public: true
+        interpretation: pit fill
+        description: dark yellow silt layer
+    su_ed_901:
+        site: '@site_ed'
+        number: 901
+        year: 2022
+        public: true
+        interpretation: pit cut
+        description: round shaped swallow cut
+    su_ed_902:
+        site: '@site_ed'
+        number: 902
+        year: 2022
+        public: true
+        interpretation: anthropized soil
+        description: dark gray clay layer
     su_ed_1001:
         site: '@site_ed'
         number: 1001
