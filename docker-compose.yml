@@ -14,6 +14,7 @@ services:
     build:
       context: ./api
       target: app_php
+    network_mode: host
     depends_on:
       - database
     restart: unless-stopped

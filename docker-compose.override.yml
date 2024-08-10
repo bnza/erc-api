@@ -12,6 +12,7 @@ services:
       # See https://xdebug.org/docs/all_settings#mode
       XDEBUG_MODE: "${XDEBUG_MODE:-develop,debug}"
       XDEBUG_CLIENT_HOST: "${XDEBUG_CLIENT_HOST:-host.docker.internal}"
+      PHP_IDE_CONFIG: "serverName=medgreenrev"
     extra_hosts:
       - host.docker.internal:host-gateway
   nginx:
