@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <resources xmlns="https://api-platform.com/schema/metadata/resources-3.0"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
         https://api-platform.com/schema/metadata/resources-3.0.xsd">
     <resource class="App\Entity\Validator\Unique">
         <formats>
@@ -123,6 +123,40 @@
                     <requirement property="number">\d+</requirement>
                 </requirements>
                 <openapi description="Check for stratigraphic unit [site, year, number] uniqueness">
+                    <responses>
+                        <response status="200">
+                            <content>
+                                <values>
+                                    <value name="application/json">
+                                        <values>
+                                            <value name="schema">
+                                                <values>
+                                                    <value name="type">integer</value>
+                                                </values>
+                                            </value>
+                                        </values>
+                                    </value>
+                                </values>
+                            </content>
+                        </response>
+                    </responses>
+                </openapi>
+            </operation>
+            <operation
+                input="App\Entity\Validator\UniqueSitesUsers"
+                output="App\Entity\Validator\UniqueSitesUsers"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/validator/unique/sites_users/{site}/{user}"
+                provider="App\State\ValidatorUniqueSitesUsersProvider"
+                name="unique_sites_users"
+                description="Check for sites users privileges [site, user] uniqueness"
+                security="is_granted('ROLE_ADMIN')"
+            >
+                <requirements>
+                    <requirement property="site">\d+</requirement>
+                    <requirement property="user">[0-9a-f\-]{36}</requirement>
+                </requirements>
+                <openapi description="Check for sites users privileges [site, user] uniqueness">
                     <responses>
                         <response status="200">
                             <content>

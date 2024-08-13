@@ -7,11 +7,15 @@
         <attribute name="id">
             <group>User:acl:read</group>
             <group>User:read:session</group>
+            <group>SitesUsers:acl:read</group>
+            <group>Users:autocomplete</group>
         </attribute>
         <attribute name="email">
             <group>User:acl:read</group>
             <group>User:read:session</group>
             <group>User:create</group>
+            <group>SitesUsers:acl:read</group>
+            <group>Users:autocomplete</group>
         </attribute>
         <attribute name="roles">
             <group>User:acl:read</group>

@@ -4,11 +4,17 @@
         https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="App\Entity\Data\M2M\SitesUsers">
-        <attribute name="site">
-            <group>read:item:User</group>
+        <attribute name="id">
+            <group>SitesUsers:acl:read</group>
         </attribute>
-        <attribute name="privilege" >
-            <group>read:item:User</group>
+        <attribute name="site">
+            <group>SitesUsers:acl:read</group>
+        </attribute>
+        <attribute name="user">
+            <group>SitesUsers:acl:read</group>
+        </attribute>
+        <attribute name="privileges">
+            <group>SitesUsers:acl:read</group>
         </attribute>
     </class>
 </serializer>

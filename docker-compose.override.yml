@@ -10,6 +10,7 @@ services:
       #- /srv/app/vendor
     environment:
       # See https://xdebug.org/docs/all_settings#mode
+      XDEBUG_PORT: "${XDEBUG_PORT:-9003}"
       XDEBUG_MODE: "${XDEBUG_MODE:-develop,debug}"
       XDEBUG_CLIENT_HOST: "${XDEBUG_CLIENT_HOST:-host.docker.internal}"
       PHP_IDE_CONFIG: "serverName=medgreenrev"
@@ -18,8 +19,8 @@ services:
   nginx:
     volumes:
       - ./api/docker/nginx/templates/dev.site.conf.template:/etc/nginx/templates/site.conf.template
-
-##> doctrine/doctrine-bundle ###
+  
+  ##> doctrine/doctrine-bundle ###
   database:
     ports:
       - target: 5432

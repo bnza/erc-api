@@ -83,7 +83,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this->sites->reduce(function (array $sitesPrivileges, SitesUsers $sitesUser) {
-            $sitesPrivileges[$sitesUser->site->getId()] = $sitesUser->privilege;
+            $sitesPrivileges[$sitesUser->site->getId()] = $sitesUser->privileges;
 
             return $sitesPrivileges;
         }, []);

@@ -4,16 +4,18 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services
         https://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="user.order_filter" parent="api_platform.doctrine.orm.order_filter">
+        <service id="sites_users.order_filter" parent="api_platform.doctrine.orm.order_filter">
             <argument type="collection">
                 <argument key="id"/>
-                <argument key="email"/>
+                <argument key="site.code"/>
+                <argument key="user.email"/>
             </argument>
             <tag name="api_platform.filter"/>
         </service>
-        <service id="user.search_filter" parent="api_platform.doctrine.orm.search_filter">
+        <service id="sites_users.search_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
-                <argument key="email">partial</argument>
+                <argument key="site.id">exact</argument>
+                <argument key="user.id">exact</argument>
             </argument>
             <tag name="api_platform.filter"/>
         </service>

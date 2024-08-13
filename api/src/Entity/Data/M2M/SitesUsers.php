@@ -14,7 +14,7 @@ class SitesUsers
 
     public Site $site;
 
-    public int $privilege;
+    public int $privileges;
 
     public function getId(): Uuid
     {

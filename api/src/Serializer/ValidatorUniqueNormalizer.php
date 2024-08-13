@@ -4,6 +4,7 @@ namespace App\Serializer;
 
 use App\Entity\Validator\Unique;
 use App\Entity\Validator\UniqueInterface;
+use App\Entity\Validator\UniqueSitesUsers;
 use App\Entity\Validator\UniqueStratigraphicUnit;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
@@ -19,6 +20,7 @@ class ValidatorUniqueNormalizer implements NormalizerInterface
         return [
             Unique::class => true,
             UniqueStratigraphicUnit::class => true,
+            UniqueSitesUsers::class => true,
         ];
     }
 

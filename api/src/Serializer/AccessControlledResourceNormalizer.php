@@ -3,6 +3,7 @@
 namespace App\Serializer;
 
 use App\Entity\Data\Site;
+use App\Entity\Data\M2M\SitesUsers;
 use App\Entity\Data\StratigraphicUnit;
 use App\Entity\Data\User;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -55,18 +56,22 @@ final class AccessControlledResourceNormalizer implements NormalizerInterface, N
 
         return array_key_exists('groups', $context)
             && is_array($context['groups'])
-            && array_reduce($context['groups'], function ($acc, $group) {
-                $acc |= str_contains($group, ':acl:');
+            && array_reduce(
+                $context['groups'],
+                function ($acc, $group) {
+                    $acc |= str_contains($group, ':acl:');
 
-                return $acc;
-            },
-                false);
+                    return $acc;
+                },
+                false
+            );
     }
 
     public function getSupportedTypes(?string $format): array
     {
         return [
             Site::class => true,
+            SitesUsers::class => true,
             User::class => true,
             StratigraphicUnit::class => true,
         ];
