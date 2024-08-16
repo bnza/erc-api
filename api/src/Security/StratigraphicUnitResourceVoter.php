@@ -3,7 +3,11 @@
 namespace App\Security;
 
 use App\Entity\Data\StratigraphicUnit;
+use App\Repository\SitesUsersRepository;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Cache\Adapter\ApcuAdapter;
+use Symfony\Component\Cache\Adapter\NullAdapter;
+use Symfony\Component\Cache\Adapter\PhpArrayAdapter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -14,8 +18,13 @@ class StratigraphicUnitResourceVoter extends Voter
     public const UPDATE = 'update';
     public const DELETE = 'delete';
 
-    public function __construct(private Security $security)
-    {
+    private iterable $cache = [];
+
+    public function __construct(
+        readonly private Security $security,
+        readonly private SitesUsersRepository $sitesUsersRepository
+    ) {
+
     }
 
     protected function supports(string $attribute, mixed $subject): bool
@@ -29,18 +38,42 @@ class StratigraphicUnitResourceVoter extends Voter
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
+        if (self::READ === $attribute) {
+            return true;
+        }
+
+        if (!$this->security->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return false;
+        }
+
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            return true;
+        }
+
+        $userId = $this->security->getUser()->getId()->__toString();
+        $siteId = $subject->site->getId();
+        $key = "$siteId/$userId";
+
+        if (!array_key_exists($key, $this->cache)) {
+            $this->cache[$key] = $this->sitesUsersRepository->hasSitePrivilege(
+                $userId,
+                $siteId,
+            );
+        }
+        $hasSiteRoleBase = $this->cache[$key];
+
         if (self::CREATE === $attribute) {
-            return $this->security->isGranted('IS_AUTHENTICATED_FULLY');
+            return true;
         }
 
         if (self::UPDATE === $attribute) {
-            return $this->security->isGranted('ROLE_EDITOR');
+            return $hasSiteRoleBase;
         }
 
         if (self::DELETE === $attribute) {
-            return $this->security->isGranted('ROLE_EDITOR');
+            return $hasSiteRoleBase;
         }
 
-        return true;
+        return false;
     }
 }
