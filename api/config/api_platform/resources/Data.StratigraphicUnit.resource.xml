@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <resources xmlns="https://api-platform.com/schema/metadata/resources-3.0"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
         https://api-platform.com/schema/metadata/resources-3.0.xsd">
     <resource class="App\Entity\Data\StratigraphicUnit">
         <normalizationContext>
@@ -31,6 +31,7 @@
                     <filter>stratigraphic_unit.search_filter</filter>
                     <filter>stratigraphic_unit.numeric_filter</filter>
                     <filter>stratigraphic_unit.range_filter</filter>
+                    <filter>stratigraphic_unit.boolean_filter</filter>
                 </filters>
             </operation>
             <operation
