@@ -81,6 +81,13 @@ server {
         alias /srv/static/;
     }
 
+    location /geoserver/ {
+            proxy_pass http://geoserver:8080;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
     location / {
          try_files $uri $uri/ /index.php$is_args$args;
     }

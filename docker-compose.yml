@@ -32,6 +32,28 @@ services:
   #      DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-!ChangeMe!}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-15}
   #      TRUSTED_PROXIES: ${TRUSTED_PROXIES:-127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}
   #      TRUSTED_HOSTS: ^${SERVER_NAME:-example\.com|localhost}|caddy$$
+  geoserver:
+    image:
+      docker.osgeo.org/geoserver:${GEOSERVER_VERSION:-2.25.2}
+    volumes:
+      - ${GEOSERVER_DATA_DIR}:/opt/geoserver_data/:Z
+    depends_on:
+      - database
+    environment:
+      - POSTGRES_JNDI_ENABLED=true
+      - POSTGRES_HOST=database
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=app
+      - POSTGRES_USERNAME=${POSTGRES_USER:-app}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-!ChangeMe!}
+      - POSTGRES_JNDI_RESOURCE_NAME=jdbc/postgres
+      - GEOSERVER_ADMIN_USER=${GEOSERVER_ADMIN_USER:-geoserver}
+      - GEOSERVER_ADMIN_PASSWORD=${GEOSERVER_ADMIN_PASSWORD:-geoserver}
+    healthcheck:
+      test: curl --fail "http://localhost:8080/geoserver/web/wicket/resource/org.geoserver.web.GeoServerBasePage/img/logo.png" || exit 1
+      interval: 1m
+      retries: 3
+      timeout: 20s
   nginx:
     image: nginx:1.25-alpine
     depends_on:
