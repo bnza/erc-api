@@ -28,7 +28,11 @@ final class OrSearchFilter extends AbstractFilter
 
         $expressions = [];
         foreach ($this->getProperties() as $property => $stat) {
-            if (!$this->isPropertyEnabled($property, $resourceClass) || !$this->isPropertyMapped($property, $resourceClass, true)) {
+            if (!$this->isPropertyEnabled($property, $resourceClass) || !$this->isPropertyMapped(
+                $property,
+                $resourceClass,
+                true
+            )) {
                 return;
             }
 
@@ -36,7 +40,14 @@ final class OrSearchFilter extends AbstractFilter
             $field = $property;
 
             if ($this->isPropertyNested($property, $resourceClass)) {
-                [$alias, $field] = $this->addJoinsForNestedProperty($property, $alias, $queryBuilder, $queryNameGenerator, $resourceClass, Join::LEFT_JOIN);
+                [$alias, $field] = $this->addJoinsForNestedProperty(
+                    $property,
+                    $alias,
+                    $queryBuilder,
+                    $queryNameGenerator,
+                    $resourceClass,
+                    Join::LEFT_JOIN
+                );
             }
 
             $expressions[] = $queryBuilder

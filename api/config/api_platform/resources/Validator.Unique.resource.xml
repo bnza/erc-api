@@ -176,6 +176,39 @@
                     </responses>
                 </openapi>
             </operation>
+            <operation
+                input="App\Entity\Validator\UniqueStratigraphicUnitsRelationship"
+                output="App\Entity\Validator\UniqueStratigraphicUnitsRelationship"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/validator/unique/stratigraphic_units_relationships/{sxSU}/{dxSU}"
+                provider="App\State\ValidatorUniqueStratigraphicUnitsRelationshipProvider"
+                name="unique_sus_rel_pair"
+                description="Check for stratigraphic unit [sxSU, dxSU] uniqueness"
+            >
+                <requirements>
+                    <requirement property="sxSU">\d+</requirement>
+                    <requirement property="dxSU">\d+</requirement>
+                </requirements>
+                <openapi description="Check for stratigraphic unit [sxSU, dxSU] uniqueness">
+                    <responses>
+                        <response status="200">
+                            <content>
+                                <values>
+                                    <value name="application/json">
+                                        <values>
+                                            <value name="schema">
+                                                <values>
+                                                    <value name="type">integer</value>
+                                                </values>
+                                            </value>
+                                        </values>
+                                    </value>
+                                </values>
+                            </content>
+                        </response>
+                    </responses>
+                </openapi>
+            </operation>
         </operations>
     </resource>
 </resources>

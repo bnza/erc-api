@@ -1,0 +1,25 @@
+App\Entity\Data\M2M\StratigraphicUnitsRelationship:
+    su_relation_1:
+        sxSU: '@su_ed_900'
+        relationship: '@voc__su__relationship_f'
+        dxSU: '@su_ed_901'
+    su_relation_2:
+        sxSU: '@su_ed_901'
+        relationship: '@voc__su__relationship_c'
+        dxSU: '@su_ed_902'
+    su_relation_3:
+        sxSU: '@su_ed_1001'
+        relationship: '@voc__su__relationship_c'
+        dxSU: '@su_ed_1002'
+    su_relation_4:
+        sxSU: '@su_ed_1002'
+        relationship: '@voc__su__relationship_F'
+        dxSU: '@su_ed_1003'
+    su_relation_5:
+        sxSU: '@su_ed_1003'
+        relationship: '@voc__su__relationship_x'
+        dxSU: '@su_ed_1004'
+    su_relation_6:
+        sxSU: '@su_ed_1004'
+        relationship: '@voc__su__relationship_c'
+        dxSU: '@su_ed_1005'

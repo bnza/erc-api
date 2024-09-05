@@ -2,12 +2,11 @@
 
 namespace App\Security;
 
+use App\Entity\Data\M2M\StratigraphicUnitsRelationship;
 use App\Entity\Data\StratigraphicUnit;
+use App\Entity\Data\View\M2M\VwStratigraphicUnitsRelationship;
 use App\Repository\SitesUsersRepository;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\Cache\Adapter\ApcuAdapter;
-use Symfony\Component\Cache\Adapter\NullAdapter;
-use Symfony\Component\Cache\Adapter\PhpArrayAdapter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -33,7 +32,11 @@ class StratigraphicUnitResourceVoter extends Voter
             return false;
         }
 
-        return $subject instanceof StratigraphicUnit;
+        return is_object($subject)
+            && in_array(get_class($subject), [
+                StratigraphicUnit::class,
+                VwStratigraphicUnitsRelationship::class,
+            ]);
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
@@ -48,6 +51,10 @@ class StratigraphicUnitResourceVoter extends Voter
 
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
+        }
+
+        if ($subject instanceof VwStratigraphicUnitsRelationship) {
+            $subject = $subject->sxSU;
         }
 
         $userId = $this->security->getUser()->getId()->__toString();

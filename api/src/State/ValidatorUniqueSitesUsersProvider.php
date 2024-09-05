@@ -8,7 +8,6 @@ use App\Entity\Data\M2M\SitesUsers;
 use App\Entity\Validator\UniqueSitesUsers;
 use App\Repository\StratigraphicUnitRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use InvalidArgumentException;
 
 class ValidatorUniqueSitesUsersProvider implements ProviderInterface
 {
@@ -21,7 +20,7 @@ class ValidatorUniqueSitesUsersProvider implements ProviderInterface
         $criteria = [];
         foreach (['site', 'user'] as $prop) {
             if (!isset($uriVariables[$prop])) {
-                throw new InvalidArgumentException("Missing '$prop' parameter");
+                throw new \InvalidArgumentException("Missing '$prop' parameter");
             }
             $criteria[$prop] = $uriVariables[$prop];
         }

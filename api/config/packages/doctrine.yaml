@@ -27,6 +27,9 @@ doctrine:
                 alias: App
         controller_resolver:
             auto_mapping: true
+        dql:
+            string_functions:
+                cast: Oro\ORM\Query\AST\Functions\Cast
 
 when@test:
     doctrine:

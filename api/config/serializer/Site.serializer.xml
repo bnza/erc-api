@@ -1,6 +1,6 @@
 <serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
         https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="App\Entity\Data\Site">
@@ -17,6 +17,8 @@
             <group>Site:item:write</group>
             <group>StratigraphicUnit:acl:read</group>
             <group>SitesUsers:acl:read</group>
+            <group>StratigraphicUnitsRelationship:read</group>
+            <group>StratigraphicUnit:autocomplete</group>
         </attribute>
         <attribute name="name">
             <group>Site:acl:read</group>

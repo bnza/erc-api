@@ -1,0 +1,20 @@
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
+        https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="App\Entity\Data\View\M2M\VwStratigraphicUnitsRelationship">
+        <attribute name="id">
+            <group>StratigraphicUnitsRelationship:read</group>
+        </attribute>
+        <attribute name="sxSU">
+            <group>StratigraphicUnitsRelationship:read</group>
+        </attribute>
+        <attribute name="relationship">
+            <group>StratigraphicUnitsRelationship:read</group>
+        </attribute>
+        <attribute name="dxSU">
+            <group>StratigraphicUnitsRelationship:read</group>
+        </attribute>
+    </class>
+</serializer>

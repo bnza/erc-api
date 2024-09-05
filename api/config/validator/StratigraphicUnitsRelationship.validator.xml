@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+        https://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="App\Entity\Data\View\M2M\VwStratigraphicUnitsRelationship">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">
+                <value>sxSU</value>
+                <value>dxSU</value>
+            </option>
+            <option name="message">
+                Duplicate stratigraphic unit pair
+            </option>
+        </constraint>
+        <property name="sxSU">
+            <constraint name="NotBlank"/>
+        </property>
+        <property name="dxSU">
+            <constraint name="NotBlank"/>
+            <constraint name="NotEqualTo">
+                <option name="propertyPath">sxSU</option>
+                <option name="message">Self referencing relationship</option>
+            </constraint>
+        </property>
+        <property name="relationship">
+            <constraint name="NotBlank"/>
+        </property>
+    </class>
+</constraint-mapping>

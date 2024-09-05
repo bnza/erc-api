@@ -24,6 +24,7 @@ final class Version20240712143020 extends AbstractMigration
         $this->addSql('CREATE SEQUENCE area_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE site_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE su_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE sus_relationships_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql(
             'CREATE TABLE app_user (id UUID NOT NULL, email VARCHAR(180) NOT NULL, roles TEXT NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(id))'
         );
@@ -59,6 +60,18 @@ final class Version20240712143020 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_65A4BD79BD0F409C ON su (area_id)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_65A4BD79F6BD1646BB82733796901F54 ON su (site_id, year, number)');
         $this->addSql(
+            'CREATE TABLE sus_relationships (id INT NOT NULL, sx_su_id INT NOT NULL, dx_su_id INT NOT NULL, relationship_id CHAR(1) NOT NULL, PRIMARY KEY(id))'
+        );
+        $this->addSql('CREATE INDEX IDX_FFCCEBDE1E31BBE7 ON sus_relationships (sx_su_id)');
+        $this->addSql('CREATE INDEX IDX_FFCCEBDE684F83D5 ON sus_relationships (dx_su_id)');
+        $this->addSql('CREATE INDEX IDX_FFCCEBDE2C41D668 ON sus_relationships (relationship_id)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_FFCCEBDE1E31BBE7684F83D5 ON sus_relationships (sx_su_id, dx_su_id)');
+        $this->addSql(
+            'CREATE TABLE voc__su__relationship (id CHAR(1) NOT NULL, inverted_by_id CHAR(1) DEFAULT NULL, value VARCHAR(255) NOT NULL, description TEXT DEFAULT NULL, PRIMARY KEY(id))'
+        );
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_2DB01D41C4CDAD40 ON voc__su__relationship (inverted_by_id)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_2DB01D411D775834 ON voc__su__relationship (value)');
+        $this->addSql(
             'ALTER TABLE area ADD CONSTRAINT FK_D7943D68F6BD1646 FOREIGN KEY (site_id) REFERENCES site (id) NOT DEFERRABLE INITIALLY IMMEDIATE'
         );
         $this->addSql(
@@ -76,6 +89,18 @@ final class Version20240712143020 extends AbstractMigration
         $this->addSql(
             'ALTER TABLE su ADD CONSTRAINT FK_65A4BD79BD0F409C FOREIGN KEY (area_id) REFERENCES area (id) NOT DEFERRABLE INITIALLY IMMEDIATE'
         );
+        $this->addSql(
+            'ALTER TABLE sus_relationships ADD CONSTRAINT FK_FFCCEBDE1E31BBE7 FOREIGN KEY (sx_su_id) REFERENCES su (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE'
+        );
+        $this->addSql(
+            'ALTER TABLE sus_relationships ADD CONSTRAINT FK_FFCCEBDE684F83D5 FOREIGN KEY (dx_su_id) REFERENCES su (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE'
+        );
+        $this->addSql(
+            'ALTER TABLE sus_relationships ADD CONSTRAINT FK_FFCCEBDE2C41D668 FOREIGN KEY (relationship_id) REFERENCES voc__su__relationship (id) NOT DEFERRABLE INITIALLY IMMEDIATE'
+        );
+        $this->addSql(
+            'ALTER TABLE voc__su__relationship ADD CONSTRAINT FK_2DB01D41C4CDAD40 FOREIGN KEY (inverted_by_id) REFERENCES voc__su__relationship (id) NOT DEFERRABLE INITIALLY IMMEDIATE'
+        );
     }
 
     public function down(Schema $schema): void
@@ -84,17 +109,24 @@ final class Version20240712143020 extends AbstractMigration
         $this->addSql('DROP SEQUENCE area_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE site_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE su_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE sus_relationships_id_seq CASCADE');
         $this->addSql('ALTER TABLE area DROP CONSTRAINT FK_D7943D68F6BD1646');
         $this->addSql('ALTER TABLE geom.site DROP CONSTRAINT FK_B9623109F6BD1646');
         $this->addSql('ALTER TABLE sites__users DROP CONSTRAINT FK_32F53B24F6BD1646');
         $this->addSql('ALTER TABLE sites__users DROP CONSTRAINT FK_32F53B24A76ED395');
         $this->addSql('ALTER TABLE su DROP CONSTRAINT FK_65A4BD79F6BD1646');
         $this->addSql('ALTER TABLE su DROP CONSTRAINT FK_65A4BD79BD0F409C');
+        $this->addSql('ALTER TABLE sus_relationships DROP CONSTRAINT FK_FFCCEBDE1E31BBE7');
+        $this->addSql('ALTER TABLE sus_relationships DROP CONSTRAINT FK_FFCCEBDE684F83D5');
+        $this->addSql('ALTER TABLE sus_relationships DROP CONSTRAINT FK_FFCCEBDE2C41D668');
+        $this->addSql('ALTER TABLE voc__su__relationship DROP CONSTRAINT FK_2DB01D41C4CDAD40');
         $this->addSql('DROP TABLE app_user');
         $this->addSql('DROP TABLE area');
         $this->addSql('DROP TABLE geom.site');
         $this->addSql('DROP TABLE site');
         $this->addSql('DROP TABLE sites__users');
         $this->addSql('DROP TABLE su');
+        $this->addSql('DROP TABLE sus_relationships');
+        $this->addSql('DROP TABLE voc__su__relationship');
     }
 }

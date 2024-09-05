@@ -1,0 +1,14 @@
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="stratigraphic_units_relationship.search_filter" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="sxSU">exact</argument>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+    </services>
+</container>

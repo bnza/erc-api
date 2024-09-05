@@ -6,6 +6,7 @@ use App\Entity\Validator\Unique;
 use App\Entity\Validator\UniqueInterface;
 use App\Entity\Validator\UniqueSitesUsers;
 use App\Entity\Validator\UniqueStratigraphicUnit;
+use App\Entity\Validator\UniqueStratigraphicUnitsRelationship;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class ValidatorUniqueNormalizer implements NormalizerInterface
@@ -20,6 +21,7 @@ class ValidatorUniqueNormalizer implements NormalizerInterface
         return [
             Unique::class => true,
             UniqueStratigraphicUnit::class => true,
+            UniqueStratigraphicUnitsRelationship::class => true,
             UniqueSitesUsers::class => true,
         ];
     }
@@ -29,6 +31,6 @@ class ValidatorUniqueNormalizer implements NormalizerInterface
         /*
          * @var $object UniqueInterface
          */
-        return (int) $object->isUnique();
+        return (int)$object->isUnique();
     }
 }
