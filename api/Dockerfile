@@ -19,17 +19,28 @@ COPY --from=mlocati/php-extension-installer:latest --link /usr/bin/install-php-e
 
 # persistent / runtime deps
 # hadolint ignore=DL3018
-RUN apk add --no-cache \
+RUN apk update \
+    && apk add --no-cache \
 		acl \
+    	autoconf \
 		fcgi \
 		file \
 		gettext \
+    	gcc \
 		git \
-	;
+    	ghostscript \
+    	imagemagick-dev \
+    && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS imagemagick-dev \
+	&& pecl install imagick \
+    && docker-php-ext-enable imagick \
+    && rm -fr /tmp/pear \
+    && apk del .build-deps
+
 
 RUN set -eux; \
     install-php-extensions \
 		apcu \
+    	gd \
 		intl \
 		opcache \
 		zip \
@@ -41,6 +52,17 @@ RUN set -eux; \
     install-php-extensions pdo_pgsql
 ###< doctrine/doctrine-bundle ###
 ###< recipes ###
+
+
+#RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS imagemagick-dev \
+#&& pecl install imagick \
+#&& docker-php-ext-enable imagick \
+#&& apk del .build-deps
+
+#RUN pecl install imagick && \
+#    docker-php-ext-enable imagick
+
+RUN sed -i '/^<\/policymap>/i <policy domain="coder" rights="read | write" pattern="PDF" \/>' /etc/ImageMagick-7/policy.xml
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY --link docker/php/conf.d/app.ini $PHP_INI_DIR/conf.d/

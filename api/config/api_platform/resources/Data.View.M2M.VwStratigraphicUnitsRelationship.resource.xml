@@ -19,7 +19,7 @@
             <operation class="ApiPlatform\Metadata\Get"/>
             <operation class="ApiPlatform\Metadata\GetCollection">
                 <filters>
-                    <filter>stratigraphic_units_relationship.search_filter</filter>
+                    <filter>stratigraphic_units__relationship.search_filter</filter>
                 </filters>
             </operation>
             <operation

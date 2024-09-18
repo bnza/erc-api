@@ -1,0 +1,11 @@
+<vich_uploader xmlns="https://vich-uploader-bundle/schema/ " class="App\Entity\Data\MediaObject">
+    <field
+        mapping="media_object"
+        name="file"
+        filename_property="filePath"
+        mime_type="mimeType"
+        size="size"
+        dimensions="dimensions"
+        original_name="originalFilename"
+    />
+</vich_uploader>

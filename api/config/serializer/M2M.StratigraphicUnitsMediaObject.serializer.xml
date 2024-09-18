@@ -1,0 +1,20 @@
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
+        https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="App\Entity\Data\M2M\StratigraphicUnitsMediaObject">
+        <attribute name="id">
+            <group>StratigraphicUnitsMediaObject:read</group>
+            <group>StratigraphicUnitsMediaObject:create</group>
+        </attribute>
+        <attribute name="item">
+            <group>StratigraphicUnitsMediaObject:read</group>
+            <group>StratigraphicUnitsMediaObject:create</group>
+        </attribute>
+        <attribute name="mediaObject">
+            <group>StratigraphicUnitsMediaObject:create</group>
+            <group>StratigraphicUnitsMediaObject:read</group>
+        </attribute>
+    </class>
+</serializer>

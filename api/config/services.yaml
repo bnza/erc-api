@@ -38,6 +38,16 @@ services:
         autoconfigure: false
     
     App\Repository\SitesUsersRepository:
-        arguments: [ "@doctrine.orm.entity_manager" ]
+        arguments: [ '@doctrine.orm.entity_manager' ]
         calls:
             -   setPrivilegeOperator: [ '@App\Security\PrivilegeValueOperator' ]
+    
+    App\Service\MediaObjectFileHashNamer:
+        public: true
+        arguments:
+            $slugger: '@Symfony\Component\String\Slugger\SluggerInterface'
+    
+    App\Service\FixturesMediaReset:
+        arguments:
+            $sourcePath: '%kernel.project_dir%/fixtures/media'
+            $destPath: '/srv/static'

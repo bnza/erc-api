@@ -1,0 +1,42 @@
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
+        https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="App\Entity\Data\MediaObject">
+        <attribute name="id">
+            <group>MediaObject:read</group>
+        </attribute>
+        <attribute name="originalFilename">
+            <group>StratigraphicUnitsMediaObject:read</group>
+            <group>MediaObject:read</group>
+            <group>MediaObject:write</group>
+        </attribute>
+        <attribute name="sha256">
+            <group>MediaObject:read</group>
+            <group>MediaObject:write</group>
+        </attribute>
+        <attribute name="filePath">
+            <group>MediaObject:write</group>
+        </attribute>
+        <attribute name="uploadDate">
+            <group>StratigraphicUnitsMediaObject:read</group>
+            <group>MediaObject:read</group>
+            <group>MediaObject:write</group>
+        </attribute>
+        <attribute name="mimeType">
+            <group>StratigraphicUnitsMediaObject:read</group>
+            <group>MediaObject:read</group>
+            <group>MediaObject:write</group>
+        </attribute>
+        <attribute name="size">
+            <group>StratigraphicUnitsMediaObject:read</group>
+            <group>MediaObject:read</group>
+            <group>MediaObject:write</group>
+        </attribute>
+        <attribute name="contentUrl">
+            <group>StratigraphicUnitsMediaObject:read</group>
+            <group>MediaObject:read</group>
+        </attribute>
+    </class>
+</serializer>

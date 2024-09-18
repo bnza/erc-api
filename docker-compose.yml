@@ -22,6 +22,7 @@ services:
       - ./api:/srv/api
       - php_socket:/var/run/php
       - pg_socket:/var/run/postgresql
+      - "${WWW_STATIC_DIR}:/srv/static"
     healthcheck:
       test: [ "CMD", "php", "-v" ]
       interval: 10s
@@ -61,6 +62,7 @@ services:
     ports:
       - "${NGINX_PORT:-8000}:80"
     volumes:
+      - "${WWW_STATIC_DIR}:/srv/static:ro"
       - "${WWW_CLIENT_DIR}:/srv/client:ro"
       - ./api:/srv/api
       - ./api/docker/nginx/nginx.conf:/etc/nginx/nginx.conf

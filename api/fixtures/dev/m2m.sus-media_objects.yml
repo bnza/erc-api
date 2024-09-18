@@ -1,0 +1,19 @@
+App\Entity\Data\M2M\StratigraphicUnitsMediaObject:
+    su_media_object_1:
+        item: '@su_ed_1001'
+        mediaObject: '@media_object_1'
+    su_media_object_2:
+        item: '@su_ed_1001'
+        mediaObject: '@media_object_2'
+    su_media_object_3:
+        item: '@su_ed_1001'
+        mediaObject: '@media_object_3'
+    su_media_object_4:
+        item: '@su_ed_1001'
+        mediaObject: '@media_object_4'
+    su_media_object_5:
+        item: '@su_an_1001'
+        mediaObject: '@media_object_7'
+    su_media_object_6:
+        item: '@su_ww_1001'
+        mediaObject: '@media_object_8'

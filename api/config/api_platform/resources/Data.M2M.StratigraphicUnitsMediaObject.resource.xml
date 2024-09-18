@@ -1,0 +1,85 @@
+<resources xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
+        https://api-platform.com/schema/metadata/resources-3.0.xsd">
+    <resource class="App\Entity\Data\M2M\StratigraphicUnitsMediaObject">
+        <normalizationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>StratigraphicUnitsMediaObject:read</value>
+                    </values>
+                </value>
+            </values>
+        </normalizationContext>
+        <operations>
+            <operation class="ApiPlatform\Metadata\Get"/>
+            <operation class="ApiPlatform\Metadata\GetCollection">
+                <filters>
+                    <filter>item_collection__media_object.search_filter</filter>
+                </filters>
+            </operation>
+            <operation
+                class="ApiPlatform\Metadata\Post"
+                securityPostDenormalize="is_granted('create', object)"
+            >
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>StratigraphicUnitsMediaObject:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <inputFormats>
+                    <format name="multipart">multipart/form-data</format>
+                </inputFormats>
+                <openapiContext>
+                    <values>
+                        <value name="requestBody">
+                            <values>
+                                <value name="content">
+                                    <values>
+                                        <value name="multipart/form-data">
+                                            <values>
+                                                <value name="schema">
+                                                    <values>
+                                                        <value name="type">object</value>
+                                                        <value name="properties">
+                                                            <values>
+                                                                <value name="item">
+                                                                    <values>
+                                                                        <value name="type">string</value>
+                                                                        <value name="format">iri-reference</value>
+                                                                        <value name="example">/api/stratigraphic_units/7469</value>
+                                                                    </values>
+                                                                </value>
+                                                                <value name="file">
+                                                                    <values>
+                                                                        <value name="type">string</value>
+                                                                        <value name="format">binary</value>
+                                                                    </values>
+                                                                </value>
+                                                            </values>
+                                                        </value>
+                                                    </values>
+                                                </value>
+                                            </values>
+                                        </value>
+                                    </values>
+                                </value>
+                            </values>
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                security="is_granted('delete', object)"
+                output="false"
+                status="204"
+            />
+        </operations>
+    </resource>
+</resources>

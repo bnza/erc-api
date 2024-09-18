@@ -20,6 +20,8 @@ class StratigraphicUnit
 
     public bool $public = false;
 
+    public iterable $mediaObjects;
+
     public function getId(): int
     {
         return $this->id;

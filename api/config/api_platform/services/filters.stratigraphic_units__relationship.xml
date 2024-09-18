@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services
         https://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="stratigraphic_units_relationship.search_filter" parent="api_platform.doctrine.orm.search_filter">
+        <service id="stratigraphic_units__relationship.search_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
                 <argument key="sxSU">exact</argument>
             </argument>

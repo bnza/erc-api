@@ -22,8 +22,10 @@ final class Version20240712143020 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA geom');
         $this->addSql('CREATE SEQUENCE area_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE media_object_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE site_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE su_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE sus__media_objects_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE sus_relationships_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql(
             'CREATE TABLE app_user (id UUID NOT NULL, email VARCHAR(180) NOT NULL, roles TEXT NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(id))'
@@ -36,6 +38,11 @@ final class Version20240712143020 extends AbstractMigration
         );
         $this->addSql('CREATE INDEX IDX_D7943D68F6BD1646 ON area (site_id)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_D7943D68F6BD164677153098 ON area (site_id, code)');
+        $this->addSql(
+            'CREATE TABLE media_object (id INT NOT NULL, file_path VARCHAR(255) NOT NULL, original_filename VARCHAR(255) NOT NULL, mime_type VARCHAR(255) NOT NULL, size INT NOT NULL, width SMALLINT DEFAULT NULL, height SMALLINT DEFAULT NULL, sha256 CHAR(64) NOT NULL, upload_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))'
+        );
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_14D431325CC814F7 ON media_object (sha256)');
+        $this->addSql('COMMENT ON COLUMN media_object.upload_date IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql(
             'CREATE TABLE geom.site (site_id INT NOT NULL, geom geometry(POINTZ, 4326) NOT NULL, PRIMARY KEY(site_id))'
         );
@@ -59,6 +66,14 @@ final class Version20240712143020 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_65A4BD79F6BD1646 ON su (site_id)');
         $this->addSql('CREATE INDEX IDX_65A4BD79BD0F409C ON su (area_id)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_65A4BD79F6BD1646BB82733796901F54 ON su (site_id, year, number)');
+        $this->addSql(
+            'CREATE TABLE sus__media_objects (id INT NOT NULL, su_id INT NOT NULL, media_object_id INT NOT NULL, PRIMARY KEY(id))'
+        );
+        $this->addSql('CREATE INDEX IDX_5576F78FBDB1218E ON sus__media_objects (su_id)');
+        $this->addSql('CREATE INDEX IDX_5576F78F64DE5A5 ON sus__media_objects (media_object_id)');
+        $this->addSql(
+            'CREATE UNIQUE INDEX UNIQ_5576F78FBDB1218E64DE5A5 ON sus__media_objects (su_id, media_object_id)'
+        );
         $this->addSql(
             'CREATE TABLE sus_relationships (id INT NOT NULL, sx_su_id INT NOT NULL, dx_su_id INT NOT NULL, relationship_id CHAR(1) NOT NULL, PRIMARY KEY(id))'
         );
@@ -90,6 +105,12 @@ final class Version20240712143020 extends AbstractMigration
             'ALTER TABLE su ADD CONSTRAINT FK_65A4BD79BD0F409C FOREIGN KEY (area_id) REFERENCES area (id) NOT DEFERRABLE INITIALLY IMMEDIATE'
         );
         $this->addSql(
+            'ALTER TABLE sus__media_objects ADD CONSTRAINT FK_5576F78FBDB1218E FOREIGN KEY (su_id) REFERENCES su (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE'
+        );
+        $this->addSql(
+            'ALTER TABLE sus__media_objects ADD CONSTRAINT FK_5576F78F64DE5A5 FOREIGN KEY (media_object_id) REFERENCES media_object (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE'
+        );
+        $this->addSql(
             'ALTER TABLE sus_relationships ADD CONSTRAINT FK_FFCCEBDE1E31BBE7 FOREIGN KEY (sx_su_id) REFERENCES su (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE'
         );
         $this->addSql(
@@ -107,8 +128,10 @@ final class Version20240712143020 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP SEQUENCE area_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE media_object_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE site_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE su_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE sus__media_objects_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE sus_relationships_id_seq CASCADE');
         $this->addSql('ALTER TABLE area DROP CONSTRAINT FK_D7943D68F6BD1646');
         $this->addSql('ALTER TABLE geom.site DROP CONSTRAINT FK_B9623109F6BD1646');
@@ -116,16 +139,20 @@ final class Version20240712143020 extends AbstractMigration
         $this->addSql('ALTER TABLE sites__users DROP CONSTRAINT FK_32F53B24A76ED395');
         $this->addSql('ALTER TABLE su DROP CONSTRAINT FK_65A4BD79F6BD1646');
         $this->addSql('ALTER TABLE su DROP CONSTRAINT FK_65A4BD79BD0F409C');
+        $this->addSql('ALTER TABLE sus__media_objects DROP CONSTRAINT FK_5576F78FBDB1218E');
+        $this->addSql('ALTER TABLE sus__media_objects DROP CONSTRAINT FK_5576F78F64DE5A5');
         $this->addSql('ALTER TABLE sus_relationships DROP CONSTRAINT FK_FFCCEBDE1E31BBE7');
         $this->addSql('ALTER TABLE sus_relationships DROP CONSTRAINT FK_FFCCEBDE684F83D5');
         $this->addSql('ALTER TABLE sus_relationships DROP CONSTRAINT FK_FFCCEBDE2C41D668');
         $this->addSql('ALTER TABLE voc__su__relationship DROP CONSTRAINT FK_2DB01D41C4CDAD40');
         $this->addSql('DROP TABLE app_user');
         $this->addSql('DROP TABLE area');
+        $this->addSql('DROP TABLE media_object');
         $this->addSql('DROP TABLE geom.site');
         $this->addSql('DROP TABLE site');
         $this->addSql('DROP TABLE sites__users');
         $this->addSql('DROP TABLE su');
+        $this->addSql('DROP TABLE sus__media_objects');
         $this->addSql('DROP TABLE sus_relationships');
         $this->addSql('DROP TABLE voc__su__relationship');
     }

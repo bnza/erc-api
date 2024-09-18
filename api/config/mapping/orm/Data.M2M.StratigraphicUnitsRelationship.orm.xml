@@ -7,7 +7,7 @@
 
     <entity name="App\Entity\Data\M2M\StratigraphicUnitsRelationship" table="sus_relationships">
         <id name="id" type="integer">
-            <generator/>
+            <generator strategy="SEQUENCE"/>
         </id>
         <many-to-one field="sxSU" target-entity="App\Entity\Data\StratigraphicUnit">
             <join-column name="sx_su_id" nullable="false" on-delete="CASCADE"/>

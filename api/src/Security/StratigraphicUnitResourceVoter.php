@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Entity\Data\M2M\StratigraphicUnitsRelationship;
+use App\Entity\Data\M2M\StratigraphicUnitsMediaObject;
 use App\Entity\Data\StratigraphicUnit;
 use App\Entity\Data\View\M2M\VwStratigraphicUnitsRelationship;
 use App\Repository\SitesUsersRepository;
@@ -21,9 +21,8 @@ class StratigraphicUnitResourceVoter extends Voter
 
     public function __construct(
         readonly private Security $security,
-        readonly private SitesUsersRepository $sitesUsersRepository
+        readonly private SitesUsersRepository $sitesUsersRepository,
     ) {
-
     }
 
     protected function supports(string $attribute, mixed $subject): bool
@@ -36,6 +35,7 @@ class StratigraphicUnitResourceVoter extends Voter
             && in_array(get_class($subject), [
                 StratigraphicUnit::class,
                 VwStratigraphicUnitsRelationship::class,
+                StratigraphicUnitsMediaObject::class,
             ]);
     }
 
@@ -53,8 +53,14 @@ class StratigraphicUnitResourceVoter extends Voter
             return true;
         }
 
+        $isStratigraphicUnit = $subject instanceof StratigraphicUnit;
+
         if ($subject instanceof VwStratigraphicUnitsRelationship) {
             $subject = $subject->sxSU;
+        }
+
+        if ($subject instanceof StratigraphicUnitsMediaObject) {
+            $subject = $subject->item;
         }
 
         $userId = $this->security->getUser()->getId()->__toString();
@@ -70,7 +76,7 @@ class StratigraphicUnitResourceVoter extends Voter
         $hasSiteRoleBase = $this->cache[$key];
 
         if (self::CREATE === $attribute) {
-            return true;
+            return $isStratigraphicUnit || $hasSiteRoleBase;
         }
 
         if (self::UPDATE === $attribute) {

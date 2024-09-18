@@ -30,7 +30,7 @@ class AdminOnlyWritableResourceVoter extends Voter
             return false;
         }
 
-        return in_array(get_class($subject), $this->supportedClasses, true);
+        return is_object($subject) && in_array(get_class($subject), $this->supportedClasses, true);
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
