@@ -5,12 +5,14 @@
 >
     <class name="App\Entity\Data\Site">
         <attribute name="id">
+            <group>Sample:acl:read</group>
             <group>Site:acl:read</group>
             <group>Site:autocomplete</group>
             <group>StratigraphicUnit:acl:read</group>
             <group>SitesUsers:acl:read</group>
         </attribute>
         <attribute name="code">
+            <group>Sample:acl:read</group>
             <group>Site:acl:read</group>
             <group>Site:autocomplete</group>
             <group>read:SiteGeometry</group>

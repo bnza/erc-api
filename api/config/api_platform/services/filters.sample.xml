@@ -1,0 +1,32 @@
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sample.order_filter" parent="api_platform.doctrine.orm.order_filter">
+            <argument type="collection">
+                <argument key="id"/>
+                <argument key="stratigraphicUnit.site.code"/>
+                <argument key="stratigraphicUnit.year"/>
+                <argument key="number"/>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+        <service id="sample.search_filter" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="stratigraphicUnit.site.id">exact</argument>
+                <argument key="stratigraphicUnit.id">exact</argument>
+                <argument key="number">exact</argument>
+                <argument key="note">ipartial</argument>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+        <service id="sample.boolean_filter" parent="api_platform.doctrine.orm.boolean_filter">
+            <argument type="collection">
+                <argument key="public"/>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+    </services>
+</container>

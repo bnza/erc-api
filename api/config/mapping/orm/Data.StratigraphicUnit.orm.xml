@@ -19,6 +19,7 @@
                 <option name="default">false</option>
             </options>
         </field>
+        <one-to-many field="samples" target-entity="App\Entity\Data\Sample" mapped-by="stratigraphicUnit"/>
         <one-to-many field="mediaObjects" target-entity="App\Entity\Data\M2M\StratigraphicUnitsMediaObject" mapped-by="item"/>
         <many-to-one field="site" target-entity="App\Entity\Data\Site" inversed-by="stratigraphicUnits">
             <join-column name="site_id" nullable="false"/>

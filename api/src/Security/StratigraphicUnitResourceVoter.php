@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\Data\M2M\StratigraphicUnitsMediaObject;
+use App\Entity\Data\Sample;
 use App\Entity\Data\StratigraphicUnit;
 use App\Entity\Data\View\M2M\VwStratigraphicUnitsRelationship;
 use App\Repository\SitesUsersRepository;
@@ -33,6 +34,7 @@ class StratigraphicUnitResourceVoter extends Voter
 
         return is_object($subject)
             && in_array(get_class($subject), [
+                Sample::class,
                 StratigraphicUnit::class,
                 VwStratigraphicUnitsRelationship::class,
                 StratigraphicUnitsMediaObject::class,
@@ -54,6 +56,10 @@ class StratigraphicUnitResourceVoter extends Voter
         }
 
         $isStratigraphicUnit = $subject instanceof StratigraphicUnit;
+
+        if ($subject instanceof Sample) {
+            $subject = $subject->stratigraphicUnit;
+        }
 
         if ($subject instanceof VwStratigraphicUnitsRelationship) {
             $subject = $subject->sxSU;

@@ -4,22 +4,17 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
         https://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="App\Entity\Data\MediaObject">
+    <class name="App\Entity\Data\Sample">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-            <option name="fields">sha256</option>
+            <option name="fields">su_id</option>
+            <option name="fields">number</option>
             <option name="message">
-                Duplicate media file (sha256)
+                Duplicate stratigraphic unit - number pair
             </option>
         </constraint>
-        <property name="file">
-            <constraint name="NotNull">
-                <option name="groups">
-                    <value>MediaObject:create</value>
-                </option>
-            </constraint>
-        </property>
-        <property name="sha256">
+        <property name="number">
             <constraint name="NotBlank"/>
+            <constraint name="Positive"/>
         </property>
     </class>
 </constraint-mapping>

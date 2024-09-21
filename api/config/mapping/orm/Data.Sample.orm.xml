@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Entity\Data\Sample" table="sample"
+        repository-class="App\Repository\SampleRepository">
+        <id name="id" type="integer">
+            <generator strategy="SEQUENCE"/>
+        </id>
+        <field name="number" type="integer"/>
+        <field name="description" type="text" nullable="true"/>
+        <field name="public" type="boolean">
+            <options>
+                <option name="default">false</option>
+            </options>
+        </field>
+        <many-to-one field="stratigraphicUnit" target-entity="App\Entity\Data\StratigraphicUnit" inversed-by="samples">
+            <join-column name="su_id"/>
+        </many-to-one>
+        <unique-constraints>
+            <unique-constraint columns="su_id,number"/>
+        </unique-constraints>
+    </entity>
+</doctrine-mapping>

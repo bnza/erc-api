@@ -100,6 +100,39 @@
                     <filter>site.or_search_filter</filter>
                 </filters>
             </operation>
+            <operation
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/autocomplete/stratigraphic_units"
+                paginationItemsPerPage="10"
+            >
+                <filters>
+                    <filter>stratigraphic_unit_autocomplete.search_filter</filter>
+                    <filter>stratigraphic_unit.code_search_filter</filter>
+                </filters>
+                <order>
+                    <values>
+                        <value name="site.code">ASC</value>
+                        <value name="year">ASC</value>
+                        <value name="number">ASC</value>
+                    </values>
+                </order>
+                <formats>
+                    <format name="json">application/json</format>
+                </formats>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>StratigraphicUnit:autocomplete</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>site.order_filter</filter>
+                    <filter>site.or_search_filter</filter>
+                </filters>
+            </operation>
         </operations>
     </resource>
 </resources>

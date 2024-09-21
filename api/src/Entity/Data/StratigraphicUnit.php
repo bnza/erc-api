@@ -20,10 +20,17 @@ class StratigraphicUnit
 
     public bool $public = false;
 
+    public iterable $samples;
+
     public iterable $mediaObjects;
 
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getCode(): string
+    {
+        return sprintf('%s.%u.%u', $this->site->code, $this->year, $this->number);
     }
 }

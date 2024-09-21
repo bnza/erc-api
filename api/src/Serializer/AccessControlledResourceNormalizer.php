@@ -2,6 +2,7 @@
 
 namespace App\Serializer;
 
+use App\Entity\Data\Sample;
 use App\Entity\Data\Site;
 use App\Entity\Data\M2M\SitesUsers;
 use App\Entity\Data\StratigraphicUnit;
@@ -70,6 +71,7 @@ final class AccessControlledResourceNormalizer implements NormalizerInterface, N
     public function getSupportedTypes(?string $format): array
     {
         return [
+            Sample::class => true,
             Site::class => true,
             SitesUsers::class => true,
             User::class => true,
