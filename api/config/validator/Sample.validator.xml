@@ -6,8 +6,10 @@
 
     <class name="App\Entity\Data\Sample">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-            <option name="fields">su_id</option>
-            <option name="fields">number</option>
+            <option name="fields">
+                <value>stratigraphicUnit</value>
+                <value>number</value>
+            </option>
             <option name="message">
                 Duplicate stratigraphic unit - number pair
             </option>

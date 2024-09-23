@@ -9,12 +9,15 @@
         </attribute>
         <attribute name="stratigraphicUnit">
             <group>Sample:acl:read</group>
+            <group>Sample:item:write</group>
         </attribute>
         <attribute name="number">
             <group>Sample:acl:read</group>
+            <group>Sample:item:write</group>
         </attribute>
         <attribute name="description">
             <group>Sample:acl:read</group>
+            <group>Sample:item:write</group>
         </attribute>
     </class>
 </serializer>

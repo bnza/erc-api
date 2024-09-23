@@ -14,6 +14,15 @@
                 </value>
             </values>
         </normalizationContext>
+        <denormalizationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>Sample:item:write</value>
+                    </values>
+                </value>
+            </values>
+        </denormalizationContext>
         <operations>
             <operation class="ApiPlatform\Metadata\Get"/>
             <operation class="ApiPlatform\Metadata\GetCollection">
