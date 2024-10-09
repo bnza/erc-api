@@ -4,18 +4,26 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
         https://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="App\Entity\Data\Sample">
+    <class name="App\Entity\Data\StratigraphicUnit">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">
-                <value>stratigraphicUnit</value>
+                <value>site</value>
+                <value>year</value>
                 <value>number</value>
             </option>
             <option name="message">
-                Duplicate stratigraphic unit - number pair
+                Duplicate [site, year, number] tuple
             </option>
         </constraint>
-        <property name="stratigraphicUnit">
+        <property name="site">
             <constraint name="NotBlank"/>
+        </property>
+        <property name="year">
+            <constraint name="NotBlank"/>
+            <constraint name="GreaterThan">
+                2000
+            </constraint>
+            <constraint name="App\Validator\IsLessThanOrEqualToCurrentYear"/>
         </property>
         <property name="number">
             <constraint name="NotBlank"/>

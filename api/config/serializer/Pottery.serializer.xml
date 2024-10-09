@@ -1,0 +1,54 @@
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
+        https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="App\Entity\Data\Pottery">
+        <attribute name="id">
+            <group>Pottery:acl:read</group>
+        </attribute>
+        <attribute name="stratigraphicUnit">
+            <group>Pottery:acl:read</group>
+            <group>Pottery:item:write</group>
+        </attribute>
+        <attribute name="code">
+            <group>Pottery:acl:read</group>
+        </attribute>
+        <attribute name="number">
+            <group>Pottery:acl:read</group>
+            <group>Pottery:item:write</group>
+        </attribute>
+        <attribute name="projectIdentifier">
+            <group>Pottery:acl:read</group>
+            <group>Pottery:item:write</group>
+        </attribute>
+        <attribute name="fragmentsNumber">
+            <group>Pottery:acl:read</group>
+            <group>Pottery:item:write</group>
+        </attribute>
+        <attribute name="chronologyLower">
+            <group>Pottery:acl:read</group>
+            <group>Pottery:item:write</group>
+        </attribute>
+        <attribute name="chronologyUpper">
+            <group>Pottery:acl:read</group>
+            <group>Pottery:item:write</group>
+        </attribute>
+        <attribute name="functionalGroup">
+            <group>Pottery:acl:read</group>
+            <group>Pottery:item:write</group>
+        </attribute>
+        <attribute name="part">
+            <group>Pottery:acl:read</group>
+            <group>Pottery:item:write</group>
+        </attribute>
+        <attribute name="typology">
+            <group>Pottery:acl:read</group>
+            <group>Pottery:item:write</group>
+        </attribute>
+        <attribute name="description">
+            <group>Pottery:acl:read</group>
+            <group>Pottery:item:write</group>
+        </attribute>
+    </class>
+</serializer>

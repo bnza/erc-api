@@ -2,9 +2,10 @@
 
 namespace App\Serializer;
 
+use App\Entity\Data\M2M\SitesUsers;
+use App\Entity\Data\Pottery;
 use App\Entity\Data\Sample;
 use App\Entity\Data\Site;
-use App\Entity\Data\M2M\SitesUsers;
 use App\Entity\Data\StratigraphicUnit;
 use App\Entity\Data\User;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -22,7 +23,7 @@ final class AccessControlledResourceNormalizer implements NormalizerInterface, N
     public function __construct(
         #[Autowire(service: 'api_platform.jsonld.normalizer.item')]
         private NormalizerInterface $decorated,
-        private Security $security
+        private Security $security,
     ) {
     }
 
@@ -71,6 +72,7 @@ final class AccessControlledResourceNormalizer implements NormalizerInterface, N
     public function getSupportedTypes(?string $format): array
     {
         return [
+            Pottery::class => true,
             Sample::class => true,
             Site::class => true,
             SitesUsers::class => true,

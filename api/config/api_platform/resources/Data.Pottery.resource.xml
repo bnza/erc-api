@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
+        https://api-platform.com/schema/metadata/resources-3.0.xsd">
+    <resource class="App\Entity\Data\Pottery">
+        <normalizationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>Pottery:acl:read</value>
+                    </values>
+                </value>
+            </values>
+        </normalizationContext>
+        <denormalizationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>Pottery:item:write</value>
+                    </values>
+                </value>
+            </values>
+        </denormalizationContext>
+        <operations>
+            <operation class="ApiPlatform\Metadata\Get"/>
+            <operation class="ApiPlatform\Metadata\GetCollection">
+                <filters>
+                    <filter>pottery.order_filter</filter>
+                    <filter>pottery.search_filter</filter>
+                    <filter>pottery.numeric_filter</filter>
+                    <filter>pottery.range_filter</filter>
+                    <filter>pottery.exists_filter</filter>
+                    <filter>pottery.boolean_filter</filter>
+                </filters>
+            </operation>
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                security="is_granted('delete', object)"
+                output="false"
+                status="204"
+            />
+            <operation
+                class="ApiPlatform\Metadata\Patch"
+                security="is_granted('update', object)"
+                output="false"
+                status="204"
+            />
+            <operation
+                class="ApiPlatform\Metadata\Post"
+                securityPostDenormalize="is_granted('create', object)"
+            />
+        </operations>
+    </resource>
+</resources>

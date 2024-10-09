@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
         https://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="App\Entity\Data\Sample">
+    <class name="App\Entity\Data\Potter">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">
                 <value>stratigraphicUnit</value>
@@ -20,6 +20,28 @@
         <property name="number">
             <constraint name="NotBlank"/>
             <constraint name="Positive"/>
+        </property>
+        <property name="fragmentsNumber">
+            <constraint name="NotBlank"/>
+            <constraint name="Positive"/>
+        </property>
+        <property name="functionalGroup">
+            <constraint name="NotBlank"/>
+        </property>
+        <property name="typology">
+            <constraint name="NotBlank"/>
+        </property>
+        <property name="chronologyLower">
+            <constraint name="Positive"/>
+            <constraint name="LessThan">
+                <option name="propertyPath">chronologyUpper</option>
+            </constraint>
+        </property>
+        <property name="chronologyUpper">
+            <constraint name="Positive"/>
+            <constraint name="GreaterThan">
+                <option name="propertyPath">chronologyLower</option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>

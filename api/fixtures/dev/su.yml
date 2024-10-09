@@ -40,7 +40,7 @@ App\Entity\Data\StratigraphicUnit:
         year: 2022
         public: true
         interpretation: pit cut
-        description: round shaped swallow cut
+        description: round shaped shallow cut
     su_ed_902:
         site: '@site_ed'
         number: 902

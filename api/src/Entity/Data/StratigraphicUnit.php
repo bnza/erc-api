@@ -18,10 +18,11 @@ class StratigraphicUnit
 
     public ?string $description;
 
-    public bool $public = false;
+    public bool $public = true;
 
     public iterable $samples;
 
+    public iterable $potteries;
     public iterable $mediaObjects;
 
     public function getId(): int

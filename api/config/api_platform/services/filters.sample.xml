@@ -18,7 +18,7 @@
                 <argument key="stratigraphicUnit.site.id">exact</argument>
                 <argument key="stratigraphicUnit.id">exact</argument>
                 <argument key="number">exact</argument>
-                <argument key="note">ipartial</argument>
+                <argument key="description">ipartial</argument>
             </argument>
             <tag name="api_platform.filter"/>
         </service>

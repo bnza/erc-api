@@ -1,0 +1,71 @@
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="pottery.order_filter" parent="api_platform.doctrine.orm.order_filter">
+            <argument type="collection">
+                <argument key="id"/>
+                <argument key="stratigraphicUnit.site.code"/>
+                <argument key="stratigraphicUnit.year"/>
+                <argument key="number"/>
+                <argument key="fragmentsNumber"/>
+                <argument key="chronologyLower"/>
+                <argument key="chronologyUpper"/>
+                <argument key="functionalGroup.value"/>
+                <argument key="typology.value"/>
+                <argument key="part.value"/>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+        <service id="pottery.search_filter" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="stratigraphicUnit.site.id">exact</argument>
+                <argument key="stratigraphicUnit.id">exact</argument>
+                <argument key="number">exact</argument>
+                <argument key="part.id">exact</argument>
+                <argument key="functionalGroup.id">exact</argument>
+                <argument key="typology.id">exact</argument>
+                <argument key="projectIdentifier">ipartial</argument>
+                <argument key="description">ipartial</argument>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+        <service id="pottery.numeric_filter" parent="api_platform.doctrine.orm.numeric_filter">
+            <argument type="collection">
+                <argument key="number"/>
+                <argument key="fragmentsNumber"/>
+                <argument key="chronologyLower"/>
+                <argument key="chronologyUpper"/>
+                <argument key="stratigraphic_unit.year"/>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+        <service id="pottery.range_filter" parent="api_platform.doctrine.orm.range_filter">
+            <argument type="collection">
+                <argument key="number"/>
+                <argument key="fragmentsNumber"/>
+                <argument key="chronologyLower"/>
+                <argument key="chronologyUpper"/>
+                <argument key="stratigraphic_unit.year"/>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+        <service id="pottery.exists_filter" parent="api_platform.doctrine.orm.exists_filter">
+            <argument type="collection">
+                <argument key="chronologyLower"/>
+                <argument key="chronologyUpper"/>
+                <argument key="projectIdentifier"/>
+                <argument key="part"/>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+        <service id="pottery.boolean_filter" parent="api_platform.doctrine.orm.boolean_filter">
+            <argument type="collection">
+                <argument key="public"/>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+    </services>
+</container>

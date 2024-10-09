@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Entity\Data\Pottery" table="pottery"
+        repository-class="App\Repository\PotteryRepository">
+        <id name="id" type="integer">
+            <generator strategy="SEQUENCE"/>
+        </id>
+        <field name="number" type="integer"/>
+        <field name="projectIdentifier" nullable="true"/>
+        <field name="chronologyLower" type="integer" nullable="true"/>
+        <field name="chronologyUpper" type="integer" nullable="true"/>
+        <field name="fragmentsNumber" type="integer">
+            <options>
+                <option name="default">1</option>
+            </options>
+        </field>
+        <field name="description" type="text" nullable="true"/>
+        <field name="public" type="boolean">
+            <options>
+                <option name="default">true</option>
+            </options>
+        </field>
+        <many-to-one field="stratigraphicUnit" target-entity="App\Entity\Data\StratigraphicUnit" inversed-by="potteries">
+            <join-column name="su_id"/>
+        </many-to-one>
+        <many-to-one field="typology" target-entity="App\Entity\Data\Vocabulary\Pottery\Typology">
+            <join-column name="voc__p__typology_id" nullable="false"/>
+        </many-to-one>
+        <many-to-one field="functionalGroup" target-entity="App\Entity\Data\Vocabulary\Pottery\FunctionalGroup">
+            <join-column name="voc__p__functional_group_id" nullable="false"/>
+        </many-to-one>
+        <many-to-one field="part" target-entity="App\Entity\Data\Vocabulary\Pottery\Part">
+            <join-column name="voc__p__part_id"/>
+        </many-to-one>
+        <unique-constraints>
+            <unique-constraint columns="su_id,number"/>
+        </unique-constraints>
+    </entity>
+</doctrine-mapping>

@@ -24,22 +24,22 @@
             </values>
         </denormalizationContext>
         <operations>
-            <operation
-                class="ApiPlatform\Metadata\GetCollection"
-                uriTemplate="sites/export"
-                paginationEnabled="false"
-            >
-                <formats>
-                    <format name="csv">text/csv</format>
-                </formats>
+            <operation class="ApiPlatform\Metadata\Get"/>
+            <operation class="ApiPlatform\Metadata\GetCollection" description="dfsdfsdfsdf">
                 <filters>
                     <filter>site.order_filter</filter>
                     <filter>site.search_filter</filter>
                     <filter>site.boolean_filter</filter>
                 </filters>
             </operation>
-            <operation class="ApiPlatform\Metadata\Get"/>
-            <operation class="ApiPlatform\Metadata\GetCollection">
+            <operation
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="export/sites"
+                paginationEnabled="false"
+            >
+                <formats>
+                    <format name="csv">text/csv</format>
+                </formats>
                 <filters>
                     <filter>site.order_filter</filter>
                     <filter>site.search_filter</filter>

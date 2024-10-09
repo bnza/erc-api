@@ -1,0 +1,13 @@
+App\Entity\Data\Vocabulary\Pottery\Part:
+    voc__pottery_part_1:
+        value: 'bottom'
+    voc__pottery_part_2:
+        value: 'body'
+    voc__pottery_part_3:
+        value: 'rim'
+    voc__pottery_part_4:
+        value: 'handle'
+    voc__pottery_part_5:
+        value: 'neck'
+    voc__pottery_part_6:
+        value: 'indeterminate'

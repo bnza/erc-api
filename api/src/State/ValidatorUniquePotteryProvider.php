@@ -4,12 +4,12 @@ namespace App\State;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
-use App\Entity\Data\Sample;
-use App\Entity\Validator\UniqueSample;
-use App\Repository\SampleRepository;
+use App\Entity\Data\Pottery;
+use App\Entity\Validator\UniquePottery;
+use App\Repository\PotteryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-class ValidatorUniqueSampleProvider implements ProviderInterface
+class ValidatorUniquePotteryProvider implements ProviderInterface
 {
     public function __construct(private EntityManagerInterface $entityManager)
     {
@@ -26,11 +26,11 @@ class ValidatorUniqueSampleProvider implements ProviderInterface
         }
 
         /**
-         * @var $repo SampleRepository
+         * @var $repo PotteryRepository
          */
-        $repo = $this->entityManager->getRepository(Sample::class);
+        $repo = $this->entityManager->getRepository(Pottery::class);
         $unique = $repo->isUnique($criteria);
 
-        return new UniqueSample($criteria, $unique);
+        return new UniquePottery($criteria, $unique);
     }
 }

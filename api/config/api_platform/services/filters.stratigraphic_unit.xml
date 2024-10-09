@@ -39,15 +39,15 @@
         </service>
         <service id="stratigraphic_unit.numeric_filter" parent="api_platform.doctrine.orm.numeric_filter">
             <argument type="collection">
-                <argument key="number">exact</argument>
-                <argument key="year">ipartial</argument>
+                <argument key="number"/>
+                <argument key="year"/>
             </argument>
             <tag name="api_platform.filter"/>
         </service>
         <service id="stratigraphic_unit.range_filter" parent="api_platform.doctrine.orm.range_filter">
             <argument type="collection">
-                <argument key="number">exact</argument>
-                <argument key="year">ipartial</argument>
+                <argument key="number"/>
+                <argument key="year"/>
             </argument>
             <tag name="api_platform.filter"/>
         </service>

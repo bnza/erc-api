@@ -1,0 +1,51 @@
+App\Entity\Data\Vocabulary\Pottery\Typology:
+    voc__pottery_typology_1:
+        value: 'ataifor'
+    voc__pottery_typology_2:
+        value: 'bowl'
+    voc__pottery_typology_3:
+        value: 'basin'
+    voc__pottery_typology_4:
+        value: 'casserole'
+    voc__pottery_typology_5:
+        value: 'pot'
+    voc__pottery_typology_6:
+        value: 'pitcher'
+    voc__pottery_typology_7:
+        value: 'jug'
+    voc__pottery_typology_8:
+        value: 'vat'
+    voc__pottery_typology_9:
+        value: 'flask'
+    voc__pottery_typology_10:
+        value: 'mug'
+    voc__pottery_typology_11:
+        value: 'bucket'
+    voc__pottery_typology_12:
+        value: 'lamp'
+    voc__pottery_typology_13:
+        value: 'lid'
+    voc__pottery_typology_14:
+        value: 'tab'
+    voc__pottery_typology_15:
+        value: 'toy'
+    voc__pottery_typology_16:
+        value: 'canteen'
+    voc__pottery_typology_17:
+        value: 'portable cooker'
+    voc__pottery_typology_18:
+        value: 'brazier'
+    voc__pottery_typology_19:
+        value: 'stockpot'
+    voc__pottery_typology_20:
+        value: 'tabaq'
+    voc__pottery_typology_21:
+        value: 'brick'
+    voc__pottery_typology_22:
+        value: 'pipe'
+    voc__pottery_typology_23:
+        value: 'roof tile'
+    voc__pottery_typology_24:
+        value: 'tessera'
+    voc__pottery_typology_25:
+        value: 'tile'

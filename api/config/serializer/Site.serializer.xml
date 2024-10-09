@@ -5,6 +5,7 @@
 >
     <class name="App\Entity\Data\Site">
         <attribute name="id">
+            <group>Pottery:acl:read</group>
             <group>Sample:acl:read</group>
             <group>Site:acl:read</group>
             <group>Site:autocomplete</group>
@@ -12,6 +13,7 @@
             <group>SitesUsers:acl:read</group>
         </attribute>
         <attribute name="code">
+            <group>Pottery:acl:read</group>
             <group>Sample:acl:read</group>
             <group>Site:acl:read</group>
             <group>Site:autocomplete</group>
@@ -23,9 +25,12 @@
             <group>StratigraphicUnit:autocomplete</group>
         </attribute>
         <attribute name="name">
+            <group>Pottery:acl:read</group>
             <group>Site:acl:read</group>
+            <group>StratigraphicUnit:acl:read</group>
             <group>Site:autocomplete</group>
             <group>Site:item:write</group>
+            <group>StratigraphicUnit:autocomplete</group>
         </attribute>
         <attribute name="description">
             <group>Site:acl:read</group>

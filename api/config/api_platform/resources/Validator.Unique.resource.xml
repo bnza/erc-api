@@ -10,6 +10,39 @@
         </formats>
         <operations>
             <operation
+                input="App\Entity\Validator\UniquePottery"
+                output="App\Entity\Validator\UniquePottery"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/validator/unique/pottery/{stratigraphicUnit}/{number}"
+                provider="App\State\ValidatorUniquePotteryProvider"
+                name="unique_pottery"
+                description="Check for pottery [stratigraphic unit, number] uniqueness"
+            >
+                <requirements>
+                    <requirement property="stratigraphicUnit">\d+</requirement>
+                    <requirement property="number">\d+</requirement>
+                </requirements>
+                <openapi description="Check for pottery [stratigraphic unit, number] uniqueness">
+                    <responses>
+                        <response status="200">
+                            <content>
+                                <values>
+                                    <value name="application/json">
+                                        <values>
+                                            <value name="schema">
+                                                <values>
+                                                    <value name="type">integer</value>
+                                                </values>
+                                            </value>
+                                        </values>
+                                    </value>
+                                </values>
+                            </content>
+                        </response>
+                    </responses>
+                </openapi>
+            </operation>
+            <operation
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/validator/unique/sites/code/{id}"
                 provider="App\State\ValidatorUniqueProvider"
@@ -112,7 +145,7 @@
                 input="App\Entity\Validator\UniqueStratigraphicUnit"
                 output="App\Entity\Validator\UniqueStratigraphicUnit"
                 class="ApiPlatform\Metadata\Get"
-                uriTemplate="/validator/unique/stratigraphic-units/{site}/{year}/{number}"
+                uriTemplate="/validator/unique/stratigraphic_units/{site}/{year}/{number}"
                 provider="App\State\ValidatorUniqueStratigraphicUnitProvider"
                 name="unique_sus_code"
                 description="Check for stratigraphic unit [site, year, number] uniqueness"
