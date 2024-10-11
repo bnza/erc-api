@@ -35,6 +35,23 @@
                     <filter>pottery.boolean_filter</filter>
                 </filters>
             </operation>
+            <operation class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="export/potteries"
+                paginationEnabled="false"
+            >
+                <formats>
+                    <format name="csv">text/csv</format>
+                </formats>
+
+                <filters>
+                    <filter>pottery.order_filter</filter>
+                    <filter>pottery.search_filter</filter>
+                    <filter>pottery.numeric_filter</filter>
+                    <filter>pottery.range_filter</filter>
+                    <filter>pottery.exists_filter</filter>
+                    <filter>pottery.boolean_filter</filter>
+                </filters>
+            </operation>
             <operation
                 class="ApiPlatform\Metadata\Delete"
                 security="is_granted('delete', object)"

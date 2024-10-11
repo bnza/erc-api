@@ -25,7 +25,7 @@
         </denormalizationContext>
         <operations>
             <operation class="ApiPlatform\Metadata\Get"/>
-            <operation class="ApiPlatform\Metadata\GetCollection" description="dfsdfsdfsdf">
+            <operation class="ApiPlatform\Metadata\GetCollection">
                 <filters>
                     <filter>site.order_filter</filter>
                     <filter>site.search_filter</filter>

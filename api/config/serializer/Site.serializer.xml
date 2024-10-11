@@ -27,6 +27,7 @@
         <attribute name="name">
             <group>Pottery:acl:read</group>
             <group>Site:acl:read</group>
+            <group>SitesUsers:acl:read</group>
             <group>StratigraphicUnit:acl:read</group>
             <group>Site:autocomplete</group>
             <group>Site:item:write</group>
