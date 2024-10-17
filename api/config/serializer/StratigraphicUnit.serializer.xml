@@ -16,26 +16,24 @@
             <group>Sample:acl:read</group>
             <group>StratigraphicUnit:acl:read</group>
             <group>StratigraphicUnit:item:write</group>
-            <group>StratigraphicUnitsRelationship:read</group>
             <group>StratigraphicUnit:autocomplete</group>
         </attribute>
         <attribute name="year">
             <group>Sample:acl:read</group>
             <group>StratigraphicUnit:acl:read</group>
             <group>StratigraphicUnit:item:write</group>
-            <group>StratigraphicUnitsRelationship:read</group>
             <group>StratigraphicUnit:autocomplete</group>
         </attribute>
         <attribute name="number">
             <group>StratigraphicUnit:acl:read</group>
             <group>StratigraphicUnit:item:write</group>
-            <group>StratigraphicUnitsRelationship:read</group>
             <group>StratigraphicUnit:autocomplete</group>
         </attribute>
         <attribute name="code">
             <group>Pottery:acl:read</group>
             <group>StratigraphicUnit:autocomplete</group>
             <group>StratigraphicUnit:acl:read</group>
+            <group>StratigraphicUnitsRelationship:read</group>
             <group>Sample:acl:read</group>
         </attribute>
         <attribute name="description">

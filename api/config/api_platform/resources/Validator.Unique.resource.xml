@@ -9,39 +9,7 @@
             <format name="json">application/json</format>
         </formats>
         <operations>
-            <operation
-                input="App\Entity\Validator\UniquePottery"
-                output="App\Entity\Validator\UniquePottery"
-                class="ApiPlatform\Metadata\Get"
-                uriTemplate="/validator/unique/pottery/{stratigraphicUnit}/{number}"
-                provider="App\State\ValidatorUniquePotteryProvider"
-                name="unique_pottery"
-                description="Check for pottery [stratigraphic unit, number] uniqueness"
-            >
-                <requirements>
-                    <requirement property="stratigraphicUnit">\d+</requirement>
-                    <requirement property="number">\d+</requirement>
-                </requirements>
-                <openapi description="Check for pottery [stratigraphic unit, number] uniqueness">
-                    <responses>
-                        <response status="200">
-                            <content>
-                                <values>
-                                    <value name="application/json">
-                                        <values>
-                                            <value name="schema">
-                                                <values>
-                                                    <value name="type">integer</value>
-                                                </values>
-                                            </value>
-                                        </values>
-                                    </value>
-                                </values>
-                            </content>
-                        </response>
-                    </responses>
-                </openapi>
-            </operation>
+
             <operation
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/validator/unique/sites/code/{id}"
@@ -256,6 +224,39 @@
                     <requirement property="number">\d+</requirement>
                 </requirements>
                 <openapi description="Check for sample [stratigraphic unit, number] uniqueness">
+                    <responses>
+                        <response status="200">
+                            <content>
+                                <values>
+                                    <value name="application/json">
+                                        <values>
+                                            <value name="schema">
+                                                <values>
+                                                    <value name="type">integer</value>
+                                                </values>
+                                            </value>
+                                        </values>
+                                    </value>
+                                </values>
+                            </content>
+                        </response>
+                    </responses>
+                </openapi>
+            </operation>
+            <operation
+                input="App\Entity\Validator\UniquePottery"
+                output="App\Entity\Validator\UniquePottery"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/validator/unique/pottery/{stratigraphicUnit}/{number}"
+                provider="App\State\ValidatorUniquePotteryProvider"
+                name="unique_pottery"
+                description="Check for pottery [stratigraphic unit, number] uniqueness"
+            >
+                <requirements>
+                    <requirement property="stratigraphicUnit">\d+</requirement>
+                    <requirement property="number">\d+</requirement>
+                </requirements>
+                <openapi description="Check for pottery [stratigraphic unit, number] uniqueness">
                     <responses>
                         <response status="200">
                             <content>

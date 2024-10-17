@@ -21,7 +21,6 @@
             <group>Site:item:write</group>
             <group>StratigraphicUnit:acl:read</group>
             <group>SitesUsers:acl:read</group>
-            <group>StratigraphicUnitsRelationship:read</group>
             <group>StratigraphicUnit:autocomplete</group>
         </attribute>
         <attribute name="name">

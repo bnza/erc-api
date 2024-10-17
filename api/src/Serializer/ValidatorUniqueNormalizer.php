@@ -35,6 +35,6 @@ class ValidatorUniqueNormalizer implements NormalizerInterface
         /*
          * @var $object UniqueInterface
          */
-        return (int)$object->isUnique();
+        return (int) $object->isUnique();
     }
 }
