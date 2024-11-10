@@ -4,7 +4,7 @@ framework:
     #csrf_protection: true
     http_method_override: false
     handle_all_throwables: true
- 
+    
     trusted_proxies: '%env(TRUSTED_PROXIES)%'
     trusted_hosts: '%env(TRUSTED_HOSTS)%'
     # See https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#headers
@@ -24,14 +24,17 @@ framework:
         log: true
 
 when@test:
+    parameters:
+        default_test_worker: '1'
     framework:
         test: true
-        #session:
-        #    storage_factory_id: session.storage.factory.mock_file
-#        http_client:
-#            scoped_clients:
-#                my_api.client:
-#                    base_uri: 'http://nginx'
-#            # ...
-#            default_options:
+
+          #session:
+          #    storage_factory_id: session.storage.factory.mock_file
+          #        http_client:
+          #            scoped_clients:
+          #                my_api.client:
+          #                    base_uri: 'http://nginx'
+          #            # ...
+          #            default_options:
                

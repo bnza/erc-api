@@ -14,7 +14,7 @@
         <!--        </service>-->
         <service id="item_collection__media_object.search_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
-                <argument key="item.id">exact</argument>
+                <argument key="item">exact</argument>
             </argument>
             <tag name="api_platform.filter"/>
         </service>

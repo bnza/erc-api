@@ -19,6 +19,7 @@
                 <argument key="description">partial</argument>
                 <argument key="interpretation">partial</argument>
                 <argument key="name">partial</argument>
+                <argument key="site">exact</argument>
                 <argument key="site.code">exact</argument>
                 <argument key="site.id">exact</argument>
             </argument>
@@ -26,7 +27,7 @@
         </service>
         <service id="stratigraphic_unit_autocomplete.search_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
-                <argument key="site.id">exact</argument>
+                <argument key="site">exact</argument>
             </argument>
             <tag name="api_platform.filter"/>
         </service>

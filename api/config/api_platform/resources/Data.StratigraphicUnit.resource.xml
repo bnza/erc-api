@@ -83,9 +83,9 @@
                         <value name="number">ASC</value>
                     </values>
                 </order>
-                <formats>
-                    <format name="json">application/json</format>
-                </formats>
+                <!--                <formats>-->
+                <!--                    <format name="json">application/json</format>-->
+                <!--                </formats>-->
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -116,9 +116,9 @@
                         <value name="number">ASC</value>
                     </values>
                 </order>
-                <formats>
-                    <format name="json">application/json</format>
-                </formats>
+                <!--                <formats>-->
+                <!--                    <format name="json">application/json</format>-->
+                <!--                </formats>-->
                 <normalizationContext>
                     <values>
                         <value name="groups">

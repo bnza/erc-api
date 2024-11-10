@@ -14,8 +14,8 @@
         </service>
         <service id="sites_users.search_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
-                <argument key="site.id">exact</argument>
-                <argument key="user.id">exact</argument>
+                <argument key="site">exact</argument>
+                <argument key="user">exact</argument>
             </argument>
             <tag name="api_platform.filter"/>
         </service>

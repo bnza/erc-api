@@ -11,8 +11,8 @@ class IsLessThanOrEqualToCurrentYearValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint): void
     {
-        if (!$constraint instanceof IsValidRole) {
-            throw new UnexpectedTypeException($constraint, IsValidRole::class);
+        if (!$constraint instanceof IsLessThanOrEqualToCurrentYear) {
+            throw new UnexpectedTypeException($constraint, IsLessThanOrEqualToCurrentYear::class);
         }
 
         if (null === $value || '' === $value) {
