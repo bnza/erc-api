@@ -21,12 +21,12 @@
         </service>
         <service id="pottery.search_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
-                <argument key="stratigraphicUnit.site.id">exact</argument>
-                <argument key="stratigraphicUnit.id">exact</argument>
+                <argument key="stratigraphicUnit.site">exact</argument>
+                <argument key="stratigraphicUnit">exact</argument>
                 <argument key="number">exact</argument>
-                <argument key="part.id">exact</argument>
-                <argument key="functionalGroup.id">exact</argument>
-                <argument key="typology.id">exact</argument>
+                <argument key="part">exact</argument>
+                <argument key="functionalGroup">exact</argument>
+                <argument key="typology">exact</argument>
                 <argument key="projectIdentifier">ipartial</argument>
                 <argument key="description">ipartial</argument>
             </argument>
