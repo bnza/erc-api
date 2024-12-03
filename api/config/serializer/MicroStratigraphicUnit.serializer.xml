@@ -1,0 +1,99 @@
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
+        https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="App\Entity\Data\MicroStratigraphicUnit">
+        <attribute name="id">
+            <group>MicroStratigraphicUnit:acl:read</group>
+        </attribute>
+        <attribute name="stratigraphicUnit">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="sample">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="number">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="depositType">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="keyAttributes">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="inclusionsGeology">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="inclusionsBuildingMaterials">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="inclusionsDomesticRefuse">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="inclusionOrganicRefuse">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="colourPpl">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="colourXpl">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="colourOil">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="lenticularPlateyPeds">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="crumbsOrGranules">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="saBlockyPeds">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="cracks">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="infillings">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="mesofaunaRootBioturbation">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="earthwormInternalChamber">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="organicOrganoMineral">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="earthwormGranule">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="interpretation">
+            <group>MicroStratigraphicUnit:acl:read</group>
+            <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+    </class>
+</serializer>

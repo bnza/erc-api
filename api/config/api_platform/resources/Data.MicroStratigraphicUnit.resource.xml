@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
+        https://api-platform.com/schema/metadata/resources-3.0.xsd">
+    <resource class="App\Entity\Data\MicroStratigraphicUnit">
+        <normalizationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>MicroStratigraphicUnit:acl:read</value>
+                    </values>
+                </value>
+            </values>
+        </normalizationContext>
+        <denormalizationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>MicroStratigraphicUnit:item:write</value>
+                    </values>
+                </value>
+            </values>
+        </denormalizationContext>
+        <operations>
+            <operation class="ApiPlatform\Metadata\Get"/>
+            <operation class="ApiPlatform\Metadata\GetCollection">
+                <filters>
+                    <filter>micro_stratigraphic_unit.order_filter</filter>
+                    <filter>micro_stratigraphic_unit.search_filter</filter>
+                    <filter>micro_stratigraphic_unit.boolean_filter</filter>
+                </filters>
+            </operation>
+            <!--            <operation-->
+            <!--                class="ApiPlatform\Metadata\Delete"-->
+            <!--                security="is_granted('delete', object)"-->
+            <!--                output="false"-->
+            <!--                status="204"-->
+            <!--            />-->
+            <!--            <operation-->
+            <!--                class="ApiPlatform\Metadata\Patch"-->
+            <!--                security="is_granted('update', object)"-->
+            <!--                output="false"-->
+            <!--                status="204"-->
+            <!--            />-->
+            <!--            <operation-->
+            <!--                class="ApiPlatform\Metadata\Post"-->
+            <!--                securityPostDenormalize="is_granted('create', object)"-->
+            <!--            />-->
+        </operations>
+    </resource>
+</resources>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Entity\Data\MicroStratigraphicUnit" table="mu">
+        <id name="id" type="integer">
+            <generator strategy="SEQUENCE"/>
+        </id>
+        <field name="number" type="integer" nullable="true"/>
+        <field name="depositType"/>
+        <field name="keyAttributes" nullable="true"/>
+        <field name="inclusionsGeology" type="integer">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+        <field name="inclusionsBuildingMaterials" type="integer">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+        <field name="inclusionsDomesticRefuse" type="integer">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+        <field name="inclusionsOrganicRefuse" type="integer">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+        <field name="colourPpl" nullable="true"/>
+        <field name="colourXpl" nullable="true"/>
+        <field name="colourOil" nullable="true"/>
+        <field name="lenticularPlateyPeds" type="boolean">
+            <options>
+                <option name="default">false</option>
+            </options>
+        </field>
+        <field name="crumbsOrGranules" type="boolean">
+            <options>
+                <option name="default">false</option>
+            </options>
+        </field>
+        <field name="saBlockyPeds" type="boolean">
+            <options>
+                <option name="default">false</option>
+            </options>
+        </field>
+        <field name="cracks" type="boolean">
+            <options>
+                <option name="default">false</option>
+            </options>
+        </field>
+        <field name="infillings" type="boolean">
+            <options>
+                <option name="default">false</option>
+            </options>
+        </field>
+        <field name="mesofaunaRootBioturbation" type="integer" column="mesofauna__root_bioturbation">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+        <field name="earthwormInternalChamber" type="integer">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+        <field name="organicOrganoMineral" type="integer" column="organic__organo_mineral">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+        <field name="earthwormGranule" type="integer">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+        <many-to-one field="stratigraphicUnit" target-entity="App\Entity\Data\StratigraphicUnit">
+            <join-column name="su_id"/>
+        </many-to-one>
+        <many-to-one field="sample" target-entity="App\Entity\Data\Sample">
+            <join-column name="sample_id"/>
+        </many-to-one>
+        <unique-constraints>
+            <unique-constraint columns="sample_id,su_id,number"/>
+        </unique-constraints>
+    </entity>
+</doctrine-mapping>

@@ -1,0 +1,39 @@
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="micro_stratigraphic_unit.order_filter" parent="api_platform.doctrine.orm.order_filter">
+            <argument type="collection">
+                <argument key="id"/>
+                <argument key="stratigraphicUnit.site.code"/>
+                <argument key="stratigraphicUnit.year"/>
+                <argument key="sample.number"/>
+                <argument key="stratigraphic.number"/>
+                <argument key="number"/>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+        <service id="micro_stratigraphic_unit.search_filter" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="stratigraphicUnit.site">exact</argument>
+                <argument key="stratigraphicUnit">exact</argument>
+                <argument key="sample">exact</argument>
+                <argument key="number">exact</argument>
+                <argument key="interpretation">ipartial</argument>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+        <service id="micro_stratigraphic_unit.boolean_filter" parent="api_platform.doctrine.orm.boolean_filter">
+            <argument type="collection">
+                <argument key="lenticularPlateyPeds"/>
+                <argument key="crumbsOrGranules"/>
+                <argument key="saBlockyPeds"/>
+                <argument key="cracks"/>
+                <argument key="infillings"/>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+    </services>
+</container>
