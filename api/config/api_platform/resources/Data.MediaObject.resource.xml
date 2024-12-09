@@ -40,7 +40,7 @@
                 <inputFormats>
                     <format name="multipart">multipart/form-data</format>
                 </inputFormats>
-                <openapiContext>
+                <!--<openapiContext>
                     <values>
                         <value name="requestBody">
                             <values>
@@ -70,7 +70,7 @@
                             </values>
                         </value>
                     </values>
-                </openapiContext>
+                </openapiContext>-->
             </operation>
         </operations>
     </resource>

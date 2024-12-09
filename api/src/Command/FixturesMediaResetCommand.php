@@ -3,17 +3,16 @@
 namespace App\Command;
 
 use App\Service\FixturesMediaReset;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 
+#[AsCommand(name: 'app:fixtures:reset-media', description: 'Reset media fixture files for test and dev purposes')]
 class FixturesMediaResetCommand extends Command
 {
-    protected static $defaultName = 'app:fixtures:reset-media';
-    protected static $defaultDescription = 'Reset media fixture files for test and dev purposes';
-
     public function __construct(private readonly FixturesMediaReset $loader, ?string $name = null)
     {
         parent::__construct($name);
@@ -50,6 +49,6 @@ class FixturesMediaResetCommand extends Command
         $questionHelper = $this->getHelperSet()->get('question');
         $question = new ConfirmationQuestion($question, $default);
 
-        return (bool) $questionHelper->ask($input, $output, $question);
+        return (bool)$questionHelper->ask($input, $output, $question);
     }
 }

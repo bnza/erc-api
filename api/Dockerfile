@@ -8,7 +8,7 @@
 
 
 # Prod image
-FROM php:8.2-fpm-alpine AS app_php
+FROM php:8.3-fpm-alpine AS app_php
 
 ENV APP_ENV=prod
 

@@ -19,7 +19,7 @@ class MediaObjectPostInject implements EventSubscriberInterface
     {
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             VicUploaderEvents::POST_UPLOAD => ['setFilePath', EventPriorities::POST_DESERIALIZE],
