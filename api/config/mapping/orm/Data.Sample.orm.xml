@@ -11,6 +11,8 @@
             <generator strategy="SEQUENCE"/>
         </id>
         <field name="number" type="integer"/>
+        <field name="collector" nullable="true"/>
+        <field name="takingDate" nullable="true" type="date_immutable"/>
         <field name="description" type="text" nullable="true"/>
         <field name="public" type="boolean">
             <options>

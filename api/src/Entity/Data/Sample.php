@@ -10,6 +10,10 @@ class Sample
 
     public int $number;
 
+    public ?string $collector;
+
+    public ?\DateTimeImmutable $takingDate;
+
     public ?string $description;
 
     public bool $public = false;

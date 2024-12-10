@@ -29,7 +29,10 @@
                 <filters>
                     <filter>sample.order_filter</filter>
                     <filter>sample.search_filter</filter>
+                    <filter>sample.numeric_filter</filter>
+                    <filter>sample.date_filter</filter>
                     <filter>sample.boolean_filter</filter>
+                    <filter>sample.exists_filter</filter>
                 </filters>
             </operation>
             <operation

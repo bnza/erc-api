@@ -4,18 +4,23 @@ App\Entity\Data\Sample:
         stratigraphicUnit: '@su_an_1001'
         number: 1
         description: 'charcoal sample'
+        collector: 'Some One'
+        takingDate: <(new DateTimeImmutable('2023-09-12'))>
     sample_an_1001_2:
         stratigraphicUnit: '@su_an_1001'
         number: 2
         description: 'terrain sample (pollen?)'
+        collector: 'Some One'
     sample_an_1001_3:
         stratigraphicUnit: '@su_an_1001'
         number: 3
         description: 'terrain sample (micro morphology)'
+        collector: 'John Doe'
     sample_an_1001_4:
         stratigraphicUnit: '@su_an_1002'
         number: 4
         description: 'terrain sample (micro morphology)'
+        collector: 'Jane Smith'
     sample_ed_1001_1:
         stratigraphicUnit: '@su_ed_1001'
         number: 1
@@ -24,14 +29,17 @@ App\Entity\Data\Sample:
         stratigraphicUnit: '@su_ed_1001'
         number: 2
         description: 'generic terrain sample contain sparse charcoal'
+        collector: 'John Doe'
     sample_ed_1002_1:
         stratigraphicUnit: '@su_ed_1002'
         number: 1
         description: 'charcoals + shells'
+        collector: 'John Doe'
     sample_ed_1001_3:
         stratigraphicUnit: '@su_ed_1001'
         number: 3
         description: 'terrain sample (with small seeds)'
+        collector: 'John Doe'
     sample_ww_1001_1:
         stratigraphicUnit: '@su_ww_1001'
         number: 1

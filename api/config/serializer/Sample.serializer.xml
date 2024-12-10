@@ -19,5 +19,13 @@
             <group>Sample:acl:read</group>
             <group>Sample:item:write</group>
         </attribute>
+        <attribute name="collector">
+            <group>Sample:acl:read</group>
+            <group>Sample:item:write</group>
+        </attribute>
+        <attribute name="takingDate">
+            <group>Sample:acl:read</group>
+            <group>Sample:item:write</group>
+        </attribute>
     </class>
 </serializer>
