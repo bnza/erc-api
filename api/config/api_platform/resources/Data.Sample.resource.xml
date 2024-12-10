@@ -27,9 +27,10 @@
             <operation class="ApiPlatform\Metadata\Get"/>
             <operation class="ApiPlatform\Metadata\GetCollection">
                 <filters>
+                    <filter>sample.numeric_filter</filter>
+                    <filter>sample.range_filter</filter>
                     <filter>sample.order_filter</filter>
                     <filter>sample.search_filter</filter>
-                    <filter>sample.numeric_filter</filter>
                     <filter>sample.date_filter</filter>
                     <filter>sample.boolean_filter</filter>
                     <filter>sample.exists_filter</filter>

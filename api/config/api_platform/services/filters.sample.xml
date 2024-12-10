@@ -15,11 +15,22 @@
             </argument>
             <tag name="api_platform.filter"/>
         </service>
+        <service id="sample.numeric_filter" parent="api_platform.doctrine.orm.numeric_filter">
+            <argument type="collection">
+                <argument key="number"/>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+        <service id="sample.range_filter" parent="api_platform.doctrine.orm.range_filter">
+            <argument type="collection">
+                <argument key="number"/>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
         <service id="sample.search_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
                 <argument key="stratigraphicUnit.site">exact</argument>
                 <argument key="stratigraphicUnit">exact</argument>
-                <argument key="number">exact</argument>
                 <argument key="takingDate">exact</argument>
                 <argument key="description">ipartial</argument>
                 <argument key="collector">ipartial</argument>
