@@ -56,5 +56,18 @@
             </argument>
             <tag name="api_platform.filter"/>
         </service>
+        <service id="sample_autocomplete.search_filter" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="stratigraphicUnit.site">exact</argument>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+        <service id="sample.code_search_filter" parent="app.sample_code_search_filter"
+            class="App\Filter\SampleCodeSearchFilter">
+            <argument type="collection">
+                <argument key="search">ipartial</argument>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
     </services>
 </container>

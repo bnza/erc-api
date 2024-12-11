@@ -10,6 +10,7 @@ parameters:
     app.alice.parameters.user_base_pw: '%env(USER_BASE_PW)%'
     app.alice.parameters.user_editor_pw: '%env(USER_EDITOR_PW)%'
     app.alice.parameters.user_admin_pw: '%env(USER_ADMIN_PW)%'
+    app.alice.parameters.user_geo_pw: '%env(USER_GEO_PW)%'
 
 services:
     # default configuration for services in *this* file

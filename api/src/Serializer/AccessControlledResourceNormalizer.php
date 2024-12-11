@@ -3,6 +3,7 @@
 namespace App\Serializer;
 
 use App\Entity\Data\M2M\SitesUsers;
+use App\Entity\Data\MicroStratigraphicUnit;
 use App\Entity\Data\Pottery;
 use App\Entity\Data\Sample;
 use App\Entity\Data\Site;
@@ -72,12 +73,13 @@ final class AccessControlledResourceNormalizer implements NormalizerInterface, N
     public function getSupportedTypes(?string $format): array
     {
         return [
+            MicroStratigraphicUnit::class => true,
             Pottery::class => true,
             Sample::class => true,
             Site::class => true,
             SitesUsers::class => true,
-            User::class => true,
             StratigraphicUnit::class => true,
+            User::class => true,
         ];
     }
 }

@@ -10,17 +10,28 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\PropertyInfo\Type;
 
-final class StratigraphicUnitCodeSearchFilter extends AbstractFilter
+final class SampleCodeSearchFilter extends AbstractFilter
 {
     private const FILTER_KEY = 'search';
 
     protected function setSingleNumericFilterExpressions(
         QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        string $resourceClass,
         bool $distinct = false,
     ): array {
-        $alias = $queryBuilder->getRootAliases()[0];
+        $rootAlias = $queryBuilder->getRootAliases()[0];
+        $format = 'CAST(%s.%s AS string)';
         foreach (['year', 'number'] as $i => $field) {
-            $format = 'CAST(%s.%s AS string)';
+            [$alias, $field] = $this->addJoinsForNestedProperty(
+                "stratigraphicUnit.$field",
+                $rootAlias,
+                $queryBuilder,
+                $queryNameGenerator,
+                $resourceClass,
+                Join::LEFT_JOIN
+            );
+
             $expressions[] = $queryBuilder
                 ->expr()
                 ->like(
@@ -28,6 +39,12 @@ final class StratigraphicUnitCodeSearchFilter extends AbstractFilter
                     $distinct ? ":search$i" : ':search'
                 );
         }
+        $expressions[] = $queryBuilder
+            ->expr()
+            ->like(
+                sprintf($format, $rootAlias, 'number'),
+                $distinct ? ":search2" : ':search'
+            );
 
         return $expressions;
     }
@@ -40,7 +57,7 @@ final class StratigraphicUnitCodeSearchFilter extends AbstractFilter
         $rootAlias = $queryBuilder->getRootAliases()[0];
         $format = '%s.%s';
         [$alias, $field] = $this->addJoinsForNestedProperty(
-            'site.code',
+            'stratigraphicUnit.site.code',
             $rootAlias,
             $queryBuilder,
             $queryNameGenerator,
@@ -82,7 +99,11 @@ final class StratigraphicUnitCodeSearchFilter extends AbstractFilter
         if (1 === count($values)) {
             //            $alias = $queryBuilder->getRootAliases()[0];
             if (is_numeric($values[0])) {
-                $expressions = $this->setSingleNumericFilterExpressions($queryBuilder);
+                $expressions = $this->setSingleNumericFilterExpressions(
+                    $queryBuilder,
+                    $queryNameGenerator,
+                    $resourceClass
+                );
                 $queryBuilder
                     ->andWhere(
                         $queryBuilder
@@ -104,7 +125,12 @@ final class StratigraphicUnitCodeSearchFilter extends AbstractFilter
         }
 
         if (2 === count($values)) {
-            $expressions = $this->setSingleNumericFilterExpressions($queryBuilder, is_numeric($values[0]));
+            $expressions = $this->setSingleNumericFilterExpressions(
+                $queryBuilder,
+                $queryNameGenerator,
+                $resourceClass,
+                is_numeric($values[0])
+            );
             if (!is_numeric($values[0])) {
                 $expression = $this->getSiteFilterExpression($queryBuilder, $queryNameGenerator, $resourceClass);
 
@@ -133,21 +159,46 @@ final class StratigraphicUnitCodeSearchFilter extends AbstractFilter
             return;
         }
 
+        if (3 === count($values)) {
+            $expressions = $this->setSingleNumericFilterExpressions(
+                $queryBuilder,
+                $queryNameGenerator,
+                $resourceClass,
+                true
+            );
+
+            if (!is_numeric($values[0])) {
+                $expression = $this->getSiteFilterExpression($queryBuilder, $queryNameGenerator, $resourceClass);
+
+                $queryBuilder
+                    ->andWhere($expression)
+                    ->andWhere(
+                        $queryBuilder
+                            ->expr()
+                            ->orX(...$expressions)
+                    )
+                    ->setParameter('site_code', "%$values[0]%")
+                    ->setParameter('search', "%$values[1]");
+
+                return;
+            }
+            $expressions[] = $this->getSiteFilterExpression($queryBuilder, $queryNameGenerator, $resourceClass);
+
+            $queryBuilder
+                ->andWhere(
+                    $queryBuilder
+                        ->expr()
+                        ->andX(...$expressions)
+                )
+                ->setParameter('site_code', "%$values[0]%")
+                ->setParameter('search0', "%$values[1]")
+                ->setParameter('search1', "%$values[2]");
+        }
+
+
         if (!is_numeric($values[0])) {
             return;
         }
-        $expressions = $this->setSingleNumericFilterExpressions($queryBuilder, true);
-        $expressions[] = $this->getSiteFilterExpression($queryBuilder, $queryNameGenerator, $resourceClass);
-
-        $queryBuilder
-            ->andWhere(
-                $queryBuilder
-                    ->expr()
-                    ->andX(...$expressions)
-            )
-            ->setParameter('site_code', "%$values[0]%")
-            ->setParameter('search0', "%$values[1]")
-            ->setParameter('search1', "%$values[2]");
     }
 
     public function getDescription(string $resourceClass): array

@@ -18,6 +18,11 @@
             <argument type="service" id="logger" on-invalid="ignore"/>
             <argument key="$nameConverter" type="service" id="api_platform.name_converter" on-invalid="ignore"/>
         </service>
+        <service id="app.sample_code_search_filter" class="App\Filter\SampleCodeSearchFilter" public="false" abstract="true">
+            <argument type="service" id="doctrine"/>
+            <argument type="service" id="logger" on-invalid="ignore"/>
+            <argument key="$nameConverter" type="service" id="api_platform.name_converter" on-invalid="ignore"/>
+        </service>
         <service id="ApiPlatform\Doctrine\Orm\Filter\SearchFilter" alias="api_platform.doctrine.orm.search_filter"/>
     </services>
 </container>

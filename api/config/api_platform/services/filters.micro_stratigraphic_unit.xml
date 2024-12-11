@@ -10,8 +10,16 @@
                 <argument key="stratigraphicUnit.site.code"/>
                 <argument key="stratigraphicUnit.year"/>
                 <argument key="sample.number"/>
-                <argument key="stratigraphic.number"/>
+                <argument key="stratigraphicUnit.number"/>
                 <argument key="number"/>
+                <argument key="inclusionsGeology"/>
+                <argument key="inclusionsBuildingMaterials"/>
+                <argument key="inclusionsDomesticRefuse"/>
+                <argument key="inclusionsOrganicRefuse"/>
+                <argument key="mesofaunaRootBioturbation"/>
+                <argument key="earthwormInternalChamber"/>
+                <argument key="organicOrganoMineral"/>
+                <argument key="earthwormGranule"/>
             </argument>
             <tag name="api_platform.filter"/>
         </service>
@@ -22,6 +30,21 @@
                 <argument key="sample">exact</argument>
                 <argument key="number">exact</argument>
                 <argument key="interpretation">ipartial</argument>
+                <argument key="sample.collector">ipartial</argument>
+            </argument>
+            <tag name="api_platform.filter"/>
+        </service>
+        <service id="micro_stratigraphic_unit.range_filter" parent="api_platform.doctrine.orm.range_filter">
+            <argument type="collection">
+                <argument key="number"/>
+                <argument key="inclusionsGeology"/>
+                <argument key="inclusionsBuildingMaterials"/>
+                <argument key="inclusionsDomesticRefuse"/>
+                <argument key="inclusionsOrganicRefuse"/>
+                <argument key="mesofaunaRootBioturbation"/>
+                <argument key="earthwormInternalChamber"/>
+                <argument key="organicOrganoMineral"/>
+                <argument key="earthwormGranule"/>
             </argument>
             <tag name="api_platform.filter"/>
         </service>

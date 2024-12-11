@@ -52,6 +52,37 @@
                 class="ApiPlatform\Metadata\Post"
                 securityPostDenormalize="is_granted('create', object)"
             />
+            <operation
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/autocomplete/samples"
+                paginationItemsPerPage="10"
+            >
+                <filters>
+                    <filter>sample_autocomplete.search_filter</filter>
+                    <filter>sample.code_search_filter</filter>
+                </filters>
+                <order>
+                    <values>
+                        <value name="stratigraphicUnit.site">ASC</value>
+                        <value name="stratigraphicUnit.year">ASC</value>
+                        <value name="stratigraphicUnit.number">ASC</value>
+                        <value name="number">ASC</value>
+                    </values>
+                </order>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>Sample:autocomplete</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>site.order_filter</filter>
+                    <filter>site.or_search_filter</filter>
+                </filters>
+            </operation>
         </operations>
     </resource>
 </resources>

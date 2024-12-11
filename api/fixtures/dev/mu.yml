@@ -78,3 +78,20 @@ App\Entity\Data\MicroStratigraphicUnit:
         saBlockyPeds: true
         mesofaunaRootBioturbation: 4
         interpretation: 'buried horizon'
+    mu_ed_1001_1:
+        sample: '@sample_ed_1001_1'
+        stratigraphicUnit: '@su_ed_1001'
+        number: 1
+        depositType: 'Buried A-horizon'
+        keyAttributes: 'sandy clay loam, intergrain aggregate'
+        inclusionsGeology: 50
+        inclusionsBuildingMaterials: 20
+        inclusionsDomesticRefuse: 15
+        inclusionsOrganicRefuse: 25
+        colourPpl: 'brown'
+        colourXpl: 'light orange brown'
+        colourOil: 'light greyish brown'
+        lenticularPlateyPeds: true
+        earthwormInternalChamber: 1
+        mesofaunaRootBioturbation: 2
+        interpretation: 'buried horizon A'

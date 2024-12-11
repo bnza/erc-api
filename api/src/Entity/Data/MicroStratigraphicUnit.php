@@ -33,4 +33,13 @@ class MicroStratigraphicUnit
     public int $earthwormGranule = 0;
 
     public ?string $interpretation;
+
+    public function getCode(): string
+    {
+        return isset($this->number) ? sprintf(
+            '%s/%u',
+            $this->sample->getCode(),
+            $this->number
+        ) : $this->sample->getCode();
+    }
 }

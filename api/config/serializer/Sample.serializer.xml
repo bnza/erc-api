@@ -5,13 +5,16 @@
 >
     <class name="App\Entity\Data\Sample">
         <attribute name="id">
+            <group>Sample:autocomplete</group>
             <group>Sample:acl:read</group>
         </attribute>
         <attribute name="stratigraphicUnit">
+            <group>Sample:autocomplete</group>
             <group>Sample:acl:read</group>
             <group>Sample:item:write</group>
         </attribute>
         <attribute name="number">
+            <group>Sample:autocomplete</group>
             <group>Sample:acl:read</group>
             <group>Sample:item:write</group>
         </attribute>
@@ -26,6 +29,10 @@
         <attribute name="takingDate">
             <group>Sample:acl:read</group>
             <group>Sample:item:write</group>
+        </attribute>
+        <attribute name="code">
+            <group>Sample:autocomplete</group>
+            <group>Sample:acl:read</group>
         </attribute>
     </class>
 </serializer>

@@ -14,6 +14,7 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 class AuthApiTestCase extends ApiTestCase
 {
     use RefreshDatabaseTrait;
+
     public const LOGIN_PATH = '/login';
 
     private string $jwtToken;
@@ -25,9 +26,12 @@ class AuthApiTestCase extends ApiTestCase
     public const USER_ADMIN = 'user_admin@example.com';
     public const USER_ADMIN_PW = '0002';
 
+    public const USER_GEO = 'user_geo@example.com';
+    public const USER_GEO_PW = '0003';
+
     protected static array $userBaseCredentials = [
-      'username' => self::USER_BASE,
-      'password' => self::USER_BASE_PW,
+        'username' => self::USER_BASE,
+        'password' => self::USER_BASE_PW,
     ];
 
     protected static array $userEditorCredentials = [
@@ -75,8 +79,11 @@ class AuthApiTestCase extends ApiTestCase
         return isset($this->jwtToken) ? "Bearer $this->jwtToken" : null;
     }
 
-    protected function createAuthenticatedClient(?string $username = self::USER_BASE, ?string $password = self::USER_BASE_PW): Client
-    {
-        return static::createClient([], ['headers' => ['authorization' => 'Bearer '.$this->getToken($username, $password)]]);
+    protected function createAuthenticatedClient(
+        ?string $username = self::USER_BASE,
+        ?string $password = self::USER_BASE_PW
+    ): Client {
+        return static::createClient([],
+            ['headers' => ['authorization' => 'Bearer '.$this->getToken($username, $password)]]);
     }
 }

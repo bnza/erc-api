@@ -39,7 +39,7 @@
             <group>MicroStratigraphicUnit:acl:read</group>
             <group>MicroStratigraphicUnit:item:write</group>
         </attribute>
-        <attribute name="inclusionOrganicRefuse">
+        <attribute name="inclusionsOrganicRefuse">
             <group>MicroStratigraphicUnit:acl:read</group>
             <group>MicroStratigraphicUnit:item:write</group>
         </attribute>
@@ -94,6 +94,9 @@
         <attribute name="interpretation">
             <group>MicroStratigraphicUnit:acl:read</group>
             <group>MicroStratigraphicUnit:item:write</group>
+        </attribute>
+        <attribute name="code">
+            <group>MicroStratigraphicUnit:acl:read</group>
         </attribute>
     </class>
 </serializer>

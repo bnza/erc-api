@@ -11,6 +11,7 @@ class AuthenticationTest extends AuthApiTestCase
             [self::USER_BASE, self::USER_BASE_PW],
             [self::USER_EDITOR, self::USER_EDITOR_PW],
             [self::USER_ADMIN, self::USER_ADMIN_PW],
+            [self::USER_GEO, self::USER_GEO_PW],
         ];
     }
 

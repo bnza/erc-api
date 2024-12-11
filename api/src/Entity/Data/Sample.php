@@ -2,6 +2,8 @@
 
 namespace App\Entity\Data;
 
+use DateTimeImmutable;
+
 class Sample
 {
     private int $id;
@@ -12,7 +14,7 @@ class Sample
 
     public ?string $collector;
 
-    public ?\DateTimeImmutable $takingDate;
+    public ?DateTimeImmutable $takingDate;
 
     public ?string $description;
 
@@ -21,5 +23,14 @@ class Sample
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getCode(): string
+    {
+        return sprintf(
+            '%s/%u',
+            $this->stratigraphicUnit->getCode(),
+            $this->number
+        );
     }
 }

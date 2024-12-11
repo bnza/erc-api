@@ -23,3 +23,7 @@ App\Entity\Data\M2M\SitesUsers:
         site: '@site_ed'
         user: '@user_editor'
         privileges: 0
+    sites_users_7:
+        site: '@site_an'
+        user: '@user_geo'
+        privileges: 0

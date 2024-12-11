@@ -32,6 +32,6 @@ class StratigraphicUnit
 
     public function getCode(): string
     {
-        return sprintf('%s.%u.%u', $this->site->code, $this->year, $this->number);
+        return sprintf('%s.%u.%u', $this->site->code, substr($this->year, -2), $this->number);
     }
 }
