@@ -30,7 +30,7 @@
         <service id="sample.search_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
                 <argument key="stratigraphicUnit.site">exact</argument>
-                <argument key="stratigraphicUnit">exact</argument>
+                <argument key="stratigraphicUnits.stratigraphicUnit">exact</argument>
                 <argument key="takingDate">exact</argument>
                 <argument key="description">ipartial</argument>
                 <argument key="collector">ipartial</argument>

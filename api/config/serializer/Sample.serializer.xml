@@ -10,8 +10,11 @@
         </attribute>
         <attribute name="stratigraphicUnit">
             <group>Sample:autocomplete</group>
-            <group>Sample:acl:read</group>
             <group>Sample:item:write</group>
+            <group>Sample:acl:read</group>
+        </attribute>
+        <attribute name="stratigraphicUnits">
+            <group>Sample:acl:read</group>
         </attribute>
         <attribute name="number">
             <group>Sample:autocomplete</group>

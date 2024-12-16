@@ -20,7 +20,7 @@
             </options>
         </field>
         <one-to-many field="potteries" target-entity="App\Entity\Data\Pottery" mapped-by="stratigraphicUnit"/>
-        <one-to-many field="samples" target-entity="App\Entity\Data\Sample" mapped-by="stratigraphicUnit"/>
+        <one-to-many field="samples" target-entity="App\Entity\Data\View\M2M\VwStratigraphicUnitsSamples" mapped-by="stratigraphicUnit"/>
         <one-to-many field="mediaObjects" target-entity="App\Entity\Data\M2M\StratigraphicUnitsMediaObject" mapped-by="item"/>
         <many-to-one field="site" target-entity="App\Entity\Data\Site" inversed-by="stratigraphicUnits">
             <join-column name="site_id" nullable="false"/>

@@ -57,6 +57,16 @@ EOF
         $this->addSql(
             'CREATE RULE __delete AS ON DELETE TO vw_sus_relationships DO INSTEAD DELETE FROM sus_relationships WHERE id = ABS(OLD.id)'
         );
+
+        $this->addSql(
+            <<<EOF
+            CREATE VIEW vw_sus__samples AS
+SELECT (id || '_' || su_id) as id,  id as sample_id, su_id FROM sample
+UNION
+SELECT  (sample_id || '_' || su_id) as id, sample_id, su_id FROM mu
+;
+EOF
+        );
     }
 
     public function down(Schema $schema): void
@@ -64,5 +74,7 @@ EOF
         $this->addSql('DROP VIEW IF EXISTS geom.vw_site');
 
         $this->addSql('DROP VIEW IF EXISTS vw_sus_relationships;');
+
+        $this->addSql('DROP VIEW IF EXISTS vw_sus__samples;');
     }
 }
