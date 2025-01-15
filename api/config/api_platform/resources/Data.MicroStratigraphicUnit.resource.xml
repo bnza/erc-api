@@ -33,22 +33,22 @@
                     <filter>micro_stratigraphic_unit.boolean_filter</filter>
                 </filters>
             </operation>
-            <!--            <operation-->
-            <!--                class="ApiPlatform\Metadata\Delete"-->
-            <!--                security="is_granted('delete', object)"-->
-            <!--                output="false"-->
-            <!--                status="204"-->
-            <!--            />-->
-            <!--            <operation-->
-            <!--                class="ApiPlatform\Metadata\Patch"-->
-            <!--                security="is_granted('update', object)"-->
-            <!--                output="false"-->
-            <!--                status="204"-->
-            <!--            />-->
-            <!--            <operation-->
-            <!--                class="ApiPlatform\Metadata\Post"-->
-            <!--                securityPostDenormalize="is_granted('create', object)"-->
-            <!--            />-->
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                security="is_granted('delete', object)"
+                output="false"
+                status="204"
+            />
+            <operation
+                class="ApiPlatform\Metadata\Patch"
+                security="is_granted('update', object)"
+                output="false"
+                status="204"
+            />
+            <operation
+                class="ApiPlatform\Metadata\Post"
+                securityPostDenormalize="is_granted('create', object)"
+            />
         </operations>
     </resource>
 </resources>

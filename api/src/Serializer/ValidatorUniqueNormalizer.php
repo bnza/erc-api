@@ -4,6 +4,7 @@ namespace App\Serializer;
 
 use App\Entity\Validator\Unique;
 use App\Entity\Validator\UniqueInterface;
+use App\Entity\Validator\UniqueMicroStratigraphicUnit;
 use App\Entity\Validator\UniquePottery;
 use App\Entity\Validator\UniqueSample;
 use App\Entity\Validator\UniqueSitesUsers;
@@ -25,6 +26,7 @@ class ValidatorUniqueNormalizer implements NormalizerInterface
             UniqueSample::class => true,
             UniquePottery::class => true,
             UniqueStratigraphicUnit::class => true,
+            UniqueMicroStratigraphicUnit::class => true,
             UniqueStratigraphicUnitsRelationship::class => true,
             UniqueSitesUsers::class => true,
         ];
@@ -35,6 +37,6 @@ class ValidatorUniqueNormalizer implements NormalizerInterface
         /*
          * @var $object UniqueInterface
          */
-        return (int) $object->isUnique();
+        return (int)$object->isUnique();
     }
 }

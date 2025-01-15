@@ -5,13 +5,15 @@
     xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Entity\Data\MicroStratigraphicUnit" table="mu">
+    <entity name="App\Entity\Data\MicroStratigraphicUnit" table="mu"
+        repository-class="App\Repository\MicroStratigraphicUnitRepository">
         <id name="id" type="integer">
             <generator strategy="SEQUENCE"/>
         </id>
         <field name="number" type="integer" nullable="true"/>
         <field name="depositType"/>
         <field name="keyAttributes" nullable="true"/>
+        <field name="interpretation" type="text" nullable="true"/>
         <field name="inclusionsGeology" type="integer">
             <options>
                 <option name="default">0</option>
@@ -87,7 +89,7 @@
             <join-column name="sample_id"/>
         </many-to-one>
         <unique-constraints>
-            <unique-constraint columns="sample_id,su_id,number"/>
+            <unique-constraint columns="sample_id,number"/>
         </unique-constraints>
     </entity>
 </doctrine-mapping>

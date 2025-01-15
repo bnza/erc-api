@@ -5,6 +5,7 @@
 >
     <class name="App\Entity\Data\Sample">
         <attribute name="id">
+            <group>MicroStratigraphicUnit:acl:read</group>
             <group>Sample:autocomplete</group>
             <group>Sample:acl:read</group>
         </attribute>
@@ -34,6 +35,7 @@
             <group>Sample:item:write</group>
         </attribute>
         <attribute name="code">
+            <group>MicroStratigraphicUnit:acl:read</group>
             <group>Sample:autocomplete</group>
             <group>Sample:acl:read</group>
         </attribute>

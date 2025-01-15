@@ -4,7 +4,7 @@ namespace App\Entity\Data;
 
 class MicroStratigraphicUnit
 {
-    public readonly int $id;
+    private int $id;
     public Sample $sample;
     public StratigraphicUnit $stratigraphicUnit;
     public ?int $number;
@@ -33,6 +33,11 @@ class MicroStratigraphicUnit
     public int $earthwormGranule = 0;
 
     public ?string $interpretation;
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
     public function getCode(): string
     {

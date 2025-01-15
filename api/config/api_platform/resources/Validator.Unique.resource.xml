@@ -9,7 +9,39 @@
             <format name="json">application/json</format>
         </formats>
         <operations>
-
+            <operation
+                input="App\Entity\Validator\UniqueMicroStratigraphicUnit"
+                output="App\Entity\Validator\UniqueMicroStratigraphicUnit"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/validator/unique/micro_stratigraphic_units/{sample}/{number}"
+                provider="App\State\ValidatorUniqueMicroStratigraphicUnitProvider"
+                name="unique_micro_stratigraphic_unit"
+                description="Check for micro stratigraphic [sample, number] uniqueness"
+            >
+                <requirements>
+                    <requirement property="sample">\d+</requirement>
+                    <requirement property="number">\d+</requirement>
+                </requirements>
+                <openapi description="Check for micro stratigraphic [stratigraphic unit, number] uniqueness">
+                    <responses>
+                        <response status="200">
+                            <content>
+                                <values>
+                                    <value name="application/json">
+                                        <values>
+                                            <value name="schema">
+                                                <values>
+                                                    <value name="type">integer</value>
+                                                </values>
+                                            </value>
+                                        </values>
+                                    </value>
+                                </values>
+                            </content>
+                        </response>
+                    </responses>
+                </openapi>
+            </operation>
             <operation
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/validator/unique/sites/code/{id}"

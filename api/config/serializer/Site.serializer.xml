@@ -28,6 +28,7 @@
         </attribute>
         <attribute name="name">
             <group>Sample:autocomplete</group>
+            <group>Sample:acl:read</group>
             <group>MicroStratigraphicUnit:acl:read</group>
             <group>Pottery:acl:read</group>
             <group>Site:acl:read</group>

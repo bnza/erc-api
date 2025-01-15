@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+        https://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="App\Entity\Data\MicroStratigraphicUnit">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">
+                <value>sample</value>
+                <value>number</value>
+            </option>
+            <option name="message">
+                Duplicate (stratigraphicUnit, number) pair
+            </option>
+        </constraint>
+        <constraint name="App\Validator\IsMuInclusionsPercentageSum100"/>
+        <property name="depositType">
+            <constraint name="NotBlank"/>
+        </property>
+        <property name="stratigraphicUnit">
+            <constraint name="NotBlank"/>
+        </property>
+        <property name="number">
+            <constraint name="Positive"/>
+        </property>
+        <property name="inclusionsGeology">
+            <constraint name="NotBlank"/>
+            <constraint name="PositiveOrZero"/>
+        </property>
+        <property name="inclusionsBuildingMaterials">
+            <constraint name="NotBlank"/>
+            <constraint name="PositiveOrZero"/>
+        </property>
+        <property name="inclusionsDomesticRefuse">
+            <constraint name="NotBlank"/>
+            <constraint name="PositiveOrZero"/>
+        </property>
+        <property name="inclusionsOrganicRefuse">
+            <constraint name="NotBlank"/>
+            <constraint name="PositiveOrZero"/>
+        </property>
+        <property name="mesofaunaRootBioturbation">
+            <constraint name="NotBlank"/>
+            <constraint name="PositiveOrZero"/>
+        </property>
+        <property name="earthwormInternalChamber">
+            <constraint name="NotBlank"/>
+            <constraint name="PositiveOrZero"/>
+        </property>
+        <property name="organicOrganoMineral">
+            <constraint name="NotBlank"/>
+            <constraint name="PositiveOrZero"/>
+        </property>
+        <property name="earthwormGranule">
+            <constraint name="NotBlank"/>
+            <constraint name="PositiveOrZero"/>
+        </property>
+    </class>
+</constraint-mapping>
