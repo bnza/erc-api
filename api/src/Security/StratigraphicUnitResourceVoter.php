@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\Data\M2M\PotteriesMediaObject;
 use App\Entity\Data\M2M\StratigraphicUnitsMediaObject;
 use App\Entity\Data\Pottery;
 use App\Entity\Data\Sample;
@@ -35,6 +36,7 @@ class StratigraphicUnitResourceVoter extends Voter
 
         return is_object($subject)
             && in_array(get_class($subject), [
+                PotteriesMediaObject::class,
                 Pottery::class,
                 Sample::class,
                 StratigraphicUnit::class,
@@ -69,6 +71,10 @@ class StratigraphicUnitResourceVoter extends Voter
 
         if ($subject instanceof StratigraphicUnitsMediaObject) {
             $subject = $subject->item;
+        }
+
+        if ($subject instanceof PotteriesMediaObject) {
+            $subject = $subject->item->stratigraphicUnit;
         }
 
         $userId = $this->security->getUser()->getId()->__toString();

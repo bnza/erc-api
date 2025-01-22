@@ -32,6 +32,8 @@ class Pottery
 
     public bool $public = true;
 
+    public iterable $mediaObjects;
+
     public function getId(): int
     {
         return $this->id;

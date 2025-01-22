@@ -8,6 +8,7 @@
             <group>MediaObject:read</group>
         </attribute>
         <attribute name="originalFilename">
+            <group>PotteriesMediaObject:read</group>
             <group>StratigraphicUnitsMediaObject:read</group>
             <group>MediaObject:read</group>
             <group>MediaObject:write</group>
@@ -20,21 +21,25 @@
             <group>MediaObject:write</group>
         </attribute>
         <attribute name="uploadDate">
+            <group>PotteriesMediaObject:read</group>
             <group>StratigraphicUnitsMediaObject:read</group>
             <group>MediaObject:read</group>
             <group>MediaObject:write</group>
         </attribute>
         <attribute name="mimeType">
+            <group>PotteriesMediaObject:read</group>
             <group>StratigraphicUnitsMediaObject:read</group>
             <group>MediaObject:read</group>
             <group>MediaObject:write</group>
         </attribute>
         <attribute name="size">
+            <group>PotteriesMediaObject:read</group>
             <group>StratigraphicUnitsMediaObject:read</group>
             <group>MediaObject:read</group>
             <group>MediaObject:write</group>
         </attribute>
         <attribute name="contentUrl">
+            <group>PotteriesMediaObject:read</group>
             <group>StratigraphicUnitsMediaObject:read</group>
             <group>MediaObject:read</group>
         </attribute>

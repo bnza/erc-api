@@ -2,9 +2,11 @@
 
 namespace App\Serializer;
 
+use App\Entity\Data\M2M\PotteriesMediaObject;
 use App\Entity\Data\M2M\StratigraphicUnitsMediaObject;
 use App\Entity\Data\MediaObject;
 use App\Service\MediaObjectDuplicateFinder;
+use DateTimeImmutable;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -29,7 +31,7 @@ final class MediaObjectFileDenormalizer implements DenormalizerInterface
             $mediaObject = new MediaObject();
             $mediaObject->file = $data['file'];
             $mediaObject->sha256 = hash_file('sha256', $file);
-            $mediaObject->uploadDate = new \DateTimeImmutable();
+            $mediaObject->uploadDate = new DateTimeImmutable();
         }
 
         $return->mediaObject = $mediaObject;
@@ -39,7 +41,7 @@ final class MediaObjectFileDenormalizer implements DenormalizerInterface
 
     public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return StratigraphicUnitsMediaObject::class === $context['resource_class']
+        return in_array($context['resource_class'], [StratigraphicUnitsMediaObject::class, PotteriesMediaObject::class])
             && is_array($data) && array_key_exists('file', $data) && $data['file'] instanceof File;
     }
 
@@ -48,6 +50,7 @@ final class MediaObjectFileDenormalizer implements DenormalizerInterface
         return [
             'object' => null,
             '*' => false,
+            PotteriesMediaObject::class => true,
             StratigraphicUnitsMediaObject::class => true,
         ];
     }

@@ -25,6 +25,7 @@
                 <option name="default">true</option>
             </options>
         </field>
+        <one-to-many field="mediaObjects" target-entity="App\Entity\Data\M2M\PotteriesMediaObject" mapped-by="item"/>
         <many-to-one field="stratigraphicUnit" target-entity="App\Entity\Data\StratigraphicUnit" inversed-by="potteries">
             <join-column name="su_id"/>
         </many-to-one>

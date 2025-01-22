@@ -23,6 +23,4 @@ trait DuplicateMediaObjectEntityRepositoryTrait
 
         return $qb->getQuery()->getOneOrNullResult();
     }
-
-//    abstract public function createQueryBuilder(string $string): QueryBuilder;
 }
