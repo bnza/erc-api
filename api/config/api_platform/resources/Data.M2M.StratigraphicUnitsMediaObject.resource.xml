@@ -35,44 +35,6 @@
                 <inputFormats>
                     <format name="multipart">multipart/form-data</format>
                 </inputFormats>
-                <!--                <openapiContext>-->
-                <!--                    <values>-->
-                <!--                        <value name="requestBody">-->
-                <!--                            <values>-->
-                <!--                                <value name="content">-->
-                <!--                                    <values>-->
-                <!--                                        <value name="multipart/form-data">-->
-                <!--                                            <values>-->
-                <!--                                                <value name="schema">-->
-                <!--                                                    <values>-->
-                <!--                                                        <value name="type">object</value>-->
-                <!--                                                        <value name="properties">-->
-                <!--                                                            <values>-->
-                <!--                                                                <value name="item">-->
-                <!--                                                                    <values>-->
-                <!--                                                                        <value name="type">string</value>-->
-                <!--                                                                        <value name="format">iri-reference</value>-->
-                <!--                                                                        <value name="example">/api/stratigraphic_units/7469</value>-->
-                <!--                                                                    </values>-->
-                <!--                                                                </value>-->
-                <!--                                                                <value name="file">-->
-                <!--                                                                    <values>-->
-                <!--                                                                        <value name="type">string</value>-->
-                <!--                                                                        <value name="format">binary</value>-->
-                <!--                                                                    </values>-->
-                <!--                                                                </value>-->
-                <!--                                                            </values>-->
-                <!--                                                        </value>-->
-                <!--                                                    </values>-->
-                <!--                                                </value>-->
-                <!--                                            </values>-->
-                <!--                                        </value>-->
-                <!--                                    </values>-->
-                <!--                                </value>-->
-                <!--                            </values>-->
-                <!--                        </value>-->
-                <!--                    </values>-->
-                <!--                </openapiContext>-->
             </operation>
             <operation
                 class="ApiPlatform\Metadata\Delete"
