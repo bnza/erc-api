@@ -8,7 +8,7 @@
 
 
 # Prod image
-FROM php:8.3-fpm-alpine AS app_php
+FROM php:8.4-fpm-alpine AS app_php
 
 ENV APP_ENV=prod
 
@@ -31,8 +31,8 @@ RUN apk update \
     	ghostscript \
     	imagemagick-dev \
     && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS imagemagick-dev \
-	&& pecl install imagick \
-    && docker-php-ext-enable imagick \
+#	&& pecl install imagick \
+#    && docker-php-ext-enable imagick \
     && rm -fr /tmp/pear \
     && apk del .build-deps
 
@@ -42,6 +42,7 @@ RUN set -eux; \
 		apcu \
     	gd \
 		intl \
+        Imagick/imagick@65e27f2bc0 \
 		opcache \
 		zip \
     ;

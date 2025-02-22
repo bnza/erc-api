@@ -6,9 +6,11 @@ use App\Entity\Data\M2M\SitesUsers;
 use App\Entity\Data\User;
 use App\Security\ApiPrivileges;
 use App\Security\PrivilegeValueOperator;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query\Parameter;
 use Doctrine\Persistence\ManagerRegistry;
 
 class SitesUsersRepository extends AbstractCheckUniqueRepository
@@ -43,12 +45,14 @@ class SitesUsersRepository extends AbstractCheckUniqueRepository
             $qb->expr()->eq('su.user', ':userId'),
             $qb->expr()->eq('su.site', ':siteId'),
         ]);
-        $qb->select('su.privileges')
+        $qb->select(['su.privileges'])
             ->where($and)
-            ->setParameters([
-                ':userId' => $user->getId(),
-                ':siteId' => $siteId,
-            ]);
+            ->setParameters(
+                new ArrayCollection([
+                    new Parameter(':userId', $user->getId()),
+                    new Parameter(':siteId', $siteId),
+                ])
+            );
         try {
             return $qb->getQuery()->getSingleScalarResult();
         } catch (NoResultException $e) {
@@ -67,12 +71,14 @@ class SitesUsersRepository extends AbstractCheckUniqueRepository
             $qb->expr()->eq('su.user', ':userId'),
             $qb->expr()->eq('su.site', ':siteId'),
         ]);
-        $qb->select('su.privileges')
+        $qb->select(['su.privileges'])
             ->where($and)
-            ->setParameters([
-                ':userId' => $userId,
-                ':siteId' => $siteId,
-            ]);
+            ->setParameters(
+                new ArrayCollection([
+                    new Parameter(':userId', $userId),
+                    new Parameter(':siteId', $siteId),
+                ])
+            );
         try {
             $privileges = $qb->getQuery()->getSingleScalarResult();
         } catch (NoResultException $e) {

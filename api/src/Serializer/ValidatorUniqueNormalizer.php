@@ -14,12 +14,12 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class ValidatorUniqueNormalizer implements NormalizerInterface
 {
-    public function supportsNormalization(mixed $data, ?string $format = null): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof UniqueInterface;
     }
 
-    public function getSupportedTypes(): array
+    public function getSupportedTypes(?string $format): array
     {
         return [
             Unique::class => true,
@@ -32,11 +32,11 @@ class ValidatorUniqueNormalizer implements NormalizerInterface
         ];
     }
 
-    public function normalize(mixed $object, ?string $format = null, array $context = []): int
+    public function normalize(mixed $data, ?string $format = null, array $context = []): int
     {
         /*
          * @var $object UniqueInterface
          */
-        return (int)$object->isUnique();
+        return (int)$data->isUnique();
     }
 }

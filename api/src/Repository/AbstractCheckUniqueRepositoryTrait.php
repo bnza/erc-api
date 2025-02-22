@@ -2,6 +2,10 @@
 
 namespace App\Repository;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Query\Parameter;
+use InvalidArgumentException;
+
 trait AbstractCheckUniqueRepositoryTrait
 {
     abstract protected function getUniqueFields(): array;
@@ -19,7 +23,7 @@ trait AbstractCheckUniqueRepositoryTrait
             }
         }
         if (!$isSupported) {
-            throw new \InvalidArgumentException(sprintf("Unsupported unique fields '%s'", implode(', ', $fields)));
+            throw new InvalidArgumentException(sprintf("Unsupported unique fields '%s'", implode(', ', $fields)));
         }
     }
 
@@ -31,11 +35,11 @@ trait AbstractCheckUniqueRepositoryTrait
         $sub = $this->createQueryBuilder('s');
 
         $sub->select('1');
-        $params = [];
+        $params = new ArrayCollection();
 
         foreach ($criteria as $field => $value) {
             $paramKey = ':'.$field;
-            $params[$paramKey] = $value;
+            $params->add(new Parameter($paramKey, $value));
             $sub->andWhere($sub->expr()->eq($sub->getRootAliases()[0].'.'.$field, $paramKey));
         }
 
@@ -45,6 +49,6 @@ trait AbstractCheckUniqueRepositoryTrait
             ->setMaxResults(1)
             ->getQuery();
 
-        return !(bool) count($query->getResult());
+        return !(bool)count($query->getResult());
     }
 }

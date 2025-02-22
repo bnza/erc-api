@@ -7,6 +7,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use function in_array;
 
 class UserSitesPrivilegesNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
@@ -23,7 +24,7 @@ class UserSitesPrivilegesNormalizer implements NormalizerInterface, NormalizerAw
     {
         $containsSupportedContextGroup = function (array $context = []) {
             $isSupportedContextGroup = function (bool $carry, string $group): bool {
-                return $carry || \in_array($group, ['read:session:User']);
+                return $carry || in_array($group, ['read:session:User']);
             };
 
             return false;
@@ -33,15 +34,15 @@ class UserSitesPrivilegesNormalizer implements NormalizerInterface, NormalizerAw
         return $containsSupportedContextGroup($context);
     }
 
-    public function getSupportedTypes(): array
+    public function getSupportedTypes(?string $format): array
     {
         return [
-           // SitesUsers::class => false,
+            // SitesUsers::class => false,
         ];
     }
 
-    public function normalize(mixed $object, string $format = null, array $context = []): array
+    public function normalize(mixed $data, string $format = null, array $context = []): array
     {
-        return [$object->site->getId() => $object->privilege];
+        return [$data->site->getId() => $data->privilege];
     }
 }

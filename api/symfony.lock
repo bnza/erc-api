@@ -154,10 +154,7 @@
             "branch": "main",
             "version": "1.7",
             "ref": "211979f7917bf6edb8fc5006a17b2e84e8e84d50"
-        },
-        "files": [
-            "config/packages/jsor_doctrine_postgis.yaml"
-        ]
+        }
     },
     "laminas/laminas-code": {
         "version": "4.5.1"
@@ -168,17 +165,11 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.2.0"
     },
-    "lcobucci/clock": {
-        "version": "2.1.0"
-    },
-    "lcobucci/jwt": {
-        "version": "4.1.5"
-    },
     "league/html-to-markdown": {
         "version": "5.0.2"
     },
     "lexik/jwt-authentication-bundle": {
-        "version": "2.19",
+        "version": "2.21",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -363,12 +354,6 @@
             "src/Controller/.gitignore",
             "src/Kernel.php"
         ]
-    },
-    "symfony/http-client": {
-        "version": "v6.0.2"
-    },
-    "symfony/http-client-contracts": {
-        "version": "v3.0.0"
     },
     "symfony/http-foundation": {
         "version": "v6.0.2"

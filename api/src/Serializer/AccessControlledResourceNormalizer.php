@@ -9,6 +9,7 @@ use App\Entity\Data\Sample;
 use App\Entity\Data\Site;
 use App\Entity\Data\StratigraphicUnit;
 use App\Entity\Data\User;
+use ArrayObject;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
@@ -28,18 +29,21 @@ final class AccessControlledResourceNormalizer implements NormalizerInterface, N
     ) {
     }
 
-    public function normalize(mixed $object, ?string $format = null, array $context = [])
-    {
+    public function normalize(
+        mixed $data,
+        ?string $format = null,
+        array $context = []
+    ): float|int|bool|ArrayObject|array|string|null {
         $context[self::ALREADY_CALLED] = true;
-        $data = $this->decorated->normalize($object, $format, $context);
-        if (is_array($data)) {
-            $data['_acl'] = [];
-            $data['_acl']['canRead'] = $this->security->isGranted('read', $object);
-            $data['_acl']['canUpdate'] = $this->security->isGranted('update', $object);
-            $data['_acl']['canDelete'] = $this->security->isGranted('delete', $object);
+        $normalizedData = $this->decorated->normalize($data, $format, $context);
+        if (is_array($normalizedData)) {
+            $normalizedData['_acl'] = [];
+            $normalizedData['_acl']['canRead'] = $this->security->isGranted('read', $data);
+            $normalizedData['_acl']['canUpdate'] = $this->security->isGranted('update', $data);
+            $normalizedData['_acl']['canDelete'] = $this->security->isGranted('delete', $data);
         }
 
-        return $data;
+        return $normalizedData;
     }
 
     public function supportsNormalization($data, $format = null, array $context = []): bool

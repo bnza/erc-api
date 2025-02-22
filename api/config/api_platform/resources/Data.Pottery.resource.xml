@@ -42,7 +42,6 @@
                 <formats>
                     <format name="csv">text/csv</format>
                 </formats>
-
                 <filters>
                     <filter>pottery.order_filter</filter>
                     <filter>pottery.search_filter</filter>
