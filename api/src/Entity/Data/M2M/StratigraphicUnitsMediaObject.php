@@ -13,6 +13,8 @@ class StratigraphicUnitsMediaObject
 
     public MediaObject $mediaObject;
 
+    public ?string $description;
+
     public function getId(): int
     {
         return $this->id;

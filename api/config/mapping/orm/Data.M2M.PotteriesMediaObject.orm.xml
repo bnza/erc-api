@@ -9,6 +9,7 @@
         <id name="id" type="integer">
             <generator strategy="SEQUENCE"/>
         </id>
+        <field name="description" type="text" nullable="true"/>
         <many-to-one field="item" target-entity="App\Entity\Data\Pottery" inversed-by="mediaObjects">
             <join-column name="pottery_id" nullable="false" on-delete="CASCADE"/>
         </many-to-one>

@@ -5,16 +5,20 @@
 >
     <class name="App\Entity\Data\M2M\PotteriesMediaObject">
         <attribute name="id">
-            <group>PotteriesMediaObject:read</group>
-            <group>PotteriesMediaObject:create</group>
+            <group>MediaObjectJoin:read</group>
+            <group>MediaObjectJoin:create</group>
         </attribute>
         <attribute name="item">
-            <group>PotteriesMediaObject:read</group>
-            <group>PotteriesMediaObject:create</group>
+            <group>MediaObjectJoin:read</group>
+            <group>MediaObjectJoin:create</group>
         </attribute>
         <attribute name="mediaObject">
-            <group>PotteriesMediaObject:create</group>
-            <group>PotteriesMediaObject:read</group>
+            <group>MediaObjectJoin:create</group>
+            <group>MediaObjectJoin:read</group>
+        </attribute>
+        <attribute name="description">
+            <group>MediaObjectJoin:create</group>
+            <group>MediaObjectJoin:read</group>
         </attribute>
     </class>
 </serializer>

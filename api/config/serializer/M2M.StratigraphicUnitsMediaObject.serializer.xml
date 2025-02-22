@@ -5,16 +5,20 @@
 >
     <class name="App\Entity\Data\M2M\StratigraphicUnitsMediaObject">
         <attribute name="id">
-            <group>StratigraphicUnitsMediaObject:read</group>
-            <group>StratigraphicUnitsMediaObject:create</group>
+            <group>MediaObjectJoin:read</group>
+            <group>MediaObjectJoin:create</group>
         </attribute>
         <attribute name="item">
-            <group>StratigraphicUnitsMediaObject:read</group>
-            <group>StratigraphicUnitsMediaObject:create</group>
+            <group>MediaObjectJoin:read</group>
+            <group>MediaObjectJoin:create</group>
         </attribute>
         <attribute name="mediaObject">
-            <group>StratigraphicUnitsMediaObject:create</group>
-            <group>StratigraphicUnitsMediaObject:read</group>
+            <group>MediaObjectJoin:create</group>
+            <group>MediaObjectJoin:read</group>
+        </attribute>
+        <attribute name="description">
+            <group>MediaObjectJoin:create</group>
+            <group>MediaObjectJoin:read</group>
         </attribute>
     </class>
 </serializer>

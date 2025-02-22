@@ -2,6 +2,7 @@ App\Entity\Data\M2M\StratigraphicUnitsMediaObject:
     su_media_object_1:
         item: '@su_ed_1001'
         mediaObject: '@media_object_1'
+        description: 'Some description of the media'
     su_media_object_2:
         item: '@su_ed_1001'
         mediaObject: '@media_object_2'

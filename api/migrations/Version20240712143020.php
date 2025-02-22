@@ -24,6 +24,7 @@ final class Version20240712143020 extends AbstractMigration
         $this->addSql('CREATE SEQUENCE area_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE media_object_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE mu_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE potteries__media_objects_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE pottery_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE sample_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE site_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
@@ -51,11 +52,19 @@ final class Version20240712143020 extends AbstractMigration
         $this->addSql('CREATE UNIQUE INDEX UNIQ_14D431325CC814F7 ON media_object (sha256)');
         $this->addSql('COMMENT ON COLUMN media_object.upload_date IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql(
-            'CREATE TABLE mu (id INT NOT NULL, su_id INT DEFAULT NULL, sample_id INT DEFAULT NULL, number INT DEFAULT NULL, deposit_type VARCHAR(255) NOT NULL, key_attributes VARCHAR(255) DEFAULT NULL, inclusions_geology INT DEFAULT 0 NOT NULL, inclusions_building_materials INT DEFAULT 0 NOT NULL, inclusions_domestic_refuse INT DEFAULT 0 NOT NULL, inclusions_organic_refuse INT DEFAULT 0 NOT NULL, colour_ppl VARCHAR(255) DEFAULT NULL, colour_xpl VARCHAR(255) DEFAULT NULL, colour_oil VARCHAR(255) DEFAULT NULL, lenticular_platey_peds BOOLEAN DEFAULT false NOT NULL, crumbs_or_granules BOOLEAN DEFAULT false NOT NULL, sa_blocky_peds BOOLEAN DEFAULT false NOT NULL, cracks BOOLEAN DEFAULT false NOT NULL, infillings BOOLEAN DEFAULT false NOT NULL, mesofauna__root_bioturbation INT DEFAULT 0 NOT NULL, earthworm_internal_chamber INT DEFAULT 0 NOT NULL, organic__organo_mineral INT DEFAULT 0 NOT NULL, earthworm_granule INT DEFAULT 0 NOT NULL, PRIMARY KEY(id))'
+            'CREATE TABLE mu (id INT NOT NULL, su_id INT DEFAULT NULL, sample_id INT DEFAULT NULL, number INT DEFAULT NULL, deposit_type VARCHAR(255) NOT NULL, key_attributes VARCHAR(255) DEFAULT NULL, interpretation TEXT DEFAULT NULL, inclusions_geology INT DEFAULT 0 NOT NULL, inclusions_building_materials INT DEFAULT 0 NOT NULL, inclusions_domestic_refuse INT DEFAULT 0 NOT NULL, inclusions_organic_refuse INT DEFAULT 0 NOT NULL, colour_ppl VARCHAR(255) DEFAULT NULL, colour_xpl VARCHAR(255) DEFAULT NULL, colour_oil VARCHAR(255) DEFAULT NULL, lenticular_platey_peds BOOLEAN DEFAULT false NOT NULL, crumbs_or_granules BOOLEAN DEFAULT false NOT NULL, sa_blocky_peds BOOLEAN DEFAULT false NOT NULL, cracks BOOLEAN DEFAULT false NOT NULL, infillings BOOLEAN DEFAULT false NOT NULL, mesofauna__root_bioturbation INT DEFAULT 0 NOT NULL, earthworm_internal_chamber INT DEFAULT 0 NOT NULL, organic__organo_mineral INT DEFAULT 0 NOT NULL, earthworm_granule INT DEFAULT 0 NOT NULL, PRIMARY KEY(id))'
         );
         $this->addSql('CREATE INDEX IDX_B1E582A6BDB1218E ON mu (su_id)');
         $this->addSql('CREATE INDEX IDX_B1E582A61B1FEA20 ON mu (sample_id)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_B1E582A61B1FEA20BDB1218E96901F54 ON mu (sample_id, su_id, number)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_B1E582A61B1FEA2096901F54 ON mu (sample_id, number)');
+        $this->addSql(
+            'CREATE TABLE potteries__media_objects (id INT NOT NULL, pottery_id INT NOT NULL, media_object_id INT NOT NULL, description TEXT DEFAULT NULL, PRIMARY KEY(id))'
+        );
+        $this->addSql('CREATE INDEX IDX_E9D2D624F23816BB ON potteries__media_objects (pottery_id)');
+        $this->addSql('CREATE INDEX IDX_E9D2D62464DE5A5 ON potteries__media_objects (media_object_id)');
+        $this->addSql(
+            'CREATE UNIQUE INDEX UNIQ_E9D2D624F23816BB64DE5A5 ON potteries__media_objects (pottery_id, media_object_id)'
+        );
         $this->addSql(
             'CREATE TABLE pottery (id INT NOT NULL, su_id INT DEFAULT NULL, voc__p__typology_id INT NOT NULL, voc__p__functional_group_id INT NOT NULL, voc__p__part_id INT DEFAULT NULL, number INT NOT NULL, project_identifier VARCHAR(255) DEFAULT NULL, chronology_lower INT DEFAULT NULL, chronology_upper INT DEFAULT NULL, fragments_number INT DEFAULT 1 NOT NULL, description TEXT DEFAULT NULL, public BOOLEAN DEFAULT true NOT NULL, PRIMARY KEY(id))'
         );
@@ -94,7 +103,7 @@ final class Version20240712143020 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_65A4BD79BD0F409C ON su (area_id)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_65A4BD79F6BD1646BB82733796901F54 ON su (site_id, year, number)');
         $this->addSql(
-            'CREATE TABLE sus__media_objects (id INT NOT NULL, su_id INT NOT NULL, media_object_id INT NOT NULL, PRIMARY KEY(id))'
+            'CREATE TABLE sus__media_objects (id INT NOT NULL, su_id INT NOT NULL, media_object_id INT NOT NULL, description TEXT DEFAULT NULL, PRIMARY KEY(id))'
         );
         $this->addSql('CREATE INDEX IDX_5576F78FBDB1218E ON sus__media_objects (su_id)');
         $this->addSql('CREATE INDEX IDX_5576F78F64DE5A5 ON sus__media_objects (media_object_id)');
@@ -133,6 +142,12 @@ final class Version20240712143020 extends AbstractMigration
         );
         $this->addSql(
             'ALTER TABLE mu ADD CONSTRAINT FK_B1E582A61B1FEA20 FOREIGN KEY (sample_id) REFERENCES sample (id) NOT DEFERRABLE INITIALLY IMMEDIATE'
+        );
+        $this->addSql(
+            'ALTER TABLE potteries__media_objects ADD CONSTRAINT FK_E9D2D624F23816BB FOREIGN KEY (pottery_id) REFERENCES pottery (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE'
+        );
+        $this->addSql(
+            'ALTER TABLE potteries__media_objects ADD CONSTRAINT FK_E9D2D62464DE5A5 FOREIGN KEY (media_object_id) REFERENCES media_object (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE'
         );
         $this->addSql(
             'ALTER TABLE pottery ADD CONSTRAINT FK_1A651839BDB1218E FOREIGN KEY (su_id) REFERENCES su (id) NOT DEFERRABLE INITIALLY IMMEDIATE'
@@ -190,6 +205,7 @@ final class Version20240712143020 extends AbstractMigration
         $this->addSql('DROP SEQUENCE area_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE media_object_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE mu_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE potteries__media_objects_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE pottery_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE sample_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE site_id_seq CASCADE');
@@ -203,6 +219,8 @@ final class Version20240712143020 extends AbstractMigration
         $this->addSql('ALTER TABLE area DROP CONSTRAINT FK_D7943D68F6BD1646');
         $this->addSql('ALTER TABLE mu DROP CONSTRAINT FK_B1E582A6BDB1218E');
         $this->addSql('ALTER TABLE mu DROP CONSTRAINT FK_B1E582A61B1FEA20');
+        $this->addSql('ALTER TABLE potteries__media_objects DROP CONSTRAINT FK_E9D2D624F23816BB');
+        $this->addSql('ALTER TABLE potteries__media_objects DROP CONSTRAINT FK_E9D2D62464DE5A5');
         $this->addSql('ALTER TABLE pottery DROP CONSTRAINT FK_1A651839BDB1218E');
         $this->addSql('ALTER TABLE pottery DROP CONSTRAINT FK_1A651839B45722E3');
         $this->addSql('ALTER TABLE pottery DROP CONSTRAINT FK_1A651839B4468908');
@@ -223,6 +241,7 @@ final class Version20240712143020 extends AbstractMigration
         $this->addSql('DROP TABLE area');
         $this->addSql('DROP TABLE media_object');
         $this->addSql('DROP TABLE mu');
+        $this->addSql('DROP TABLE potteries__media_objects');
         $this->addSql('DROP TABLE pottery');
         $this->addSql('DROP TABLE sample');
         $this->addSql('DROP TABLE geom.site');
@@ -236,6 +255,5 @@ final class Version20240712143020 extends AbstractMigration
         $this->addSql('DROP TABLE voc__p__part');
         $this->addSql('DROP TABLE voc__p__typology');
         $this->addSql('DROP TABLE voc__su__relationship');
-
     }
 }

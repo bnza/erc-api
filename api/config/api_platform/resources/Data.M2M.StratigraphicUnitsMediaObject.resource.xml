@@ -7,7 +7,7 @@
             <values>
                 <value name="groups">
                     <values>
-                        <value>StratigraphicUnitsMediaObject:read</value>
+                        <value>MediaObjectJoin:read</value>
                     </values>
                 </value>
             </values>
@@ -27,7 +27,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>StratigraphicUnitsMediaObject:create</value>
+                                <value>MediaObjectJoin:create</value>
                             </values>
                         </value>
                     </values>
