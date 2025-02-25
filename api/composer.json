@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "jsor/doctrine-postgis": "@dev",
+        "bnza/job-manager2": "@dev",
         "lexik/jwt-authentication-bundle": "^3.1.1",
         "oro/doctrine-extensions": "^3.0",
         "vich/uploader-bundle": "^2.4",
@@ -109,7 +110,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "/srv/api/*"
+            "url": "/srv/api/packages/*"
         }
     ]
 }

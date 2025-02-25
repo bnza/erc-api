@@ -1,0 +1,10 @@
+<vich_uploader xmlns="https://vich-uploader-bundle/schema/ " class="App\Entity\Job\ImportFile">
+    <field
+        mapping="import_file"
+        name="file"
+        filename_property="filePath"
+        mime_type="mimeType"
+        size="size"
+        original_name="originalFilename"
+    />
+</vich_uploader>

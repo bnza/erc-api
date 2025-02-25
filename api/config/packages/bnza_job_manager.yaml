@@ -1,0 +1,27 @@
+bnza_job_manager:
+    em_name: bnza_job_manager
+
+doctrine:
+    dbal:
+        types:
+            job_status: 'Bnza\JobManagerBundle\Doctrine\Types\StatusType'
+        connections:
+            bnza_job_manager:
+                ## Socket connection
+                driver: pdo_pgsql
+                dbname: bnza_job_manager
+                server_version: 15
+                user: app
+                host: null
+                ## Socket connection
+    orm:
+        entity_managers:
+            bnza_job_manager:
+                connection: bnza_job_manager
+                #                naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+                mappings:
+                    BnzaJobManagerBundle:
+                        type: xml
+                        dir: '%kernel.project_dir%/vendor/bnza/job-manager2/config/doctrine'
+                        prefix: 'Bnza\JobManagerBundle\Entity'
+                        alias: BnzaJobManagerBundle

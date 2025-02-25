@@ -1,6 +1,5 @@
 vich_uploader:
     db_driver: orm
-    
     mappings:
         media_object:
             uri_prefix: /media
@@ -9,4 +8,8 @@ vich_uploader:
             directory_namer:
                 service: Vich\UploaderBundle\Naming\SubdirDirectoryNamer
                 options: { chars_per_dir: 1, dirs: 2 }
-            
+        import_file:
+            uri_prefix: /import
+            upload_destination: /srv/static
+            namer: Vich\UploaderBundle\Naming\OrignameNamer
+    

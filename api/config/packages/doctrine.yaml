@@ -1,36 +1,37 @@
 doctrine:
     dbal:
-        #        url: '%env(resolve:DATABASE_URL)%'
-        ## Socket connection
-        driver: pdo_pgsql
-        dbname: app
-        server_version: 15
-        user: app
-        host: null
-        ## Socket connection
-        schema_filter: ~^(?!(tiger\.|topology\.|vw_))~
+        default_connection: default
+        connections:
+            default:
+                driver: pdo_pgsql
+                dbname: app
+                server_version: 15
+                user: app
+                host: null
+                ## Socket connection
+                schema_filter: ~^(?!(tiger\.|topology\.|vw_))~
 
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '15'
     orm:
         auto_generate_proxy_classes: true
+        default_entity_manager: default
         enable_lazy_ghost_objects: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
-        auto_mapping: true
-        mappings:
-            App:
-                is_bundle: false
-                type: xml
-                dir: '%kernel.project_dir%/config/mapping/orm'
-                prefix: 'App\Entity'
-                alias: App
-        controller_resolver:
-            auto_mapping: true
-        dql:
-            string_functions:
-                cast: Oro\ORM\Query\AST\Functions\Cast
-
+        entity_managers:
+            default:
+                naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+                auto_mapping: true
+                mappings:
+                    App:
+                        is_bundle: false
+                        type: xml
+                        dir: '%kernel.project_dir%/config/mapping/orm'
+                        prefix: 'App\Entity'
+                        alias: App
+                dql:
+                    string_functions:
+                        cast: Oro\ORM\Query\AST\Functions\Cast
 when@test:
     doctrine:
         dbal:

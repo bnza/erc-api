@@ -29,6 +29,9 @@
             "src/ApiResource/.gitignore"
         ]
     },
+    "bnza/job-manager2": {
+        "version": "0.0"
+    },
     "composer/pcre": {
         "version": "1.0.0"
     },

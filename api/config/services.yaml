@@ -33,10 +33,11 @@ services:
     #    App\State\UserPasswordHasher:
     #        bind:
     #            $processor: '@api_platform.doctrine.orm.state.persist_processor'
-    App\OpenApi\OpenApiFactory:
+    App\OpenApi\OpenApiDecorator:
         decorates: 'api_platform.openapi.factory'
-        arguments: [ '@App\OpenApi\OpenApiFactory.inner' ]
-        autoconfigure: false
+        arguments: [ '@App\OpenApi\OpenApiDecorator.inner', '@logger' ]
+        tags: [ 'api_platform.openapi.factory' ]
+    #        autoconfigure: false
     
     App\Repository\SitesUsersRepository:
         arguments: [ '@doctrine.orm.entity_manager' ]

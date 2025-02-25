@@ -1,0 +1,27 @@
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
+        https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="App\Entity\Data\Zooarchaeology\Bone">
+        <attribute name="id">
+            <group>Zooarchaeology:Bone:acl:read</group>
+        </attribute>
+        <attribute name="stratigraphicUnit">
+            <group>Zooarchaeology:Bone:acl:read</group>
+            <group>Zooarchaeology:Bone:item:write</group>
+        </attribute>
+        <attribute name="taxonomy">
+            <group>Zooarchaeology:Bone:acl:read</group>
+            <group>Zooarchaeology:Bone:item:write</group>
+        </attribute>
+        <attribute name="notes">
+            <group>Zooarchaeology:Bone:acl:read</group>
+            <group>Zooarchaeology:Bone:item:write</group>
+        </attribute>
+        <attribute name="unidentified">
+            <group>Zooarchaeology:Bone:acl:read</group>
+            <group>Zooarchaeology:Bone:item:write</group>
+        </attribute>
+    </class>
+</serializer>

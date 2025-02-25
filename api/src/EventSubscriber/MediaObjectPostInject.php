@@ -29,7 +29,10 @@ class MediaObjectPostInject implements EventSubscriberInterface
 
     public function setFilePath(VicUploaderEvent $event): void
     {
-        $this->media = $event->getObject();
+        $media = $event->getObject();
+        if ($media instanceof MediaObject) {
+            $this->media = $media;
+        }
     }
 
     public function generateThumbnail(TerminateEvent $event): void

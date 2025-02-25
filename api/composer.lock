@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "675acddfb4d0b9efd75d065e59c0fc51",
+    "content-hash": "1af0241d8fce2dfdcd59025d0c4a173d",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -1110,6 +1110,45 @@
                 "source": "https://github.com/api-platform/validator/tree/v4.1.0-beta.2"
             },
             "time": "2025-02-07T14:44:27+00:00"
+        },
+        {
+            "name": "bnza/job-manager2",
+            "version": "0.0",
+            "dist": {
+                "type": "path",
+                "url": "/srv/api/packages/job-manager2",
+                "reference": "aeedd9eac5240ee8f52c2831e428cec7812409bf"
+            },
+            "require": {
+                "doctrine/doctrine-migrations-bundle": "^3.0",
+                "php": ">=8.4",
+                "symfony/http-kernel": "^7.2",
+                "symfony/orm-pack": "^2.4"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Bnza\\JobManagerBundle\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Bnza\\JobManagerBundle\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pietro Baldassarri",
+                    "email": "pietro.baldassarri@gmail.com"
+                }
+            ],
+            "description": "description",
+            "transport-options": {
+                "relative": false
+            }
         },
         {
             "name": "doctrine/cache",
@@ -2483,16 +2522,10 @@
         {
             "name": "jsor/doctrine-postgis",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jsor/doctrine-postgis.git",
-                "reference": "3dac2315d0e398d3029dd862eaedd94298b545cb"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jsor/doctrine-postgis/zipball/3dac2315d0e398d3029dd862eaedd94298b545cb",
-                "reference": "3dac2315d0e398d3029dd862eaedd94298b545cb",
-                "shasum": ""
+                "type": "path",
+                "url": "/srv/api/packages/doctrine-postgis",
+                "reference": "558267d39a8de403e4e8dd6f2eba6d300583402e"
             },
             "require": {
                 "doctrine/dbal": "^2.13 || ^3.1",
@@ -2509,7 +2542,6 @@
             "suggest": {
                 "doctrine/orm": "For using with the Doctrine ORM"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2521,7 +2553,14 @@
                     "Jsor\\Doctrine\\PostGIS\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Jsor\\Doctrine\\PostGIS\\": [
+                        "tests/fixtures",
+                        "tests/"
+                    ]
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -2545,11 +2584,9 @@
                 "postgis",
                 "spatial"
             ],
-            "support": {
-                "issues": "https://github.com/jsor/doctrine-postgis/issues",
-                "source": "https://github.com/jsor/doctrine-postgis/tree/main"
-            },
-            "time": "2024-09-09T07:04:30+00:00"
+            "transport-options": {
+                "relative": false
+            }
         },
         {
             "name": "lcobucci/clock",
@@ -5326,6 +5363,55 @@
                 }
             ],
             "time": "2023-11-06T17:08:13+00:00"
+        },
+        {
+            "name": "symfony/orm-pack",
+            "version": "v2.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/orm-pack.git",
+                "reference": "9d8729016b3a8b0db854c028d15c2dcf4d19b1b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/orm-pack/zipball/9d8729016b3a8b0db854c028d15c2dcf4d19b1b4",
+                "reference": "9d8729016b3a8b0db854c028d15c2dcf4d19b1b4",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^3",
+                "doctrine/doctrine-bundle": "*",
+                "doctrine/doctrine-migrations-bundle": "*",
+                "doctrine/orm": "*"
+            },
+            "conflict": {
+                "php": "<8.1"
+            },
+            "type": "symfony-pack",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A pack for the Doctrine ORM",
+            "support": {
+                "issues": "https://github.com/symfony/orm-pack/issues",
+                "source": "https://github.com/symfony/orm-pack/tree/v2.4.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-02-13T17:58:44+00:00"
         },
         {
             "name": "symfony/password-hasher",
@@ -8347,16 +8433,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.69.1",
+            "version": "v3.70.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "13b0c0eede38c11cd674b080f2b485d0f14ffa9f"
+                "reference": "2ecd5aae0edc937f0d5aa4a22d1d705c6b2e084e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/13b0c0eede38c11cd674b080f2b485d0f14ffa9f",
-                "reference": "13b0c0eede38c11cd674b080f2b485d0f14ffa9f",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/2ecd5aae0edc937f0d5aa4a22d1d705c6b2e084e",
+                "reference": "2ecd5aae0edc937f0d5aa4a22d1d705c6b2e084e",
                 "shasum": ""
             },
             "require": {
@@ -8438,7 +8524,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.69.1"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.70.0"
             },
             "funding": [
                 {
@@ -8446,7 +8532,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-18T23:57:43+00:00"
+            "time": "2025-02-22T23:30:51+00:00"
         },
         {
             "name": "hautelook/alice-bundle",
@@ -11217,6 +11303,7 @@
     "aliases": [],
     "minimum-stability": "alpha",
     "stability-flags": {
+        "bnza/job-manager2": 20,
         "jsor/doctrine-postgis": 20
     },
     "prefer-stable": false,

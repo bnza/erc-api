@@ -13,7 +13,7 @@ Clone the ```doctrine-postgis``` repository
 
 ```shell
 mkdir api/packages/bnza
-git clone https://github.com/bnza/doctrine-postgis.git api/packages/bnza
+git clone https://github.com/bnza/doctrine-postgis.git api/packages/doctrine-postgis
 ```
 
 ### Media directory

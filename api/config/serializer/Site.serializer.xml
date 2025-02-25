@@ -25,6 +25,7 @@
             <group>StratigraphicUnit:acl:read</group>
             <group>SitesUsers:acl:read</group>
             <group>StratigraphicUnit:autocomplete</group>
+            <group>Zooarchaeology:Bone:acl:read</group>
         </attribute>
         <attribute name="name">
             <group>Sample:autocomplete</group>
@@ -37,6 +38,7 @@
             <group>Site:autocomplete</group>
             <group>Site:item:write</group>
             <group>StratigraphicUnit:autocomplete</group>
+            <group>Zooarchaeology:Bone:acl:read</group>
         </attribute>
         <attribute name="description">
             <group>Site:acl:read</group>
