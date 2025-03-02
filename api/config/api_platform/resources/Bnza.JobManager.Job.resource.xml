@@ -9,7 +9,7 @@
             <values>
                 <value name="groups">
                     <values>
-                        <value>read:Area</value>
+                        <value>Bnza:Job:read</value>
                     </values>
                 </value>
             </values>
@@ -18,18 +18,13 @@
             <values>
                 <value name="groups">
                     <values>
-                        <value>write:Area</value>
+                        <value>Bnza:Job:write</value>
                     </values>
                 </value>
             </values>
         </denormalizationContext>
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection"/>
-            <!--            <operation class="ApiPlatform\Metadata\GetCollection">-->
-            <!--                <filters>-->
-            <!--                    <filter>Area.order_filter</filter>-->
-            <!--                </filters>-->
-            <!--            </operation>-->
         </operations>
     </resource>
 </resources>

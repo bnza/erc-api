@@ -3,13 +3,13 @@ vich_uploader:
     mappings:
         media_object:
             uri_prefix: /media
-            upload_destination: /srv/static
+            upload_destination: /srv/static/media
             namer: App\Service\MediaObjectFileHashNamer
             directory_namer:
                 service: Vich\UploaderBundle\Naming\SubdirDirectoryNamer
                 options: { chars_per_dir: 1, dirs: 2 }
         import_file:
             uri_prefix: /import
-            upload_destination: /srv/static
+            upload_destination: /srv/static/import
             namer: Vich\UploaderBundle\Naming\OrignameNamer
     

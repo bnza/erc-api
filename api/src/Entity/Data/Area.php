@@ -2,6 +2,12 @@
 
 namespace App\Entity\Data;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\ApiProperty;
+
+#[ApiResource(
+    normalizationContext: ['groups' => ['Area:read']],
+)]
 class Area
 {
     private int $id;
@@ -14,6 +20,7 @@ class Area
 
     public iterable $stratigraphicUnits;
 
+    #[ApiProperty(security: 'is_granted("IS_AUTHENTICATED_FULLY")')]
     public bool $public = false;
 
     public function getId(): int

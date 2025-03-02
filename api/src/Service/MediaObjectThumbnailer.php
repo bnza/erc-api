@@ -3,6 +3,8 @@
 namespace App\Service;
 
 use App\Entity\Data\MediaObject;
+use Imagick;
+use ImagickException;
 use Psr\Log\LoggerInterface;
 
 class MediaObjectThumbnailer
@@ -41,21 +43,22 @@ class MediaObjectThumbnailer
      */
     private function createThumb(MediaObject $mediaObject, $thumbWidth = 100): void
     {
-        $suffix = 'application/pdf' === $mediaObject->file->getMimeType() ? '[0]' : '';
-        $realPath = $mediaObject->file->getRealPath();
+        $suffix = 'application/pdf' === $mediaObject->getFile()->getMimeType() ? '[0]' : '';
+        $realPath = $mediaObject->getFile()->getRealPath();
         try {
-            $img = new \Imagick($realPath.$suffix);
+            $img = new Imagick($realPath.$suffix);
             $imageDimensions = $img->getImageGeometry();
             $thumbDimensions = $imageDimensions['width'] > $imageDimensions['height'] ? [0, 200] : [200, 0];
             $img->scaleImage(...$thumbDimensions);
             $img->setImageFormat('jpg');
-            $img = $img->mergeImageLayers(\Imagick::LAYERMETHOD_FLATTEN);
+            $img = $img->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
             $img->writeImage($this->geThumbnailPath($realPath));
 
             $img->clear();
-            $img->destroy();
-            $this->logger->info('Successfully created thumbnail for media object: '.$mediaObject->file->getRealPath());
-        } catch (\ImagickException $e) {
+            $this->logger->info(
+                'Successfully created thumbnail for media object: '.$mediaObject->getFile()->getRealPath()
+            );
+        } catch (ImagickException $e) {
             $this->logger->error($e->getMessage());
         }
     }

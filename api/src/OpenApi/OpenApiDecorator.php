@@ -21,9 +21,9 @@ class OpenApiDecorator implements OpenApiFactoryInterface
         $openApi = $this->decorated->__invoke($context);
         $this->setUserMeChangePassword($openApi);
 
-        foreach (['/api/import_files', '/api/media_objects', '/api/jobs/import/zooarchaeology/bones'] as $path) {
-            $this->setBinaryFormat($openApi, $path);
-        }
+        /* foreach (['/api/import_files', '/api/media_objects', '/api/jobs/import/zooarchaeology/bones'] as $path) {
+             $this->setBinaryFormat($openApi, $path);
+         }*/
 
         return $openApi;
     }

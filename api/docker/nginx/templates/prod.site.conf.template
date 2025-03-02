@@ -78,7 +78,7 @@ server {
     }
 
     location /media/ {
-        alias /srv/static/;
+        alias /srv/static/media/;
     }
 
     location /geoserver/ {

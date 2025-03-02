@@ -1,9 +1,7 @@
 # This file is the entry point to configure your own services.
 # Files in the packages/ subdirectory configure your dependencies.
 
-imports:
-    # If you want to import a whole directory:
-    - { resource: api_platform/services/ }
+
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
@@ -11,6 +9,11 @@ parameters:
     app.alice.parameters.user_editor_pw: '%env(USER_EDITOR_PW)%'
     app.alice.parameters.user_admin_pw: '%env(USER_ADMIN_PW)%'
     app.alice.parameters.user_geo_pw: '%env(USER_GEO_PW)%'
+
+imports:
+    # If you want to import a whole directory:
+    - { resource: api_platform/services/ }
+    - { resource: bnza_job_manager/services/ }
 
 services:
     # default configuration for services in *this* file
@@ -52,4 +55,14 @@ services:
     App\Service\FixturesMediaReset:
         arguments:
             $sourcePath: '%kernel.project_dir%/fixtures/media'
-            $destPath: '/srv/static'
+            $destPath: '/srv/static/media'
+
+    App\State\Job\Import\FileBasedImportProcessor:
+        arguments:
+            $appEntityManager: '@doctrine.orm.default_entity_manager'
+            $jobEntityManager: '@doctrine.orm.bnza_job_manager_entity_manager'
+            $locator: '@bnza_job_manager.job_locator'
+    
+    App\State\Job\Import\FileBasedImportRunnerProcessor:
+        arguments:
+            $runner: '@bnza_job_manager.job_runner'

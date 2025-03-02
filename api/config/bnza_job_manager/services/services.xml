@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="app.task.import.zooarchaeology_bone"
+            class="App\Service\Job\Import\ZooarchaeologyBoneImportTask"
+            parent="bnza_job_manager.abstract_task"
+            shared="false"
+        >
+            <tag name="bnza_job_manager.task"/>
+        </service>
+
+
+        <service id="app.job.import.zooarchaeology_bone"
+            class="App\Service\Job\Import\ZooarchaeologyBoneImportJob"
+            parent="bnza_job_manager.abstract_job"
+            shared="false"
+        >
+            <tag name="bnza_job_manager.job"/>
+            <argument key="$workUnits" type="collection">
+                <argument type="service" id="app.task.import.zooarchaeology_bone"/>
+            </argument>
+        </service>
+    </services>
+</container>
