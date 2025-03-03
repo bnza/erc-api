@@ -3,10 +3,10 @@ framework:
         prefix_seed: bnza/medgreenrev
         pools:
             redis.cache:
-                #                adapter: cache.adapter.filesystem
+                # adapter: cache.adapter.filesystem
                 adapter: cache.adapter.redis
-                #                provider: redis:///var/run/redis/redis.sock
-                provider: 'redis://redis:6379'
+                provider: redis:///var/run/redis/redis/redis.sock
+                # provider: 'redis://redis:6379'
                 default_lifetime: 3600
             # Unique name of your app: used to compute stable namespaces for cache keys.
             #prefix_seed: your_vendor_name/app_name

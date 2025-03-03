@@ -5,31 +5,29 @@ services:
       - POSTGRES_DB=${POSTGRES_DB:-app}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-!ChangeMe!}
       - POSTGRES_USER=${POSTGRES_USER:-app}
-    #    ports:
-    #      - "5432:5432"
     volumes:
       - ${POSTGRES_DATA_DIR}:/var/lib/postgresql/data
       - pg_socket:/var/run/postgresql
   redis:
     volumes:
       - ./api/docker/redis/redis.conf:/etc/redis.conf:ro
-      - redis_socket:/var/run/redis
+      - redis_socket:/tmp/socket
     build:
       dockerfile: api/docker/redis/Dockerfile
-    #    command: redis-server /etc/redis.conf
-    tmpfs:
-      - /var/run/redis
-    user: redis
-    networks:
-      - erc_api_network
+    healthcheck:
+      test: [ "CMD", "redis-cli", "-s", "/tmp/socket/redis/redis.sock", "ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 3
   php:
     build:
       context: ./api
       target: app_php
-    #    network_mode: host
     depends_on:
-      - database
-      - redis
+      redis:
+        condition: service_healthy
+      database:
+        condition: service_started
     restart: unless-stopped
     volumes:
       - ./api:/srv/api
@@ -43,12 +41,6 @@ services:
       timeout: 3s
       retries: 3
       start_period: 30s
-    networks:
-      - erc_api_network
-  #    environment:
-  #      DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-!ChangeMe!}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-15}
-  #      TRUSTED_PROXIES: ${TRUSTED_PROXIES:-127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}
-  #      TRUSTED_HOSTS: ^${SERVER_NAME:-example\.com|localhost}|caddy$$
   geoserver:
     image:
       docker.osgeo.org/geoserver:${GEOSERVER_VERSION:-2.25.2}
@@ -97,6 +89,4 @@ volumes:
   php_socket:
   pg_socket:
   redis_socket:
-networks:
-  erc_api_network:
-    driver: bridge
+

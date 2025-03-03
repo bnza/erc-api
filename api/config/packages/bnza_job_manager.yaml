@@ -4,7 +4,7 @@ bnza_job_manager:
 doctrine:
     dbal:
         types:
-            job_status: 'Bnza\JobManagerBundle\Doctrine\Types\StatusType'
+            microtime: 'Bnza\JobManagerBundle\Doctrine\Types\MicrotimeType'
         connections:
             bnza_job_manager:
                 ## Socket connection

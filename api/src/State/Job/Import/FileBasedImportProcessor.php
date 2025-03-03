@@ -5,23 +5,20 @@ namespace App\State\Job\Import;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Entity\Job\ImportFile;
-use Bnza\JobManagerBundle\Entity\Job;
 use Bnza\JobManagerBundle\JobServicesIdLocator;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use LogicException;
-use Psr\Cache\CacheItemPoolInterface;
 
 class FileBasedImportProcessor implements ProcessorInterface
 {
     const CONTEXT_KEY = 'bnza_job_manager.service_id';
 
     public function __construct(
-        private EntityManagerInterface $appEntityManager,
-        private EntityManagerInterface $jobEntityManager,
-        private JobServicesIdLocator $locator,
-        private CacheItemPoolInterface $redisCache
+        private readonly EntityManagerInterface $appEntityManager,
+        private readonly EntityManagerInterface $jobEntityManager,
+        private readonly JobServicesIdLocator $locator,
     ) {
     }
 
@@ -46,7 +43,7 @@ class FileBasedImportProcessor implements ProcessorInterface
         $this->appEntityManager->flush();
 
         $job = $service
-            ->toEntity()
+            ->getEntity()
             ->setService($serviceId)
             ->setParameters([
                 'fileId' => $importFile->getId()->toString(),
@@ -55,13 +52,6 @@ class FileBasedImportProcessor implements ProcessorInterface
 
         $this->jobEntityManager->persist($job);
         $this->jobEntityManager->flush();
-
-        $redisKey = 'job.'.$job->getId();
-        $item = $this->redisCache->getItem($redisKey);
-        $item->set((string)$job->getId());
-        if (!$this->redisCache->save($item)) {
-            echo "error";
-        }
 
         return $job->getId();
     }

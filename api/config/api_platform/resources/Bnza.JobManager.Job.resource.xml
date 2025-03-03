@@ -4,12 +4,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
         https://api-platform.com/schema/metadata/resources-3.0.xsd">
-    <resource class="Bnza\JobManagerBundle\Entity\Job">
+    <resource class="Bnza\JobManagerBundle\Entity\WorkUnitEntity" shortName="WorkUnit">
         <normalizationContext>
             <values>
                 <value name="groups">
                     <values>
-                        <value>Bnza:Job:read</value>
+                        <value>Bnza:WorkUnit:read</value>
                     </values>
                 </value>
             </values>
@@ -18,13 +18,18 @@
             <values>
                 <value name="groups">
                     <values>
-                        <value>Bnza:Job:write</value>
+                        <value>Bnza:WorkUnit:write</value>
                     </values>
                 </value>
             </values>
         </denormalizationContext>
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection"/>
+            <operation
+                class="ApiPlatform\Metadata\Get"
+                provider="Bnza\JobManagerBundle\State\WorkUnitItemProvider"
+                uriTemplate="/work_units/{id}/cached"/>
+            <!--            <operation class="ApiPlatform\Metadata\Get"/>-->
         </operations>
     </resource>
 </resources>

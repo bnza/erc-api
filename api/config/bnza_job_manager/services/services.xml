@@ -21,7 +21,7 @@
         >
             <tag name="bnza_job_manager.job"/>
             <argument key="$workUnits" type="collection">
-                <argument type="service" id="app.task.import.zooarchaeology_bone"/>
+                <argument key="app.task.import.zooarchaeology_bone" type="service" id="app.task.import.zooarchaeology_bone"/>
             </argument>
         </service>
     </services>
