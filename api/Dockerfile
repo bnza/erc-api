@@ -30,6 +30,7 @@ RUN apk update \
 		git \
     	ghostscript \
     	imagemagick-dev \
+    	redis \
     && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS imagemagick-dev \
 #	&& pecl install imagick \
 #    && docker-php-ext-enable imagick \
@@ -44,6 +45,7 @@ RUN set -eux; \
 		intl \
         Imagick/imagick@65e27f2bc0 \
 		opcache \
+    	redis \
 		zip \
     ;
 
@@ -91,13 +93,15 @@ COPY --from=composer/composer:2-bin --link /composer /usr/bin/composer
 
 # prevent the reinstallation of vendors at every changes in the source code
 COPY --link composer.* symfony.* ./
+# copy sources
+COPY --link . ./
+RUN rm -Rf docker/
+# RUN sh -c 'while [ ! -d "/srv/api/packages/job-manager2" ]; do echo "Waiting for /srv/api/packages/job-manager2..."; sleep 1; done'
 RUN set -eux; \
 	composer install --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress; \
 	composer clear-cache
 
-# copy sources
-COPY --link . ./
-RUN rm -Rf docker/
+
 
 RUN set -eux; \
 	mkdir -p var/cache var/log; \

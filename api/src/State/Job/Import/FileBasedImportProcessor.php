@@ -11,6 +11,7 @@ use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use LogicException;
+use Psr\Cache\CacheItemPoolInterface;
 
 class FileBasedImportProcessor implements ProcessorInterface
 {
@@ -19,7 +20,8 @@ class FileBasedImportProcessor implements ProcessorInterface
     public function __construct(
         private EntityManagerInterface $appEntityManager,
         private EntityManagerInterface $jobEntityManager,
-        private JobServicesIdLocator $locator
+        private JobServicesIdLocator $locator,
+        private CacheItemPoolInterface $redisCache
     ) {
     }
 
@@ -53,6 +55,13 @@ class FileBasedImportProcessor implements ProcessorInterface
 
         $this->jobEntityManager->persist($job);
         $this->jobEntityManager->flush();
+
+        $redisKey = 'job.'.$job->getId();
+        $item = $this->redisCache->getItem($redisKey);
+        $item->set((string)$job->getId());
+        if (!$this->redisCache->save($item)) {
+            echo "error";
+        }
 
         return $job->getId();
     }
