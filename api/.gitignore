@@ -16,7 +16,9 @@
 ###< friendsofphp/php-cs-fixer ###
 
 ###> lexik/jwt-authentication-bundle ###
-/config/jwt/*.pem
+config/jwt/*.pem
+!config/jwt/private-test.pem
+!config/jwt/public-test.pem
 ###< lexik/jwt-authentication-bundle ###
 
 ###> phpunit/phpunit ###

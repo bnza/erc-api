@@ -38,6 +38,7 @@
     },
     "require-dev": {
         "api-platform/schema-generator": "^5.0",
+        "dama/doctrine-test-bundle": "^8.3",
         "friendsofphp/php-cs-fixer": "^3.40",
         "hautelook/alice-bundle": "^2.12",
         "phpunit/phpunit": "^12.0",

@@ -1,0 +1,63 @@
+#file: noinspection YAMLSchemaValidation
+App\Entity\Data\MediaObject:
+    media_object_1:
+        filePath: 'b9a1c8f70173bd4591ecf2c0a1c1cde4c05ae6ddd539e57589b9c9c93160d424_ed221001a.pdf'
+        originalFilename: 'ED221001A.pdf'
+        mimeType: 'application/pdf'
+        size: 12877
+        sha256: 'b9a1c8f70173bd4591ecf2c0a1c1cde4c05ae6ddd539e57589b9c9c93160d424'
+        uploadDate: '<date_create_from_format("Y-m-d H:i:s","2024-09-16 17:58:18")>'
+    media_object_2:
+        filePath: 'ba08e22871eb2d08bc0897bedf65736b404eaee6cf898d0f5f09e147107d64f0_ed221001b.pdf'
+        originalFilename: 'ED221001B.pdf'
+        mimeType: 'application/pdf'
+        size: 12889
+        sha256: 'ba08e22871eb2d08bc0897bedf65736b404eaee6cf898d0f5f09e147107d64f0'
+        uploadDate: '<date_create_from_format("Y-m-d H:i:s","2024-09-16 17:58:19")>'
+    media_object_3:
+        filePath: '8fa42b4206bcf45109bc70316709cd0b7046d5a38a0eb80d313459813977a7fb_ed221001c.pdf'
+        originalFilename: 'ED221001C.pdf'
+        mimeType: 'application/pdf'
+        size: 12833
+        sha256: '8fa42b4206bcf45109bc70316709cd0b7046d5a38a0eb80d313459813977a7fb'
+        uploadDate: '<date_create_from_format("Y-m-d H:i:s","2024-09-16 18:58:35")>'
+    media_object_4:
+        filePath: '13672e4cc70d97069fd96d534298761819337acb72612c2c20c356dd9b109f5f_ed221001g.jpg'
+        originalFilename: 'ED221001G.jpg'
+        mimeType: 'image/jpeg'
+        size: 84537
+        dimensions: [ 1588,2446 ]
+        sha256: '13672e4cc70d97069fd96d534298761819337acb72612c2c20c356dd9b109f5f'
+        uploadDate: '<date_create_from_format("Y-m-d H:i:s","2024-09-17 14:18:35")>'
+    media_object_5:
+        filePath: '6f915f539dd0366f43f0b10f9afbeefddea3f375b91abcf678f5f666a6a434cb_ed241001a.png'
+        originalFilename: 'ED241001A.png'
+        mimeType: 'image/png'
+        size: 84442
+        dimensions: [ 1588,2446 ]
+        sha256: '6f915f539dd0366f43f0b10f9afbeefddea3f375b91abcf678f5f666a6a434cb'
+        uploadDate: '<date_create_from_format("Y-m-d H:i:s","2024-09-19 04:15:22")>'
+    media_object_6:
+        filePath: 'fdcf0856eab55b00b32e30147bc0305dd004316f186c093c322399e4477ee97c_ed241001c.webp'
+        originalFilename: 'ED241001C.webp'
+        mimeType: 'image/webp'
+        size: 43648
+        dimensions: [ 1588,2446 ]
+        sha256: 'fdcf0856eab55b00b32e30147bc0305dd004316f186c093c322399e4477ee97c'
+        uploadDate: '<date_create_from_format("Y-m-d H:i:s","2024-09-29 07:51:52")>'
+    media_object_7:
+        filePath: '7d3ca41785a9010e6043891e65b9eb9a3114c93daf559dd7cc0e449a28b0682c_an241001a.png'
+        originalFilename: 'AN241001A.png'
+        mimeType: 'image/png'
+        size: 87164
+        dimensions: [ 1588,2446 ]
+        sha256: '7d3ca41785a9010e6043891e65b9eb9a3114c93daf559dd7cc0e449a28b0682c'
+        uploadDate: '<date_create_from_format("Y-m-d H:i:s","2024-09-29 07:56:52")>'
+    media_object_8:
+        filePath: '45789cd0b804e7b1c0511cd561fa2ac71f5cd45fd126f7bd8f4da9f8ee8c558b_ww241001a.png'
+        originalFilename: 'WW241001A.png'
+        mimeType: 'image/png'
+        size: 91683
+        dimensions: [ 1588,2446 ]
+        sha256: '45789cd0b804e7b1c0511cd561fa2ac71f5cd45fd126f7bd8f4da9f8ee8c558b'
+        uploadDate: '<date_create_from_format("Y-m-d H:i:s","2024-09-29 14:19:11")>'

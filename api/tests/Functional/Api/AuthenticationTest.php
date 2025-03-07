@@ -1,23 +1,22 @@
 <?php
 
-namespace App\Tests\Api;
+namespace App\Tests\Functional\Api;
 
+
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class AuthenticationTest extends AuthApiTestCase
 {
-    public function authCredentialsProvider(): array
+    public static function authCredentialsProvider(): array
     {
         return [
             [self::USER_BASE, self::USER_BASE_PW],
             [self::USER_EDITOR, self::USER_EDITOR_PW],
             [self::USER_ADMIN, self::USER_ADMIN_PW],
-            [self::USER_GEO, self::USER_GEO_PW],
         ];
     }
 
-    /**
-     * @dataProvider authCredentialsProvider
-     */
+    #[DataProvider('authCredentialsProvider')]
     public function testAuth(string $username, string $password)
     {
         $this->assertEmpty($this->getAuthorizationHeaderString());
@@ -32,7 +31,7 @@ class AuthenticationTest extends AuthApiTestCase
     {
         $this->assertEmpty($this->getAuthorizationHeaderString());
         $client = $this->createAuthenticatedClient();
-        $client->request('GET', '/users/me');
+        $client->request('GET', self::API_PREFIX.'/users/me', ['headers' => ['Accept' => 'application/json']]);
         $this->assertResponseIsSuccessful();
     }
 }

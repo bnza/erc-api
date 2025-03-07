@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests\Api;
+namespace App\Tests\Functional\Api;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use ApiPlatform\Symfony\Bundle\Test\Client;
-use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
+use RuntimeException;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
@@ -13,8 +13,7 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class AuthApiTestCase extends ApiTestCase
 {
-    use RefreshDatabaseTrait;
-
+    public const API_PREFIX = "/api";
     public const LOGIN_PATH = '/login';
 
     private string $jwtToken;
@@ -59,17 +58,19 @@ class AuthApiTestCase extends ApiTestCase
             return $this->jwtToken;
         }
 
-        $response = static::createClient()->request('POST', self::LOGIN_PATH, [
+        $response = static::createClient()->request('POST', self::API_PREFIX.self::LOGIN_PATH, [
             'json' => [
                 'email' => $username,
                 'password' => $password,
             ],
         ]);
 
-        if ($response->getStatusCode() < 300) {
-            $content = $response->toArray();
-            $this->jwtToken = $content['token'];
+        if ($response->getStatusCode() >= 300) {
+            throw new RuntimeException('Unexpected HTTP status code "'.$response->getStatusCode().'"');
         }
+
+        $content = $response->toArray();
+        $this->jwtToken = $content['token'];
 
         return $this->jwtToken;
     }
@@ -84,6 +85,6 @@ class AuthApiTestCase extends ApiTestCase
         ?string $password = self::USER_BASE_PW
     ): Client {
         return static::createClient([],
-            ['headers' => ['authorization' => 'Bearer '.$this->getToken($username, $password)]]);
+            ['headers' => ['Authorization' => 'Bearer '.$this->getToken($username, $password)]]);
     }
 }

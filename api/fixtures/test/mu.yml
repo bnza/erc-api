@@ -1,0 +1,97 @@
+#file: noinspection YAMLSchemaValidation
+App\Entity\Data\MicroStratigraphicUnit:
+    mu_an_1001_1:
+        sample: '@sample_an_1001_1'
+        stratigraphicUnit: '@su_an_1001'
+        depositType: 'Buried A-horizon'
+        keyAttributes: 'sandy clay loam, unsorted, intergrain aggregate'
+        inclusionsGeology: 60
+        inclusionsBuildingMaterials: 15
+        inclusionsDomesticRefuse: 0
+        inclusionsOrganicRefuse: 25
+        colourPpl: 'light greyish brown'
+        colourXpl: 'greyish brown'
+        colourOil: 'light greyish brown'
+        crumbsOrGranules: true
+        earthwormGranule: 2
+        interpretation: 'buried horizon'
+    mu_an_1001_2:
+        sample: '@sample_an_1001_2'
+        stratigraphicUnit: '@su_an_1001'
+        depositType: 'Buried A-horizon'
+        keyAttributes: 'sandy clay loam, unsorted, intergrain aggregate'
+        inclusionsGeology: 70
+        inclusionsBuildingMaterials: 20
+        inclusionsDomesticRefuse: 10
+        inclusionsOrganicRefuse: 0
+        colourPpl: 'light greyish brown'
+        colourXpl: 'greyish brown'
+        colourOil: 'light greyish brown'
+        crumbsOrGranules: true
+        earthwormGranule: 2
+        interpretation: 'buried horizon'
+    mu_an_1001_3:
+        sample: '@sample_an_1001_3'
+        stratigraphicUnit: '@su_an_1002'
+        depositType: 'Buried B-horizon'
+        keyAttributes: 'sandy clay loam, unsorted, intergrain aggregate'
+        inclusionsGeology: 80
+        inclusionsBuildingMaterials: 10
+        inclusionsDomesticRefuse: 10
+        inclusionsOrganicRefuse: 0
+        colourPpl: 'light greyish brown'
+        colourXpl: 'greyish brown'
+        colourOil: 'light greyish brown'
+        crumbsOrGranules: true
+        earthwormGranule: 2
+        interpretation: 'buried horizon'
+    mu_an_1001_4:
+        sample: '@sample_an_1001_3'
+        stratigraphicUnit: '@su_an_1001'
+        number: 1
+        depositType: 'Buried B-horizon'
+        keyAttributes: 'sandy clay loam with gravel inclusion, unsorted, embedded and intergrain aggregate'
+        inclusionsGeology: 80
+        inclusionsBuildingMaterials: 15
+        inclusionsDomesticRefuse: 0
+        inclusionsOrganicRefuse: 5
+        colourPpl: 'greyish brown'
+        colourXpl: 'light grayish orange brown'
+        colourOil: 'light greyish brown'
+        crumbsOrGranules: true
+        mesofaunaRootBioturbation: 4
+        interpretation: 'buried horizon'
+    mu_an_1001_5:
+        sample: '@sample_an_1001_4'
+        stratigraphicUnit: '@su_an_1002'
+        number: 1
+        depositType: 'Buried B-horizon'
+        keyAttributes: 'sandy clay loam with gravel inclusion, unsorted, embedded and intergrain aggregate'
+        inclusionsGeology: 70
+        inclusionsBuildingMaterials: 20
+        inclusionsDomesticRefuse: 5
+        inclusionsOrganicRefuse: 5
+        colourPpl: 'greyish brown'
+        colourXpl: 'light grayish orange brown'
+        colourOil: 'light greyish brown'
+        crumbsOrGranules: true
+        saBlockyPeds: true
+        mesofaunaRootBioturbation: 4
+        interpretation: 'buried horizon'
+    mu_ed_1001_1:
+        sample: '@sample_ed_1001_1'
+        stratigraphicUnit: '@su_ed_1001'
+        number: 1
+        depositType: 'Buried A-horizon'
+        keyAttributes: 'sandy clay loam, intergrain aggregate'
+        inclusionsGeology: 50
+        inclusionsBuildingMaterials: 20
+        inclusionsDomesticRefuse: 15
+        inclusionsOrganicRefuse: 25
+        colourPpl: 'brown'
+        colourXpl: 'light orange brown'
+        colourOil: 'light greyish brown'
+        lenticularPlateyPeds: true
+        earthwormInternalChamber: 1
+        mesofaunaRootBioturbation: 2
+        interpretation: 'buried horizon A'

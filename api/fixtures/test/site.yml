@@ -1,0 +1,62 @@
+#file: noinspection YAMLSchemaValidation
+App\Entity\Data\Site:
+    site_jb:
+        code: 'JB'
+        name: 'Jabal al-Baidain'
+        description: 'Saudi mountain archaeological site'
+        public: true
+    site_ed:
+        code: 'ED'
+        name: 'Ed-Dur'
+        description: 'UAE ancient city site'
+        public: true
+    site_an:
+        code: 'AN'
+        name: 'Al Naslaa'
+        description: 'Saudi landform site'
+        public: true
+    site_ain:
+        code: 'AYN'
+        name: 'Aynuna'
+        description: 'Saudi roman city site'
+        public: true
+    site_alu:
+        code: 'ALU'
+        name: 'Al-''Ula'
+        description: 'Saudi ancient Arabic oasis city site'
+        public: true
+    site_ala:
+        code: 'ALA'
+        name: 'Al Ain'
+        description: 'UAE ancient Arabic oasis city site'
+        public: true
+    site_ww:
+        code: 'WW'
+        name: 'Tell Wadi'
+        description: 'A nice site'
+    site_ge:
+        code: 'GE'
+        name: 'Gerrha'
+        description: 'Saudi ancient and renowned city site'
+        public: true
+    site_ta:
+        code: 'TA'
+        name: 'Tell Abraq'
+        description: 'UAE Umm Al Nar settlement site'
+        public: true
+    site_sah:
+        code: 'SAH'
+        name: 'Seih Al Harf'
+        description: 'UAE Umm Wadi Suq settlement site'
+        public: true
+    site_shi:
+        code: 'SHI'
+        name: 'Shimal'
+        description: 'UAE Umm Al Nar settlement site'
+        public: true
+    site_th:
+        code: 'TH'
+        name: 'Tell Hatarah'
+        description: 'The site we''re working on'
+        public: true
+

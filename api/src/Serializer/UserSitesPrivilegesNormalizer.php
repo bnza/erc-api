@@ -20,7 +20,7 @@ class UserSitesPrivilegesNormalizer implements NormalizerInterface, NormalizerAw
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
     }
 
-    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         $containsSupportedContextGroup = function (array $context = []) {
             $isSupportedContextGroup = function (bool $carry, string $group): bool {
@@ -41,7 +41,7 @@ class UserSitesPrivilegesNormalizer implements NormalizerInterface, NormalizerAw
         ];
     }
 
-    public function normalize(mixed $data, string $format = null, array $context = []): array
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array
     {
         return [$data->site->getId() => $data->privilege];
     }

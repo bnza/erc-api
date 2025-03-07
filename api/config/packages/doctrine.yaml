@@ -18,6 +18,8 @@ doctrine:
         auto_generate_proxy_classes: true
         default_entity_manager: default
         enable_lazy_ghost_objects: true
+        controller_resolver:
+            auto_mapping: false
         entity_managers:
             default:
                 naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
@@ -35,9 +37,10 @@ doctrine:
 when@test:
     doctrine:
         dbal:
-            # "TEST_TOKEN" is typically set by ParaTest
-            #            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
-            dbname_suffix: '_test%env(default:default_test_worker:TEST_WORKER)%'
+            connections:
+                default:
+                    use_savepoints: true
+                    dbname: app_test
 
 when@prod:
     doctrine:

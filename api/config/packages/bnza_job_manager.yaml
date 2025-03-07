@@ -25,3 +25,11 @@ doctrine:
                         dir: '%kernel.project_dir%/vendor/bnza/job-manager2/config/doctrine'
                         prefix: 'Bnza\JobManagerBundle\Entity'
                         alias: BnzaJobManagerBundle
+
+when@test:
+    doctrine:
+        dbal:
+            connections:
+                bnza_job_manager:
+                    use_savepoints: true
+                    dbname: bnza_job_manager_test

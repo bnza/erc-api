@@ -1,0 +1,62 @@
+#file: noinspection YAMLSchemaValidation
+App\Entity\Data\Pottery:
+    pottery_an_1001_1:
+        stratigraphicUnit: '@su_an_1001'
+        number: 1
+        functionalGroup: '@voc__pottery_functional_group_2'
+        typology: '@voc__pottery_typology_4'
+        part: '@voc__pottery_part_2'
+        projectIdentifier: 'AN18a'
+        description: 'Large fragment of casserole body with burned traces'
+    pottery_an_1001_2:
+        stratigraphicUnit: '@su_an_1001'
+        number: 2
+        functionalGroup: '@voc__pottery_functional_group_1'
+        typology: '@voc__pottery_typology_25'
+        projectIdentifier: 'AN/tile 313'
+        fragmentsNumber: 24
+        description: 'Fragment group of broken azulejos'
+    pottery_ed_1001_1:
+        stratigraphicUnit: '@su_ed_1001'
+        number: 1
+        functionalGroup: '@voc__pottery_functional_group_5'
+        typology: '@voc__pottery_typology_11'
+        part: '@voc__pottery_part_1'
+        chronologyLower: 950
+        chronologyUpper: 1000
+        projectIdentifier: '1123/c'
+        fragmentsNumber: 2
+        description: 'Bucket bottom with organic residuals'
+    pottery_ed_1001_2:
+        stratigraphicUnit: '@su_ed_1001'
+        number: 2
+        functionalGroup: '@voc__pottery_functional_group_5'
+        typology: '@voc__pottery_typology_11'
+        part: '@voc__pottery_part_1'
+        chronologyLower: 900
+        chronologyUpper: 1100
+        projectIdentifier: '1124/d'
+        fragmentsNumber: 1
+        description: 'Bucket bottom. Contains seeds and organic traces'
+    pottery_ed_1001_3:
+        stratigraphicUnit: '@su_ed_1001'
+        number: 3
+        functionalGroup: '@voc__pottery_functional_group_2'
+        typology: '@voc__pottery_typology_19'
+        part: '@voc__pottery_part_1'
+        chronologyLower: 1050
+        chronologyUpper: 1100
+        projectIdentifier: '1121/1'
+        fragmentsNumber: 1
+        description: 'Stockpot containing grains seeds'
+    pottery_ed_1006_1:
+        stratigraphicUnit: '@su_ed_1006'
+        number: 1
+        functionalGroup: '@voc__pottery_functional_group_2'
+        typology: '@voc__pottery_typology_19'
+        part: '@voc__pottery_part_4'
+        chronologyLower: 900
+        chronologyUpper: 1050
+        projectIdentifier: '1128/f'
+        fragmentsNumber: 3
+        description: 'Stockpot handle with bitumen traces'
