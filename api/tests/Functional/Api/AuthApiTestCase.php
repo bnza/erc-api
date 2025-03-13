@@ -4,12 +4,15 @@ namespace App\Tests\Functional\Api;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use ApiPlatform\Symfony\Bundle\Test\Client;
+use InvalidArgumentException;
 use RuntimeException;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class AuthApiTestCase extends ApiTestCase
 {
@@ -86,5 +89,37 @@ class AuthApiTestCase extends ApiTestCase
     ): Client {
         return static::createClient([],
             ['headers' => ['Authorization' => 'Bearer '.$this->getToken($username, $password)]]);
+    }
+
+    protected function getJsonResponseValue(
+        ResponseInterface $response,
+        ?string $key,
+        ?string $format = 'jsonld'
+    ): mixed {
+        if (!in_array($format, ['jsonld', 'json'])) {
+            throw new InvalidArgumentException("Unsupported format: \"$format\"");
+        }
+        $this->assertResponseFormatSame($format);
+        $values = $response->toArray();
+        if ($key) {
+            if (!array_key_exists($key, $values)) {
+                throw new InvalidArgumentException("Key \"$key\" does not exist");
+            }
+
+            return $values[$key];
+        }
+
+        return $values;
+    }
+
+    protected function getJsonResponseId(ResponseInterface $response, ?string $format = 'jsonld'): int|Uuid
+    {
+        $id = $this->getJsonResponseValue($response, 'id', $format);
+
+        return match (true) {
+            is_numeric($id) => (int)$id,
+            Uuid::isValid($id) => Uuid::fromString($id),
+            default => throw new RuntimeException("Unsupported response type: \"$id\""),
+        };
     }
 }

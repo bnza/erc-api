@@ -25,11 +25,11 @@
         </denormalizationContext>
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection"/>
+            <operation class="ApiPlatform\Metadata\Get"/>
             <operation
                 class="ApiPlatform\Metadata\Get"
                 provider="Bnza\JobManagerBundle\State\WorkUnitItemProvider"
                 uriTemplate="/work_units/{id}/cached"/>
-            <!--            <operation class="ApiPlatform\Metadata\Get"/>-->
         </operations>
     </resource>
 </resources>

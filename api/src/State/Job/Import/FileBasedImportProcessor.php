@@ -53,6 +53,6 @@ class FileBasedImportProcessor implements ProcessorInterface
         $this->jobEntityManager->persist($job);
         $this->jobEntityManager->flush();
 
-        return $job->getId();
+        return $job;
     }
 }

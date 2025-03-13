@@ -62,7 +62,8 @@ services:
             $appEntityManager: '@doctrine.orm.default_entity_manager'
             $jobEntityManager: '@doctrine.orm.bnza_job_manager_entity_manager'
             $locator: '@bnza_job_manager.job_locator'
-    
+
     App\State\Job\Import\FileBasedImportRunnerProcessor:
         arguments:
-            $runner: '@bnza_job_manager.job_runner'
+            $bus: '@messenger.bus.default'
+            $jobEntityManager: '@doctrine.orm.bnza_job_manager_entity_manager'

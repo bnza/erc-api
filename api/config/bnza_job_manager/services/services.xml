@@ -5,24 +5,85 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="app.task.import.zooarchaeology_bone"
-            class="App\Service\Job\Import\ZooarchaeologyBoneImportTask"
+
+        <!-- WORKERS -->
+
+        <service id="app.worker.import.file.abstract"
+            class="App\Service\Job\Import\AbstractFileImportWorker"
+            abstract="true"
+        >
+            <argument key="$dataEntityManager" id="doctrine.orm.default_entity_manage"/>
+            <argument key="$validator" id="validator"/>
+        </service>
+
+        <service id="app.worker.import.csv_file.abstract"
+            class="App\Service\Job\Import\AbstractCsvFileImportWorker"
+            parent="app.worker.import.file.abstract"
+            abstract="true"
+        />
+
+        <!-- TASKS -->
+
+        <service id="app.task.import.abstract"
+            class="App\Service\Job\Import\AbstractImportTask"
             parent="bnza_job_manager.abstract_task"
             shared="false"
+            abstract="true"
         >
             <tag name="bnza_job_manager.task"/>
         </service>
 
-
-        <service id="app.job.import.zooarchaeology_bone"
-            class="App\Service\Job\Import\ZooarchaeologyBoneImportJob"
-            parent="bnza_job_manager.abstract_job"
+        <service id="app.task.import.stratigraphic_unit"
+            class="App\Service\Job\Import\StratigraphicUnitCsvFileImportTask"
+            parent="app.task.import.abstract"
             shared="false"
         >
-            <tag name="bnza_job_manager.job"/>
-            <argument key="$workUnits" type="collection">
-                <argument key="app.task.import.zooarchaeology_bone" type="service" id="app.task.import.zooarchaeology_bone"/>
-            </argument>
+            <argument key="$worker" type="service" id="App\Service\Job\Import\StratigraphicUnitCsvFileImportWorker"/>
+            <tag name="bnza_job_manager.task"/>
         </service>
+
+        <!--        <service id="app.task.import.zooarchaeology_bone"-->
+        <!--            class="App\Service\Job\Import\ZooarchaeologyBoneImportTask"-->
+        <!--            parent="bnza_job_manager.abstract_task"-->
+        <!--            shared="false"-->
+        <!--        >-->
+        <!--            &lt;!&ndash; TODO correct &ndash;&gt;-->
+        <!--            <argument key="$worker" type="service" id="App\Service\Job\Import\StratigraphicUnitCsvFileImportWorker"/>-->
+        <!--            <tag name="bnza_job_manager.task"/>-->
+        <!--        </service>-->
+
+        <!-- JOBS -->
+
+        <service id="app.job.import.abstract"
+            class="App\Service\Job\Import\AbstractImportJob"
+            parent="bnza_job_manager.abstract_job"
+            shared="false"
+            abstract="true"
+        >
+            <argument key="$dataEntityManager" type="service" id="doctrine.orm.default_entity_manager"/>
+            <tag name="bnza_job_manager.job"/>
+        </service>
+
+        <service id="app.job.import.stratigraphic_unit"
+            class="App\Service\Job\Import\StratigraphicUnitCsvFileImportJob"
+            parent="app.job.import.abstract"
+            shared="false"
+        >
+            <argument key="$workUnits" type="collection">
+                <argument key="app.task.import.stratigraphic_unit" type="service" id="app.task.import.stratigraphic_unit"/>
+            </argument>
+            <tag name="bnza_job_manager.job"/>
+        </service>
+
+        <!--        <service id="app.job.import.zooarchaeology_bone"-->
+        <!--            class="App\Service\Job\Import\ZooarchaeologyBoneImportJob"-->
+        <!--            parent="app.job.import.abstract"-->
+        <!--            shared="false"-->
+        <!--        >-->
+        <!--            <argument key="$workUnits" type="collection">-->
+        <!--                <argument key="app.task.import.zooarchaeology_bone" type="service" id="app.task.import.zooarchaeology_bone"/>-->
+        <!--            </argument>-->
+        <!--            <tag name="bnza_job_manager.job"/>-->
+        <!--        </service>-->
     </services>
 </container>

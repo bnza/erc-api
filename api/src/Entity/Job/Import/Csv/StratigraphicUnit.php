@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Entity\Job\Import;
+namespace App\Entity\Job\Import\Csv;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model;
-use App\Service\Job\Import\ZooarchaeologyBoneImportJob;
-use App\State\Job\Import\FileBasedImportRunnerProcessor;
-use Symfony\Component\HttpFoundation\File\File;
+use App\Service\Job\Import\StratigraphicUnitCsvFileImportJob;
 use App\State\Job\Import\FileBasedImportProcessor;
+use App\State\Job\Import\FileBasedImportRunnerProcessor;
 use ArrayObject;
+use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ApiResource(
-    shortName: 'Import',
+    shortName: 'ImportCsv',
     operations: [
         new Post(
-            uriTemplate: 'api/jobs/import/zooarchaeology/bones',
+            uriTemplate: 'jobs/import/csv/stratigraphic_unit',
             inputFormats: ['multipart' => ["multipart/form-data"]],
             openapi: new Model\Operation(
                 requestBody: new Model\RequestBody(
@@ -35,18 +35,19 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
                     ])
                 )
             ),
-            denormalizationContext: [FileBasedImportProcessor::CONTEXT_KEY => 'app.job.import.zooarchaeology_bone'],
+            denormalizationContext: [FileBasedImportProcessor::CONTEXT_KEY => 'app.job.import.stratigraphic_unit'],
             processor: FileBasedImportProcessor::class
         ),
         new Post(
-            uriTemplate: 'api/jobs/import/zooarchaeology/bones/{id}/run',
-            denormalizationContext: [FileBasedImportProcessor::CONTEXT_KEY => 'app.job.import.zooarchaeology_bone'],
+            uriTemplate: 'jobs/import/csv/stratigraphic_unit/{id}/run',
+            output: 'Bnza\JobManagerBundle\Entity\WorkUnitEntity',
+            deserialize: false,
             processor: FileBasedImportRunnerProcessor::class
         ),
     ],
 )]
 #[Vich\Uploadable]
-class ZooarchaeologyBone
+class StratigraphicUnit
 {
     #[Vich\UploadableField(
         mapping: 'import_file',
@@ -60,6 +61,6 @@ class ZooarchaeologyBone
 
     public function __construct()
     {
-        $this->jobClassName = ZooarchaeologyBoneImportJob::class;
+        $this->jobClassName = StratigraphicUnitCsvFileImportJob::class;
     }
 }

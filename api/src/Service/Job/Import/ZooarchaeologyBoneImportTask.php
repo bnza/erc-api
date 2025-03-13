@@ -4,7 +4,7 @@ namespace App\Service\Job\Import;
 
 use Bnza\JobManagerBundle\AbstractTask;
 
-class ZooarchaeologyBoneImportTask extends AbstractTask
+class ZooarchaeologyBoneImportTask extends AbstractImportTask
 {
 
     public function getName(): string
@@ -22,23 +22,9 @@ class ZooarchaeologyBoneImportTask extends AbstractTask
         return ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
     }
 
-    public function executeStep(mixed $args)
-    {
-
-    }
-
-    protected function validateParameters(array $params): void
-    {
-        // TODO: Implement validateParameters() method.
-    }
-
     protected function returnParameters(): array
     {
         return [];
     }
 
-    public function getStepsCount(): int
-    {
-        return count($this->getSteps());
-    }
 }

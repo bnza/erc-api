@@ -2,9 +2,7 @@
 
 namespace App\Service\Job\Import;
 
-use Bnza\JobManagerBundle\AbstractJob;
-
-class ZooarchaeologyBoneImportJob extends AbstractJob
+class ZooarchaeologyBoneImportJob extends AbstractImportJob
 {
 
     public function getName(): string
@@ -15,11 +13,6 @@ class ZooarchaeologyBoneImportJob extends AbstractJob
     public function getDescription(): string
     {
         return 'Import zooarchaeology bones data from CSV file';
-    }
-
-    protected function validateParameters(array $params): void
-    {
-        // TODO: Implement validateParameters() method.
     }
 
     protected function returnParameters(): array
