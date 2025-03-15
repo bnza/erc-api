@@ -2,7 +2,10 @@
 
 namespace App\Service\Job\Import;
 
+use App\Exception\Import\FileDataValidationException;
+use App\Exception\Import\InvalidHeadersException;
 use Bnza\JobManagerBundle\Entity\WorkUnitEntity;
+use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use League\Csv\Exception;
 use League\Csv\InvalidArgument;
@@ -11,20 +14,20 @@ use League\Csv\UnavailableStream;
 use League\Csv\Writer;
 use SplTempFileObject;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
 {
     public const string HEADER_OFFSET_KEY = 'CsvHeaderOffset';
     public const string DELIMITER_KEY = 'CsvDelimiter';
 
-    public const string VALIDATION_ERRORS_FIELD_NAME = 'validation_errors';
 
     private Reader $reader;
 
-    private Writer $writer;
+//    private Writer $writer;
 
     private ConstraintViolationList $violations;
 
@@ -34,6 +37,15 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
      * @return string[]
      */
     abstract protected function getExpectedHeader(): array;
+
+    public function __construct(
+        EntityManagerInterface $dataEntityManager,
+        ValidatorInterface $validator,
+        SerializerInterface $serializer,
+        protected readonly CsvFileValidationErrorsWriter $writer
+    ) {
+        parent::__construct($dataEntityManager, $validator, $serializer);
+    }
 
     public function executeStep(int $index, mixed $args): void
     {
@@ -45,7 +57,7 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
         $errors = $this->validator->validate($dto);
         if (count($errors) > 0) {
             $this->violations->addAll($errors);
-            $_args[self::VALIDATION_ERRORS_FIELD_NAME] = (string)$errors;
+            $_args[CsvFileValidationErrorsWriter::VALIDATION_ERRORS_FIELD_NAME] = (string)$errors;
             $this->getWriter()->insertOne($_args);
 
             return;
@@ -55,7 +67,7 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
         $errors = $this->validator->validate($entity);
         if (count($errors) > 0) {
             $this->violations->addAll($errors);
-            $_args[self::VALIDATION_ERRORS_FIELD_NAME] = (string)$errors;
+            $_args[CsvFileValidationErrorsWriter::VALIDATION_ERRORS_FIELD_NAME] = (string)$errors;
             $this->getWriter()->insertOne($_args);
         } else {
             $this->dataEntityManager->persist($entity);
@@ -77,7 +89,9 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
     public function tearDown(): void
     {
         if (isset($this->violations) && $this->violations->count() > 0) {
-            throw new ValidationFailedException($this->writer->toString(), $this->violations);
+            $this->writer->persist = true;
+            throw new FileDataValidationException($this->writer->getPathname());
+//            throw new ValidationFailedException($this->writer->getPathname(), $this->violations);
         }
         $this->dataEntityManager->flush();
     }
@@ -88,7 +102,8 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
         $header = $this->getReader()->getHeader();
         $missingHeaders = array_diff($expectedHeader, $header);
         if (count($missingHeaders) > 0) {
-            throw new InvalidArgumentException(sprintf('Missing headers: %s', implode(', ', $missingHeaders)));
+            throw new InvalidHeadersException($missingHeaders);
+//            throw new InvalidArgumentException(sprintf('Missing headers: %s', implode(', ', $missingHeaders)));
         }
     }
 
@@ -101,7 +116,9 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
         }
         $file = new File($params[self::FILE_PATH_KEY]);
         if ($file->getMimeType() !== 'text/csv') {
-            throw new  InvalidArgumentException(sprintf("File \"%s\" is not a valid CSV file.", self::FILE_PATH_KEY));
+            throw new  InvalidArgumentException(
+                sprintf("File \"%s\" is not a valid CSV file.", $params[self::FILE_PATH_KEY])
+            );
         }
         if (isset($params[self::HEADER_OFFSET_KEY]) && !is_integer($params[self::HEADER_OFFSET_KEY])) {
             throw new InvalidArgumentException('Header offset must be an integer');
@@ -138,15 +155,11 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
 
     protected function getWriter(): Writer
     {
-        if (!isset($this->writer)) {
-            $this->writer = Writer::createFromFileObject(new SplTempFileObject());
-            $this->writer->setDelimiter($this->reader->getDelimiter());
-            $header = $this->getReader()->getHeader();
-            $header[] = self::VALIDATION_ERRORS_FIELD_NAME;
-            $this->writer->insertOne($header);
+        if (!$this->writer->isConfigured()) {
+            $this->writer->configure($this->getReader());
         }
 
-        return $this->writer;
+        return $this->writer->getWriter();
     }
 
     private function getHeaderOffset(): int
@@ -161,14 +174,5 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
         return isset($this->params[self::DELIMITER_KEY])
             ? $this->params[self::DELIMITER_KEY]
             : ',';
-    }
-
-    private function getViolations(): ConstraintViolationListInterface
-    {
-        if (!isset($this->violations)) {
-            $this->violations = new ConstraintViolationList();
-        }
-
-        return $this->violations;
     }
 }

@@ -5,7 +5,10 @@ framework:
 
         failure_transport: failed
         transports:
-            async: 'redis:///var/run/redis/redis/redis.sock'
+            async:
+                dsn: 'redis:///var/run/redis/redis/redis.sock'
+                retry_strategy:
+                    max_retries: 0
             failed: 'doctrine://bnza_job_manager?auto_setup=0'
         # https://symfony.com/doc/current/messenger.html#transport-configuration
         # async: '%env(MESSENGER_TRANSPORT_DSN)%'
