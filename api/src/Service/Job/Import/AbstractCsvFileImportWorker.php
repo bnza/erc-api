@@ -3,8 +3,6 @@
 namespace App\Service\Job\Import;
 
 use Bnza\JobManagerBundle\Entity\WorkUnitEntity;
-use Bnza\JobManagerBundle\Event\WorkUnitEvent;
-use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use League\Csv\Exception;
 use League\Csv\InvalidArgument;
@@ -30,7 +28,7 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
 
     private ConstraintViolationList $violations;
 
-    abstract protected function toEntity(array $rowData): object;
+    abstract protected function toEntity(object $dto): object;
 
     /**
      * @return string[]
@@ -43,7 +41,17 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
             throw new InvalidArgumentException('Argument $args must be an array');
         }
         $_args = array_merge([], $args);
-        $entity = $this->toEntity($args);
+        $dto = $this->serializer->denormalize($_args, $this->getDtoClass());
+        $errors = $this->validator->validate($dto);
+        if (count($errors) > 0) {
+            $this->violations->addAll($errors);
+            $_args[self::VALIDATION_ERRORS_FIELD_NAME] = (string)$errors;
+            $this->getWriter()->insertOne($_args);
+
+            return;
+        }
+
+        $entity = $this->toEntity($dto);
         $errors = $this->validator->validate($entity);
         if (count($errors) > 0) {
             $this->violations->addAll($errors);
@@ -63,6 +71,7 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
     {
         parent::configure($entity);
         $this->validateHeaders();
+        $this->violations = new ConstraintViolationList();
     }
 
     public function tearDown(): void

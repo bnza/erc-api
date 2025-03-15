@@ -5,6 +5,7 @@ namespace App\Service\Job\Import;
 use Bnza\JobManagerBundle\Entity\WorkUnitEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 abstract class AbstractFileImportWorker implements FileImportWorkerInterface
@@ -13,9 +14,12 @@ abstract class AbstractFileImportWorker implements FileImportWorkerInterface
 
     protected array $params;
 
+    abstract protected function getDtoClass(): string;
+
     public function __construct(
         protected readonly EntityManagerInterface $dataEntityManager,
-        protected readonly ValidatorInterface $validator
+        protected readonly ValidatorInterface $validator,
+        protected readonly SerializerInterface $serializer
     ) {
     }
 

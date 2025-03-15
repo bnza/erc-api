@@ -2,10 +2,11 @@
 
 namespace App\Tests\Functional\Api\Job\Import;
 
+use ApiPlatform\Symfony\Bundle\Test\Response;
 use App\Tests\Functional\Api\AuthApiTestCase;
 use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use ApiPlatform\Symfony\Bundle\Test\Client;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -13,6 +14,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface;
 use Symfony\Component\Messenger\Transport\TransportInterface;
+use Symfony\Component\Uid\Uuid;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 
 abstract class AbstractJobImportTest extends AuthApiTestCase
 {
@@ -95,4 +98,52 @@ abstract class AbstractJobImportTest extends AuthApiTestCase
         $this->assertCount(0, $transport->get());
     }
 
+    protected function uploadFile(Client $client, string $fileName, string $url, ?string $path = ''): int|Uuid
+    {
+        $uploadedFile = $this->getTestUploadFile($fileName, $path);
+        $response = $client->request(
+            'POST',
+            $url,
+            [
+                'headers' => ['Content-Type' => 'multipart/form-data'],
+                'extra' => [
+                    'files' =>
+                        [
+                            'file' => $uploadedFile,
+                        ],
+                ],
+            ],
+        );
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseFormatSame('jsonld');
+
+        return $this->getJsonResponseId($response);
+    }
+
+    protected function runJob(Client $client, int|Uuid $jobId, string $url): void
+    {
+        $response = $client->request(
+            'POST',
+            "$url/$jobId/run",
+            [
+                'headers' => ['Content-Type' => 'application/ld+json'],
+            ]
+        );
+        $this->assertResponseIsSuccessful();
+        $this->assertEquals((string)$jobId, (string)$this->getJsonResponseId($response));
+
+
+        $this->assertResponseIsSuccessful();
+    }
+
+    protected function fetchApiWorkUnit(Client $client, int|Uuid $jobId): ResponseInterface
+    {
+        return $client->request(
+            'GET',
+            "api/work_units/$jobId",
+            [
+                'headers' => ['Content-Type' => 'application/ld+json'],
+            ]
+        );
+    }
 }
