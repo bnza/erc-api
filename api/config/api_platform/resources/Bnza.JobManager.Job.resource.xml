@@ -24,8 +24,10 @@
             </values>
         </denormalizationContext>
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection"/>
-            <operation class="ApiPlatform\Metadata\Get"/>
+            <operation class="ApiPlatform\Metadata\GetCollection" provider="Bnza\JobManagerBundle\State\WorkUnitCollectionProvider"/>
+            <operation class="ApiPlatform\Metadata\Get"
+                provider="Bnza\JobManagerBundle\State\WorkUnitItemProvider"
+            />
             <operation
                 class="ApiPlatform\Metadata\Get"
                 provider="Bnza\JobManagerBundle\State\WorkUnitItemProvider"

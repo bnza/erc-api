@@ -19,7 +19,7 @@ class AuthApiTestCase extends ApiTestCase
     public const API_PREFIX = "/api";
     public const LOGIN_PATH = '/login';
 
-    private string $jwtToken;
+    private array $jwtToken = [];
 
     public const USER_BASE = 'user_base@example.com';
     public const USER_BASE_PW = '0000';
@@ -57,8 +57,8 @@ class AuthApiTestCase extends ApiTestCase
         ?string $username = self::USER_BASE,
         ?string $password = self::USER_BASE_PW
     ) {
-        if (isset($this->jwtToken)) {
-            return $this->jwtToken;
+        if (array_key_exists($username, $this->jwtToken)) {
+            return $this->jwtToken[$username];
         }
 
         $response = static::createClient()->request('POST', self::API_PREFIX.self::LOGIN_PATH, [
@@ -73,14 +73,14 @@ class AuthApiTestCase extends ApiTestCase
         }
 
         $content = $response->toArray();
-        $this->jwtToken = $content['token'];
+        $this->jwtToken[$username] = $content['token'];
 
-        return $this->jwtToken;
+        return $this->jwtToken[$username];
     }
 
-    protected function getAuthorizationHeaderString(): ?string
+    protected function getAuthorizationHeaderString(?string $username = self::USER_BASE): ?string
     {
-        return isset($this->jwtToken) ? "Bearer $this->jwtToken" : null;
+        return array_key_exists($username, $this->jwtToken) ? sprintf("Bearer %s", $this->jwtToken[$username]) : null;
     }
 
     protected function createAuthenticatedClient(

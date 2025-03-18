@@ -10,6 +10,8 @@ use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use LogicException;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class FileBasedImportProcessor implements ProcessorInterface
 {
@@ -19,6 +21,7 @@ class FileBasedImportProcessor implements ProcessorInterface
         private readonly EntityManagerInterface $appEntityManager,
         private readonly EntityManagerInterface $jobEntityManager,
         private readonly JobServicesIdLocator $locator,
+        private readonly Security $security,
     ) {
     }
 
@@ -32,6 +35,10 @@ class FileBasedImportProcessor implements ProcessorInterface
 
         if (!$this->locator->has($serviceId)) {
             throw new InvalidArgumentException("Service id $serviceId does not exist.");
+        }
+
+        if (!$this->security->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw new AccessDeniedHttpException('Access denied');
         }
 
         $service = $this->locator->get($serviceId);
@@ -48,7 +55,10 @@ class FileBasedImportProcessor implements ProcessorInterface
             ->setParameters([
                 'fileId' => $importFile->getId()->toString(),
                 'filePath' => $importFile->file->getRealPath(),
-            ]);
+            ])
+            ->setUserId(
+                $this->security->getUser()->getUserIdentifier()
+            );
 
         $this->jobEntityManager->persist($job);
         $this->jobEntityManager->flush();

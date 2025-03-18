@@ -15,6 +15,9 @@
                 Duplicate [site, year, number] tuple
             </option>
         </constraint>
+        <constraint name="App\Validator\HasApiResourceSecurity">
+            <option name="groups">import</option>
+        </constraint>
         <property name="site">
             <constraint name="NotBlank"/>
         </property>

@@ -136,11 +136,22 @@ abstract class AbstractJobImportTest extends AuthApiTestCase
         $this->assertResponseIsSuccessful();
     }
 
-    protected function fetchApiWorkUnit(Client $client, int|Uuid $jobId): ResponseInterface
+    protected function fetchApiWorkUnitItem(Client $client, int|Uuid $jobId): ResponseInterface
     {
         return $client->request(
             'GET',
             "api/work_units/$jobId",
+            [
+                'headers' => ['Content-Type' => 'application/ld+json'],
+            ]
+        );
+    }
+
+    protected function fetchApiWorkUnitCollection(Client $client): ResponseInterface
+    {
+        return $client->request(
+            'GET',
+            "api/work_units",
             [
                 'headers' => ['Content-Type' => 'application/ld+json'],
             ]

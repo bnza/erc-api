@@ -9,6 +9,7 @@ use App\Service\Job\Import\StratigraphicUnitCsvFileImportJob;
 use App\State\Job\Import\FileBasedImportProcessor;
 use App\State\Job\Import\FileBasedImportRunnerProcessor;
 use ArrayObject;
+use Bnza\JobManagerBundle\State\WorkUnitItemProvider;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -36,13 +37,17 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
                 )
             ),
             denormalizationContext: [FileBasedImportProcessor::CONTEXT_KEY => 'app.job.import.stratigraphic_unit'],
+            security: "is_granted('IS_AUTHENTICATED_FULLY')",
             processor: FileBasedImportProcessor::class
         ),
         new Post(
             uriTemplate: 'jobs/import/csv/stratigraphic_unit/{id}/run',
+            security: "is_granted('run', object)",
             output: 'Bnza\JobManagerBundle\Entity\WorkUnitEntity',
+            read: true,
             deserialize: false,
-            processor: FileBasedImportRunnerProcessor::class
+            provider: WorkUnitItemProvider::class,
+            processor: FileBasedImportRunnerProcessor::class,
         ),
     ],
 )]

@@ -89,8 +89,9 @@ class StratigraphicUnitResourceVoter extends Voter
         }
         $hasSiteRoleBase = $this->cache[$key];
 
+        // @TODO evaluate and test change from || to &&
         if (self::CREATE === $attribute) {
-            return $isStratigraphicUnit || $hasSiteRoleBase;
+            return $isStratigraphicUnit && $hasSiteRoleBase;
         }
 
         if (self::UPDATE === $attribute) {
