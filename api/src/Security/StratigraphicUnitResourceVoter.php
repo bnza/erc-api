@@ -91,7 +91,7 @@ class StratigraphicUnitResourceVoter extends Voter
 
         // @TODO evaluate and test change from || to &&
         if (self::CREATE === $attribute) {
-            return $isStratigraphicUnit && $hasSiteRoleBase;
+            return $hasSiteRoleBase;
         }
 
         if (self::UPDATE === $attribute) {

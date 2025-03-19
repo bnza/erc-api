@@ -85,10 +85,16 @@ class AuthApiTestCase extends ApiTestCase
 
     protected function createAuthenticatedClient(
         ?string $username = self::USER_BASE,
-        ?string $password = self::USER_BASE_PW
+        ?string $password = self::USER_BASE_PW,
+        ?string $contentType = 'application/ld+json'
     ): Client {
         return static::createClient([],
-            ['headers' => ['Authorization' => 'Bearer '.$this->getToken($username, $password)]]);
+            [
+                'headers' => [
+                    'Authorization' => 'Bearer '.$this->getToken($username, $password),
+                    'Content-Type' => $contentType,
+                ],
+            ]);
     }
 
     protected function getJsonResponseValue(

@@ -29,8 +29,7 @@ final class MediaObjectFileDenormalizer implements DenormalizerInterface
         $mediaObject = $this->duplicateFinder->get($type, $sha256);
         if (!$mediaObject) {
             $mediaObject = new MediaObject();
-            $mediaObject->file = $data['file'];
-            $mediaObject->sha256 = hash_file('sha256', $file);
+            $mediaObject->setFile($data['file']);
             $mediaObject->uploadDate = new DateTimeImmutable();
         }
 

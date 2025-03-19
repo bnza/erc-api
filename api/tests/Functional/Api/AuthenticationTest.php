@@ -21,7 +21,7 @@ class AuthenticationTest extends AuthApiTestCase
     {
         $this->assertEmpty($this->getAuthorizationHeaderString());
         $this->createAuthenticatedClient($username, $password);
-        $this->assertIsString($this->getAuthorizationHeaderString());
+        $this->assertIsString($this->getAuthorizationHeaderString($username));
     }
 
     /**
