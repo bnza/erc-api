@@ -1,6 +1,6 @@
 <?php
 
-namespace Functional\Api;
+namespace App\Functional\Api;
 
 use App\Tests\Functional\Api\AuthApiTestCase;
 
