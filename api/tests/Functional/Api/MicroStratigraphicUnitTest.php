@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Functional\Api;
-
-use App\Tests\Functional\Api\AuthApiTestCase;
+namespace App\Tests\Functional\Api;
 
 class MicroStratigraphicUnitTest extends AuthApiTestCase
 {
