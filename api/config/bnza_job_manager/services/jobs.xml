@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- JOBS -->
+
+        <!--        <service id="app.work_unit.import.abstract.job"-->
+        <!--            class="App\Service\WorkUnit\Import\AbstractImportJob"-->
+        <!--            parent="bnza_job_manager.abstract_job"-->
+        <!--            shared="false"-->
+        <!--            abstract="true"-->
+        <!--        >-->
+        <!--            <argument key="$dataEntityManager" type="service" id="doctrine.orm.default_entity_manager"/>-->
+        <!--            <tag name="bnza_job_manager.job"/>-->
+        <!--        </service>-->
+
+        <!--        <service id="app.work_unit.import.stratigraphic_unit.job"-->
+        <!--            class="App\Service\WorkUnit\Import\Csv\StratigraphicUnitImportCsvJob"-->
+        <!--            parent="app.work_unit.import.abstract.job"-->
+        <!--            shared="false"-->
+        <!--        >-->
+        <!--            <argument key="$workUnits" type="collection">-->
+        <!--                &lt;!&ndash;                <argument key="app.task.import.stratigraphic_unit" type="service" id="app.task.import.stratigraphic_unit"/>&ndash;&gt;-->
+        <!--            </argument>-->
+        <!--            <tag name="bnza_job_manager.job"/>-->
+        <!--        </service>-->
+    </services>
+</container>

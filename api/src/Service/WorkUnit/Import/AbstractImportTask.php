@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Service\Job\Import;
+namespace App\Service\WorkUnit\Import;
 
 
 use Bnza\JobManagerBundle\AbstractTask;
 use Bnza\JobManagerBundle\Entity\WorkUnitEntity;
+use Bnza\JobManagerBundle\WorkUnitDefinition;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -12,11 +13,12 @@ abstract class AbstractImportTask extends AbstractTask
 {
 
     public function __construct(
-        EventDispatcherInterface $eventDispatcher,
         protected readonly FileImportWorkerInterface $worker,
-        LoggerInterface $logger
+        EventDispatcherInterface $eventDispatcher,
+        LoggerInterface $logger,
+        WorkUnitDefinition $definition
     ) {
-        parent::__construct($eventDispatcher, $logger);
+        parent::__construct($eventDispatcher, $logger, $definition);
     }
 
     public function configure(WorkUnitEntity $entity): void

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Job\Import;
+namespace App\Service\WorkUnit\Import;
 
 use Bnza\JobManagerBundle\Entity\WorkUnitEntity;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,7 +12,7 @@ abstract class AbstractFileImportWorker implements FileImportWorkerInterface
 {
     public const string FILE_PATH_KEY = 'filePath';
 
-    protected array $params;
+    protected array $params = [];
 
     abstract protected function getDtoClass(): string;
 
@@ -21,6 +21,12 @@ abstract class AbstractFileImportWorker implements FileImportWorkerInterface
         protected readonly ValidatorInterface $validator,
         protected readonly SerializerInterface $serializer
     ) {
+    }
+
+    public function reset(): void
+    {
+        $this->params = [];
+        $this->dataEntityManager->clear();
     }
 
     protected function validateParams(array $params): void

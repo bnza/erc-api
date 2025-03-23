@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Service\Job\Import;
+namespace App\Service\WorkUnit\Import\Csv;
 
+use App\DTO\Import\CSV\StratigraphicUnitDTO;
 use App\Entity\Data\Site;
 use App\Entity\Data\StratigraphicUnit;
-use App\DTO\Import\CSV\StratigraphicUnitDTO;
 use UnexpectedValueException;
 
-final class StratigraphicUnitCsvFileImportWorker extends AbstractCsvFileImportWorker
+final class StratigraphicUnitImportCsvWorker extends AbstractCsvFileImportWorker
 {
 
     private function findSite(string $siteCode): Site

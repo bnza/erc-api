@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Job\Import;
+namespace App\Service\WorkUnit\Import;
 
 use Bnza\JobManagerBundle\WorkerInterface;
 

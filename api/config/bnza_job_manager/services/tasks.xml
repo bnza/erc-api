@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- TASKS -->
+
+        <!--        <service id="app.task.import.abstract"-->
+        <!--            class="App\Service\Job\Import\AbstractImportTask"-->
+        <!--            parent="bnza_job_manager.abstract_task"-->
+        <!--            shared="false"-->
+        <!--            abstract="true"-->
+        <!--        >-->
+        <!--            <tag name="bnza_job_manager.task"/>-->
+        <!--        </service>-->
+
+        <!--        <service id="app.task.import.stratigraphic_unit"-->
+        <!--            class="App\Service\Job\Import\StratigraphicUnitCsvFileImportTask"-->
+        <!--            parent="app.task.import.abstract"-->
+        <!--            shared="false"-->
+        <!--        >-->
+        <!--            <argument key="$worker" type="service" id="App\Service\Job\Import\StratigraphicUnitCsvFileImportWorker"/>-->
+        <!--            <tag name="bnza_job_manager.task"/>-->
+        <!--        </service>-->
+
+    </services>
+</container>

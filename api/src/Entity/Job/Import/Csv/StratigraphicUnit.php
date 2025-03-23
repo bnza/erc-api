@@ -36,7 +36,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
                     ])
                 )
             ),
-            denormalizationContext: [FileBasedImportProcessor::CONTEXT_KEY => 'app.job.import.stratigraphic_unit'],
+            denormalizationContext: [FileBasedImportProcessor::CONTEXT_KEY => 'app.job.import.csv.stratigraphic_unit'],
             security: "is_granted('IS_AUTHENTICATED_FULLY')",
             processor: FileBasedImportProcessor::class
         ),

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service
+            id="App\Service\WorkUnit\Import\ImportTaskAbstractFactory"
+            parent=""
+            abstract="true"
+        />
+
+        <service id="app.task.import.stratigraphic_unit.factory"
+            parent="App\Service\WorkUnit\Import\ImportTaskAbstractFactory"
+        >
+            <argument key="$definition" type="service" id="app.task.import.csv.stratigraphic_unit.definition"/>
+            <argument key="$worker" type="service" id="App\Service\WorkUnit\Import\Csv\StratigraphicUnitImportCsvWorker"/>
+            <tag name="bnza_job_manager.work_unit_factory"/>
+        </service>
+
+        <service id="app.job.import.abstract.factory"
+            class="App\Service\WorkUnit\Import\ImportJobAbstractFactory"
+            parent="Bnza\JobManagerBundle\AbstractJobFactory"
+            abstract="true"
+        >
+            <argument key="$dataEntityManager" type="service" id="doctrine.orm.default_entity_manager"/>
+        </service>
+
+        <service id="app.job.import.csv.stratigraphic_unit.factory"
+            parent="app.job.import.abstract.factory"
+        >
+            <argument key="$definition" type="service" id="app.job.import.csv.stratigraphic_unit.definition"/>
+            <argument key="$workUnitFactories" type="collection">
+                <argument type="service" id="app.task.import.stratigraphic_unit.factory"/>
+            </argument>
+            <tag name="bnza_job_manager.work_unit_factory"/>
+        </service>
+    </services>
+</container>

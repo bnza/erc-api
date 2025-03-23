@@ -31,7 +31,17 @@
             <operation
                 class="ApiPlatform\Metadata\Get"
                 provider="Bnza\JobManagerBundle\State\WorkUnitItemProvider"
-                uriTemplate="/work_units/{id}/cached"/>
+                uriTemplate="/work_units/{id}/cached"
+            />
+            <operation class="ApiPlatform\Metadata\Post"
+                uriTemplate="/work_units/{id}/run"
+                status="202"
+                security="is_granted('run', object)"
+                read="true"
+                deserialize="false"
+                processor="App\State\Job\Import\FileBasedImportRunnerProcessor"
+                provider="Bnza\JobManagerBundle\State\WorkUnitItemProvider"
+            />
         </operations>
     </resource>
 </resources>
