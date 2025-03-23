@@ -13,7 +13,7 @@ services:
       XDEBUG_PORT: "${XDEBUG_PORT:-9003}"
       XDEBUG_MODE: "${XDEBUG_MODE:-develop,debug}"
       XDEBUG_CLIENT_HOST: "${XDEBUG_CLIENT_HOST:-host.docker.internal}"
-      XDEBUG_SESSION_START: DOCKER_INTERNAL
+      XDEBUG_SESSION_START: "${XDEBUG_SESSION_START:-false}"
       PHP_IDE_CONFIG: "serverName=medgreenrev"
     extra_hosts:
       - host.docker.internal:host-gateway

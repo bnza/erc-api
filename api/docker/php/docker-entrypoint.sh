@@ -1,6 +1,13 @@
 #!/bin/sh
 set -e
 
+if [ -n "${XDEBUG_SESSION_START+x}" ] && [ "$XDEBUG_SESSION_START" = "false" ];then
+	echo "Unsetting XDEBUG_SESSION_START"
+	unset XDEBUG_SESSION_START
+else
+	echo "Starting with XDEBUG_SESSION_START: $XDEBUG_SESSION_START"
+fi
+
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
 	set -- php-fpm "$@"
@@ -41,5 +48,6 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		fi
 	fi
 fi
+
 
 exec docker-php-entrypoint "$@"
