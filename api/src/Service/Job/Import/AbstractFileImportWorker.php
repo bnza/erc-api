@@ -45,7 +45,7 @@ abstract class AbstractFileImportWorker implements FileImportWorkerInterface
     private function mapParameters(array $params): array
     {
         $paramsMapping = [];
-        if (isset($params['paramsMapping' && is_array($params['paramsMapping'])])) {
+        if (array_key_exists('paramsMapping', $params) && is_array($params['paramsMapping'])) {
             $paramsMapping = array_merge($paramsMapping, $params['paramsMapping']);
             foreach ($paramsMapping as $providedParamKey => $workerParamKey) {
                 if (!is_string($workerParamKey)) {

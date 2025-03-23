@@ -17,7 +17,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     shortName: 'ImportCsv',
     operations: [
         new Post(
-            uriTemplate: 'jobs/import/csv/stratigraphic_unit',
+            uriTemplate: 'work_units/import/csv/stratigraphic_units',
             inputFormats: ['multipart' => ["multipart/form-data"]],
             openapi: new Model\Operation(
                 requestBody: new Model\RequestBody(
@@ -40,15 +40,16 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             security: "is_granted('IS_AUTHENTICATED_FULLY')",
             processor: FileBasedImportProcessor::class
         ),
-        new Post(
-            uriTemplate: 'jobs/import/csv/stratigraphic_unit/{id}/run',
-            security: "is_granted('run', object)",
-            output: 'Bnza\JobManagerBundle\Entity\WorkUnitEntity',
-            read: true,
-            deserialize: false,
-            provider: WorkUnitItemProvider::class,
-            processor: FileBasedImportRunnerProcessor::class,
-        ),
+//        new Post(
+//            uriTemplate: 'jobs/import/csv/stratigraphic_unit/{id}/run',
+//            status: 202,
+//            security: "is_granted('run', object)",
+//            output: 'Bnza\JobManagerBundle\Entity\WorkUnitEntity',
+//            read: true,
+//            deserialize: false,
+//            provider: WorkUnitItemProvider::class,
+//            processor: FileBasedImportRunnerProcessor::class,
+//        ),
     ],
 )]
 #[Vich\Uploadable]

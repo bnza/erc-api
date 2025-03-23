@@ -124,7 +124,7 @@ abstract class AbstractJobImportTest extends AuthApiTestCase
     {
         $response = $client->request(
             'POST',
-            "$url/$jobId/run",
+            "api/work_units/$jobId/run",
             [
                 'headers' => ['Content-Type' => 'application/ld+json'],
             ]

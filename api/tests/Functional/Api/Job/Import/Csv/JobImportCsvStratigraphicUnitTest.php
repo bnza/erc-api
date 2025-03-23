@@ -7,15 +7,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 class JobImportCsvStratigraphicUnitTest extends AbstractJobImportTest
 {
+    private const string URL = 'api/work_units/import/csv/stratigraphic_units';
+
     public function testSuccess()
     {
         $clientEditor = $this->createAuthenticatedClient(self::USER_EDITOR, self::USER_EDITOR_PW);
         $client = $this->createAuthenticatedClient();
-        $url = 'api/jobs/import/csv/stratigraphic_unit';
 
-        $jobId = $this->uploadFile($client, 'su.csv', $url);
+        $jobId = $this->uploadFile($client, 'su.csv', self::URL);
 
-        $this->runJob($client, $jobId, $url);
+        $this->runJob($client, $jobId, self::URL);
 
         $response = $this->fetchApiWorkUnitItem($clientEditor, $jobId);
         $this->assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
@@ -41,10 +42,9 @@ class JobImportCsvStratigraphicUnitTest extends AbstractJobImportTest
     {
         $client = $this->createAuthenticatedClient(self::USER_ADMIN, self::USER_ADMIN_PW);
 
-        $url = 'api/jobs/import/csv/stratigraphic_unit';
-        $jobId = $this->uploadFile($client, 'su.csv', $url);
+        $jobId = $this->uploadFile($client, 'su.csv', self::URL);
 
-        $this->runJob($client, $jobId, $url);
+        $this->runJob($client, $jobId, self::URL);
 
         $this->consumeQueue();
         $response = $this->fetchApiWorkUnitCollection($client);
@@ -54,10 +54,9 @@ class JobImportCsvStratigraphicUnitTest extends AbstractJobImportTest
     public function testHeadersValidationError()
     {
         $client = $this->createAuthenticatedClient();
-        $url = 'api/jobs/import/csv/stratigraphic_unit';
-        $jobId = $this->uploadFile($client, 'su__headers_err.csv', $url);
+        $jobId = $this->uploadFile($client, 'su__headers_err.csv', self::URL);
 
-        $this->runJob($client, $jobId, $url);
+        $this->runJob($client, $jobId, self::URL);
 
         $this->consumeQueue();
 
@@ -70,10 +69,9 @@ class JobImportCsvStratigraphicUnitTest extends AbstractJobImportTest
     public function testDataValidationError()
     {
         $client = $this->createAuthenticatedClient();
-        $url = 'api/jobs/import/csv/stratigraphic_unit';
-        $jobId = $this->uploadFile($client, 'su__err1.csv', $url);
+        $jobId = $this->uploadFile($client, 'su__err1.csv', self::URL);
 
-        $this->runJob($client, $jobId, $url);
+        $this->runJob($client, $jobId, self::URL);
 
         $this->consumeQueue();
 
@@ -86,10 +84,9 @@ class JobImportCsvStratigraphicUnitTest extends AbstractJobImportTest
     public function testWrongFileMimeTypeError()
     {
         $client = $this->createAuthenticatedClient();
-        $url = 'api/jobs/import/csv/stratigraphic_unit';
-        $jobId = $this->uploadFile($client, 'test.pdf', $url);
+        $jobId = $this->uploadFile($client, 'test.pdf', self::URL);
 
-        $this->runJob($client, $jobId, $url);
+        $this->runJob($client, $jobId, self::URL);
 
         $this->consumeQueue();
 
@@ -102,10 +99,9 @@ class JobImportCsvStratigraphicUnitTest extends AbstractJobImportTest
     public function testFakeCsvFileError()
     {
         $client = $this->createAuthenticatedClient();
-        $url = 'api/jobs/import/csv/stratigraphic_unit';
-        $jobId = $this->uploadFile($client, 'fake.csv', $url);
+        $jobId = $this->uploadFile($client, 'fake.csv', self::URL);
 
-        $this->runJob($client, $jobId, $url);
+        $this->runJob($client, $jobId, self::URL);
 
         $this->consumeQueue();
 
@@ -118,10 +114,9 @@ class JobImportCsvStratigraphicUnitTest extends AbstractJobImportTest
     public function testAuthFileError()
     {
         $client = $this->createAuthenticatedClient();
-        $url = 'api/jobs/import/csv/stratigraphic_unit';
-        $jobId = $this->uploadFile($client, 'su__auth_err.csv', $url);
+        $jobId = $this->uploadFile($client, 'su__auth_err.csv', self::URL);
 
-        $this->runJob($client, $jobId, $url);
+        $this->runJob($client, $jobId, self::URL);
 
         $this->consumeQueue();
 
