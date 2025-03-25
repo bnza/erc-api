@@ -9,11 +9,12 @@ class JobImportCsvStratigraphicUnitTest extends AbstractJobImportTest
 {
     private const string URL = 'api/work_units/import/csv/stratigraphic_units';
 
-    public function testSuccess()
+    public function testSingleSuccess()
     {
         $clientEditor = $this->createAuthenticatedClient(self::USER_EDITOR, self::USER_EDITOR_PW);
         $client = $this->createAuthenticatedClient();
 
+        // @todo test with at least two messages
         $jobId = $this->uploadFile($client, 'su.csv', self::URL);
 
         $this->runJob($client, $jobId, self::URL);
@@ -24,19 +25,49 @@ class JobImportCsvStratigraphicUnitTest extends AbstractJobImportTest
         $response = $this->fetchApiWorkUnitItem($client, $jobId);
         $status = $this->getJsonResponseValue($response, 'status');
         $this->assertEquals(0, $status['value']);
-//
+
         $this->consumeQueue();
         $response = $this->fetchApiWorkUnitItem($client, $jobId);
         $status = $this->getJsonResponseValue($response, 'status');
         $this->assertEquals(2, $status['value']);
-//
+
         $response = $this->fetchApiWorkUnitCollection($client);
         $this->assertResponseIsSuccessful();
-//        $this->assertEquals(2, $response->toArray()['totalItems']);
+        $this->assertEquals(2, $response->toArray()['totalItems']);
 
         $response = $client->request('GET', 'api/stratigraphic_units?site.code=ED&year=2025&number=1');
         $this->assertResponseIsSuccessful();
     }
+
+    public function testTwoSuccess()
+    {
+
+        $client = $this->createAuthenticatedClient();
+        $jobId1 = $this->uploadFile($client, 'su.csv', self::URL);
+
+        $this->runJob($client, $jobId1, self::URL);
+        $response = $this->fetchApiWorkUnitItem($client, $jobId1);
+        $status = $this->getJsonResponseValue($response, 'status');
+        $this->assertEquals(0, $status['value']);
+
+        $jobId2 = $this->uploadFile($client, 'su1.csv', self::URL);
+
+        $this->runJob($client, $jobId2, self::URL);
+        $response = $this->fetchApiWorkUnitItem($client, $jobId2);
+        $status = $this->getJsonResponseValue($response, 'status');
+        $this->assertEquals(0, $status['value']);
+
+        $this->consumeQueue('async', 2);
+
+        $response = $this->fetchApiWorkUnitItem($client, $jobId1);
+        $status = $this->getJsonResponseValue($response, 'status');
+        $this->assertEquals(2, $status['value']);
+
+        $response = $this->fetchApiWorkUnitItem($client, $jobId2);
+        $status = $this->getJsonResponseValue($response, 'status');
+        $this->assertEquals(2, $status['value']);
+    }
+
 
     public function testAdminSuccess()
     {
@@ -123,6 +154,28 @@ class JobImportCsvStratigraphicUnitTest extends AbstractJobImportTest
         $response = $this->fetchApiWorkUnitItem($client, $jobId);
         $status = $this->getJsonResponseValue($response, 'status');
         $this->assertEquals(8, $status['value']);
+        $this->assertIsArray($this->getJsonResponseValue($response, 'errors'));
+    }
+
+    public function testOneErrorOneSuccess()
+    {
+        $client = $this->createAuthenticatedClient();
+        $jobId1 = $this->uploadFile($client, 'su__headers_err.csv', self::URL);
+        $jobId2 = $this->uploadFile($client, 'su.csv', self::URL);
+
+        $this->runJob($client, $jobId1, self::URL);
+        $this->runJob($client, $jobId2, self::URL);
+
+        $this->consumeQueue('async', 2);
+
+        $response = $this->fetchApiWorkUnitItem($client, $jobId1);
+        $status = $this->getJsonResponseValue($response, 'status');
+        $this->assertEquals(8, $status['value']);
+        $this->assertIsArray($this->getJsonResponseValue($response, 'errors'));
+
+        $response = $this->fetchApiWorkUnitItem($client, $jobId2);
+        $status = $this->getJsonResponseValue($response, 'status');
+        $this->assertEquals(2, $status['value']);
         $this->assertIsArray($this->getJsonResponseValue($response, 'errors'));
     }
 }

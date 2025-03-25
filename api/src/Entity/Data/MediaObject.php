@@ -77,15 +77,19 @@ class MediaObject
         return $this->file;
     }
 
-    public function setFile(File $file): void
+    public function setFile(File $file): MediaObject
     {
         $this->file = $file;
         $this->sha256 = hash_file('sha256', $file);
+
+        return $this;
     }
 
-    public function setMimeType(string $mimeType): void
+    public function setMimeType(string $mimeType): MediaObject
     {
         $this->mimeType = 'image/jpg' === $mimeType ? 'image/jpeg' : $mimeType;
+
+        return $this;
     }
 
     public function getMimeType(): string

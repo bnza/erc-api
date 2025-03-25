@@ -1,0 +1,18 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Entity\Job\ImportedFile" schema="job" table="imported_file">
+        <id name="id" type="uuid"/>
+        <field name="service"/>
+        <field name="userId"/>
+        <field name="uploadDate" type="datetime_immutable"/>
+        <one-to-one field="mediaObject" target-entity="App\Entity\Data\MediaObject">
+            <join-column name="media_object_id" on-delete="RESTRICT"/>
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-one>
+    </entity>
+</doctrine-mapping>

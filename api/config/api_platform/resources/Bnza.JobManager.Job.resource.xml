@@ -24,14 +24,20 @@
             </values>
         </denormalizationContext>
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" provider="Bnza\JobManagerBundle\State\WorkUnitCollectionProvider"/>
+            <operation
+                class="ApiPlatform\Metadata\GetCollection"
+                provider="Bnza\JobManagerBundle\State\WorkUnitCollectionProvider"
+                security="is_granted('IS_AUTHENTICATED_FULLY')"
+            />
             <operation class="ApiPlatform\Metadata\Get"
                 provider="Bnza\JobManagerBundle\State\WorkUnitItemProvider"
+                security="is_granted('IS_AUTHENTICATED_FULLY')"
             />
             <operation
                 class="ApiPlatform\Metadata\Get"
-                provider="Bnza\JobManagerBundle\State\WorkUnitItemProvider"
+                provider="Bnza\JobManagerBundle\State\WorkUnitCachedItemProvider"
                 uriTemplate="/work_units/{id}/cached"
+                output="Bnza\JobManagerBundle\Entity\CachedWorkUnit"
             />
             <operation class="ApiPlatform\Metadata\Post"
                 uriTemplate="/work_units/{id}/run"

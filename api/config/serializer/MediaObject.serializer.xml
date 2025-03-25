@@ -5,14 +5,17 @@
 >
     <class name="App\Entity\Data\MediaObject">
         <attribute name="id">
+            <group>ImportedFile:read</group>
             <group>MediaObject:read</group>
         </attribute>
         <attribute name="originalFilename">
+            <group>ImportedFile:read</group>
             <group>MediaObjectJoin:read</group>
             <group>MediaObject:read</group>
             <group>MediaObject:write</group>
         </attribute>
         <attribute name="sha256">
+            <group>ImportedFile:read</group>
             <group>MediaObject:read</group>
             <group>MediaObject:write</group>
         </attribute>
@@ -25,16 +28,19 @@
             <group>MediaObject:write</group>
         </attribute>
         <attribute name="mimeType">
+            <group>ImportedFile:read</group>
             <group>MediaObjectJoin:read</group>
             <group>MediaObject:read</group>
             <group>MediaObject:write</group>
         </attribute>
         <attribute name="size">
+            <group>ImportedFile:read</group>
             <group>MediaObjectJoin:read</group>
             <group>MediaObject:read</group>
             <group>MediaObject:write</group>
         </attribute>
         <attribute name="contentUrl">
+            <group>ImportedFile:read</group>
             <group>MediaObjectJoin:read</group>
             <group>MediaObject:read</group>
         </attribute>

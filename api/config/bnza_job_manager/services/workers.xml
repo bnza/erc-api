@@ -12,7 +12,6 @@
             abstract="true"
         >
             <argument key="$dataEntityManager" id="doctrine.orm.default_entity_manage"/>
-            <argument key="$validator" id="validator"/>
         </service>
 
         <service

@@ -19,6 +19,7 @@ abstract class AbstractImportTask extends AbstractTask
         WorkUnitDefinition $definition
     ) {
         parent::__construct($eventDispatcher, $logger, $definition);
+        $this->worker->reset();
     }
 
     public function configure(WorkUnitEntity $entity): void

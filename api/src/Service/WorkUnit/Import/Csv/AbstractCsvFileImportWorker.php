@@ -13,6 +13,7 @@ use League\Csv\InvalidArgument;
 use League\Csv\Reader;
 use League\Csv\UnavailableStream;
 use League\Csv\Writer;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
@@ -39,9 +40,10 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
         EntityManagerInterface $dataEntityManager,
         ValidatorInterface $validator,
         SerializerInterface $serializer,
+        LoggerInterface $logger,
         protected readonly CsvFileValidationErrorsWriter $writer
     ) {
-        parent::__construct($dataEntityManager, $validator, $serializer);
+        parent::__construct($dataEntityManager, $validator, $serializer, $logger);
     }
 
     public function reset(): void

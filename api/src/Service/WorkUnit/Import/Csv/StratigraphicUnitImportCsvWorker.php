@@ -9,15 +9,17 @@ use UnexpectedValueException;
 
 final class StratigraphicUnitImportCsvWorker extends AbstractCsvFileImportWorker
 {
+    private array $siteCache = [];
 
     private function findSite(string $siteCode): Site
     {
-        static $cache = [];
-        if (!isset($cache[$siteCode])) {
-            $cache[$siteCode] = $this->dataEntityManager->getRepository(Site::class)->findOneBy(['code' => $siteCode]);
+        if (!isset($this->siteCache[$siteCode])) {
+            $this->siteCache[$siteCode] = $this->dataEntityManager->getRepository(Site::class)->findOneBy(
+                ['code' => $siteCode]
+            );
         }
 
-        return $cache[$siteCode];
+        return $this->siteCache[$siteCode];
     }
 
     protected function toEntity(object $dto): object
@@ -45,5 +47,11 @@ final class StratigraphicUnitImportCsvWorker extends AbstractCsvFileImportWorker
     protected function getDtoClass(): string
     {
         return StratigraphicUnitDTO::class;
+    }
+
+    public function reset(): void
+    {
+        parent::reset();
+        $this->siteCache = [];
     }
 }

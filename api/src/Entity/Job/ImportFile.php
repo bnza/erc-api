@@ -8,7 +8,6 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Controller\CreateImportFileAction;
-use App\Controller\CreateMediaObjectAction;
 use ArrayObject;
 use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\File\File;
@@ -43,7 +42,6 @@ use Symfony\Component\Uid\Uuid;
             deserialize: false
         ),
     ],
-    normalizationContext: ['groups' => ['MediaObject:read']],
     security: "is_granted('IS_AUTHENTICATED_FULLY')"
 )]
 class ImportFile
@@ -53,13 +51,13 @@ class ImportFile
 
     public ?File $file = null;
 
-    public string $filePath;
-    public string $originalFilename;
+    public ?string $filePath;
+    public ?string $originalFilename;
 
     public DateTimeImmutable $uploadDate;
-    public string $mimeType;
+    public ?string $mimeType;
 
-    public int $size;
+    public ?int $size;
 
     public function getId(): ?Uuid
     {

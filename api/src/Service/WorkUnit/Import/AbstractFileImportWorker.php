@@ -5,12 +5,14 @@ namespace App\Service\WorkUnit\Import;
 use Bnza\JobManagerBundle\Entity\WorkUnitEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 abstract class AbstractFileImportWorker implements FileImportWorkerInterface
 {
     public const string FILE_PATH_KEY = 'filePath';
+    public const string FILE_ID = 'fileId';
 
     protected array $params = [];
 
@@ -19,7 +21,8 @@ abstract class AbstractFileImportWorker implements FileImportWorkerInterface
     public function __construct(
         protected readonly EntityManagerInterface $dataEntityManager,
         protected readonly ValidatorInterface $validator,
-        protected readonly SerializerInterface $serializer
+        protected readonly SerializerInterface $serializer,
+        protected readonly LoggerInterface $logger
     ) {
     }
 
@@ -34,6 +37,9 @@ abstract class AbstractFileImportWorker implements FileImportWorkerInterface
         if (!array_key_exists(self::FILE_PATH_KEY, $params)) {
             throw new InvalidArgumentException(sprintf("Missing \"%s\" key", self::FILE_PATH_KEY));
         }
+        if (!array_key_exists(self::FILE_ID, $params)) {
+            throw new InvalidArgumentException(sprintf("Missing \"%s\" key", self::FILE_ID));
+        }
     }
 
     public function configure(WorkUnitEntity $entity): void
@@ -41,6 +47,7 @@ abstract class AbstractFileImportWorker implements FileImportWorkerInterface
         $params = array_merge([], $entity->getParameters());
         $this->params = $this->mapParameters($params);
         $this->validateParams($this->params);
+        $this->logger->debug('Worker parameters set: '.json_encode($params));
     }
 
     public function getFilePath(): string

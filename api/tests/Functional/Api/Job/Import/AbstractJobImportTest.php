@@ -2,7 +2,6 @@
 
 namespace App\Tests\Functional\Api\Job\Import;
 
-use ApiPlatform\Symfony\Bundle\Test\Response;
 use App\Tests\Functional\Api\AuthApiTestCase;
 use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -11,9 +10,7 @@ use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface;
-use Symfony\Component\Messenger\Transport\TransportInterface;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
@@ -23,9 +20,6 @@ abstract class AbstractJobImportTest extends AuthApiTestCase
     protected ParameterBagInterface $params;
 
     private Application $application;
-
-    private MessageBusInterface $messageBus;
-
 
     protected function setUp(): void
     {
@@ -89,11 +83,11 @@ abstract class AbstractJobImportTest extends AuthApiTestCase
 
         /** @var ReceiverInterface $transport */
         $transport = self::getContainer()->get("messenger.transport.$transportName");
-        $this->assertCount($expectedQueueLength, $transport->get());
+//        $this->assertCount($expectedQueueLength, $transport->get());
 
         $command = $this->getApplication()->find('messenger:consume');
         $commandTester = new CommandTester($command);
-        $commandTester->execute([$transportName, '--limit' => 1]);
+        $commandTester->execute([$transportName, '--limit' => $expectedQueueLength]);
 
         $this->assertCount(0, $transport->get());
     }

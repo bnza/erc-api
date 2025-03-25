@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Vich\UploaderBundle\Event\Event as VicUploaderEvent;
 use Vich\UploaderBundle\Event\Events as VicUploaderEvents;
 
-class MediaObjectPostInject implements EventSubscriberInterface
+class MediaObjectPostInjectSubscriber implements EventSubscriberInterface
 {
     private ?MediaObject $media = null;
 

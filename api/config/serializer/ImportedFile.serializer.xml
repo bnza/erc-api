@@ -1,0 +1,26 @@
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
+        https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="App\Entity\Job\ImportedFile">
+        <attribute name="id">
+            <group>ImportedFile:read</group>
+        </attribute>
+        <attribute name="mediaObject">
+            <group>ImportedFile:read</group>
+        </attribute>
+        <attribute name="originalFilename">
+            <group>ImportedFile:read</group>
+        </attribute>
+        <attribute name="userId">
+            <group>ImportedFile:read</group>
+        </attribute>
+        <attribute name="service">
+            <group>ImportedFile:read</group>
+        </attribute>
+        <attribute name="uploadDate">
+            <group>ImportedFile:read</group>
+        </attribute>
+    </class>
+</serializer>

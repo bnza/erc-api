@@ -4,6 +4,7 @@ vich_uploader:
         media_object:
             uri_prefix: /media
             upload_destination: /srv/static/media
+            delete_on_remove: false
             namer: App\Service\MediaObjectFileHashNamer
             directory_namer:
                 service: Vich\UploaderBundle\Naming\SubdirDirectoryNamer
@@ -12,4 +13,5 @@ vich_uploader:
             uri_prefix: /import
             upload_destination: /srv/static/import
             namer: Vich\UploaderBundle\Naming\OrignameNamer
+            delete_on_remove: true
     
