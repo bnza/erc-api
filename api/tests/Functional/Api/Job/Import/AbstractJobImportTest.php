@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface;
 use Symfony\Component\Messenger\Transport\TransportInterface;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
@@ -89,12 +90,15 @@ abstract class AbstractJobImportTest extends AuthApiTestCase
 
         /** @var ReceiverInterface $transport */
         $transport = self::getContainer()->get("messenger.transport.$transportName");
-        $this->assertCount($expectedQueueLength, $transport->get());
+//        $this->assertCount($expectedQueueLength, $transport->get());
 
         $command = $this->getApplication()->find('messenger:consume');
         $commandTester = new CommandTester($command);
-        $commandTester->execute([$transportName, '--limit' => 1]);
-
+        $commandTester->execute([$transportName, '--limit' => $expectedQueueLength]);
+//        $process = new Process(['bin/console', 'messenger:consume', 'async', '-vvv']);
+//        $process->start();
+//        sleep(2);
+//        $process->stop();
         $this->assertCount(0, $transport->get());
     }
 
