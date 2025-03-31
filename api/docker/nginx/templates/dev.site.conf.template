@@ -20,6 +20,10 @@ server {
         alias /srv/static/media/;
     }
 
+    location /import/ {
+        alias /srv/static/import/;
+    }
+
     location /geoserver/ {
             proxy_pass http://geoserver:8080;
             proxy_set_header Host $host;

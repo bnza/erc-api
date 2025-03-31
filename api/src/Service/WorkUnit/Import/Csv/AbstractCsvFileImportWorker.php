@@ -64,7 +64,7 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
         $errors = $this->validator->validate($dto);
         if (count($errors) > 0) {
             $this->violations->addAll($errors);
-            $_args[CsvFileValidationErrorsWriter::VALIDATION_ERRORS_FIELD_NAME] = (string)$errors;
+            $_args[CsvFileValidationErrorsWriter::VALIDATION_ERRORS_FIELD_NAME] = "Row [$index]: $errors";
             $this->getWriter()->insertOne($_args);
 
             return;
@@ -74,7 +74,7 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
         $errors = $this->validator->validate($entity, null, ['Default', 'import']);
         if (count($errors) > 0) {
             $this->violations->addAll($errors);
-            $_args[CsvFileValidationErrorsWriter::VALIDATION_ERRORS_FIELD_NAME] = (string)$errors;
+            $_args[CsvFileValidationErrorsWriter::VALIDATION_ERRORS_FIELD_NAME] = "Row [$index]: $errors";
             $this->getWriter()->insertOne($_args);
         } else {
             $this->dataEntityManager->persist($entity);

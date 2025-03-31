@@ -110,6 +110,14 @@ class JobImportCsvStratigraphicUnitTest extends AbstractJobImportTest
         $status = $this->getJsonResponseValue($response, 'status');
         $this->assertEquals(8, $status['value']);
         $this->assertIsArray($this->getJsonResponseValue($response, 'errors'));
+        $response = $client->request(
+            'GET',
+            "api/import_files/$jobId",
+            [
+                'headers' => ['Content-Type' => 'application/ld+json'],
+            ]
+        );
+        $this->assertResponseIsSuccessful();
     }
 
     public function testWrongFileMimeTypeError()

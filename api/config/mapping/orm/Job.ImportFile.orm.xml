@@ -5,13 +5,18 @@
 
     <entity name="App\Entity\Job\ImportFile" schema="job" table="import_file">
         <id name="id" type="uuid">
-            <generator strategy="CUSTOM"/>
-            <custom-id-generator class="Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator"/>
+            <generator strategy="NONE"/>
+            <!--<generator strategy="CUSTOM"/>
+            <custom-id-generator class="Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator"/>-->
         </id>
         <field name="filePath"/>
         <field name="originalFilename"/>
         <field name="mimeType"/>
         <field name="size" type="integer"/>
         <field name="uploadDate" type="datetime_immutable"/>
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="prePersist"/>
+        </lifecycle-callbacks>
     </entity>
 </doctrine-mapping>

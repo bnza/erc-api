@@ -35,4 +35,9 @@ class InvalidHeadersException extends InvalidArgumentException implements AppImp
         ];
     }
 
+    public function isHandled(): bool
+    {
+        return true;
+    }
+
 }

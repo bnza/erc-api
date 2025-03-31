@@ -67,3 +67,9 @@ services:
         arguments:
             $bus: '@messenger.bus.default'
             $jobEntityManager: '@doctrine.orm.bnza_job_manager_entity_manager'
+    
+    App\EventSubscriber\ImportFileCsvWorkUnitSubscriber:
+        arguments:
+            $dataEntityManager: '@doctrine.orm.default_entity_manager'
+            $jobEntityManager: '@doctrine.orm.bnza_job_manager_entity_manager'
+            $logger: '@logger'

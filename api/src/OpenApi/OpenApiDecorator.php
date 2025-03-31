@@ -21,10 +21,6 @@ class OpenApiDecorator implements OpenApiFactoryInterface
         $openApi = $this->decorated->__invoke($context);
         $this->setUserMeChangePassword($openApi);
 
-        /* foreach (['/api/import_files', '/api/media_objects', '/api/jobs/import/zooarchaeology/bones'] as $path) {
-             $this->setBinaryFormat($openApi, $path);
-         }*/
-
         return $openApi;
     }
 
@@ -52,40 +48,6 @@ class OpenApiDecorator implements OpenApiFactoryInterface
                     $operation->withDescription('Change user password')->withSummary('Change user password')
                 )
             );
-        }
-    }
-
-    private function setBinaryFormat(OpenApi $openApi, $path): void
-    {
-        if ($this->hasPath($openApi, $path)) {
-            $paths = $openApi->getPaths();
-            $operation = $paths->getPath($path)->getPost();
-            if ($operation) {
-                $requestBody = new RequestBody(
-                    'File upload',
-                    new ArrayObject([
-                        'multipart/form-data' => [
-                            'schema' => [
-                                'type' => 'object',
-                                'properties' => [
-                                    'file' => [
-                                        'type' => 'string',
-                                        'format' => 'binary',
-                                    ],
-                                ],
-                                'encoding' => [
-                                    'file' => [
-                                        'contentType' => 'application/octet-stream',
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ])
-                );
-                $updatedOperation = $operation->withRequestBody($requestBody);
-                $updatedPath = $paths->getPath($path)->withPost($updatedOperation);
-                $paths->addPath($path, $updatedPath);
-            }
         }
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Entity\Job;
 
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\OpenApi\Model;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Controller\CreateImportFileAction;
 use ArrayObject;
@@ -42,17 +42,20 @@ use Symfony\Component\Uid\Uuid;
             deserialize: false
         ),
     ],
+    normalizationContext: [
+        'groups' => ['ImportFile:read'],
+    ],
     security: "is_granted('IS_AUTHENTICATED_FULLY')"
 )]
 class ImportFile
 {
-
-    private Uuid $id;
+    private ?Uuid $id = null;
 
     public ?File $file = null;
 
     public ?string $filePath;
     public ?string $originalFilename;
+    public ?string $contentUrl = null;
 
     public DateTimeImmutable $uploadDate;
     public ?string $mimeType;
@@ -62,5 +65,44 @@ class ImportFile
     public function getId(): ?Uuid
     {
         return $this->id;
+    }
+
+    public function __construct(Uuid|string|null $id = null)
+    {
+        if (is_null($id)) {
+            return;
+        }
+        $this->id = is_string($id) ? Uuid::fromString($id) : $id;
+    }
+
+    public function getUploadDate(): DateTimeImmutable
+    {
+        return $this->uploadDate;
+    }
+
+    public function setUploadDate(DateTimeImmutable $uploadDate): ImportFile
+    {
+        $this->uploadDate = $uploadDate;
+
+        return $this;
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function setFile(?File $file): ImportFile
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    public function prePersist(): void
+    {
+        if ($this->id === null) {
+            $this->id = Uuid::v4();
+        }
     }
 }

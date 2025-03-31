@@ -101,7 +101,7 @@ class ImportFileWorkUnitSubscriber implements EventSubscriberInterface
             $copiedFilePath = (sys_get_temp_dir().DIRECTORY_SEPARATOR.basename($importedFilePath));
 
             if (!copy($importedFilePath, $copiedFilePath)) {
-                $this->logger->warning(
+                throw new RuntimeException(
                     "Cannot copy \"$importedFilePath\" to \"$copiedFilePath\". Unable to persist it"
                 );
             }

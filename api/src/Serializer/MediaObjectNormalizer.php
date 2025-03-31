@@ -3,6 +3,7 @@
 namespace App\Serializer;
 
 use App\Entity\Data\MediaObject;
+use App\Entity\Job\ImportFile;
 use ArrayObject;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -37,7 +38,7 @@ final class MediaObjectNormalizer implements NormalizerInterface
             return false;
         }
 
-        return $data instanceof MediaObject;
+        return is_object($data) && in_array(get_class($data), [MediaObject::class, ImportFile::class]);
     }
 
     public function getSupportedTypes(?string $format): array
@@ -46,6 +47,7 @@ final class MediaObjectNormalizer implements NormalizerInterface
             'object' => null,
             '*' => false,
             MediaObject::class => true,
+            ImportFile::class => true,
         ];
     }
 }

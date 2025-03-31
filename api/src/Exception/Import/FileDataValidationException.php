@@ -24,4 +24,8 @@ class FileDataValidationException extends InvalidArgumentException implements Ap
         ];
     }
 
+    public function isHandled(): bool
+    {
+        return true;
+    }
 }
