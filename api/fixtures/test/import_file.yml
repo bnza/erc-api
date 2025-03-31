@@ -1,0 +1,14 @@
+#file: noinspection YAMLSchemaValidation
+App\Entity\Job\ImportFile:
+    import_file_1:
+        filePath: 'test.pdf'
+        originalFilename: 'test.pdf'
+        mimeType: 'application/pdf'
+        size: 169
+        uploadDate: '<date_create_from_format("Y-m-d H:i:s","2024-09-16 17:58:18")>'
+    import_file_2:
+        filePath: 'fake.csv'
+        originalFilename: 'fake.csv'
+        mimeType: 'text/csv'
+        size: 67
+        uploadDate: '<date_create_from_format("Y-m-d H:i:s","2024-09-16 17:58:19")>'

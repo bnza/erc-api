@@ -14,4 +14,11 @@ vich_uploader:
             upload_destination: /srv/static/import
             namer: Vich\UploaderBundle\Naming\OrignameNamer
             delete_on_remove: true
-    
+
+when@test:
+    vich_uploader:
+        mappings:
+            media_object:
+                upload_destination: /tmp/srv/static/media
+            import_file:
+                upload_destination: /tmp/srv/static/import

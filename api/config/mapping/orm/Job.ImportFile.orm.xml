@@ -3,11 +3,9 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Entity\Job\ImportFile" schema="job" table="import_file">
+    <entity name="App\Entity\Job\ImportFile" schema="job" table="import_file" repository-class="App\Repository\ImportFileRepository">
         <id name="id" type="uuid">
             <generator strategy="NONE"/>
-            <!--<generator strategy="CUSTOM"/>
-            <custom-id-generator class="Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator"/>-->
         </id>
         <field name="filePath"/>
         <field name="originalFilename"/>
