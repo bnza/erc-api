@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Messenger\Event\WorkerMessageFailedEvent;
@@ -20,11 +21,29 @@ use Throwable;
 
 class ImportFileCsvWorkUnitSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @var array<string,EntityManagerInterface>
+     */
+    private array $ems = [];
+
     public function __construct(
-        private readonly EntityManagerInterface $dataEntityManager,
-        private readonly EntityManagerInterface $jobEntityManager,
+        private readonly ManagerRegistry $doctrine,
         private readonly LoggerInterface $logger,
     ) {
+        $this->ems['default'] = $this->doctrine->getManager('default');
+        $this->ems['bnza_job_manager'] = $this->doctrine->getManager('bnza_job_manager');
+    }
+
+    private function getEntityManager(string $name = 'default'): EntityManagerInterface
+    {
+        if (!array_key_exists($name, $this->ems)) {
+            throw new LogicException("Unknown entity manager name '$name'.");
+        }
+        if (!$this->ems[$name]->isOpen()) {
+            $this->ems[$name] = $this->doctrine->resetManager($name);
+        }
+
+        return $this->ems[$name];
     }
 
     public static function getSubscribedEvents(): array
@@ -38,7 +57,7 @@ class ImportFileCsvWorkUnitSubscriber implements EventSubscriberInterface
         $exception = $throwable->getPrevious();
         if ($exception instanceof JobExceptionInterface) {
             $id = $exception->getJobId();
-            $job = $this->jobEntityManager->getRepository(WorkUnitEntity::class)->find($id);
+            $job = $this->getEntityManager('bnza_job_manager')->getRepository(WorkUnitEntity::class)->find($id);
             foreach ($job->getErrors() as $error) {
                 match ($error->getClass()) {
                     FileDataValidationException::class => $this->persistValidationErrorFile($id, $error),
@@ -79,8 +98,8 @@ class ImportFileCsvWorkUnitSubscriber implements EventSubscriberInterface
                 ->setFile($uploadedFile)
                 ->setUploadDate(new DateTimeImmutable());
 
-            $this->dataEntityManager->persist($importFile);
-            $this->dataEntityManager->flush();
+            $this->getEntityManager()->persist($importFile);
+            $this->getEntityManager()->flush();
 
             $this->logger->debug("CSV validation error file successfully saved [\"{$importFile->getId()}\"]");
         } catch (Throwable $e) {

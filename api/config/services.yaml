@@ -30,17 +30,10 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-    
-    #    App\State\UserPasswordHasher:
-    #        bind:
-    #            $processor: '@api_platform.doctrine.orm.state.persist_processor'
     App\OpenApi\OpenApiDecorator:
         decorates: 'api_platform.openapi.factory'
         arguments: [ '@App\OpenApi\OpenApiDecorator.inner', '@logger' ]
         tags: [ 'api_platform.openapi.factory' ]
-    #        autoconfigure: false
     
     App\Repository\SitesUsersRepository:
         arguments: [ '@doctrine.orm.entity_manager' ]
@@ -56,20 +49,3 @@ services:
         arguments:
             $sourcePath: '%kernel.project_dir%/fixtures/media'
             $destPath: '/srv/static/media'
-
-    App\State\Job\Import\FileBasedImportProcessor:
-        arguments:
-            $appEntityManager: '@doctrine.orm.default_entity_manager'
-            $jobEntityManager: '@doctrine.orm.bnza_job_manager_entity_manager'
-            $locator: '@Bnza\JobManagerBundle\WorkUnitFactoryServiceLocator'
-
-    App\State\Job\Import\FileBasedImportRunnerProcessor:
-        arguments:
-            $bus: '@messenger.bus.default'
-            $jobEntityManager: '@doctrine.orm.bnza_job_manager_entity_manager'
-    
-    App\EventSubscriber\ImportFileCsvWorkUnitSubscriber:
-        arguments:
-            $dataEntityManager: '@doctrine.orm.default_entity_manager'
-            $jobEntityManager: '@doctrine.orm.bnza_job_manager_entity_manager'
-            $logger: '@logger'

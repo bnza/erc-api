@@ -9,6 +9,7 @@ use Bnza\JobManagerBundle\Entity\Status;
 use Bnza\JobManagerBundle\WorkUnitFactoryServiceLocator;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use LogicException;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -16,13 +17,27 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 class FileBasedImportProcessor implements ProcessorInterface
 {
     const CONTEXT_KEY = 'bnza_job_manager.service_id';
+    private array $ems = [];
 
     public function __construct(
-        private readonly EntityManagerInterface $appEntityManager,
-        private readonly EntityManagerInterface $jobEntityManager,
+        private readonly ManagerRegistry $doctrine,
         private readonly WorkUnitFactoryServiceLocator $locator,
         private readonly Security $security,
     ) {
+        $this->ems['default'] = $this->doctrine->getManager('default');
+        $this->ems['bnza_job_manager'] = $this->doctrine->getManager('bnza_job_manager');
+    }
+
+    private function getEntityManager(string $name = 'default'): EntityManagerInterface
+    {
+        if (!array_key_exists($name, $this->ems)) {
+            throw new LogicException("Unknown entity manager name '$name'.");
+        }
+        if (!$this->ems[$name]->isOpen()) {
+            $this->ems[$name] = $this->doctrine->resetManager($name);
+        }
+
+        return $this->ems[$name];
     }
 
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = [])
@@ -44,8 +59,8 @@ class FileBasedImportProcessor implements ProcessorInterface
             ->setDescription($data->description)
             ->setUploadDate(new DateTimeImmutable());
 
-        $this->appEntityManager->persist($importFile);
-        $this->appEntityManager->flush();
+        $this->getEntityManager()->persist($importFile);
+        $this->getEntityManager()->flush();
 
         $job = $factory
             ->toEntity()
@@ -58,8 +73,8 @@ class FileBasedImportProcessor implements ProcessorInterface
                 $this->security->getUser()->getUserIdentifier()
             );
 
-        $this->jobEntityManager->persist($job);
-        $this->jobEntityManager->flush();
+        $this->getEntityManager('bnza_job_manager')->persist($job);
+        $this->getEntityManager('bnza_job_manager')->flush();
 
         return $job;
     }
