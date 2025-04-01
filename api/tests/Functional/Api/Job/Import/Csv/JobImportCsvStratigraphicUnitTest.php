@@ -14,8 +14,7 @@ class JobImportCsvStratigraphicUnitTest extends AbstractJobImportTest
         $clientEditor = $this->createAuthenticatedClient(self::USER_EDITOR, self::USER_EDITOR_PW);
         $client = $this->createAuthenticatedClient();
 
-        // @todo test with at least two messages
-        $jobId = $this->uploadFile($client, 'su.csv', self::URL);
+        $jobId = $this->uploadFile($client, 'su.csv', self::URL, null, 'Some description');
 
         $this->runJob($client, $jobId, self::URL);
 

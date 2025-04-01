@@ -108,8 +108,10 @@ class ImportFileWorkUnitSubscriber implements EventSubscriberInterface
 
             $uploadedFile = new UploadedFile($copiedFilePath, $importFile->originalFilename, null, null, true);
 
-            $mediaObject = new MediaObject()->setFile($uploadedFile);
-            $mediaObject->uploadDate = new DateTimeImmutable();
+            $mediaObject = new MediaObject()
+                ->setFile($uploadedFile)
+                ->setDescription($importFile->description)
+                ->setUploadDate($importFile->uploadDate);
 
             $importedFile = new ImportedFile()
                 ->setId($task->getEntity()->getRoot()->getId())

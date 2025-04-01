@@ -92,14 +92,22 @@ abstract class AbstractJobImportTest extends AuthApiTestCase
         $this->assertCount(0, $transport->get());
     }
 
-    protected function uploadFile(Client $client, string $fileName, string $url, ?string $path = ''): int|Uuid
-    {
+    protected function uploadFile(
+        Client $client,
+        string $fileName,
+        string $url,
+        ?string $path = '',
+        ?string $description = ''
+    ): int|Uuid {
         $uploadedFile = $this->getTestUploadFile($fileName, $path);
         $response = $client->request(
             'POST',
             $url,
             [
                 'headers' => ['Content-Type' => 'multipart/form-data'],
+                'json' => [
+                    'description' => $description,
+                ],
                 'extra' => [
                     'files' =>
                         [

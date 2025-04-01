@@ -61,6 +61,7 @@ class ImportFile
     public ?string $mimeType;
 
     public ?int $size;
+    public ?string $description = null;
 
     public function getId(): ?Uuid
     {
@@ -95,6 +96,13 @@ class ImportFile
     public function setFile(?File $file): ImportFile
     {
         $this->file = $file;
+
+        return $this;
+    }
+
+    public function setDescription(?string $description): ImportFile
+    {
+        $this->description = $description;
 
         return $this;
     }

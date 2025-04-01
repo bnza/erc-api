@@ -39,9 +39,11 @@ class FileBasedImportProcessor implements ProcessorInterface
 
         $factory = $this->locator->get($serviceId);
 
-        $importFile = new ImportFile();
-        $importFile->file = $data->file;
-        $importFile->uploadDate = new DateTimeImmutable();
+        $importFile = new ImportFile()
+            ->setFile($data->file)
+            ->setDescription($data->description)
+            ->setUploadDate(new DateTimeImmutable());
+
         $this->appEntityManager->persist($importFile);
         $this->appEntityManager->flush();
 

@@ -14,6 +14,12 @@
             <group>MediaObject:read</group>
             <group>MediaObject:write</group>
         </attribute>
+        <attribute name="description">
+            <group>ImportedFile:read</group>
+            <group>MediaObjectJoin:read</group>
+            <group>MediaObject:read</group>
+            <group>MediaObject:write</group>
+        </attribute>
         <attribute name="sha256">
             <group>ImportedFile:read</group>
             <group>MediaObject:read</group>

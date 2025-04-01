@@ -62,6 +62,8 @@ class MediaObject
     private string $mimeType;
 
     public int $size;
+
+    public ?string $description = null;
     public ?string $contentUrl = null;
     private ?int $width = null;
 
@@ -106,6 +108,30 @@ class MediaObject
     {
         $this->width = $dimensions[0];
         $this->height = $dimensions[1];
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): MediaObject
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getUploadDate(): DateTimeImmutable
+    {
+        return $this->uploadDate;
+    }
+
+    public function setUploadDate(DateTimeImmutable $uploadDate): MediaObject
+    {
+        $this->uploadDate = $uploadDate;
 
         return $this;
     }

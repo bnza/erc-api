@@ -5,11 +5,8 @@ namespace App\Entity\Job\Import\Csv;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model;
-use App\Service\Job\Import\StratigraphicUnitCsvFileImportJob;
 use App\State\Job\Import\FileBasedImportProcessor;
-use App\State\Job\Import\FileBasedImportRunnerProcessor;
 use ArrayObject;
-use Bnza\JobManagerBundle\State\WorkUnitItemProvider;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -40,16 +37,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             security: "is_granted('IS_AUTHENTICATED_FULLY')",
             processor: FileBasedImportProcessor::class
         ),
-//        new Post(
-//            uriTemplate: 'jobs/import/csv/stratigraphic_unit/{id}/run',
-//            status: 202,
-//            security: "is_granted('run', object)",
-//            output: 'Bnza\JobManagerBundle\Entity\WorkUnitEntity',
-//            read: true,
-//            deserialize: false,
-//            provider: WorkUnitItemProvider::class,
-//            processor: FileBasedImportRunnerProcessor::class,
-//        ),
     ],
 )]
 #[Vich\Uploadable]
@@ -63,10 +50,5 @@ class StratigraphicUnit
         originalName: 'originalFilename')]
     public ?File $file;
 
-    public readonly string $jobClassName;
-
-    public function __construct()
-    {
-        $this->jobClassName = StratigraphicUnitCsvFileImportJob::class;
-    }
+    public ?string $description = null;
 }

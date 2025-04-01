@@ -13,6 +13,9 @@
         <attribute name="originalFilename">
             <group>ImportFile:read</group>
         </attribute>
+        <attribute name="description">
+            <group>ImportFile:read</group>
+        </attribute>
         <attribute name="uploadDate">
             <group>ImportFile:read</group>
         </attribute>
