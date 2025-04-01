@@ -4,7 +4,6 @@ namespace App\EventSubscriber;
 
 use App\Entity\Job\ImportFile;
 use App\Exception\Import\FileDataValidationException;
-use App\Service\WorkUnit\Import\AbstractImportJob;
 use Bnza\JobManagerBundle\Entity\WorkUnitEntity;
 use Bnza\JobManagerBundle\Entity\WorkUnitErrorEntity;
 use Bnza\JobManagerBundle\Exception\JobExceptionInterface;
@@ -42,7 +41,8 @@ class ImportFileCsvWorkUnitSubscriber implements EventSubscriberInterface
             $job = $this->jobEntityManager->getRepository(WorkUnitEntity::class)->find($id);
             foreach ($job->getErrors() as $error) {
                 match ($error->getClass()) {
-                    FileDataValidationException::class => $this->persistValidationErrorFile($id, $error)
+                    FileDataValidationException::class => $this->persistValidationErrorFile($id, $error),
+                    default => $this->logger->error($error->getMessage())
                 };
             }
         }

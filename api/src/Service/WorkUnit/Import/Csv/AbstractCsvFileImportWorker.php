@@ -3,6 +3,7 @@
 namespace App\Service\WorkUnit\Import\Csv;
 
 use App\Exception\Import\FileDataValidationException;
+use App\Exception\Import\InvalidFileTypeException;
 use App\Exception\Import\InvalidHeadersException;
 use App\Service\WorkUnit\Import\AbstractFileImportWorker;
 use Bnza\JobManagerBundle\Entity\WorkUnitEntity;
@@ -121,15 +122,13 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
         }
         $file = new File($params[self::FILE_PATH_KEY]);
         if ($file->getMimeType() !== 'text/csv') {
-            throw new  InvalidArgumentException(
-                sprintf("File \"%s\" is not a valid CSV file.", $params[self::FILE_PATH_KEY])
-            );
+            throw new  InvalidFileTypeException($params[self::FILE_PATH_KEY], 'text/csv');
         }
         if (isset($params[self::HEADER_OFFSET_KEY]) && !is_integer($params[self::HEADER_OFFSET_KEY])) {
             throw new InvalidArgumentException('Header offset must be an integer');
         }
         if (isset($params[self::DELIMITER_KEY]) && !is_string($params[self::DELIMITER_KEY])) {
-            throw new InvalidArgumentException('Header offset must be an integer');
+            throw new InvalidArgumentException('Delimiter key must be a string');
         }
     }
 
