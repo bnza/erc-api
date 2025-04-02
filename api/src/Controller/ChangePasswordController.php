@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use ApiPlatform\Validator\Exception\ValidationException;
-use App\DTO\PasswordChangeDTO;
+use App\Dto\PasswordChangeDto;
 use App\Repository\UserRepository;
 use Lexik\Bundle\JWTAuthenticationBundle\Response\JWTAuthenticationFailureResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,11 +20,11 @@ class ChangePasswordController extends AbstractController
         private readonly Security $security,
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly UserRepository $repository,
-        private readonly ValidatorInterface $validator)
-    {
+        private readonly ValidatorInterface $validator
+    ) {
     }
 
-    public function __invoke(PasswordChangeDTO $passwordChangeDTO): Response
+    public function __invoke(PasswordChangeDto $passwordChangeDTO): Response
     {
         $currentUser = $this->security->getUser();
 
@@ -47,7 +47,10 @@ class ChangePasswordController extends AbstractController
             return new JWTAuthenticationFailureResponse('Wrong password');
         }
 
-        $this->repository->upgradePassword($user, $this->passwordHasher->hashPassword($user, $passwordChangeDTO->repeatPassword));
+        $this->repository->upgradePassword(
+            $user,
+            $this->passwordHasher->hashPassword($user, $passwordChangeDTO->repeatPassword)
+        );
 
         return new Response(null, Response::HTTP_NO_CONTENT);
     }

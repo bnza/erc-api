@@ -2,10 +2,10 @@
 
 namespace App\Tests\Functional\Api\Job\Import\Csv;
 
-use App\Tests\Functional\Api\Job\Import\AbstractJobImportTest;
+use App\Tests\Functional\Api\Job\Import\JobImportTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class JobImportCsvStratigraphicUnitTest extends AbstractJobImportTest
+class JobImportCsvStratigraphicUnitTest extends JobImportTestCase
 {
     private const string URL = 'api/work_units/import/csv/stratigraphic_units';
 

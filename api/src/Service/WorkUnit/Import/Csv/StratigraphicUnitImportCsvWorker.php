@@ -2,7 +2,7 @@
 
 namespace App\Service\WorkUnit\Import\Csv;
 
-use App\DTO\Import\CSV\StratigraphicUnitDTO;
+use App\Dto\Import\Csv\StratigraphicUnitDto;
 use App\Entity\Data\Site;
 use App\Entity\Data\StratigraphicUnit;
 use UnexpectedValueException;
@@ -26,7 +26,7 @@ final class StratigraphicUnitImportCsvWorker extends AbstractCsvFileImportWorker
     {
         $dtoClass = $this->getDtoClass();
 
-        /* @var StratigraphicUnitDTO $dto */
+        /* @var StratigraphicUnitDto $dto */
         if (!$dto instanceof $dtoClass) {
             throw new UnexpectedValueException('Expected instance of '.$dtoClass);
         }
@@ -46,7 +46,7 @@ final class StratigraphicUnitImportCsvWorker extends AbstractCsvFileImportWorker
 
     protected function getDtoClass(): string
     {
-        return StratigraphicUnitDTO::class;
+        return StratigraphicUnitDto::class;
     }
 
     public function reset(): void

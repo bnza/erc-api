@@ -4,19 +4,26 @@ namespace App\State\Job\Import;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
+use App\Entity\Job\Import\Csv\CsvFileImportedEntityInterface;
 use App\Entity\Job\ImportFile;
 use Bnza\JobManagerBundle\Entity\Status;
+use Bnza\JobManagerBundle\Entity\WorkUnitEntity;
 use Bnza\JobManagerBundle\WorkUnitFactoryServiceLocator;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use LogicException;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
+/**
+ * @template T1
+ * @template T2
+ */
 class FileBasedImportProcessor implements ProcessorInterface
 {
-    const CONTEXT_KEY = 'bnza_job_manager.service_id';
+    const string CONTEXT_KEY = 'bnza_job_manager.service_id';
     private array $ems = [];
 
     public function __construct(
@@ -40,6 +47,13 @@ class FileBasedImportProcessor implements ProcessorInterface
         return $this->ems[$name];
     }
 
+    /**
+     * Handles the state.
+     *
+     * @inheritDoc
+     * @param CsvFileImportedEntityInterface $data
+     * @return WorkUnitEntity
+     */
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         $denormalizationContext = $operation->getDenormalizationContext();
@@ -55,8 +69,8 @@ class FileBasedImportProcessor implements ProcessorInterface
         $factory = $this->locator->get($serviceId);
 
         $importFile = new ImportFile()
-            ->setFile($data->file)
-            ->setDescription($data->description)
+            ->setFile($data->getFile())
+            ->setDescription($data->getDescription())
             ->setUploadDate(new DateTimeImmutable());
 
         $this->getEntityManager()->persist($importFile);

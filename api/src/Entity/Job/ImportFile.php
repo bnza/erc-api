@@ -107,6 +107,66 @@ class ImportFile
         return $this;
     }
 
+    public function getFilePath(): ?string
+    {
+        return $this->filePath;
+    }
+
+    public function setFilePath(?string $filePath): ImportFile
+    {
+        $this->filePath = $filePath;
+
+        return $this;
+    }
+
+    public function getOriginalFilename(): ?string
+    {
+        return $this->originalFilename;
+    }
+
+    public function setOriginalFilename(?string $originalFilename): ImportFile
+    {
+        $this->originalFilename = $originalFilename;
+
+        return $this;
+    }
+
+    public function getContentUrl(): ?string
+    {
+        return $this->contentUrl;
+    }
+
+    public function setContentUrl(?string $contentUrl): ImportFile
+    {
+        $this->contentUrl = $contentUrl;
+
+        return $this;
+    }
+
+    public function getMimeType(): ?string
+    {
+        return $this->mimeType;
+    }
+
+    public function setMimeType(?string $mimeType): ImportFile
+    {
+        $this->mimeType = $mimeType;
+
+        return $this;
+    }
+
+    public function getSize(): ?int
+    {
+        return $this->size;
+    }
+
+    public function setSize(?int $size): ImportFile
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
     public function prePersist(): void
     {
         if ($this->id === null) {

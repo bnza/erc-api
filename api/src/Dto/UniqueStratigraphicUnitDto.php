@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DTO;
+namespace App\Dto;
 
-class UniqueStratigraphicUnitDTO
+class UniqueStratigraphicUnitDto
 {
     public int $site;
     public int $year;

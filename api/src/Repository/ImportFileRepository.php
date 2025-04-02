@@ -45,7 +45,7 @@ class ImportFileRepository extends EntityRepository
         }
         $em->flush();
 
-        return $deleted;
+        return $entities;
     }
 
     private function validateBasicRelativeDate(string $relativeDateTimeString, bool $onlyNegative = false): bool

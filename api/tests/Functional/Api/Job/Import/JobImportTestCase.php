@@ -14,7 +14,7 @@ use Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
-abstract class AbstractJobImportTest extends AuthApiTestCase
+abstract class JobImportTestCase extends AuthApiTestCase
 {
     protected FileLocatorInterface $locator;
     protected ParameterBagInterface $params;

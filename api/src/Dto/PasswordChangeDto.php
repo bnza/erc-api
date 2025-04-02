@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DTO;
+namespace App\Dto;
 
-class PasswordChangeDTO
+class PasswordChangeDto
 {
     public string $oldPassword;
     public string $newPassword;

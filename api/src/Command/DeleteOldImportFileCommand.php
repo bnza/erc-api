@@ -68,7 +68,7 @@ class DeleteOldImportFileCommand extends Command
         }
 
         foreach ($deleted as $record) {
-            $output->writeln(sprintf('<info>%s</info>', $record->filePath));
+            $output->writeln(sprintf('<info>%s</info>', $record->getFilePath()));
         }
 
         return self::SUCCESS;

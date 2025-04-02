@@ -7,7 +7,6 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model;
 use App\State\Job\Import\FileBasedImportProcessor;
 use ArrayObject;
-use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ApiResource(
@@ -40,15 +39,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     ],
 )]
 #[Vich\Uploadable]
-class StratigraphicUnit
+class StratigraphicUnit extends AbstractCsvFileImportedEntity
 {
-    #[Vich\UploadableField(
-        mapping: 'import_file',
-        fileNameProperty: 'filePath',
-        size: 'size',
-        mimeType: 'mimeType',
-        originalName: 'originalFilename')]
-    public ?File $file;
-
-    public ?string $description = null;
 }

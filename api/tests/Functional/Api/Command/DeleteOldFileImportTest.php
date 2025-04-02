@@ -1,6 +1,6 @@
 <?php
 
-namespace Functional\Api\Command;
+namespace App\Tests\Functional\Api\Command;
 
 use App\Entity\Job\ImportFile;
 use App\Tests\Functional\Api\AuthApiTestCase;

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\DTO\Import\CSV;
+namespace App\Dto\Import\Csv;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator as AppAssert;
 
-class StratigraphicUnitDTO
+class StratigraphicUnitDto
 {
     public mixed $id;
 

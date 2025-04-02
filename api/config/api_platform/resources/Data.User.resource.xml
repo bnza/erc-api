@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <resources xmlns="https://api-platform.com/schema/metadata/resources-3.0"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
         https://api-platform.com/schema/metadata/resources-3.0.xsd">
     <resource class="App\Entity\Data\User"
-              routePrefix="/admin"
+        routePrefix="/admin"
     >
         <normalizationContext>
             <values>
@@ -94,10 +94,10 @@
                 </validationContext>
             </operation>
             <operation class="ApiPlatform\Metadata\Patch"
-                       security="is_granted('ROLE_ADMIN')"
-                       processor="App\State\UserPasswordHasher"
-                       output="false"
-                       status="204">
+                security="is_granted('ROLE_ADMIN')"
+                processor="App\State\UserPasswordHasher"
+                output="false"
+                status="204">
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -140,24 +140,24 @@
         </normalizationContext>
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection"
-                       controller="App\Controller\MeController"
-                       name="me"
-                       security="is_granted('IS_AUTHENTICATED_FULLY')"
-                       uriTemplate="/users/me"
-                       read="false"
-                       write="false"
+                controller="App\Controller\MeController"
+                name="me"
+                security="is_granted('IS_AUTHENTICATED_FULLY')"
+                uriTemplate="/users/me"
+                read="false"
+                write="false"
             />
             <operation class="ApiPlatform\Metadata\Post"
-                       controller="App\Controller\ChangePasswordController"
-                       name="change_password"
-                       security="is_granted('IS_AUTHENTICATED_FULLY')"
-                       uriTemplate="/users/me/change-password"
-                       read="false"
-                       write="false"
-                       output="false"
-                       description="Change the current user password"
-                       input="App\DTO\PasswordChangeDTO"
-                       validate="true"
+                controller="App\Controller\ChangePasswordController"
+                name="change_password"
+                security="is_granted('IS_AUTHENTICATED_FULLY')"
+                uriTemplate="/users/me/change-password"
+                read="false"
+                write="false"
+                output="false"
+                description="Change the current user password"
+                input="App\Dto\PasswordChangeDto"
+                validate="true"
             />
         </operations>
     </resource>
