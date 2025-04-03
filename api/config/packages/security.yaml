@@ -12,9 +12,6 @@ security:
             entity:
                 class: App\Entity\Data\User
                 property: email
-            # document:
-            #    class: App\Document\User
-            #    property: email    
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_EDITOR
@@ -23,13 +20,14 @@ security:
         dev:
             pattern: ^/_(profiler|wdt)
             security: false
-        logout:
-            pattern: ^/api/logout
-            stateless: true
-            security: false
+        #        logout:
+        #            pattern: ^/api/logout
+        #            stateless: true
+        #            security: false
         main:
             stateless: true
             provider: users
+            entry_point: jwt
             json_login:
                 check_path: auth # The name in routes.yaml is enough for mapping
                 username_path: email
@@ -37,15 +35,19 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
             jwt: ~
+            refresh_jwt:
+                check_path: /api/token/refresh
+            logout:
+                path: api_token_invalidate
 
     access_control:
         - { path: ^/$, roles: PUBLIC_ACCESS } # Allows accessing the Swagger UI
         - { path: ^/docs, roles: PUBLIC_ACCESS } # Allows accessing the Swagger UI docs
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/logout, roles: PUBLIC_ACCESS }
+        - { path: ^/api/token/refresh, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/, roles: PUBLIC_ACCESS }
-#        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:

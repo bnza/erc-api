@@ -10,7 +10,13 @@ homepage:
     defaults:
         path: /app/
         permanent: true
-        
+
 auth:
     path: /api/login
-    methods: ['POST']
+    methods: [ 'POST' ]
+
+api_refresh_token:
+    path: /api/token/refresh
+
+api_token_invalidate:
+    path: /api/token/invalidate
