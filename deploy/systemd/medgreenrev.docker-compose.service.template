@@ -1,0 +1,20 @@
+[Unit]
+Description=MEDGREENREV app (Docker Compose)
+After=network.target docker.service
+Requires=docker.service
+
+[Service]
+User=${DOCKER_USER}
+WorkingDirectory=${DOCKER_COMPOSE_DIRECTORY}
+ExecStart=/bin/sh -c "/usr/bin/docker compose up -d && /usr/bin/docker wait $(docker compose ps -q nginx)"
+#ExecStart=/usr/bin/docker compose up -d
+Restart=always
+RestartSec=10
+TimeoutStartSec=0
+
+StandardOutput=journal
+StandardError=journal
+
+
+[Install]
+WantedBy=multi-user.target

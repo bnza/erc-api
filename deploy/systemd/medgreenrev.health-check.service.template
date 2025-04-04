@@ -1,0 +1,19 @@
+[Unit]
+Description=Check MEDGREENREV app health (Docker Compose)
+After=medgreenrev.docker-compose.service
+Requires=medgreenrev.docker-compose.service
+
+[Service]
+User=${DOCKER_USER}
+WorkingDirectory=${DOCKER_COMPOSE_DIRECTORY}
+Type=oneshot
+ExecStart=${DOCKER_COMPOSE_DIRECTORY}/deploy/check_docker_compose_health.sh
+Restart=on-failure
+RestartSec=5
+RemainAfterExit=yes
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

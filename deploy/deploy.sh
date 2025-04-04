@@ -5,46 +5,52 @@ set -e
 # Check if running with sudo
 if [ -n "$SUDO_USER" ]; then
   # User who ran sudo
-  ACTUAL_USER="$SUDO_USER"
+  docker_user="$SUDO_USER"
 else
   # Running directly as the current user
-  ACTUAL_USER=$(whoami)
+  docker_user=$(whoami)
 fi
 
 # Check if current user is root
-if [ ${ACTUAL_USER} = "root" ]; then
+if [ ${docker_user} = "root" ]; then
   echo "Error: This script cannot be run as root."
   exit 1
 fi
 
 # Get script's parent directory
-SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
-
-# Get current user
-DOCKER_USER=${ACTUAL_USER}
+script_directory=$(dirname "$(readlink -f "$0")")
 
 # Get script's parent directory
-DOCKER_COMPOSE_DIRECTORY=$(dirname "${SCRIPT_DIR}")
+docker_compose_directory=$(dirname "${script_directory}")
 
-# Generate absolute path to the template file, relative to the script's directory.
-TEMPLATE_PATH="$SCRIPT_DIR/systemd/medgreenrev.messenger-consumer.service.template"
+services="docker-compose health-check messenger-consumer"
+services_files=""
 
 echo "Replacing template vars"
-echo "DOCKER_USER: ${DOCKER_USER}"
-echo "DOCKER_COMPOSE_DIRECTORY: ${DOCKER_COMPOSE_DIRECTORY}"
-echo "##########"
-# Generate service file using envsubst with absolute template path
-env DOCKER_USER="$DOCKER_USER" DOCKER_COMPOSE_DIRECTORY="$DOCKER_COMPOSE_DIRECTORY" envsubst < "$TEMPLATE_PATH" | sudo tee /etc/systemd/system/medgreenrev.messenger-consumer.service
-echo "##########"
-## Re
-#envsubst < "${TEMPLATE_PATH}" | sudo tee /etc/systemd/system/medgreenrev.messenger-consumer.service
+echo "DOCKER_USER: ${docker_user}"
+echo "DOCKER_COMPOSE_DIRECTORY: ${docker_compose_directory}"
+
+for service in $services; do
+	# Generate absolute path to the template file, relative to the script's directory.
+	service_file="/etc/systemd/system/medgreenrev.$service.service"
+	template_path="$script_directory/systemd/medgreenrev.$service.service.template"
+	echo "---------- $service_file ----------"
+	# Generate service file using envsubst with absolute template path
+	env DOCKER_USER="$docker_user" DOCKER_COMPOSE_DIRECTORY="$docker_compose_directory" envsubst < "$template_path" | sudo tee $service_file
+	echo "-----------------------------------"
+	services_files="$services_files\n$service_file"
+done
 
 # Reload systemd configuration
 sudo systemctl daemon-reload
 
-# Enable and start the service
-sudo systemctl enable medgreenrev.messenger-consumer.service
-sudo systemctl start medgreenrev.messenger-consumer.service
+echo "Enable and start the services:"
+# Enable and start the services
+for service_file in $services_files; do
+    echo "Processing: $service_services_files"
+    sudo systemctl enable "$(basename "$service_file")"
+    sudo systemctl start "$(basename "$service_file")"
+done
 
-echo "Messenger consumer service deployed."
+echo "Systemctl services deployed."
 

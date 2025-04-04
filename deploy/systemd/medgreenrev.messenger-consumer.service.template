@@ -1,16 +1,15 @@
 [Unit]
 Description=Symfony Messenger Consumer (Docker Compose)
-After=docker.service
-Requires=docker.service
+After=medgreenrev.health-check.service
+Requires=medgreenrev.docker-compose.service
 
 [Service]
-EnvironmentFile=/etc/default/medgreenrev.messenger-consumer
 User=${DOCKER_USER}
 WorkingDirectory=${DOCKER_COMPOSE_DIRECTORY}
-ExecStart=/usr/bin/docker compose exec php bin/console messenger:consume async -vv --memory-limit=512M
+ExecStart=/bin/sh -c '${DOCKER_COMPOSE_DIRECTORY}/deploy/check_docker_compose_health.sh && /usr/bin/docker compose exec php bin/console messenger:consume async -vv --memory-limit=512M'
 ExecStop=/usr/bin/docker compose exec php bin/console messenger:stop-workers
 Restart=always
-RestartSec=5
+RestartSec=10
 SuccessExitStatus=0 130
 
 [Install]

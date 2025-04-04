@@ -28,7 +28,6 @@ services:
         condition: service_healthy
       database:
         condition: service_started
-    restart: unless-stopped
     volumes:
       - ./api:/srv/api
       - php_socket:/var/run/php
@@ -66,7 +65,8 @@ services:
   nginx:
     image: nginx:1.25-alpine
     depends_on:
-      - php
+      php:
+        condition: service_healthy
     ports:
       - "${NGINX_PORT:-8000}:80"
     volumes:
@@ -79,6 +79,12 @@ services:
       - php_socket:/var/run/php
     environment:
       - NGINX_HOST=${NGINX_HOST:-localhost}
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "80" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
     logging:
       driver: local
       options:

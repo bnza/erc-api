@@ -1,3 +1,0 @@
-# This is a comment
-DOCKER_USER="myuser"
-DOCKER_COMPOSE_DIRECTORY="/path/to/app"
