@@ -12,7 +12,7 @@ use Symfony\Component\PropertyInfo\Type;
 
 final class StratigraphicUnitCodeSearchFilter extends AbstractFilter
 {
-    private const FILTER_KEY = 'search';
+    private const string FILTER_KEY = 'search';
 
     protected function setSingleNumericFilterExpressions(
         QueryBuilder $queryBuilder,
@@ -80,15 +80,15 @@ final class StratigraphicUnitCodeSearchFilter extends AbstractFilter
         }
 
         if (1 === count($values)) {
-            //            $alias = $queryBuilder->getRootAliases()[0];
-            if (is_numeric($values[0])) {
+            $singleValue = $values[0];
+            if (is_numeric($singleValue)) {
                 $expressions = $this->setSingleNumericFilterExpressions($queryBuilder);
                 $queryBuilder
                     ->andWhere(
                         $queryBuilder
                             ->expr()
                             ->orX(...$expressions)
-                    )->setParameter('search', "%$values[0]");
+                    )->setParameter('search', "%$singleValue");
 
                 return;
             }
@@ -98,7 +98,7 @@ final class StratigraphicUnitCodeSearchFilter extends AbstractFilter
             $queryBuilder
                 ->andWhere(
                     $expression
-                )->setParameter('site_code', "%$value%");
+                )->setParameter('site_code', "%$singleValue%");
 
             return;
         }
