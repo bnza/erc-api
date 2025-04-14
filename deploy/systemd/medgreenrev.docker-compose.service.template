@@ -6,8 +6,7 @@ Requires=docker.service
 [Service]
 User=${DOCKER_USER}
 WorkingDirectory=${DOCKER_COMPOSE_DIRECTORY}
-ExecStart=/bin/sh -c "/usr/bin/docker compose up -d && /usr/bin/docker wait $(docker compose ps -q nginx)"
-#ExecStart=/usr/bin/docker compose up -d
+ExecStart=${DOCKER_COMPOSE_DIRECTORY}/deploy/up.sh
 Restart=always
 RestartSec=10
 TimeoutStartSec=0

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Get script's parent directory
+# Get script's  directory
 script_directory=$(dirname "$(readlink -f "$0")")
 
 # Get script's parent directory
