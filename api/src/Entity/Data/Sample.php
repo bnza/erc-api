@@ -28,6 +28,8 @@ class Sample
 
     public bool $public = false;
 
+    public iterable $mediaObjects;
+
     public function __construct()
     {
         $this->stratigraphicUnits = new ArrayCollection();
@@ -46,10 +48,4 @@ class Sample
             $this->number
         );
     }
-//    public function getSus()
-//    {
-//        $this->stratigraphicUnits->map(function (VwStratigraphicUnitsSamples $join) {
-//            return ['id' => $join->stratigraphicUnit->getId(), 'code' => $join->stratigraphicUnit->getCode()];
-//        });
-//    }
 }

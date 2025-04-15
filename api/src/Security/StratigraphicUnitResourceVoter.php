@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\Data\M2M\PotteriesMediaObject;
+use App\Entity\Data\M2M\SamplesMediaObject;
 use App\Entity\Data\M2M\StratigraphicUnitsMediaObject;
 use App\Entity\Data\Pottery;
 use App\Entity\Data\Sample;
@@ -39,6 +40,7 @@ class StratigraphicUnitResourceVoter extends Voter
                 PotteriesMediaObject::class,
                 Pottery::class,
                 Sample::class,
+                SamplesMediaObject::class,
                 StratigraphicUnit::class,
                 VwStratigraphicUnitsRelationship::class,
                 StratigraphicUnitsMediaObject::class,
@@ -73,7 +75,7 @@ class StratigraphicUnitResourceVoter extends Voter
             $subject = $subject->item;
         }
 
-        if ($subject instanceof PotteriesMediaObject) {
+        if (in_array(get_class($subject), [PotteriesMediaObject::class, SamplesMediaObject::class])) {
             $subject = $subject->item->stratigraphicUnit;
         }
 

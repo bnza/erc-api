@@ -20,6 +20,7 @@
             </options>
         </field>
         <one-to-many field="stratigraphicUnits" target-entity="App\Entity\Data\View\M2M\VwStratigraphicUnitsSamples" mapped-by="sample"/>
+        <one-to-many field="mediaObjects" target-entity="App\Entity\Data\M2M\SamplesMediaObject" mapped-by="item"/>
         <many-to-one field="stratigraphicUnit" target-entity="App\Entity\Data\StratigraphicUnit">
             <join-column name="su_id"/>
         </many-to-one>

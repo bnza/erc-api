@@ -4,7 +4,10 @@ namespace App\Entity\Data\M2M;
 
 use App\Entity\Data\MediaObject;
 use App\Entity\Data\Pottery;
+use App\Metadata\Attribute\MediaObjectJoinApiResource;
 
+
+#[MediaObjectJoinApiResource]
 class PotteriesMediaObject
 {
     private $id;

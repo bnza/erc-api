@@ -3,6 +3,7 @@
 namespace App\Serializer;
 
 use App\Entity\Data\M2M\PotteriesMediaObject;
+use App\Entity\Data\M2M\SamplesMediaObject;
 use App\Entity\Data\M2M\StratigraphicUnitsMediaObject;
 use App\Entity\Data\MediaObject;
 use App\Service\MediaObjectDuplicateFinder;
@@ -40,8 +41,17 @@ final class MediaObjectFileDenormalizer implements DenormalizerInterface
 
     public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return in_array($context['resource_class'], [StratigraphicUnitsMediaObject::class, PotteriesMediaObject::class])
-            && is_array($data) && array_key_exists('file', $data) && $data['file'] instanceof File;
+        return in_array(
+                $context['resource_class'],
+                [
+                    PotteriesMediaObject::class,
+                    SamplesMediaObject::class,
+                    StratigraphicUnitsMediaObject::class,
+                ]
+            )
+            && is_array($data)
+            && array_key_exists('file', $data)
+            && $data['file'] instanceof File;
     }
 
     public function getSupportedTypes(?string $format): array
@@ -50,6 +60,7 @@ final class MediaObjectFileDenormalizer implements DenormalizerInterface
             'object' => null,
             '*' => false,
             PotteriesMediaObject::class => true,
+            SamplesMediaObject::class => true,
             StratigraphicUnitsMediaObject::class => true,
         ];
     }

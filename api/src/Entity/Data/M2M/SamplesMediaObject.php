@@ -3,16 +3,16 @@
 namespace App\Entity\Data\M2M;
 
 use App\Entity\Data\MediaObject;
-use App\Entity\Data\StratigraphicUnit;
+use App\Entity\Data\Sample;
 use App\Metadata\Attribute\MediaObjectJoinApiResource;
 
 
 #[MediaObjectJoinApiResource]
-class StratigraphicUnitsMediaObject
+class SamplesMediaObject
 {
     private $id;
 
-    public StratigraphicUnit $item;
+    public Sample $item;
 
     public MediaObject $mediaObject;
 
