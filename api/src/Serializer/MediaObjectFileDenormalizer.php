@@ -2,9 +2,8 @@
 
 namespace App\Serializer;
 
-use App\Entity\Data\M2M\PotteriesMediaObject;
-use App\Entity\Data\M2M\SamplesMediaObject;
-use App\Entity\Data\M2M\StratigraphicUnitsMediaObject;
+use App\Entity\Data\M2M\BaseMediaObjectJoin;
+use App\Entity\Data\M2M\MediaObjectJoinInterface;
 use App\Entity\Data\MediaObject;
 use App\Service\MediaObjectDuplicateFinder;
 use DateTimeImmutable;
@@ -24,6 +23,9 @@ final class MediaObjectFileDenormalizer implements DenormalizerInterface
 
     public function denormalize($data, string $type, ?string $format = null, array $context = []): object
     {
+        /**
+         * @var MediaObjectJoinInterface $return
+         */
         $return = $this->decorated->denormalize($data, $type, 'jsonld', $context);
         $file = $data['file'];
         $sha256 = hash_file('sha256', $file);
@@ -34,21 +36,23 @@ final class MediaObjectFileDenormalizer implements DenormalizerInterface
             $mediaObject->uploadDate = new DateTimeImmutable();
         }
 
-        $return->mediaObject = $mediaObject;
+        $return->setMediaObject($mediaObject);
 
         return $return;
     }
 
     public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        return in_array(
-                $context['resource_class'],
-                [
-                    PotteriesMediaObject::class,
-                    SamplesMediaObject::class,
-                    StratigraphicUnitsMediaObject::class,
-                ]
-            )
+        return
+            is_subclass_of($context['resource_class'], BaseMediaObjectJoin::class)
+            /*          in_array(
+                          $context['resource_class'],
+                          [
+                              PotteriesMediaObject::class,
+                              SamplesMediaObject::class,
+                              StratigraphicUnitsMediaObject::class,
+                          ]
+                      )*/
             && is_array($data)
             && array_key_exists('file', $data)
             && $data['file'] instanceof File;
@@ -59,9 +63,9 @@ final class MediaObjectFileDenormalizer implements DenormalizerInterface
         return [
             'object' => null,
             '*' => false,
-            PotteriesMediaObject::class => true,
-            SamplesMediaObject::class => true,
-            StratigraphicUnitsMediaObject::class => true,
+            BaseMediaObjectJoin::class => true,
+//            SamplesMediaObject::class => true,
+//            StratigraphicUnitsMediaObject::class => true,
         ];
     }
 }

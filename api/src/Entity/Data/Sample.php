@@ -7,8 +7,10 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class Sample
+class Sample implements MediaObjectsHolderInterface
 {
+    use MediaObjectsHolderTrait;
+
     private int $id;
 
     public StratigraphicUnit $stratigraphicUnit;
@@ -27,8 +29,6 @@ class Sample
     public ?string $description;
 
     public bool $public = false;
-
-    public iterable $mediaObjects;
 
     public function __construct()
     {

@@ -6,8 +6,11 @@ use App\Entity\Data\Vocabulary\Pottery\FunctionalGroup;
 use App\Entity\Data\Vocabulary\Pottery\Part;
 use App\Entity\Data\Vocabulary\Pottery\Typology;
 
-class Pottery
+class Pottery implements MediaObjectsHolderInterface
 {
+
+    use MediaObjectsHolderTrait;
+
     private int $id;
 
     public StratigraphicUnit $stratigraphicUnit;
@@ -31,8 +34,6 @@ class Pottery
     public ?string $description;
 
     public bool $public = true;
-
-    public iterable $mediaObjects;
 
     public function getId(): int
     {

@@ -2,24 +2,17 @@
 
 namespace App\Entity\Data\M2M;
 
-use App\Entity\Data\MediaObject;
 use App\Entity\Data\StratigraphicUnit;
 use App\Metadata\Attribute\MediaObjectJoinApiResource;
+use Override;
 
 
 #[MediaObjectJoinApiResource]
-class StratigraphicUnitsMediaObject
+class StratigraphicUnitsMediaObject extends BaseMediaObjectJoin
 {
-    private $id;
 
-    public StratigraphicUnit $item;
-
-    public MediaObject $mediaObject;
-
-    public ?string $description;
-
-    public function getId(): int
+    #[Override] function getItemClass(): string
     {
-        return $this->id;
+        return StratigraphicUnit::class;
     }
 }

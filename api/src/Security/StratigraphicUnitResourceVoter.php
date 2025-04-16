@@ -72,11 +72,11 @@ class StratigraphicUnitResourceVoter extends Voter
         }
 
         if ($subject instanceof StratigraphicUnitsMediaObject) {
-            $subject = $subject->item;
+            $subject = $subject->getItem();
         }
 
         if (in_array(get_class($subject), [PotteriesMediaObject::class, SamplesMediaObject::class])) {
-            $subject = $subject->item->stratigraphicUnit;
+            $subject = $subject->getItem()->stratigraphicUnit;
         }
 
         $userId = $this->security->getUser()->getId()->__toString();

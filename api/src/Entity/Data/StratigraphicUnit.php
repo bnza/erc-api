@@ -2,8 +2,11 @@
 
 namespace App\Entity\Data;
 
-class StratigraphicUnit
+class StratigraphicUnit implements MediaObjectsHolderInterface
 {
+
+    use MediaObjectsHolderTrait;
+
     private int $id;
 
     public Site $site;
@@ -23,7 +26,6 @@ class StratigraphicUnit
     public iterable $samples;
 
     public iterable $potteries;
-    public iterable $mediaObjects;
 
     public function getId(): int
     {
