@@ -20,5 +20,6 @@
             </options>
         </field>
         <field name="uploadDate" type="datetime_immutable"/>
+        <one-to-many field="resources" target-entity="App\Entity\Data\View\M2M\VwResourcesMediaObject" mapped-by="mediaObject"/>
     </entity>
 </doctrine-mapping>

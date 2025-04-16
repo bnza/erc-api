@@ -9,7 +9,7 @@
         table="potteries__media_objects"
         repository-class="App\Repository\MediaObjectJoinRepository"
     >
-        <many-to-one field="item" target-entity="App\Entity\Data\Pottery">
+        <many-to-one field="item" target-entity="App\Entity\Data\Pottery" inversed-by="mediaObjects">
             <join-column name="item_id" nullable="false" on-delete="CASCADE"/>
         </many-to-one>
     </entity>

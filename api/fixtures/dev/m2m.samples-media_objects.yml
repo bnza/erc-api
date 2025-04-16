@@ -1,0 +1,11 @@
+App\Entity\Data\M2M\SamplesMediaObject:
+    sample_media_object_1:
+        item: '@sample_ed_1001_1'
+        mediaObject: '@media_object_3'
+        description: 'Some description of the media related to the sample'
+    sample_media_object_2:
+        item: '@sample_ed_1001_2'
+        mediaObject: '@media_object_4'
+    sample_media_object_3:
+        item: '@sample_ed_1001_2'
+        mediaObject: '@media_object_8'

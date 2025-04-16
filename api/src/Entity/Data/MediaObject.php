@@ -8,8 +8,11 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Controller\CreateMediaObjectAction;
+use App\Entity\Data\View\M2M\VwResourcesMediaObject;
 use ArrayObject;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -68,6 +71,13 @@ class MediaObject
     private ?int $width = null;
 
     private ?int $height = null;
+
+    private Collection $resources;
+
+    public function __construct()
+    {
+        $this->resources = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -135,4 +145,10 @@ class MediaObject
 
         return $this;
     }
+
+    public function getResources(): Collection
+    {
+        return $this->resources;
+    }
+
 }

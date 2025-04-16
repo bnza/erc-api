@@ -1,0 +1,9 @@
+App\Entity\Data\M2M\PotteriesMediaObject:
+    potteries_media_object_1:
+        item: '@pottery_ed_1001_1'
+        mediaObject: '@media_object_3'
+        description: 'Some description of the pottery''s media'
+    potteries_media_object_2:
+        item: '@pottery_ed_1001_1'
+        mediaObject: '@media_object_2'
+        description: 'Brief description of the picture'
