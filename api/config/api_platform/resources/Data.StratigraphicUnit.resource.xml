@@ -65,6 +65,7 @@
                 security="is_granted('delete', object)"
                 output="false"
                 status="204"
+                processor="App\State\DeleteValidationProcessor"
             />
             <operation
                 class="ApiPlatform\Metadata\GetCollection"

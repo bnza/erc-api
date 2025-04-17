@@ -17,3 +17,5 @@ api_platform:
     defaults:
         pagination_client_items_per_page: true
     use_symfony_listeners: true
+#    exception_to_status:
+#        Symfony\Component\Validator\Exception\ValidationFailedException: 422
