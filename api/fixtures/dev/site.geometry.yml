@@ -1,10 +1,10 @@
 App\Entity\Data\Geometry\SiteGeometry:
     site_ed_geom:
         site: '@site_ed'
-        geom: 'POINT(25.4876090043237 55.650462728292084 123.345)'
+        geom: 'POINT( -6.017 37.14 123.345)'
     site_ala_geom:
         site: '@site_ala'
-        geom: 'POINT(24.15714797635173 55.74351660103912 25.435)'
+        geom: 'POINT(-5.390 39.11 13.345)'
     site_an_geom:
         site: '@site_an'
-        geom: 'POINT(27.229135686788037 38.572995896519366 85.557)'
+        geom: 'POINT(-4.517 41.14 23.345)'

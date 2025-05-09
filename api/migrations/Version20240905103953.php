@@ -20,7 +20,17 @@ final class Version20240905103953 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $this->addSql(
-            'CREATE VIEW geom.vw_site AS SELECT site_id AS id, site_id, ST_AsGeoJSON(geom) as geom FROM geom.site;'
+            <<<'SQL'
+            CREATE VIEW geom.vw_site AS
+            SELECT
+            site_id AS id,
+            s.code,
+            s.name,
+            s.public,
+            s.description,
+            ST_AsGeoJSON(ST_Transform(g.geom, 3857)) as geom
+            FROM geom.site g LEFT JOIN public.site s on s.id = g.site_id;
+        SQL
         );
 
         $this->addSql(

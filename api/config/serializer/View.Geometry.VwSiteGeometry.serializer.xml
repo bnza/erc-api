@@ -1,17 +1,31 @@
 <serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
         https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="App\Entity\Data\View\Geometry\VwSiteGeometry">
-        <attribute name="id" >
-            <group>read:SiteGeometry</group>
+        <attribute name="id">
+            <group>SiteGeometry:read</group>
         </attribute>
-        <attribute name="site" >
-            <group>read:SiteGeometry</group>
+        <attribute name="code">
+            <group>SiteGeometry:read</group>
+
         </attribute>
-        <attribute name="geom" >
-            <group>read:SiteGeometry</group>
+        <attribute name="name">
+            <group>SiteGeometry:read</group>
+
+        </attribute>
+        <attribute name="description">
+            <group>SiteGeometry:read</group>
+
+        </attribute>
+        <attribute name="public">
+            <group>SiteGeometry:read</group>
+
+        </attribute>
+
+        <attribute name="geom">
+            <group>SiteGeometry:read</group>
         </attribute>
     </class>
 </serializer>

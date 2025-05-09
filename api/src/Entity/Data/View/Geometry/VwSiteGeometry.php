@@ -2,13 +2,35 @@
 
 namespace App\Entity\Data\View\Geometry;
 
-use App\Entity\Data\Site;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use App\Filter\SiteGeometryFilter;
 
-class VwSiteGeometry
+#[ApiResource(
+    uriTemplate: '/geometry/sites.{_format}',
+    shortName: 'SiteGeometry',
+    operations: [
+        new GetCollection(),
+    ],
+    formats: ['geojson' => ['application/geo+json'], 'json' => ['application/json']],
+    defaults: ['_format' => 'json'],
+    normalizationContext: ['groups' => ['SiteGeometry:read']],
+)]
+
+#[ApiFilter(SiteGeometryFilter::class)]
+readonly class VwSiteGeometry
 {
-    public readonly int $id;
+    public int $id;
 
-    public readonly Site $site;
+    public string $code;
 
-    public readonly array $geom;
+    public string $name;
+
+    public ?string $description;
+
+    public bool $public;
+
+    public array $geom;
+
 }
