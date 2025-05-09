@@ -3,16 +3,14 @@
 namespace App\OpenApi;
 
 use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
-use ApiPlatform\OpenApi\Model\RequestBody;
 use ApiPlatform\OpenApi\OpenApi;
-use ArrayObject;
 use Psr\Log\LoggerInterface;
 
 class OpenApiDecorator implements OpenApiFactoryInterface
 {
     public function __construct(
         readonly private OpenApiFactoryInterface $decorated,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -26,7 +24,6 @@ class OpenApiDecorator implements OpenApiFactoryInterface
 
     private function hasPath(OpenApi $openApi, $path): bool
     {
-
         $flag = array_key_exists($path, $openApi->getPaths()->getPaths());
         if (!$flag) {
             $this->logger->warning("$path does not exist");

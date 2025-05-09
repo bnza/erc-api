@@ -2,9 +2,8 @@
 
 namespace App\Validator;
 
-use InvalidArgumentException;
-use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class PhpTypeStringRepresentationValidator extends ConstraintValidator
@@ -25,7 +24,7 @@ class PhpTypeStringRepresentationValidator extends ConstraintValidator
 
         switch ($constraint->type) {
             case 'int':
-                if (filter_var($value, FILTER_VALIDATE_INT) === false) {
+                if (false === filter_var($value, FILTER_VALIDATE_INT)) {
                     $this->context->buildViolation($constraint->message)
                         ->setParameter('{{ value }}', $value)
                         ->setParameter('{{ type }}', 'integer')
@@ -33,7 +32,7 @@ class PhpTypeStringRepresentationValidator extends ConstraintValidator
                 }
                 break;
             case 'float':
-                if (filter_var($value, FILTER_VALIDATE_FLOAT) === false) {
+                if (false === filter_var($value, FILTER_VALIDATE_FLOAT)) {
                     $this->context->buildViolation($constraint->message)
                         ->setParameter('{{ value }}', $value)
                         ->setParameter('{{ type }}', 'float')
@@ -52,7 +51,7 @@ class PhpTypeStringRepresentationValidator extends ConstraintValidator
                 // Any string is valid.
                 break;
             default:
-                throw new InvalidArgumentException(sprintf('Unsupported type "%s".', $constraint->type));
+                throw new \InvalidArgumentException(sprintf('Unsupported type "%s".', $constraint->type));
         }
     }
 }

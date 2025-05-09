@@ -2,10 +2,9 @@
 
 namespace App\Tests\Functional\Api\Job\Import;
 
-use App\Tests\Functional\Api\AuthApiTestCase;
-use RuntimeException;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use ApiPlatform\Symfony\Bundle\Test\Client;
+use App\Tests\Functional\Api\AuthApiTestCase;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -36,13 +35,13 @@ abstract class JobImportTestCase extends AuthApiTestCase
     protected function getTestUploadFile(string $fileName, ?string $path = ''): UploadedFile
     {
         $tempFileName = tempnam(sys_get_temp_dir(), 'api_test_');
-        if ($tempFileName === false) {
-            throw new RuntimeException("Could not create temporary file.");
+        if (false === $tempFileName) {
+            throw new \RuntimeException('Could not create temporary file.');
         }
 
         if (!copy($this->getFixturesFilePath($fileName, $path), $tempFileName)) {
             unlink($tempFileName); // Cleanup if copy fails
-            throw new RuntimeException("Could not copy file.");
+            throw new \RuntimeException('Could not copy file.');
         }
 
         return new UploadedFile(
@@ -58,7 +57,7 @@ abstract class JobImportTestCase extends AuthApiTestCase
     {
         $filePath = $this->getProjectDir().DIRECTORY_SEPARATOR.'fixtures'.DIRECTORY_SEPARATOR.'input';
         if ($path) {
-            if ($path[0] === '/') {
+            if ('/' === $path[0]) {
                 $filePath = $path;
             } else {
                 $filePath .= DIRECTORY_SEPARATOR.$path;
@@ -83,7 +82,7 @@ abstract class JobImportTestCase extends AuthApiTestCase
 
         /** @var ReceiverInterface $transport */
         $transport = self::getContainer()->get("messenger.transport.$transportName");
-//        $this->assertCount($expectedQueueLength, $transport->get());
+        //        $this->assertCount($expectedQueueLength, $transport->get());
 
         $command = $this->getApplication()->find('messenger:consume');
         $commandTester = new CommandTester($command);
@@ -97,7 +96,7 @@ abstract class JobImportTestCase extends AuthApiTestCase
         string $fileName,
         string $url,
         ?string $path = '',
-        ?string $description = ''
+        ?string $description = '',
     ): int|Uuid {
         $uploadedFile = $this->getTestUploadFile($fileName, $path);
         $response = $client->request(
@@ -109,10 +108,9 @@ abstract class JobImportTestCase extends AuthApiTestCase
                     'description' => $description,
                 ],
                 'extra' => [
-                    'files' =>
-                        [
-                            'file' => $uploadedFile,
-                        ],
+                    'files' => [
+                        'file' => $uploadedFile,
+                    ],
                 ],
             ],
         );
@@ -132,8 +130,7 @@ abstract class JobImportTestCase extends AuthApiTestCase
             ]
         );
         $this->assertResponseIsSuccessful();
-        $this->assertEquals((string)$jobId, (string)$this->getJsonResponseId($response));
-
+        $this->assertEquals((string) $jobId, (string) $this->getJsonResponseId($response));
 
         $this->assertResponseIsSuccessful();
     }
@@ -153,7 +150,7 @@ abstract class JobImportTestCase extends AuthApiTestCase
     {
         return $client->request(
             'GET',
-            "api/work_units",
+            'api/work_units',
             [
                 'headers' => ['Content-Type' => 'application/ld+json'],
             ]

@@ -3,24 +3,21 @@
 namespace App\Repository;
 
 use App\Entity\Job\ImportFile;
-use DateMalformedStringException;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityRepository;
-use InvalidArgumentException;
 
 class ImportFileRepository extends EntityRepository
 {
     /**
-     * @param string $relativeDateTimeString
      * @return array<ImportFile>|null
      */
-    public function findRecordOlderThan(string $relativeDateTimeString = '-1 day'): array|null
+    public function findRecordOlderThan(string $relativeDateTimeString = '-1 day'): ?array
     {
         if (!$this->validateBasicRelativeDate($relativeDateTimeString, true)) {
-            throw new InvalidArgumentException("Relative date string \"$relativeDateTimeString\"is invalid");
+            throw new \InvalidArgumentException("Relative date string \"$relativeDateTimeString\"is invalid");
         }
 
-        $relativeDateTime = new DateTimeImmutable($relativeDateTimeString);
+        $relativeDateTime = new \DateTimeImmutable($relativeDateTimeString);
 
         $queryBuilder = $this->createQueryBuilder('e');
         $queryBuilder->where('e.uploadDate < :relativeDateTime');
@@ -30,7 +27,6 @@ class ImportFileRepository extends EntityRepository
     }
 
     /**
-     * @param string $relativeDateTimeString
      * @return array<string>
      */
     public function deleteRecordOlderThan(string $relativeDateTimeString): array
@@ -59,13 +55,12 @@ class ImportFileRepository extends EntityRepository
         }
 
         // Final verification using DateTimeImmutable
-        $date = new DateTimeImmutable();
+        $date = new \DateTimeImmutable();
 
         try {
-            return (bool)$date->modify($relativeDateTimeString);
-        } catch (DateMalformedStringException $e) {
+            return (bool) $date->modify($relativeDateTimeString);
+        } catch (\DateMalformedStringException $e) {
             return false;
         }
-
     }
 }

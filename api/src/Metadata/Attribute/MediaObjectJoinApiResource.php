@@ -8,9 +8,8 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\QueryParameter;
-use Attribute;
 
-#[Attribute(Attribute::TARGET_CLASS)]
+#[\Attribute(\Attribute::TARGET_CLASS)]
 class MediaObjectJoinApiResource extends ApiResource
 {
     public function __construct()
@@ -45,4 +44,3 @@ class MediaObjectJoinApiResource extends ApiResource
         );
     }
 }
-

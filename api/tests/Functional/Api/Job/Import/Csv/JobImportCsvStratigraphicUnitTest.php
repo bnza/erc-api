@@ -40,7 +40,6 @@ class JobImportCsvStratigraphicUnitTest extends JobImportTestCase
 
     public function testTwoSuccess()
     {
-
         $client = $this->createAuthenticatedClient();
         $jobId1 = $this->uploadFile($client, 'su.csv', self::URL);
 
@@ -66,7 +65,6 @@ class JobImportCsvStratigraphicUnitTest extends JobImportTestCase
         $status = $this->getJsonResponseValue($response, 'status');
         $this->assertEquals(2, $status['value']);
     }
-
 
     public function testAdminSuccess()
     {

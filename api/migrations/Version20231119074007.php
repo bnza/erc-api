@@ -26,12 +26,10 @@ final class Version20231119074007 extends AbstractMigration
         $this->addSql('DROP SCHEMA IF EXISTS tiger;');
         $this->addSql('DROP SCHEMA IF EXISTS tiger_data;');
         $this->addSql('CREATE EXTENSION IF NOT EXISTS postgis;');
-
     }
 
     public function down(Schema $schema): void
     {
         $this->addSql('DROP EXTENSION postgis;');
-
     }
 }

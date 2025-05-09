@@ -35,7 +35,5 @@ class MicroStratigraphicUnitTest extends AuthApiTestCase
         );
 
         $this->assertResponseIsSuccessful();
-
     }
-
 }

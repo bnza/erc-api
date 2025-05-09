@@ -2,8 +2,6 @@
 
 namespace App\Entity\Validator;
 
-use InvalidArgumentException;
-
 readonly class UniquePottery extends AbstractUnique
 {
     public int $stratigraphicUnit;
@@ -13,7 +11,7 @@ readonly class UniquePottery extends AbstractUnique
     {
         foreach (['stratigraphicUnit', 'number'] as $prop) {
             if (!isset($criteria[$prop])) {
-                throw new InvalidArgumentException("Missing '$prop' criteria");
+                throw new \InvalidArgumentException("Missing '$prop' criteria");
             }
             $this->$prop = $criteria[$prop];
         }

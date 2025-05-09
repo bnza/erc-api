@@ -9,7 +9,6 @@ use App\Entity\Data\Sample;
 use App\Entity\Data\Site;
 use App\Entity\Data\StratigraphicUnit;
 use App\Entity\Data\User;
-use ArrayObject;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
@@ -32,8 +31,8 @@ final class AccessControlledResourceNormalizer implements NormalizerInterface, N
     public function normalize(
         mixed $data,
         ?string $format = null,
-        array $context = []
-    ): float|int|bool|ArrayObject|array|string|null {
+        array $context = [],
+    ): float|int|bool|\ArrayObject|array|string|null {
         $context[self::ALREADY_CALLED] = true;
         $normalizedData = $this->decorated->normalize($data, $format, $context);
         if (is_array($normalizedData)) {

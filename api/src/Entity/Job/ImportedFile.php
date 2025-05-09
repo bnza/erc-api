@@ -7,7 +7,6 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\QueryParameter;
 use App\Entity\Data\MediaObject;
-use DateTimeImmutable;
 use Symfony\Component\Uid\Uuid;
 
 #[ApiResource(
@@ -32,7 +31,7 @@ class ImportedFile
 
     public string $service;
 
-    public DateTimeImmutable $uploadDate;
+    public \DateTimeImmutable $uploadDate;
 
     public function setId(Uuid $id): ImportedFile
     {
@@ -62,11 +61,10 @@ class ImportedFile
         return $this;
     }
 
-    public function setUploadDate(DateTimeImmutable $uploadDate): ImportedFile
+    public function setUploadDate(\DateTimeImmutable $uploadDate): ImportedFile
     {
         $this->uploadDate = $uploadDate;
 
         return $this;
     }
-
 }

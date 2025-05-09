@@ -6,7 +6,6 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model;
 use App\State\Job\Import\FileBasedImportProcessor;
-use ArrayObject;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ApiResource(
@@ -14,10 +13,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     operations: [
         new Post(
             uriTemplate: 'work_units/import/csv/stratigraphic_units',
-            inputFormats: ['multipart' => ["multipart/form-data"]],
+            inputFormats: ['multipart' => ['multipart/form-data']],
             openapi: new Model\Operation(
                 requestBody: new Model\RequestBody(
-                    content: new ArrayObject([
+                    content: new \ArrayObject([
                         'multipart/form-data' => [
                             'schema' => [
                                 'type' => 'object',

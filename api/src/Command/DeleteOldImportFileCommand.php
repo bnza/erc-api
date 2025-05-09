@@ -14,10 +14,10 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 
-#[AsCommand(name: 'app:import-files:delete-old', description: "Remove old import files from both database and the import directory")]
+#[AsCommand(name: 'app:import-files:delete-old', description: 'Remove old import files from both database and the import directory')]
 class DeleteOldImportFileCommand extends Command
 {
-    /** @var ImportFileRepository $repository */
+    /** @var ImportFileRepository */
     private EntityRepository $repository;
 
     public function __construct(EntityManagerInterface $entityManager, ?string $name = null)
@@ -59,7 +59,7 @@ class DeleteOldImportFileCommand extends Command
             return self::FAILURE;
         }
 
-        if ($input->hasOption('dry-run') && $input->getOption('dry-run') === true) {
+        if ($input->hasOption('dry-run') && true === $input->getOption('dry-run')) {
             $output->writeln('<info>Delete candidates</info>');
             $deleted = $this->repository->findRecordOlderThan($input->getOption('relative-date-time'));
         } else {
@@ -83,6 +83,6 @@ class DeleteOldImportFileCommand extends Command
         $questionHelper = $this->getHelperSet()->get('question');
         $question = new ConfirmationQuestion($question, false);
 
-        return (bool)$questionHelper->ask($input, $output, $question);
+        return (bool) $questionHelper->ask($input, $output, $question);
     }
 }

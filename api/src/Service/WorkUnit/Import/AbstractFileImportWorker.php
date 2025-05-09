@@ -4,7 +4,6 @@ namespace App\Service\WorkUnit\Import;
 
 use Bnza\JobManagerBundle\Entity\WorkUnitEntity;
 use Doctrine\ORM\EntityManagerInterface;
-use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -22,7 +21,7 @@ abstract class AbstractFileImportWorker implements FileImportWorkerInterface
         protected readonly EntityManagerInterface $dataEntityManager,
         protected readonly ValidatorInterface $validator,
         protected readonly SerializerInterface $serializer,
-        protected readonly LoggerInterface $logger
+        protected readonly LoggerInterface $logger,
     ) {
     }
 
@@ -35,10 +34,10 @@ abstract class AbstractFileImportWorker implements FileImportWorkerInterface
     protected function validateParams(array $params): void
     {
         if (!array_key_exists(self::FILE_PATH_KEY, $params)) {
-            throw new InvalidArgumentException(sprintf("Missing \"%s\" key", self::FILE_PATH_KEY));
+            throw new \InvalidArgumentException(sprintf('Missing "%s" key', self::FILE_PATH_KEY));
         }
         if (!array_key_exists(self::FILE_ID, $params)) {
-            throw new InvalidArgumentException(sprintf("Missing \"%s\" key", self::FILE_ID));
+            throw new \InvalidArgumentException(sprintf('Missing "%s" key', self::FILE_ID));
         }
     }
 
@@ -62,15 +61,13 @@ abstract class AbstractFileImportWorker implements FileImportWorkerInterface
             $paramsMapping = array_merge($paramsMapping, $params['paramsMapping']);
             foreach ($paramsMapping as $providedParamKey => $workerParamKey) {
                 if (!is_string($workerParamKey)) {
-                    throw new InvalidArgumentException("Parameter mapping worker's key should be string");
+                    throw new \InvalidArgumentException("Parameter mapping worker's key should be string");
                 }
                 if (!is_string($providedParamKey)) {
-                    throw new InvalidArgumentException("Parameter mapping provided key should be string");
+                    throw new \InvalidArgumentException('Parameter mapping provided key should be string');
                 }
                 if (!array_key_exists($providedParamKey, $params)) {
-                    throw new InvalidArgumentException(
-                        'Parameter mapping provided key "$providedParamKey" does not exist"'
-                    );
+                    throw new \InvalidArgumentException('Parameter mapping provided key "$providedParamKey" does not exist"');
                 }
             }
         }

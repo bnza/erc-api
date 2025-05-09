@@ -2,8 +2,8 @@
 
 namespace App\Entity\Data;
 
-use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\ApiProperty;
+use ApiPlatform\Metadata\ApiResource;
 
 #[ApiResource(
     normalizationContext: ['groups' => ['Area:read']],

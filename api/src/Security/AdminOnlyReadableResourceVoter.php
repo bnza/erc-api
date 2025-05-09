@@ -3,7 +3,6 @@
 namespace App\Security;
 
 use App\Entity\Data\M2M\SitesUsers;
-use App\Entity\Data\Site;
 use App\Entity\Data\User;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -25,7 +24,7 @@ class AdminOnlyReadableResourceVoter extends Voter
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        if ($attribute !== self::READ) {
+        if (self::READ !== $attribute) {
             return false;
         }
 

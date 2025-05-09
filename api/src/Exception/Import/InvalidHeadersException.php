@@ -2,12 +2,9 @@
 
 namespace App\Exception\Import;
 
-use InvalidArgumentException;
-use Throwable;
-
-class InvalidHeadersException extends InvalidArgumentException implements AppImportExceptionInterface
+class InvalidHeadersException extends \InvalidArgumentException implements AppImportExceptionInterface
 {
-    public function __construct(private readonly array $missingHeaders, $code = 0, ?Throwable $previous = null)
+    public function __construct(private readonly array $missingHeaders, $code = 0, ?\Throwable $previous = null)
     {
         $this->message = sprintf(
             'Missing headers: %s',
@@ -39,5 +36,4 @@ class InvalidHeadersException extends InvalidArgumentException implements AppImp
     {
         return true;
     }
-
 }

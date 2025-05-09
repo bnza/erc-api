@@ -7,5 +7,4 @@ use Bnza\JobManagerBundle\Exception\ExceptionValuesInterface;
 
 interface AppImportExceptionInterface extends AppExceptionInterface, ExceptionValuesInterface
 {
-
 }

@@ -4,8 +4,6 @@ namespace App\Service\WorkUnit\Import\Csv;
 
 use League\Csv\Reader;
 use League\Csv\Writer;
-use LogicException;
-use RuntimeException;
 use Symfony\Contracts\Service\ResetInterface;
 
 class CsvFileValidationErrorsWriter implements ResetInterface
@@ -14,7 +12,6 @@ class CsvFileValidationErrorsWriter implements ResetInterface
 
     private Writer $writer;
 
-
     public bool $persist = false;
 
     private bool $configured = false;
@@ -22,12 +19,10 @@ class CsvFileValidationErrorsWriter implements ResetInterface
     private string|bool $tempFilePath;
     private readonly string $tempDirectory;
 
-
     public function __construct(?string $filePath = null)
     {
         $this->tempDirectory = $filepath ??= sys_get_temp_dir();
         $this->initializeWriter();
-
     }
 
     public function reset(): void
@@ -38,7 +33,7 @@ class CsvFileValidationErrorsWriter implements ResetInterface
     public function configure(Reader $reader): void
     {
         if ($this->configured) {
-            throw new LogicException('Writer already configured');
+            throw new \LogicException('Writer already configured');
         }
 
         $this->writer->setDelimiter($reader->getDelimiter());
@@ -56,7 +51,7 @@ class CsvFileValidationErrorsWriter implements ResetInterface
     public function getWriter(): Writer
     {
         if (!$this->configured) {
-            throw new RuntimeException("Writer must be configured before accessing it");
+            throw new \RuntimeException('Writer must be configured before accessing it');
         }
 
         return $this->writer;
@@ -81,18 +76,15 @@ class CsvFileValidationErrorsWriter implements ResetInterface
         $this->configured = false;
 
         if (!file_exists($this->tempDirectory) || !is_readable($this->tempDirectory)) {
-            throw new RuntimeException(
-                sprintf("File path \"%s\" does not exist or is not writeable", $this->tempDirectory)
-            );
+            throw new \RuntimeException(sprintf('File path "%s" does not exist or is not writeable', $this->tempDirectory));
         }
         $tempFilePath = tempnam($this->tempDirectory, 'api_csv_validation_errors_').'.csv';
 
         if (!$tempFilePath) {
-            throw new RuntimeException("Failed to create temporary file \"$tempFilePath\"");
+            throw new \RuntimeException("Failed to create temporary file \"$tempFilePath\"");
         }
 
         $this->tempFilePath = $tempFilePath;
         $this->writer = Writer::createFromPath($tempFilePath, 'w+');
     }
-
 }

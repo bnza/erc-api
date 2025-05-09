@@ -5,20 +5,17 @@ namespace App\Service\WorkUnit\Import;
 use Bnza\JobManagerBundle\AbstractJob;
 use Bnza\JobManagerBundle\WorkUnitDefinition;
 use Doctrine\ORM\EntityManagerInterface;
-use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\File\File;
 
 abstract class AbstractImportJob extends AbstractJob
 {
-
     public function __construct(
         protected readonly EntityManagerInterface $dataEntityManager,
         EventDispatcherInterface $eventDispatcher,
         array $workUnits,
         LoggerInterface $logger,
-        WorkUnitDefinition $definition
+        WorkUnitDefinition $definition,
     ) {
         parent::__construct($eventDispatcher, $workUnits, $logger, $definition);
     }
@@ -37,5 +34,4 @@ abstract class AbstractImportJob extends AbstractJob
     {
         $this->dataEntityManager->rollback();
     }
-
 }

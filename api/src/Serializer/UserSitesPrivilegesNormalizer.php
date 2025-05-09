@@ -7,6 +7,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 use function in_array;
 
 class UserSitesPrivilegesNormalizer implements NormalizerInterface, NormalizerAwareInterface

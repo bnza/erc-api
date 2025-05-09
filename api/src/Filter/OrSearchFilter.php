@@ -20,7 +20,7 @@ final class OrSearchFilter extends AbstractFilter
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         ?Operation $operation = null,
-        array $context = []
+        array $context = [],
     ): void {
         if (self::FILTER_KEY !== $property) {
             return;

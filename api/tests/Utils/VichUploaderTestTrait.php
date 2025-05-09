@@ -2,14 +2,10 @@
 
 namespace App\Tests\Utils;
 
-
-use InvalidArgumentException;
-use LogicException;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use function Symfony\Component\String\s;
 
 trait VichUploaderTestTrait
 {
@@ -52,7 +48,6 @@ trait VichUploaderTestTrait
 
     /**
      * @param string|array<string> $subTree
-     * @return string
      */
     private function getUploadPath(string|array $subTree = ''): string
     {
@@ -84,13 +79,12 @@ trait VichUploaderTestTrait
 
     private function validateUploadBasePath(): bool
     {
-
         if (!$this->getUploadPath()) {
-            throw new LogicException("Upload base path is not set");
+            throw new \LogicException('Upload base path is not set');
         }
 
         if (!$this->isPathInTmpDir()) {
-            throw new InvalidArgumentException("Upload base path must be in the system temp dir");
+            throw new \InvalidArgumentException('Upload base path must be in the system temp dir');
         }
 
         return true;
@@ -99,11 +93,10 @@ trait VichUploaderTestTrait
     private function getSourcePath(string $fileName = ''): string
     {
         if (!$this->testDataSourcePath) {
-
             $this->testDataSourcePath = realpath(getenv('VICH_UPLOADER_SOURCE_PATH'));
 
             if (!$this->testDataSourcePath) {
-                throw new InvalidArgumentException('Unable to determine Vich Uploader test data source path');
+                throw new \InvalidArgumentException('Unable to determine Vich Uploader test data source path');
             }
         }
 
@@ -138,7 +131,6 @@ trait VichUploaderTestTrait
             } catch (IOException $e) {
                 echo "An error occurred while copying '$sourceFile': ".$e->getMessage()."\n";
             }
-
         }
     }
 
@@ -159,5 +151,4 @@ trait VichUploaderTestTrait
 
         return $this->finder;
     }
-
 }

@@ -19,5 +19,4 @@ class StratigraphicUnitsRelationship
     {
         return $this->id;
     }
-
 }

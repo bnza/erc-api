@@ -29,6 +29,5 @@ class HasApiResourceSecurityValidator extends ConstraintValidator
         if (!$this->security->isGranted($attribute, $value)) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
-
     }
 }

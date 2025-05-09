@@ -5,9 +5,7 @@ namespace App\Service\WorkUnit\Import;
 use Bnza\JobManagerBundle\AbstractWorkUnitFactory;
 use Bnza\JobManagerBundle\WorkUnitDefinitionInterface;
 use Bnza\JobManagerBundle\WorkUnitInterface;
-use Override;
 use Psr\Log\LoggerInterface;
-use RuntimeException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ImportTaskAbstractFactory extends AbstractWorkUnitFactory
@@ -21,16 +19,17 @@ class ImportTaskAbstractFactory extends AbstractWorkUnitFactory
         parent::__construct($definition, $eventDispatcher, $logger);
     }
 
-    #[Override] final public function create(): WorkUnitInterface
+    #[\Override]
+    final public function create(): WorkUnitInterface
     {
         $class = $this->definition->getClass();
 
         if (!class_exists($class)) {
-            throw new RuntimeException('Class "'.$class.'" does not exist.');
+            throw new \RuntimeException('Class "'.$class.'" does not exist.');
         }
 
         if (!class_implements($class, AbstractImportTask::class)) {
-            throw new RuntimeException('Class "'.$class.'" does not implement AbstractImportJob.');
+            throw new \RuntimeException('Class "'.$class.'" does not implement AbstractImportJob.');
         }
 
         return new $class($this->worker, $this->eventDispatcher, $this->logger, $this->definition);

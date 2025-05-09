@@ -8,7 +8,7 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Data\MediaObject;
 
 #[ApiResource(
-    shortName: "resourceMediaObject",
+    shortName: 'resourceMediaObject',
     operations: [
         new Get(),
         new GetCollection(),
@@ -78,6 +78,4 @@ class VwResourcesMediaObject
 
         return $this;
     }
-
-
 }

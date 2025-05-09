@@ -4,8 +4,6 @@ namespace App\Tests\Functional\Api;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use ApiPlatform\Symfony\Bundle\Test\Client;
-use InvalidArgumentException;
-use RuntimeException;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
@@ -16,7 +14,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class AuthApiTestCase extends ApiTestCase
 {
-    public const API_PREFIX = "/api";
+    public const API_PREFIX = '/api';
     public const LOGIN_PATH = '/login';
 
     private array $jwtToken = [];
@@ -55,7 +53,7 @@ class AuthApiTestCase extends ApiTestCase
      */
     private function getToken(
         ?string $username = self::USER_BASE,
-        ?string $password = self::USER_BASE_PW
+        ?string $password = self::USER_BASE_PW,
     ) {
         if (array_key_exists($username, $this->jwtToken)) {
             return $this->jwtToken[$username];
@@ -69,7 +67,7 @@ class AuthApiTestCase extends ApiTestCase
         ]);
 
         if ($response->getStatusCode() >= 300) {
-            throw new RuntimeException('Unexpected HTTP status code "'.$response->getStatusCode().'"');
+            throw new \RuntimeException('Unexpected HTTP status code "'.$response->getStatusCode().'"');
         }
 
         $content = $response->toArray();
@@ -80,13 +78,13 @@ class AuthApiTestCase extends ApiTestCase
 
     protected function getAuthorizationHeaderString(?string $username = self::USER_BASE): ?string
     {
-        return array_key_exists($username, $this->jwtToken) ? sprintf("Bearer %s", $this->jwtToken[$username]) : null;
+        return array_key_exists($username, $this->jwtToken) ? sprintf('Bearer %s', $this->jwtToken[$username]) : null;
     }
 
     protected function createAuthenticatedClient(
         ?string $username = self::USER_BASE,
         ?string $password = self::USER_BASE_PW,
-        ?string $contentType = 'application/ld+json'
+        ?string $contentType = 'application/ld+json',
     ): Client {
         return static::createClient([],
             [
@@ -100,16 +98,16 @@ class AuthApiTestCase extends ApiTestCase
     protected function getJsonResponseValue(
         ResponseInterface $response,
         ?string $key,
-        ?string $format = 'jsonld'
+        ?string $format = 'jsonld',
     ): mixed {
         if (!in_array($format, ['jsonld', 'json'])) {
-            throw new InvalidArgumentException("Unsupported format: \"$format\"");
+            throw new \InvalidArgumentException("Unsupported format: \"$format\"");
         }
         $this->assertResponseFormatSame($format);
         $values = $response->toArray();
         if ($key) {
             if (!array_key_exists($key, $values)) {
-                throw new InvalidArgumentException("Key \"$key\" does not exist");
+                throw new \InvalidArgumentException("Key \"$key\" does not exist");
             }
 
             return $values[$key];
@@ -123,9 +121,9 @@ class AuthApiTestCase extends ApiTestCase
         $id = $this->getJsonResponseValue($response, 'id', $format);
 
         return match (true) {
-            is_numeric($id) => (int)$id,
+            is_numeric($id) => (int) $id,
             Uuid::isValid($id) => Uuid::fromString($id),
-            default => throw new RuntimeException("Unsupported response type: \"$id\""),
+            default => throw new \RuntimeException("Unsupported response type: \"$id\""),
         };
     }
 }

@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Data\MediaObject;
 use Doctrine\ORM\Query\Expr;
-use Doctrine\ORM\QueryBuilder;
 
 trait DuplicateMediaObjectEntityRepositoryTrait
 {

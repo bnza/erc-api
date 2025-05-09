@@ -1,8 +1,12 @@
 <?php
+putenv('PHP_CS_FIXER_IGNORE_ENV=1');
 
 $finder = (new PhpCsFixer\Finder())
     ->in(__DIR__)
-    ->exclude('var');
+    ->exclude('var')
+    ->exclude('vendor')
+    ->exclude('packages');
+
 
 return (new PhpCsFixer\Config())
     ->setRules([

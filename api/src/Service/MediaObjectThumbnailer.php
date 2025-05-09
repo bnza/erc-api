@@ -3,8 +3,6 @@
 namespace App\Service;
 
 use App\Entity\Data\MediaObject;
-use Imagick;
-use ImagickException;
 use Psr\Log\LoggerInterface;
 
 class MediaObjectThumbnailer
@@ -46,19 +44,19 @@ class MediaObjectThumbnailer
         $suffix = 'application/pdf' === $mediaObject->getFile()->getMimeType() ? '[0]' : '';
         $realPath = $mediaObject->getFile()->getRealPath();
         try {
-            $img = new Imagick($realPath.$suffix);
+            $img = new \Imagick($realPath.$suffix);
             $imageDimensions = $img->getImageGeometry();
             $thumbDimensions = $imageDimensions['width'] > $imageDimensions['height'] ? [0, 200] : [200, 0];
             $img->scaleImage(...$thumbDimensions);
             $img->setImageFormat('jpg');
-            $img = $img->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
+            $img = $img->mergeImageLayers(\Imagick::LAYERMETHOD_FLATTEN);
             $img->writeImage($this->geThumbnailPath($realPath));
 
             $img->clear();
             $this->logger->info(
                 'Successfully created thumbnail for media object: '.$mediaObject->getFile()->getRealPath()
             );
-        } catch (ImagickException $e) {
+        } catch (\ImagickException $e) {
             $this->logger->error($e->getMessage());
         }
     }

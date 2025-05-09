@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use ApiPlatform\Validator\ValidatorInterface;
 use App\Entity\Data\MediaObject;
-use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
@@ -26,7 +25,7 @@ final class CreateMediaObjectAction extends AbstractController
 
         $mediaObject = new MediaObject();
         $mediaObject->setFile($uploadedFile);
-        $mediaObject->uploadDate = new DateTimeImmutable();
+        $mediaObject->uploadDate = new \DateTimeImmutable();
 
         $this->validator->validate($mediaObject);
 

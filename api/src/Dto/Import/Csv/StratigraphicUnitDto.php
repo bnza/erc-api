@@ -2,8 +2,8 @@
 
 namespace App\Dto\Import\Csv;
 
-use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator as AppAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class StratigraphicUnitDto
 {

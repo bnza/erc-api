@@ -43,7 +43,7 @@ final class SampleCodeSearchFilter extends AbstractFilter
             ->expr()
             ->like(
                 sprintf($format, $rootAlias, 'number'),
-                $distinct ? ":search2" : ':search'
+                $distinct ? ':search2' : ':search'
             );
 
         return $expressions;
@@ -194,7 +194,6 @@ final class SampleCodeSearchFilter extends AbstractFilter
                 ->setParameter('search0', "%$values[1]")
                 ->setParameter('search1', "%$values[2]");
         }
-
 
         if (!is_numeric($values[0])) {
             return;

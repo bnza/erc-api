@@ -4,7 +4,6 @@ namespace App\Entity\Data;
 
 class StratigraphicUnit implements MediaObjectsHolderInterface
 {
-
     use MediaObjectsHolderTrait;
 
     private int $id;

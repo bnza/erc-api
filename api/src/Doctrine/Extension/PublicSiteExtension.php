@@ -21,7 +21,7 @@ readonly class PublicSiteExtension implements QueryCollectionExtensionInterface,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         ?Operation $operation = null,
-        array $context = []
+        array $context = [],
     ): void {
         $this->addWhere($queryBuilder, $resourceClass);
     }
@@ -32,7 +32,7 @@ readonly class PublicSiteExtension implements QueryCollectionExtensionInterface,
         string $resourceClass,
         array $identifiers,
         ?Operation $operation = null,
-        array $context = []
+        array $context = [],
     ): void {
         $this->addWhere($queryBuilder, $resourceClass);
     }

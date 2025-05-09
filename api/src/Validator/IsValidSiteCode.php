@@ -2,10 +2,9 @@
 
 namespace App\Validator;
 
-use Attribute;
 use Symfony\Component\Validator\Constraint;
 
-#[Attribute]
+#[\Attribute]
 class IsValidSiteCode extends Constraint
 {
     public string $message = 'The site code "{{ string }}" does not exist.';

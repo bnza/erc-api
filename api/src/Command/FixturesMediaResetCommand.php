@@ -49,6 +49,6 @@ class FixturesMediaResetCommand extends Command
         $questionHelper = $this->getHelperSet()->get('question');
         $question = new ConfirmationQuestion($question, $default);
 
-        return (bool)$questionHelper->ask($input, $output, $question);
+        return (bool) $questionHelper->ask($input, $output, $question);
     }
 }

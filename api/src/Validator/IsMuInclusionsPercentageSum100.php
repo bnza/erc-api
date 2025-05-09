@@ -2,10 +2,9 @@
 
 namespace App\Validator;
 
-use Attribute;
 use Symfony\Component\Validator\Constraint;
 
-#[Attribute(Attribute::TARGET_CLASS)]
+#[\Attribute(\Attribute::TARGET_CLASS)]
 class IsMuInclusionsPercentageSum100 extends Constraint
 {
     public string $message = 'Inclusions percentage sum is not correct.';

@@ -8,7 +8,6 @@ use App\Entity\Data\MicroStratigraphicUnit;
 use App\Entity\Validator\UniqueMicroStratigraphicUnit;
 use App\Repository\StratigraphicUnitRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use InvalidArgumentException;
 
 class ValidatorUniqueMicroStratigraphicUnitProvider implements ProviderInterface
 {
@@ -21,7 +20,7 @@ class ValidatorUniqueMicroStratigraphicUnitProvider implements ProviderInterface
         $criteria = [];
         foreach (['sample', 'number'] as $prop) {
             if (!isset($uriVariables[$prop])) {
-                throw new InvalidArgumentException("Missing '$prop' parameter");
+                throw new \InvalidArgumentException("Missing '$prop' parameter");
             }
             $criteria[$prop] = $uriVariables[$prop];
         }

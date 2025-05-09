@@ -2,28 +2,25 @@
 
 namespace App\Entity\Job;
 
-use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\OpenApi\Model;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\OpenApi\Model;
 use App\Controller\CreateImportFileAction;
-use ArrayObject;
-use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Uid\Uuid;
-
 
 #[ApiResource(
     operations: [
         new Get(),
         new GetCollection(),
         new Post(
-            inputFormats: ['multipart' => ["multipart/form-data"]],
+            inputFormats: ['multipart' => ['multipart/form-data']],
             controller: CreateImportFileAction::class,
             openapi: new Model\Operation(
                 requestBody: new Model\RequestBody(
-                    content: new ArrayObject([
+                    content: new \ArrayObject([
                         'multipart/form-data' => [
                             'schema' => [
                                 'type' => 'object',
@@ -57,7 +54,7 @@ class ImportFile
     public ?string $originalFilename;
     public ?string $contentUrl = null;
 
-    public DateTimeImmutable $uploadDate;
+    public \DateTimeImmutable $uploadDate;
     public ?string $mimeType;
 
     public ?int $size;
@@ -76,12 +73,12 @@ class ImportFile
         $this->id = is_string($id) ? Uuid::fromString($id) : $id;
     }
 
-    public function getUploadDate(): DateTimeImmutable
+    public function getUploadDate(): \DateTimeImmutable
     {
         return $this->uploadDate;
     }
 
-    public function setUploadDate(DateTimeImmutable $uploadDate): ImportFile
+    public function setUploadDate(\DateTimeImmutable $uploadDate): ImportFile
     {
         $this->uploadDate = $uploadDate;
 
@@ -169,7 +166,7 @@ class ImportFile
 
     public function prePersist(): void
     {
-        if ($this->id === null) {
+        if (null === $this->id) {
             $this->id = Uuid::v4();
         }
     }

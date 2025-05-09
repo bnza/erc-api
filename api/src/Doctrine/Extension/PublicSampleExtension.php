@@ -22,7 +22,7 @@ readonly class PublicSampleExtension implements QueryCollectionExtensionInterfac
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         ?Operation $operation = null,
-        array $context = []
+        array $context = [],
     ): void {
         $this->addWhere($queryBuilder, $queryNameGenerator, $resourceClass);
     }
@@ -33,7 +33,7 @@ readonly class PublicSampleExtension implements QueryCollectionExtensionInterfac
         string $resourceClass,
         array $identifiers,
         ?Operation $operation = null,
-        array $context = []
+        array $context = [],
     ): void {
         $this->addWhere($queryBuilder, $queryNameGenerator, $resourceClass);
     }
@@ -41,7 +41,7 @@ readonly class PublicSampleExtension implements QueryCollectionExtensionInterfac
     private function addWhere(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-        string $resourceClass
+        string $resourceClass,
     ): void {
         if (
             Sample::class !== $resourceClass

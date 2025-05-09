@@ -2,10 +2,9 @@
 
 namespace App\Validator;
 
-use Attribute;
 use Symfony\Component\Validator\Constraint;
 
-#[Attribute]
+#[\Attribute]
 class IsBooleanLike extends Constraint
 {
     public string $message = 'The value "{{ string }}" cannot be mapped to boolean: valid values are 0, 1, true, false, t, f';

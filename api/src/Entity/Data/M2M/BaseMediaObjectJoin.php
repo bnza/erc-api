@@ -4,9 +4,8 @@ namespace App\Entity\Data\M2M;
 
 use App\Entity\Data\MediaObject;
 use App\Entity\Data\MediaObjectsHolderInterface;
-use InvalidArgumentException;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[UniqueEntity(
@@ -15,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 )]
 abstract class BaseMediaObjectJoin
 {
-
     #[Groups(['MediaObjectJoin:read', 'MediaObjectJoin:create'])]
     private $id;
 
@@ -30,7 +28,7 @@ abstract class BaseMediaObjectJoin
     #[Groups(['MediaObjectJoin:read', 'MediaObjectJoin:create'])]
     protected ?string $description;
 
-    abstract function getItemClass(): string;
+    abstract public function getItemClass(): string;
 
     public function getId(): int
     {
@@ -65,9 +63,7 @@ abstract class BaseMediaObjectJoin
     public function setItem(MediaObjectsHolderInterface $item): void
     {
         if (get_class($item) !== $this->getItemClass()) {
-            throw new InvalidArgumentException(
-                sprintf('Item class should be %s, %s giver', $this->getItemClass(), get_class($item))
-            );
+            throw new \InvalidArgumentException(sprintf('Item class should be %s, %s giver', $this->getItemClass(), get_class($item)));
         }
         $this->item = $item;
     }

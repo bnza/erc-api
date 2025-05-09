@@ -5,7 +5,6 @@ namespace App\Tests\Functional\Api\Command;
 use App\Entity\Job\ImportFile;
 use App\Tests\Functional\Api\AuthApiTestCase;
 use App\Tests\Utils\VichUploaderTestTrait;
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -38,7 +37,7 @@ class DeleteOldFileImportTest extends AuthApiTestCase
             if (null === $entity) {
                 return;
             }
-            $entity->setUploadDate(new DateTimeImmutable($relativeDate));
+            $entity->setUploadDate(new \DateTimeImmutable($relativeDate));
             $this->entityManager->persist($entity);
         }
         $this->entityManager->flush();
@@ -51,7 +50,7 @@ class DeleteOldFileImportTest extends AuthApiTestCase
         $client = $this->createAuthenticatedClient();
         $response = $client->request(
             'GET',
-            "api/import_files",
+            'api/import_files',
             [
                 'headers' => ['Content-Type' => 'application/ld+json'],
             ]
@@ -66,7 +65,7 @@ class DeleteOldFileImportTest extends AuthApiTestCase
         $this->assertStringContainsString('test.pdf', $commandTester->getDisplay());
         $response = $client->request(
             'GET',
-            "api/import_files",
+            'api/import_files',
             [
                 'headers' => ['Content-Type' => 'application/ld+json'],
             ]
@@ -80,7 +79,7 @@ class DeleteOldFileImportTest extends AuthApiTestCase
         $commandTester->assertCommandIsSuccessful();
         $response = $client->request(
             'GET',
-            "api/import_files",
+            'api/import_files',
             [
                 'headers' => ['Content-Type' => 'application/ld+json'],
             ]

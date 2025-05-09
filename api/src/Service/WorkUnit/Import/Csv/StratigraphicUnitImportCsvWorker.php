@@ -5,7 +5,6 @@ namespace App\Service\WorkUnit\Import\Csv;
 use App\Dto\Import\Csv\StratigraphicUnitDto;
 use App\Entity\Data\Site;
 use App\Entity\Data\StratigraphicUnit;
-use UnexpectedValueException;
 
 final class StratigraphicUnitImportCsvWorker extends AbstractCsvFileImportWorker
 {
@@ -28,7 +27,7 @@ final class StratigraphicUnitImportCsvWorker extends AbstractCsvFileImportWorker
 
         /* @var StratigraphicUnitDto $dto */
         if (!$dto instanceof $dtoClass) {
-            throw new UnexpectedValueException('Expected instance of '.$dtoClass);
+            throw new \UnexpectedValueException('Expected instance of '.$dtoClass);
         }
         $entity = new StratigraphicUnit();
         $entity->site = $this->findSite($dto->site);

@@ -2,8 +2,6 @@
 
 namespace App\Entity\Validator;
 
-use InvalidArgumentException;
-
 readonly class UniqueSitesUsers extends AbstractUnique
 {
     public int $site;
@@ -13,7 +11,7 @@ readonly class UniqueSitesUsers extends AbstractUnique
     {
         foreach (['site', 'user'] as $prop) {
             if (!isset($criteria[$prop])) {
-                throw new InvalidArgumentException("Missing '$prop' criteria");
+                throw new \InvalidArgumentException("Missing '$prop' criteria");
             }
             $this->$prop = $criteria[$prop];
         }

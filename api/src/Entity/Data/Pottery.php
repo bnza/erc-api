@@ -8,7 +8,6 @@ use App\Entity\Data\Vocabulary\Pottery\Typology;
 
 class Pottery implements MediaObjectsHolderInterface
 {
-
     use MediaObjectsHolderTrait;
 
     private int $id;

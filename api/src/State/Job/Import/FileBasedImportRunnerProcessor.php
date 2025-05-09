@@ -9,8 +9,6 @@ use Bnza\JobManagerBundle\Entity\WorkUnitEntity;
 use Bnza\JobManagerBundle\Message\JobRunnerMessage;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use InvalidArgumentException;
-use RuntimeException;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -40,15 +38,15 @@ class FileBasedImportRunnerProcessor implements ProcessorInterface
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         if (!$operation instanceof Post) {
-            throw new RuntimeException("Only post operations are supported");
+            throw new \RuntimeException('Only post operations are supported');
         }
         if (!isset($uriVariables['id'])) {
-            throw new InvalidArgumentException("Missing 'id' parameter");
+            throw new \InvalidArgumentException("Missing 'id' parameter");
         }
 
         $id = Uuid::fromString($uriVariables['id']);
         if (!Uuid::isValid($id)) {
-            throw new RuntimeException("Invalid id \"$id\"");
+            throw new \RuntimeException("Invalid id \"$id\"");
         }
         $id = Uuid::fromString($id);
 

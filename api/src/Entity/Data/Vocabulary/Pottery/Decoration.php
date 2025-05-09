@@ -4,7 +4,6 @@ namespace App\Entity\Data\Vocabulary\Pottery;
 
 class Decoration
 {
-
     private int $id;
 
     public string $value;

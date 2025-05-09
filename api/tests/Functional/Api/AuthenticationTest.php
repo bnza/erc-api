@@ -2,7 +2,6 @@
 
 namespace App\Tests\Functional\Api;
 
-
 use PHPUnit\Framework\Attributes\DataProvider;
 
 class AuthenticationTest extends AuthApiTestCase

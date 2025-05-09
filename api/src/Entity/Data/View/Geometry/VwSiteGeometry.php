@@ -17,7 +17,6 @@ use App\Filter\SiteGeometryFilter;
     defaults: ['_format' => 'json'],
     normalizationContext: ['groups' => ['SiteGeometry:read']],
 )]
-
 #[ApiFilter(SiteGeometryFilter::class)]
 readonly class VwSiteGeometry
 {
@@ -32,5 +31,4 @@ readonly class VwSiteGeometry
     public bool $public;
 
     public array $geom;
-
 }

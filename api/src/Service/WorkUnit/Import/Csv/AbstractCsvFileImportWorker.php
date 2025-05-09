@@ -8,7 +8,6 @@ use App\Exception\Import\InvalidHeadersException;
 use App\Service\WorkUnit\Import\AbstractFileImportWorker;
 use Bnza\JobManagerBundle\Entity\WorkUnitEntity;
 use Doctrine\ORM\EntityManagerInterface;
-use InvalidArgumentException;
 use League\Csv\Exception;
 use League\Csv\InvalidArgument;
 use League\Csv\Reader;
@@ -24,7 +23,6 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
 {
     public const string HEADER_OFFSET_KEY = 'CsvHeaderOffset';
     public const string DELIMITER_KEY = 'CsvDelimiter';
-
 
     private ?Reader $reader = null;
 
@@ -42,7 +40,7 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
         ValidatorInterface $validator,
         SerializerInterface $serializer,
         LoggerInterface $logger,
-        protected readonly CsvFileValidationErrorsWriter $writer
+        protected readonly CsvFileValidationErrorsWriter $writer,
     ) {
         parent::__construct($dataEntityManager, $validator, $serializer, $logger);
     }
@@ -58,7 +56,7 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
     public function executeStep(int $index, mixed $args): void
     {
         if (!is_array($args)) {
-            throw new InvalidArgumentException('Argument $args must be an array');
+            throw new \InvalidArgumentException('Argument $args must be an array');
         }
         $_args = array_merge([], $args);
         $dto = $this->serializer->denormalize($_args, $this->getDtoClass());
@@ -118,17 +116,17 @@ abstract class AbstractCsvFileImportWorker extends AbstractFileImportWorker
         parent::validateParams($params);
 
         if (!file_exists($params[self::FILE_PATH_KEY])) {
-            throw new InvalidArgumentException(sprintf("File \"%s\" does not exist.", $params[self::FILE_PATH_KEY]));
+            throw new \InvalidArgumentException(sprintf('File "%s" does not exist.', $params[self::FILE_PATH_KEY]));
         }
         $file = new File($params[self::FILE_PATH_KEY]);
-        if ($file->getMimeType() !== 'text/csv') {
-            throw new  InvalidFileTypeException($params[self::FILE_PATH_KEY], 'text/csv');
+        if ('text/csv' !== $file->getMimeType()) {
+            throw new InvalidFileTypeException($params[self::FILE_PATH_KEY], 'text/csv');
         }
         if (isset($params[self::HEADER_OFFSET_KEY]) && !is_integer($params[self::HEADER_OFFSET_KEY])) {
-            throw new InvalidArgumentException('Header offset must be an integer');
+            throw new \InvalidArgumentException('Header offset must be an integer');
         }
         if (isset($params[self::DELIMITER_KEY]) && !is_string($params[self::DELIMITER_KEY])) {
-            throw new InvalidArgumentException('Delimiter key must be a string');
+            throw new \InvalidArgumentException('Delimiter key must be a string');
         }
     }
 

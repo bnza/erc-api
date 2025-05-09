@@ -6,7 +6,6 @@ use App\Entity\Data\M2M\BaseMediaObjectJoin;
 use App\Entity\Data\M2M\MediaObjectJoinInterface;
 use App\Entity\Data\MediaObject;
 use App\Service\MediaObjectDuplicateFinder;
-use DateTimeImmutable;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -33,7 +32,7 @@ final class MediaObjectFileDenormalizer implements DenormalizerInterface
         if (!$mediaObject) {
             $mediaObject = new MediaObject();
             $mediaObject->setFile($data['file']);
-            $mediaObject->uploadDate = new DateTimeImmutable();
+            $mediaObject->uploadDate = new \DateTimeImmutable();
         }
 
         $return->setMediaObject($mediaObject);
@@ -64,8 +63,8 @@ final class MediaObjectFileDenormalizer implements DenormalizerInterface
             'object' => null,
             '*' => false,
             BaseMediaObjectJoin::class => true,
-//            SamplesMediaObject::class => true,
-//            StratigraphicUnitsMediaObject::class => true,
+            //            SamplesMediaObject::class => true,
+            //            StratigraphicUnitsMediaObject::class => true,
         ];
     }
 }

@@ -4,7 +4,6 @@ namespace App\Entity\Data\Vocabulary\StratigraphicUnit;
 
 class Relationship
 {
-
     public string $id;
 
     public string $value;
@@ -12,8 +11,8 @@ class Relationship
 
     public ?string $description;
 
-//    public function getId(): string
-//    {
-//        return $this->id;
-//    }
+    //    public function getId(): string
+    //    {
+    //        return $this->id;
+    //    }
 }

@@ -8,7 +8,6 @@ use App\Entity\Data\View\M2M\VwStratigraphicUnitsRelationship;
 use App\Entity\Validator\UniqueStratigraphicUnitsRelationship;
 use App\Repository\StratigraphicUnitsRelationshipRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use InvalidArgumentException;
 
 class ValidatorUniqueStratigraphicUnitsRelationshipProvider implements ProviderInterface
 {
@@ -21,7 +20,7 @@ class ValidatorUniqueStratigraphicUnitsRelationshipProvider implements ProviderI
         $criteria = [];
         foreach (['sxSU', 'dxSU'] as $prop) {
             if (!isset($uriVariables[$prop])) {
-                throw new InvalidArgumentException("Missing '$prop' parameter");
+                throw new \InvalidArgumentException("Missing '$prop' parameter");
             }
             $criteria[$prop] = $uriVariables[$prop];
         }

@@ -2,16 +2,13 @@
 
 namespace App\Exception\Import;
 
-use InvalidArgumentException;
-use Throwable;
-
-class InvalidFileTypeException extends InvalidArgumentException implements AppImportExceptionInterface
+class InvalidFileTypeException extends \InvalidArgumentException implements AppImportExceptionInterface
 {
     public function __construct(
         private readonly string $fileName,
         private readonly string $fileType,
         $code = 0,
-        ?Throwable $previous = null
+        ?\Throwable $previous = null,
     ) {
         $this->message = sprintf(
             'File "%s" is not a valid "%s" file.',
@@ -33,5 +30,4 @@ class InvalidFileTypeException extends InvalidArgumentException implements AppIm
     {
         return true;
     }
-
 }

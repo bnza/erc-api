@@ -8,7 +8,6 @@ use ApiPlatform\OpenApi\Model;
 use App\Service\Job\Import\ZooarchaeologyBoneImportJob;
 use App\State\Job\Import\FileBasedImportProcessor;
 use App\State\Job\Import\FileBasedImportRunnerProcessor;
-use ArrayObject;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -17,10 +16,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     operations: [
         new Post(
             uriTemplate: 'api/jobs/import/csv/zooarchaeology/bones',
-            inputFormats: ['multipart' => ["multipart/form-data"]],
+            inputFormats: ['multipart' => ['multipart/form-data']],
             openapi: new Model\Operation(
                 requestBody: new Model\RequestBody(
-                    content: new ArrayObject([
+                    content: new \ArrayObject([
                         'multipart/form-data' => [
                             'schema' => [
                                 'type' => 'object',

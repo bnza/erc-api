@@ -2,14 +2,11 @@
 
 namespace App\Exception\Import;
 
-use InvalidArgumentException;
-use Throwable;
-
-class FileDataValidationException extends InvalidArgumentException implements AppImportExceptionInterface
+class FileDataValidationException extends \InvalidArgumentException implements AppImportExceptionInterface
 {
-    public function __construct(private readonly string $validationFilePath, $code = 0, ?Throwable $previous = null)
+    public function __construct(private readonly string $validationFilePath, $code = 0, ?\Throwable $previous = null)
     {
-        parent::__construct("File data validation failed", $code, $previous);
+        parent::__construct('File data validation failed', $code, $previous);
     }
 
     public function getValidationFilePath(): string

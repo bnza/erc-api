@@ -9,12 +9,9 @@ use App\Entity\Job\ImportFile;
 use Bnza\JobManagerBundle\Entity\Status;
 use Bnza\JobManagerBundle\Entity\WorkUnitEntity;
 use Bnza\JobManagerBundle\WorkUnitFactoryServiceLocator;
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use LogicException;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
@@ -23,7 +20,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
  */
 class FileBasedImportProcessor implements ProcessorInterface
 {
-    const string CONTEXT_KEY = 'bnza_job_manager.service_id';
+    public const string CONTEXT_KEY = 'bnza_job_manager.service_id';
     private array $ems = [];
 
     public function __construct(
@@ -38,7 +35,7 @@ class FileBasedImportProcessor implements ProcessorInterface
     private function getEntityManager(string $name = 'default'): EntityManagerInterface
     {
         if (!array_key_exists($name, $this->ems)) {
-            throw new LogicException("Unknown entity manager name '$name'.");
+            throw new \LogicException("Unknown entity manager name '$name'.");
         }
         if (!$this->ems[$name]->isOpen()) {
             $this->ems[$name] = $this->doctrine->resetManager($name);
@@ -50,15 +47,17 @@ class FileBasedImportProcessor implements ProcessorInterface
     /**
      * Handles the state.
      *
-     * @inheritDoc
+     * {@inheritDoc}
+     *
      * @param CsvFileImportedEntityInterface $data
+     *
      * @return WorkUnitEntity
      */
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         $denormalizationContext = $operation->getDenormalizationContext();
         if (is_null($denormalizationContext) || !isset($denormalizationContext[self::CONTEXT_KEY])) {
-            throw new LogicException("Missing context key ".self::CONTEXT_KEY);
+            throw new \LogicException('Missing context key '.self::CONTEXT_KEY);
         }
         $serviceId = $denormalizationContext[self::CONTEXT_KEY];
 
@@ -71,7 +70,7 @@ class FileBasedImportProcessor implements ProcessorInterface
         $importFile = new ImportFile()
             ->setFile($data->getFile())
             ->setDescription($data->getDescription())
-            ->setUploadDate(new DateTimeImmutable());
+            ->setUploadDate(new \DateTimeImmutable());
 
         $this->getEntityManager()->persist($importFile);
         $this->getEntityManager()->flush();

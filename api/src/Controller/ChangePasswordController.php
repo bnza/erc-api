@@ -20,7 +20,7 @@ class ChangePasswordController extends AbstractController
         private readonly Security $security,
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly UserRepository $repository,
-        private readonly ValidatorInterface $validator
+        private readonly ValidatorInterface $validator,
     ) {
     }
 

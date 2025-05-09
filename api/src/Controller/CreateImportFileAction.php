@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use ApiPlatform\Validator\ValidatorInterface;
 use App\Entity\Job\ImportFile;
-use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
@@ -26,7 +25,7 @@ final class CreateImportFileAction extends AbstractController
 
         $mediaObject = new ImportFile();
         $mediaObject->file = $uploadedFile;
-        $mediaObject->uploadDate = new DateTimeImmutable();
+        $mediaObject->uploadDate = new \DateTimeImmutable();
 
         $this->validator->validate($mediaObject);
 

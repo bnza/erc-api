@@ -2,31 +2,28 @@
 
 namespace App\Entity\Data;
 
-use ApiPlatform\OpenApi\Model;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\OpenApi\Model;
 use App\Controller\CreateMediaObjectAction;
-use App\Entity\Data\View\M2M\VwResourcesMediaObject;
-use ArrayObject;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ApiResource(
     operations: [
         new Get(),
         new GetCollection(),
         new Post(
-            inputFormats: ['multipart' => ["multipart/form-data"]],
+            inputFormats: ['multipart' => ['multipart/form-data']],
             controller: CreateMediaObjectAction::class,
             openapi: new Model\Operation(
                 requestBody: new Model\RequestBody(
-                    content: new ArrayObject([
+                    content: new \ArrayObject([
                         'multipart/form-data' => [
                             'schema' => [
                                 'type' => 'object',
@@ -61,7 +58,7 @@ class MediaObject
 
     #[Assert\NotBlank]
     public string $sha256;
-    public DateTimeImmutable $uploadDate;
+    public \DateTimeImmutable $uploadDate;
     private string $mimeType;
 
     public int $size;
@@ -134,12 +131,12 @@ class MediaObject
         return $this;
     }
 
-    public function getUploadDate(): DateTimeImmutable
+    public function getUploadDate(): \DateTimeImmutable
     {
         return $this->uploadDate;
     }
 
-    public function setUploadDate(DateTimeImmutable $uploadDate): MediaObject
+    public function setUploadDate(\DateTimeImmutable $uploadDate): MediaObject
     {
         $this->uploadDate = $uploadDate;
 
@@ -150,5 +147,4 @@ class MediaObject
     {
         return $this->resources;
     }
-
 }

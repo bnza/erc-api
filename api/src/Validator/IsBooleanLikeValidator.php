@@ -5,7 +5,6 @@ namespace App\Validator;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 class IsBooleanLikeValidator extends ConstraintValidator
 {
@@ -23,7 +22,7 @@ class IsBooleanLikeValidator extends ConstraintValidator
             return;
         }
 
-        if ($value === 0 || $value === 1) {
+        if (0 === $value || 1 === $value) {
             return;
         }
 
@@ -32,7 +31,7 @@ class IsBooleanLikeValidator extends ConstraintValidator
         }
 
         $this->context->buildViolation($constraint->message)
-            ->setParameter('{{ string }}', (string)$value)
+            ->setParameter('{{ string }}', (string) $value)
             ->addViolation();
     }
 }

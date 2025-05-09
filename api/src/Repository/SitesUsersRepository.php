@@ -11,11 +11,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Parameter;
-use Doctrine\Persistence\ManagerRegistry;
 
 class SitesUsersRepository extends AbstractCheckUniqueRepository
 {
-
     private PrivilegeValueOperator $privilegeValueOperator;
 
     public function __construct(
@@ -37,7 +35,7 @@ class SitesUsersRepository extends AbstractCheckUniqueRepository
     public function getUserSitePrivilege(
         User $user,
         int $siteId,
-        ApiPrivileges $privilege = ApiPrivileges::Editor
+        ApiPrivileges $privilege = ApiPrivileges::Editor,
     ): int|bool {
         $qb = $this->createQueryBuilder('su');
         $and = $qb->expr()->andX();
@@ -63,7 +61,7 @@ class SitesUsersRepository extends AbstractCheckUniqueRepository
     public function hasSitePrivilege(
         string $userId,
         int $siteId,
-        ?ApiPrivileges $privilege = null
+        ?ApiPrivileges $privilege = null,
     ): bool {
         $qb = $this->createQueryBuilder('su');
         $and = $qb->expr()->andX();

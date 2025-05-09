@@ -3,7 +3,6 @@
 namespace App\Entity\Data;
 
 use App\Entity\Data\View\M2M\VwStratigraphicUnitsSamples;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -24,7 +23,7 @@ class Sample implements MediaObjectsHolderInterface
 
     public ?string $collector;
 
-    public ?DateTimeImmutable $takingDate;
+    public ?\DateTimeImmutable $takingDate;
 
     public ?string $description;
 

@@ -4,14 +4,12 @@ namespace App\Validator;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\AssociationMapping;
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ManyToManyAssociationMapping;
 use Doctrine\ORM\Mapping\OneToManyAssociationMapping;
 use Doctrine\ORM\Mapping\OneToOneAssociationMapping;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-
 
 class IsResourceNotReferencedValidator extends ConstraintValidator
 {
@@ -47,7 +45,7 @@ class IsResourceNotReferencedValidator extends ConstraintValidator
                 $hasCascadeDelete = false;
                 if (isset($mapping['joinColumns'])) {
                     foreach ($mapping['joinColumns'] as $joinColumn) {
-                        if (isset($joinColumn['onDelete']) && strtoupper($joinColumn['onDelete']) === 'CASCADE') {
+                        if (isset($joinColumn['onDelete']) && 'CASCADE' === strtoupper($joinColumn['onDelete'])) {
                             $hasCascadeDelete = true;
                             break;
                         }
@@ -73,18 +71,16 @@ class IsResourceNotReferencedValidator extends ConstraintValidator
             foreach ($references as $reference) {
                 $this->context->buildViolation($constraint->message)
                     ->setParameter('{{ entity }}', $reference['entity'])
-                    ->setParameter('{{ count }}', (string)$reference['count'])
+                    ->setParameter('{{ count }}', (string) $reference['count'])
                     ->addViolation();
             }
         }
     }
 
-
     private function checkReferenceCount(
         AssociationMapping $mapping,
-        object $entity
+        object $entity,
     ): int {
-
         if ($mapping instanceof OneToManyAssociationMapping || $mapping instanceof ManyToManyAssociationMapping) {
             return 0;
         }
@@ -102,7 +98,7 @@ class IsResourceNotReferencedValidator extends ConstraintValidator
         }
 
         // $mapping is ManyToOneAssociationMapping
-        return (int)$this->em->createQueryBuilder()
+        return (int) $this->em->createQueryBuilder()
             ->select('COUNT(r.id)')
             ->from($mapping->sourceEntity, 'r')
             ->where('r.'.$mapping->fieldName.' = :entity')
@@ -117,5 +113,4 @@ class IsResourceNotReferencedValidator extends ConstraintValidator
 
         return end($parts);
     }
-
 }
