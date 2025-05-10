@@ -5,6 +5,7 @@ namespace App\Entity\Data\View\Geometry;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use App\Filter\BboxGeometryFilter;
 use App\Filter\SiteGeometryFilter;
 
 #[ApiResource(
@@ -18,6 +19,7 @@ use App\Filter\SiteGeometryFilter;
     normalizationContext: ['groups' => ['SiteGeometry:read']],
 )]
 #[ApiFilter(SiteGeometryFilter::class)]
+#[ApiFilter(BboxGeometryFilter::class)]
 readonly class VwSiteGeometry
 {
     public int $id;

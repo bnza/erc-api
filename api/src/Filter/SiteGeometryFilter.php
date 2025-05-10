@@ -45,7 +45,6 @@ final class SiteGeometryFilter extends AbstractFilter
         ?Operation $operation = null,
         array $context = [],
     ): void {
-        // Only apply to VwSiteGeometry
         if (VwSiteGeometry::class !== $resourceClass) {
             return;
         }
@@ -60,7 +59,6 @@ final class SiteGeometryFilter extends AbstractFilter
             }
         }
 
-        // If no matching filter found, don't apply anything
         if (!$matchingFilter) {
             return;
         }
@@ -76,7 +74,6 @@ final class SiteGeometryFilter extends AbstractFilter
             ->select("DISTINCT {$subqueryRootAlias}.id")
             ->from(Site::class, $subqueryRootAlias);
 
-        // Create a separate query name generator for the subquery
         $subQueryNameGenerator = new QueryNameGenerator();
 
         // Apply the filter to the subquery
