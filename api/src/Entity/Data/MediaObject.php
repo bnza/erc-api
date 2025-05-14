@@ -2,12 +2,15 @@
 
 namespace App\Entity\Data;
 
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model;
 use App\Controller\CreateMediaObjectAction;
+use ArrayObject;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -23,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             controller: CreateMediaObjectAction::class,
             openapi: new Model\Operation(
                 requestBody: new Model\RequestBody(
-                    content: new \ArrayObject([
+                    content: new ArrayObject([
                         'multipart/form-data' => [
                             'schema' => [
                                 'type' => 'object',
@@ -58,12 +61,16 @@ class MediaObject
 
     #[Assert\NotBlank]
     public string $sha256;
-    public \DateTimeImmutable $uploadDate;
+    public DateTimeImmutable $uploadDate;
     private string $mimeType;
 
     public int $size;
 
     public ?string $description = null;
+
+    #[ApiProperty(
+        iris: ['http://schema.org/contentUrl']
+    )]
     public ?string $contentUrl = null;
     private ?int $width = null;
 
@@ -131,12 +138,12 @@ class MediaObject
         return $this;
     }
 
-    public function getUploadDate(): \DateTimeImmutable
+    public function getUploadDate(): DateTimeImmutable
     {
         return $this->uploadDate;
     }
 
-    public function setUploadDate(\DateTimeImmutable $uploadDate): MediaObject
+    public function setUploadDate(DateTimeImmutable $uploadDate): MediaObject
     {
         $this->uploadDate = $uploadDate;
 

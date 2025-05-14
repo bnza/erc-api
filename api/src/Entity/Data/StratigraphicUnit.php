@@ -2,6 +2,8 @@
 
 namespace App\Entity\Data;
 
+use ApiPlatform\Metadata\ApiProperty;
+
 class StratigraphicUnit implements MediaObjectsHolderInterface
 {
     use MediaObjectsHolderTrait;
@@ -20,6 +22,7 @@ class StratigraphicUnit implements MediaObjectsHolderInterface
 
     public ?string $description;
 
+    #[ApiProperty(security: "is_granted('IS_AUTHENTICATED_FULLY')")]
     public bool $public = true;
 
     public iterable $samples;

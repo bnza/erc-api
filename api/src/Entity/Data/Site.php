@@ -2,6 +2,8 @@
 
 namespace App\Entity\Data;
 
+use ApiPlatform\Metadata\ApiProperty;
+
 class Site
 {
     private int $id;
@@ -12,6 +14,7 @@ class Site
 
     public ?string $description;
 
+    #[ApiProperty(security: "is_granted('IS_AUTHENTICATED_FULLY')")]
     public bool $public = false;
 
     public iterable $users;
