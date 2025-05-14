@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests\Functional\Api\Resource;
+namespace App\Tests\Functional\Api\Filter;
 
 use App\Tests\Functional\Api\AuthApiTestCase;
 
-class StratigraphicUnitTest extends AuthApiTestCase
+class StratigraphicUnitCodeSearchFilterTest extends AuthApiTestCase
 {
     /**
      * Test that the search filter works when providing a site code (string pattern).
