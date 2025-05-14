@@ -75,3 +75,9 @@ Deploy web server container
 docker-compose up nginx
 ```
 
+## Setup Git Hooks
+
+Run this on your host machine (not in Docker):
+
+```bash
+./scripts/setup-hooks.sh
