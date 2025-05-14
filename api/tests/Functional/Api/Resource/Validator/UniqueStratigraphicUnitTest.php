@@ -7,7 +7,7 @@ use App\Tests\Functional\Api\AuthApiTestCase;
 class UniqueStratigraphicUnitTest extends AuthApiTestCase
 {
     /**
-     * Test that checks if the uniqueness validation works correctly when a stratigraphic unit doesn't exist
+     * Test that checks if the uniqueness validation works correctly when a stratigraphic unit doesn't exist.
      */
     public function testUniqueStratigraphicUnitSuccess(): void
     {
@@ -36,7 +36,7 @@ class UniqueStratigraphicUnitTest extends AuthApiTestCase
     }
 
     /**
-     * Test that checks if the uniqueness validation detects existing stratigraphic units
+     * Test that checks if the uniqueness validation detects existing stratigraphic units.
      */
     public function testUniqueStratigraphicUnitFail(): void
     {
@@ -61,7 +61,6 @@ class UniqueStratigraphicUnitTest extends AuthApiTestCase
         $year = $existingSU['year'];
         $number = $existingSU['number'];
 
-
         // Query the unique validator endpoint with parameters that should already exist
         $response = $client->request(
             'GET',
@@ -79,7 +78,7 @@ class UniqueStratigraphicUnitTest extends AuthApiTestCase
     }
 
     /**
-     * Test that validates input requirement validation works
+     * Test that validates input requirement validation works.
      */
     public function testInvalidRequirements(): void
     {

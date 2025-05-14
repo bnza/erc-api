@@ -7,7 +7,7 @@ use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 class BoneTest extends ApiTestCase
 {
     /**
-     * Test that the collection endpoint returns a valid response
+     * Test that the collection endpoint returns a valid response.
      */
     public function testGetBoneCollection(): void
     {
@@ -25,7 +25,7 @@ class BoneTest extends ApiTestCase
     }
 
     /**
-     * Test that an individual item can be retrieved
+     * Test that an individual item can be retrieved.
      */
     public function testGetBoneItem(): void
     {
@@ -53,8 +53,7 @@ class BoneTest extends ApiTestCase
         $this->assertJsonContains([
             '@context' => '/api/contexts/Bone',
             '@type' => 'Bone',
-            'id' => $boneId
+            'id' => $boneId,
         ]);
     }
 }
-

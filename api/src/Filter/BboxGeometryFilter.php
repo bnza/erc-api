@@ -52,7 +52,7 @@ final class BboxGeometryFilter extends AbstractFilter
 
         $srid = isset($bboxParts[4]) ? filter_var($bboxParts[4], FILTER_VALIDATE_INT) : 4326;
 
-        if ($minx === false || $miny === false || $maxx === false || $maxy === false || $srid === false) {
+        if (false === $minx || false === $miny || false === $maxx || false === $maxy || false === $srid) {
             return; // Invalid values
         }
 
@@ -67,7 +67,6 @@ final class BboxGeometryFilter extends AbstractFilter
             ->setParameter('maxx', $maxx)
             ->setParameter('maxy', $maxy)
             ->setParameter('srid', $srid);
-
     }
 
     public function getDescription(string $resourceClass): array
@@ -84,7 +83,7 @@ final class BboxGeometryFilter extends AbstractFilter
                 'description' => 'Filter by bounding box (format: minx,miny,maxx,maxy[,srid]). SRID is optional and defaults to 4326.',
                 'openapi' => [
                     'example' => '-74.1,40.7,-73.9,40.9',
-                    'description' => 'Filter geometries that intersect with the given bounding box. ' .
+                    'description' => 'Filter geometries that intersect with the given bounding box. '.
                         'Format is "minx,miny,maxx,maxy[,srid]" where SRID is optional and defaults to 4326 (WGS84).',
                 ],
             ],

@@ -7,7 +7,7 @@ use App\Tests\Functional\Api\AuthApiTestCase;
 class SiteTest extends AuthApiTestCase
 {
     /**
-     * Test that authenticated users can see the public property in collection requests
+     * Test that authenticated users can see the public property in collection requests.
      */
     public function testCollectionWithAuthenticatedUser(): void
     {
@@ -25,7 +25,7 @@ class SiteTest extends AuthApiTestCase
     }
 
     /**
-     * Test that unauthenticated users cannot see the public property in collection requests
+     * Test that unauthenticated users cannot see the public property in collection requests.
      */
     public function testCollectionWithUnauthenticatedUser(): void
     {
@@ -43,7 +43,7 @@ class SiteTest extends AuthApiTestCase
     }
 
     /**
-     * Test that authenticated users can see the public property in item requests
+     * Test that authenticated users can see the public property in item requests.
      */
     public function testItemWithAuthenticatedUser(): void
     {
@@ -69,7 +69,7 @@ class SiteTest extends AuthApiTestCase
     }
 
     /**
-     * Test that unauthenticated users cannot see the public property in item requests
+     * Test that unauthenticated users cannot see the public property in item requests.
      */
     public function testItemWithUnauthenticatedUser(): void
     {
@@ -95,7 +95,7 @@ class SiteTest extends AuthApiTestCase
     }
 
     /**
-     * Test that we can filter sites by public property when authenticated
+     * Test that we can filter sites by public property when authenticated.
      */
     public function testFilterByPublicPropertyWithAuthenticatedUser(): void
     {
@@ -129,7 +129,7 @@ class SiteTest extends AuthApiTestCase
     }
 
     /**
-     * Test that unauthenticated users cannot filter by public property
+     * Test that unauthenticated users cannot filter by public property.
      */
     public function testFilterByPublicPropertyWithUnauthenticatedUser(): void
     {
@@ -149,7 +149,5 @@ class SiteTest extends AuthApiTestCase
             $filteredSites,
             'Filter by public=false property should return an empty set'
         );
-
     }
 }
-

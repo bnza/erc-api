@@ -6,7 +6,7 @@ use ApiPlatform\Metadata\ResourceClassResolverInterface;
 use ApiPlatform\Serializer\AbstractCollectionNormalizer;
 use ApiPlatform\State\Pagination\PaginatorInterface;
 use ApiPlatform\State\Pagination\PartialPaginatorInterface;
-use Countable;
+
 use function count;
 use function is_array;
 
@@ -34,7 +34,7 @@ class CollectionNormalizer extends AbstractCollectionNormalizer
             $data['totalItems'] = (int) $object->getTotalItems();
         }
 
-        if (is_array($object) || ($object instanceof Countable && !$object instanceof PartialPaginatorInterface)) {
+        if (is_array($object) || ($object instanceof \Countable && !$object instanceof PartialPaginatorInterface)) {
             $data['totalItems'] = count($object);
         }
 

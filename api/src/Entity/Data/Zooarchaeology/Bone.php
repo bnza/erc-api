@@ -11,14 +11,14 @@ use App\Entity\Data\StratigraphicUnit;
     shortName: 'Bone',
     operations: [
         new Get(),
-        new GetCollection()
+        new GetCollection(),
     ],
     routePrefix: 'zooarchaeology',
     normalizationContext: [
-        'groups' => ['Zooarchaeology:Bone:acl:read']
+        'groups' => ['Zooarchaeology:Bone:acl:read'],
     ],
     denormalizationContext: [
-        'groups' => ['Zooarchaeology:Bone:item:write']
+        'groups' => ['Zooarchaeology:Bone:item:write'],
     ]
 )]
 class Bone
