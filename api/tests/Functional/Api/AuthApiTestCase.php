@@ -81,6 +81,15 @@ class AuthApiTestCase extends ApiTestCase
         return array_key_exists($username, $this->jwtToken) ? sprintf('Bearer %s', $this->jwtToken[$username]) : null;
     }
 
+    /**
+     * Creates an authenticated API client with the provided user credentials and appropriate headers.
+     *
+     * @param string|null $username    The username to authenticate with
+     * @param string|null $password    The password associated with the username
+     * @param string|null $contentType The content type to set in the request headers
+     *
+     * @return Client The authenticated API client
+     */
     protected function createAuthenticatedClient(
         ?string $username = self::USER_BASE,
         ?string $password = self::USER_BASE_PW,
@@ -90,6 +99,23 @@ class AuthApiTestCase extends ApiTestCase
             [
                 'headers' => [
                     'Authorization' => 'Bearer '.$this->getToken($username, $password),
+                    'Content-Type' => $contentType,
+                ],
+            ]);
+    }
+
+    /**
+     * Creates an unauthenticated API client with appropriate headers.
+     *
+     * @param string|null $contentType The content type to set in the request headers
+     *
+     * @return Client The unauthenticated API client
+     */
+    protected function createUnauthenticatedClient(?string $contentType = 'application/ld+json'): Client
+    {
+        return static::createClient([],
+            [
+                'headers' => [
                     'Content-Type' => $contentType,
                 ],
             ]);
