@@ -7,9 +7,6 @@ use ApiPlatform\Serializer\AbstractCollectionNormalizer;
 use ApiPlatform\State\Pagination\PaginatorInterface;
 use ApiPlatform\State\Pagination\PartialPaginatorInterface;
 
-use function count;
-use function is_array;
-
 class CollectionNormalizer extends AbstractCollectionNormalizer
 {
     public const FORMAT = 'geojson';

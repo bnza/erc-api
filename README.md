@@ -80,4 +80,4 @@ docker-compose up nginx
 Run this on your host machine (not in Docker):
 
 ```bash
-./scripts/setup-hooks.sh
+./scripts/setup-git-hooks.sh

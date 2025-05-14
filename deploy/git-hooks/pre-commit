@@ -3,7 +3,7 @@
 
 # Environment variables - use default if not already set
 if [ -z "$PHP_CS_FIXER" ]; then
-    PHP_CS_FIXER="./api/vendor/bin/php-cs-fixer"
+    PHP_CS_FIXER="vendor/bin/php-cs-fixer"
 fi
 
 # Local variables
@@ -11,21 +11,23 @@ staged_files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(php
 
 # Exit early if no PHP files are staged
 if [ -z "$staged_files" ]; then
+    echo "No staged PHP files"
     exit 0
 fi
 
 echo "Running PHP-CS-Fixer on staged PHP files..."
 
-# Check if PHP-CS-Fixer exists
-if [ ! -f "$PHP_CS_FIXER" ]; then
-    echo "Error: PHP-CS-Fixer not found at $PHP_CS_FIXER. Please install it first."
-    exit 1
-fi
-
 # Process each staged file
 for file in $staged_files; do
-    "$PHP_CS_FIXER" fix "$file" --config=./api/php-cs-fixer.dist.php
-    git add "$file"
+    case "$file" in
+        api/*)
+            # Extract the relative path inside the api directory
+            relative_path=$(echo "$file" | sed 's|^api/||')
+            echo "Checking $relative_path"
+            docker compose exec -e PHP_CS_FIXER_IGNORE_ENV=1 php $PHP_CS_FIXER fix "$relative_path" --config=.php-cs-fixer.dist.php
+            git add "$file"
+            ;;
+    esac
 done
 
 echo "PHP-CS-Fixer completed successfully."
